@@ -5,4 +5,5 @@ const nurseRouter = express.Router()
 
 nurseRouter.post("/", createNurse)
 
+
 module.exports = nurseRouter

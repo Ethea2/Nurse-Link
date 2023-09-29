@@ -5,15 +5,15 @@ import RegisterLayout from "./layouts/registerLayout/RegisterLayout"
 
 function App() {
     const location = useLocation()
-    const [noLayout, setNoLayout] = useState<Boolean>(false)
+    const [noNavbar, setnoNavbar] = useState<Boolean>(false)
     useEffect(() => {
         if (location.pathname.includes("register")) {
-            setNoLayout(true)
+            setnoNavbar(true)
         } else {
-            setNoLayout(false)
+            setnoNavbar(false)
         }
     }, [location])
-    return <>{noLayout ? <RegisterLayout /> : <MainLayout />}</>
+    return <>{noNavbar ? <RegisterLayout /> : <MainLayout />}</>
 }
 
 export default App

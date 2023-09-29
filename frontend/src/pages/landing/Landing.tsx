@@ -1,5 +1,10 @@
+import HeroSection from "../../components/landingComponents/HeroSection"
 const Landing = (): JSX.Element => {
-    return <div>Landing</div>
+    return (
+        <>
+            <HeroSection />
+        </>
+    )
 }
 
 export default Landing
