@@ -1,9 +1,20 @@
 const express = require("express")
-const { createNurse } = require("../controllers/nurseController")
+const { checkAuth } = require("../middlewears/checkAuth")
+const {
+    createNurse,
+    loginNurse,
+    logoutNurse,
+    getNurses,
+} = require("../controllers/nurseController")
 
 const nurseRouter = express.Router()
 
-nurseRouter.post("/", createNurse)
+nurseRouter.post("/register", createNurse)
 
+nurseRouter.post("/login", loginNurse)
+
+nurseRouter.post("/logout", logoutNurse)
+
+nurseRouter.get("/", checkAuth, getNurses)
 
 module.exports = nurseRouter
