@@ -35,6 +35,9 @@ app.use(
         resave: false,
         saveUninitialized: false,
         store: store,
+        cookie: {
+            maxAge: 1000 * 60 * 5
+        }
     })
 )
 app.use(passport.authenticate("session"))
@@ -46,6 +49,7 @@ app.use((req, res, next) => {
 })
 
 app.use("/test", async (req, res) => {
+    
     res.status(200).json({ message: "WE ARE ON THE GO!" })
 })
 app.use("/nurse", nurseRouter)
