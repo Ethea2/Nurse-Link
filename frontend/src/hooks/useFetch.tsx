@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import axios from "axios"
 //this is for getting data
 const useFetch = (url: string) => {
     const [data, setData] = useState<any>()
@@ -6,24 +7,31 @@ const useFetch = (url: string) => {
     const [error, setError] = useState<any>()
     useEffect(() => {
         const fetchData = async (url: string) => {
-            setLoading(true)
-            const res = await fetch(import.meta.env.VITE_API_URL + url, {
-                method: "GET",
-                credentials: "include"
-            })
-            const result = await res.json()
+            try {
+                setLoading(true)
 
-            if(res.ok) {
-                setData(result)
-                setLoading(false)
-            } else {
+                const response = await axios.get(
+                    import.meta.env.VITE_API_URL + url,
+                    {
+                        withCredentials: true,
+                    }
+                )
+
+                if (response.status === 200) {
+                    setData(response.data)
+                    setLoading(false)
+                } else {
+                    setError(true)
+                    setLoading(false)
+                }
+            } catch (error) {
                 setError(true)
                 setLoading(false)
             }
         }
         fetchData(url)
     }, [url])
-    return {data, loading, error}
+    return { data, loading, error }
 }
 
 export default useFetch

@@ -13,11 +13,11 @@ const { generateSecret } = require("./utils/sessionSecret")
 const app = express()
 
 //middlewears
-app.use(cors())
 app.use(
     cors({
-        origin: [],
+        origin: process.env.WEB_URL,
         methods: ["GET", "POST", "PATCH", "DELETE"],
+        credentials: true
     })
 )
 app.use(bodyParser.json())
@@ -40,7 +40,8 @@ app.use(
         cookie: {
             secure: false,
             httpOnly: true,
-            maxAge: 1000 * 60 * 5
+            maxAge: 1000 * 60 * 5,
+            name: "nurse-session"
         }
     })
 )
