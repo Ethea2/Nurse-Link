@@ -5,6 +5,7 @@ const cors = require("cors")
 const mongoose = require("mongoose")
 const passport = require("./auth/passport")
 const session = require("express-session")
+const cookieParser = require("cookie-parser")
 const MongoDBStore = require("connect-mongodb-session")(session)
 const nurseRouter = require("./routes/nurseRoutes")
 const { generateSecret } = require("./utils/sessionSecret")
@@ -22,6 +23,7 @@ app.use(
 app.use(bodyParser.json())
 app.use(express.json())
 app.use(express.json({ limit: "50mb" }))
+app.use(cookieParser())
 
 //authentication
 app.use(passport.initialize())
@@ -31,10 +33,14 @@ const store = new MongoDBStore({
 })
 app.use(
     session({
-        secret: generateSecret(),
+        secret: process.env.SECRET,
         resave: false,
         saveUninitialized: false,
         store: store,
+        cookie: {
+            secure: false,
+            httpOnly: true,
+        },
     })
 )
 app.use(passport.authenticate("session"))
@@ -48,7 +54,7 @@ app.use((req, res, next) => {
 app.use("/test", async (req, res) => {
     res.status(200).json({ message: "WE ARE ON THE GO!" })
 })
-app.use("/nurse", nurseRouter)
+app.use("/api/nurse", nurseRouter)
 
 //start of program
 mongoose

@@ -32,7 +32,7 @@ const logoutNurse = async (req, res, next) => {
 }
 
 const getNurses = async (req, res) => {
-    const nurses = await Nurse.find({})
+    const nurses = await Nurse.find({}, 'username email')
     res.status(200).json(nurses)
 }
 

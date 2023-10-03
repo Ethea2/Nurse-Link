@@ -15,6 +15,6 @@ nurseRouter.post("/login", loginNurse)
 
 nurseRouter.post("/logout", logoutNurse)
 
-nurseRouter.get("/", checkAuth, getNurses)
+nurseRouter.get("/", checkAuth,getNurses)
 
 module.exports = nurseRouter
