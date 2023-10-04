@@ -13,7 +13,7 @@ const Test = () => {
                 data?.map((nurse: NurseType, index: number) => (
                     <>
                         <div className="flex gap-10">
-                            Nurse 1
+                            Nurse {index + 1}:
                             <h1>{nurse.username}</h1>
                             <h2>{nurse.email}</h2>
                         </div>
