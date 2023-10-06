@@ -18,7 +18,7 @@ const RegisterPage = () => {
                         <div className="welcomeTitle text-4xl font-semibold ">
                             Nice to meet you.
                         </div>
-                        <form>
+                        <form className="pt-5">
                             <label htmlFor="username">
                                 Username
                                 <br />
@@ -57,6 +57,9 @@ const RegisterPage = () => {
                                 </button>
                             </div>
                         </form>
+                        <div className="divider"><span className="text">or</span></div>
+                        <div className="loginOption text-center">Already a Member? <a href="#" className="font-semibold">Login.</a></div>
+
                     </div>
                 </div>
                 <div className="rightPage flex items-center justify-center flex-col w-full h-full">
