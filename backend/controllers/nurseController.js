@@ -12,7 +12,7 @@ const createNurse = async (req, res, next) => {
 const loginNurse = async (req, res, next) => {
     passport.authenticate("login", (err, user, info) => {
         if (err) return next(err)
-        if (!user) return res.status(404).json({ message: "User not found!" })
+        if (!user) return res.status(404).json({ message: "Wrong Password or Username!" })
         req.login(user, (loginErr) => {
             if (loginErr) {
                 return next(loginErr)
