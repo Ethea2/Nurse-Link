@@ -6,7 +6,7 @@ import LoginPage from "../../pages/login/LoginPage"
 
 const routes: Array<RouteType> = [
     { path: "/", element: <Landing /> },
-    { path: "/homepage", element: <Homepage /> },
+    { path: "/homepage", element: <Homepage />, name: "Homepage" },
     { path: "/register", element: <RegisterPage /> },
     { path: "/login", element: <LoginPage /> },
 ]
