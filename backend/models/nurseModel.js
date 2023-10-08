@@ -41,4 +41,5 @@ const nurseSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model("Nurse", nurseSchema, "Nurse")
+const Nurse = mongoose.model("Nurse", nurseSchema, "Nurse")
+export default Nurse;

@@ -25,4 +25,5 @@ const instituteSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model("Institute", instituteSchema, "Institute")
+const Institute = mongoose.model("Institute", instituteSchema, "Institute")
+export default Institute;
