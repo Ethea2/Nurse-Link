@@ -5,25 +5,26 @@ const BCRYPT_SALT_ROUNDS = 12
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 const Nurse = require("../models/nurseModel")
+const User = require("../models/userModel")
 
 const validateEmail = (email) =>
     /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 
 passport.serializeUser((user, done) => {
-    process.nextTick(() => done(null, { id: user.id, username: user.username }))
+    process.nextTick(() => done(null, { id: user._id, username: user.username }))
 })
 
 passport.deserializeUser(async (user, done) => {
     try {
-        const nurse = await Nurse.findById({_id: user.id})
-        done(null, nurse)
+        const userLogin = await User.findById({_id: user.id})
+        done(null, userLogin)
     } catch (error) {
         done(error)
     }
 })
 
 passport.use(
-    "register",
+    "register-nurse",
     new LocalStrategy(
         {
             usernameField: "username",
@@ -34,10 +35,10 @@ passport.use(
         async (req, username, password, done) => {
             try {
                 const { email } = req.body
-                const nurse = await Nurse.findOne({
+                const user = await User.findOne({
                     $or: [{ username }, { email }],
                 })
-                if (nurse !== null)
+                if (user !== null)
                     return done(null, false, { message: "User already exists" })
                 if (!validateEmail(email))
                     return done(null, false, {
@@ -46,10 +47,15 @@ passport.use(
                 const salt = await bcrypt.genSalt(BCRYPT_SALT_ROUNDS)
                 const newPass = await bcrypt.hash(password, salt)
 
-                const newNurse = Nurse.create({
+                const newUser = User.create({
                     username,
                     password: newPass,
                     email,
+                    userType: 'nurse'
+                })
+
+                const newNurse = Nurse.create({
+                    userId: newUser._id
                 })
 
                 req.login(newNurse, (loginErr) => {
@@ -78,20 +84,20 @@ passport.use(
         },
         async (username, password, done) => {
             try {
-                const nurse = await Nurse.findOne({ username })
-                if (!nurse) {
+                const user = await User.findOne({ username })
+                if (!user) {
                     return done(null, false, {
                         message: "No username such as exists!",
                     })
                 }
-
-                const match = await bcrypt.compare(password, nurse.password)
+                console.log(user.userType)
+                const match = bcrypt.compare(password, user.password)
                 if (!match) {
                     return done(null, false, { message: "Wrong password!" })
                 }
 
                 // If the login is successful, return the nurse object
-                return done(null, nurse)
+                return done(null, user)
             } catch (e) {
                 console.error(e)
                 return done(e)

@@ -57,15 +57,22 @@ const RegisterPage = () => {
                                 </button>
                             </div>
                         </form>
-                        <div className="divider"><span className="text">or</span></div>
-                        <div className="loginOption text-center">Already a Member? <a href="#" className="font-semibold">Login.</a></div>
-
+                        <div className="divider">
+                            <span className="text">or</span>
+                        </div>
+                        <div className="loginOption text-center">
+                            Already a Member?{" "}
+                            <a href="#" className="font-semibold">
+                                Login.
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div className="rightPage flex items-center justify-center flex-col w-full h-full">
-                    <img 
+                    <img
                         className="scale-125"
-                        src="https://t4.ftcdn.net/jpg/00/66/01/29/360_F_66012928_ztFfdS8dnLgghWKWxrDOH8FfhrzAkI2Z.jpg" />
+                        src="https://t4.ftcdn.net/jpg/00/66/01/29/360_F_66012928_ztFfdS8dnLgghWKWxrDOH8FfhrzAkI2Z.jpg"
+                    />
                 </div>
             </div>
         </>

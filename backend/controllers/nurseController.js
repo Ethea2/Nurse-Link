@@ -2,7 +2,7 @@ const passport = require("passport")
 const Nurse = require("../models/nurseModel")
 
 const createNurse = async (req, res, next) => {
-    passport.authenticate("register", (err, user, info) => {
+    passport.authenticate("register-nurse", (err, user, info) => {
         if (err) return next(err)
         if (!user) return res.status(404).json({ message: "User not found!" })
         res.status(200).json({ message: "Registration Successful!" })

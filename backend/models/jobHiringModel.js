@@ -29,5 +29,4 @@ const jobHiringSchema = new Schema({
     }]
 })
 
-const JobHiring = mongoose.model("JobHiring", jobHiringSchema, "JobHiring")
-export default JobHiring;
+module.exports = mongoose.model("JobHiring", jobHiringSchema, "JobHiring")
