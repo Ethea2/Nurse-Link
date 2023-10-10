@@ -16,7 +16,7 @@ const useLogin = () => {
                 password,
             },
             withCredentials: true,
-            url: import.meta.env.VITE_API_URL + "/api/nurse/login",
+            url: import.meta.env.VITE_API_URL + "/api/auth/login",
         })
             .then((data) => {
                 setState("Success")

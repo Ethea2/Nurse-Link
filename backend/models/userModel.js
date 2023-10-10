@@ -25,7 +25,6 @@ const userSchema = new Schema({
     },
     phoneNumber: {
         type: String,
-        unique: true
     },
     profilePicture: {
         type: String
@@ -36,15 +35,12 @@ const userSchema = new Schema({
     socials: {
         facebook: {
             type: String,
-            unique: true
         },
         twitter: {
             type: String,
-            unique: true
         },
         instagram: {
             type: String,
-            unique: true
         }
     }
 })

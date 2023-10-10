@@ -6,17 +6,20 @@ const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 const Nurse = require("../models/nurseModel")
 const User = require("../models/userModel")
+const Institute = require("../models/instituteModel")
 
 const validateEmail = (email) =>
     /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 
 passport.serializeUser((user, done) => {
-    process.nextTick(() => done(null, { id: user._id, username: user.username }))
+    process.nextTick(() =>
+        done(null, { id: user._id, username: user.username })
+    )
 })
 
 passport.deserializeUser(async (user, done) => {
     try {
-        const userLogin = await User.findById({_id: user.id})
+        const userLogin = await User.findById({ _id: user.id })
         done(null, userLogin)
     } catch (error) {
         done(error)
@@ -24,7 +27,7 @@ passport.deserializeUser(async (user, done) => {
 })
 
 passport.use(
-    "register-nurse",
+    "register",
     new LocalStrategy(
         {
             usernameField: "username",
@@ -34,12 +37,14 @@ passport.use(
         },
         async (req, username, password, done) => {
             try {
-                const { email } = req.body
+                const { email, userType } = req.body //for now it only requires userType
                 const user = await User.findOne({
                     $or: [{ username }, { email }],
                 })
                 if (user !== null)
-                    return done(null, false, { message: "User already exists" })
+                    return done(null, false, {
+                        message: "User already exists",
+                    })
                 if (!validateEmail(email))
                     return done(null, false, {
                         message: "Please provide a valid email",
@@ -47,25 +52,41 @@ passport.use(
                 const salt = await bcrypt.genSalt(BCRYPT_SALT_ROUNDS)
                 const newPass = await bcrypt.hash(password, salt)
 
-                const newUser = User.create({
+                const newUser = await User.create({
                     username,
                     password: newPass,
                     email,
-                    userType: 'nurse'
+                    userType,
                 })
 
-                const newNurse = Nurse.create({
-                    userId: newUser._id
-                })
+                if (userType === "nurse") {
+                    const newNurse = await Nurse.create({
+                        userId: newUser._id,
+                    })
+                    req.login(newUser, (loginErr) => {
+                        if (loginErr) {
+                            return done(loginErr)
+                        }
 
-                req.login(newNurse, (loginErr) => {
-                    if (loginErr) {
-                        return done(loginErr)
-                    }
+                        console.log("User created!")
+                        return done(null, newNurse)
+                    })
+                } else {
+                    const newInstitute = await Institute.create({
+                        userId: newUser._id,
+                    })
+                    
+                    req.login(newUser, (loginErr) => {
+                        if (loginErr) {
+                            return done(loginErr)
+                        }
 
-                    console.log("User created!")
-                    return done(null, newNurse)
-                })
+                        console.log("Institute created!")
+                        return done(null, newInstitute)
+                    })
+                }
+
+                //return done(null, false, { message: "No user type was sent." })
             } catch (e) {
                 console.log(e)
                 return done(e)
@@ -90,14 +111,27 @@ passport.use(
                         message: "No username such as exists!",
                     })
                 }
-                console.log(user.userType)
                 const match = bcrypt.compare(password, user.password)
+
                 if (!match) {
                     return done(null, false, { message: "Wrong password!" })
                 }
 
-                // If the login is successful, return the nurse object
-                return done(null, user)
+                if (user.userType === "nurse") {
+                    const nurse = await Nurse.findOne({ userId: user._id })
+                    if (!nurse)
+                        return done(null, false, {
+                            message: "Could not find the nurse account.",
+                        })
+                    return done(null, user)
+                } else {
+                    const institute = await Institute.findOne({ userId: user._id })
+                    if (!institute)
+                        return done(null, false, {
+                            message: "Could not find the institute account.",
+                        })
+                    return done(null, user)
+                }
             } catch (e) {
                 console.error(e)
                 return done(e)

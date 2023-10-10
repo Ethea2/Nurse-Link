@@ -8,6 +8,7 @@ const session = require("express-session")
 const cookieParser = require("cookie-parser")
 const MongoDBStore = require("connect-mongodb-session")(session)
 const nurseRouter = require("./routes/nurseRoutes")
+const authRouter = require('./routes/authRoutes')
 const { generateSecret } = require("./utils/sessionSecret")
 
 const app = express()
@@ -58,6 +59,7 @@ app.use("/test", async (req, res) => {
     res.status(200).json({ message: "WE ARE ON THE GO!" })
 })
 app.use("/api/nurse", nurseRouter)
+app.use("/api/auth", authRouter)
 
 //start of program
 mongoose
