@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { toast } from "react-toastify"
 //this is for getting data
 const useFetch = (url: string) => {
     const [data, setData] = useState<any>()

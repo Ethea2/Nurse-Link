@@ -3,7 +3,7 @@ import { useState } from "react"
 import { FiMenu, FiArrowRight } from "react-icons/fi"
 import { Link } from "react-router-dom"
 import routes from "../router/router"
-import { RouteType } from "../../types/routes/routeType"
+import { RouteType } from "../../types/routeTypes/routeType"
 
 const Navbar = () => {
     return (

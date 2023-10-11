@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import useFetch from "../../hooks/useFetch"
-import { NurseType } from "../../types/routes/nurseTypes/nurseType"
+import { NurseType } from "../../types/nurseTypes/nurseType"
 
 const Test = () => {
     const { data, loading } = useFetch("/api/nurse")

@@ -1,4 +1,4 @@
-import { RouteType } from "../../types/routes/routeType"
+import { RouteType } from "../../types/routeTypes/routeType"
 import Landing from "../../pages/landing/Landing"
 import Homepage from "../../pages/homepage/Homepage"
 import RegisterPage from "../../pages/register/RegisterPage"
