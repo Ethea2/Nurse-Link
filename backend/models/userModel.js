@@ -25,23 +25,7 @@ const userSchema = new Schema({
     },
     phoneNumber: {
         type: String,
-    },
-    profilePicture: {
-        type: String
-    },
-    about: {
-        type: String
-    },
-    socials: {
-        facebook: {
-            type: String,
-        },
-        twitter: {
-            type: String,
-        },
-        instagram: {
-            type: String,
-        }
+        unique: true,
     }
 })
 

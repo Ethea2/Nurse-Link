@@ -14,8 +14,11 @@ const jobHiringSchema = new Schema({
         require: true
     }, 
     requirements:{
-        type: String, //probably not String
+        type: [String], //probably not String
         require: true
+    },
+    acceptingEndDate: {
+        type: Date
     },
     applicants: [{
         applicantID: {
@@ -24,6 +27,12 @@ const jobHiringSchema = new Schema({
         },
         appliedDate: {
             type: Date,
+            require: true
+        },
+        filter: {
+            type: String,
+            enum: ['pending', 'active', 'inactive'],
+            dafault: 'pending',
             require: true
         }
     }]
