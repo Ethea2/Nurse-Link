@@ -20,49 +20,63 @@ const instituteSchema = new Schema({
     },
     profilePicture: {
         type: String,
-    }, 
+    },
     bannerPicture: {
         type: String,
-    }, 
+    },
     about: {
         type: String,
     },
     socials: {
         facebook: {
-            type: String
+            type: String,
         },
         twitter: {
-            type: String
+            type: String,
         },
         instagram: {
-            type: String
+            type: String,
         },
     },
     instituteWebsite: {
-        type: String
+        type: String,
     },
     employee: {
-        type: [mongoose.Schema.Types.ObjectId]
+        type: [mongoose.Schema.Types.ObjectId],
     },
     jobHiringId: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: "JobHiring",
     },
-    notification: [{
-        status: {
-            type: String,
-            enum: ['unread', 'read'],
-            dafault: 'unread',
-            require: true
+    notification: [
+        {
+            status: {
+                type: String,
+                enum: ["unread", "read"],
+                dafault: "unread",
+                require: true,
+            },
+            description: {
+                type: String,
+                require: true,
+            },
+            userReference: {
+                type: [mongoose.Schema.Types.ObjectId],
+            },
         },
-        description: {
-            type: String,
-            require: true
+    ],
+    roles: [
+        {
+            user: {
+                type: Object.Types.Schema.ObjectId,
+                ref: "User",
+            },
+            role: {
+                type: String,
+                enum: ["admin", "poster", "editor"],
+            },
         },
-        userReference: {
-            type: [mongoose.Schema.Types.ObjectId]
-        }
-    }],
+    ],
 })
 
 module.exports = mongoose.model("Institute", instituteSchema, "Institute")

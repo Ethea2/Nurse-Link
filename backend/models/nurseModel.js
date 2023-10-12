@@ -9,7 +9,6 @@ const nurseSchema = new Schema({
         unique: true,
         ref: "User",
     },
-
     firstName: {
         type: String,
         require: true
