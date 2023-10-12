@@ -23,26 +23,6 @@ const userSchema = new Schema({
         enum: ['nurse', 'institute'],
         dafault: 'nurse'
     },
-    phoneNumber: {
-        type: String,
-    },
-    profilePicture: {
-        type: String
-    },
-    about: {
-        type: String
-    },
-    socials: {
-        facebook: {
-            type: String,
-        },
-        twitter: {
-            type: String,
-        },
-        instagram: {
-            type: String,
-        }
-    }
 })
 
 module.exports = mongoose.model("User", userSchema, "User")
