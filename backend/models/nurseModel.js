@@ -9,111 +9,55 @@ const nurseSchema = new Schema({
         unique: true,
         ref: "User",
     },
+
     firstName: {
         type: String,
+        require: true
     },
     lastName: {
         type: String,
+        require: true
     },
     specialization: {
         type: String,
     },
-    credentials: {
-        education: [
-            {
-                institutionName: {
-                    type: String,
-                },
-                startDate: {
-                    type: Date,
-                },
-                endDate: {
-                    type: Date,
-                },
-            },
-        ],
-        experience: [
-            {
-                institutionName: {
-                    type: String,
-                },
-                startDate: {
-                    type: Date,
-                },
-                endDate: {
-                    type: Date,
-                },
-                description: {
-                    type: String,
-                },
-            },
-        ],
-        organization: [
-            {
-                institutionName: {
-                    type: String,
-                },
-                startDate: {
-                    type: Date,
-                },
-                endDate: {
-                    type: Date,
-                },
-                description: {
-                    type: String,
-                },
-            },
-        ],
-        license: [
-            {
-                institutionName: {
-                    type: String,
-                },
-                startDate: {
-                    type: Date,
-                },
-                endDate: {
-                    type: Date,
-                },
-                description: {
-                    type: String,
-                },
-                image: {
-                    type: String,
-                },
-            },
-        ],
-        certification: [
-            {
-                institutionName: {
-                    type: String,
-                },
-                startDate: {
-                    type: Date,
-                },
-                endDate: {
-                    type: Date,
-                },
-                description: {
-                    type: String,
-                },
-                image: {
-                    type: String,
-                },
-            },
-        ],
-    },
-    youtube: {
+    about: {
         type: String,
     },
-    phoneNumber: {
+    birthdate: {
+        type: Date
+    },
+    gender: {
         type: String,
+        enum: ['Male', 'Female', 'Non-Binary', 'Prefer not to Say']
+    },
+    country: {
+        type: String
+    },
+    city: {
+        type: String
     },
     profilePicture: {
         type: String,
     },
-    about: {
+    bannerPicture: {
         type: String,
+    },
+    youtube: {
+        type: String,
+    },
+    technicalSkill: [
+        {
+            type: String
+        }
+    ],
+    contact: {
+        email: {
+            type: String,
+        },
+        phoneNumber: {
+            type: String,
+        },
     },
     socials: {
         facebook: {
@@ -125,6 +69,145 @@ const nurseSchema = new Schema({
         instagram: {
             type: String,
         },
+    },
+    preferredLoc: {
+        country: {
+            type: String,
+        },
+        city: {
+            type: String,
+        }
+    },
+    credentials: {
+        education: [
+            {
+                institutionName: {
+                    type: String,
+                    require: true
+                },
+                degree: {
+                    type: String,
+                },
+                fieldStudy: {
+                    type: String,
+                },
+                startDate: {
+                    type: Date,
+                },
+                endDate: {
+                    type: Date,
+                },
+                isCurrent: {
+                    type: Boolean,
+                }
+            },
+        ],
+        experience: [
+            {
+                institutionName: {
+                    type: String,
+                },
+                description: {
+                    type: String,
+                },
+                role: {
+                    type: String,
+                },
+                startDate: {
+                    type: Date,
+                },
+                endDate: {
+                    type: Date,
+                },
+                employmentType: {
+                    type: String,
+                    enum: ['Full-time', 'Part-time', 'Self-employed', 'Freelance', 'Contract', 'Internship', 'Apprenticeship', 'Seasonal'],
+                },
+                isCurrent: {
+                    type: Boolean,
+                }
+            },
+        ],
+        volunteering: [
+            {
+                institutionName: {
+                    type: String,
+                },
+                role: {
+                    type: String,
+                },
+                description: {
+                    type: String,
+                },
+                startDate: {
+                    type: Date,
+                },
+                endDate: {
+                    type: Date,
+                },
+                isCurrent: {
+                    type: Boolean,
+                },
+            }
+        ],
+        license: [
+            {
+                name: {
+                    type: String,
+                },
+                description: {
+                    type: String,
+                },
+                institutionName: {
+                    type: String,
+                },
+                issuanceDate: {
+                    type: Date,
+                },
+                status: {
+                    type: String,
+                    enum: ['verified', 'unverified', 'pending'],
+                    default: 'pending'
+                },            
+            }
+        ],
+        certification: [
+            {
+                name: {
+                    type: String,
+                },
+                description: {
+                    type: String,
+                },
+                institutionName: {
+                    type: String,
+                },
+                issuanceDate: {
+                    type: Date,
+                },
+                status: {
+                    type: String,
+                    enum: ['verified', 'unverified', 'pending'],
+                    default: 'pending'
+                },            
+            }
+        ],
+        award: [
+            {
+                name: {
+                    type: String,
+                },
+                description: {
+                    type: String,
+                },
+                institutionName: {
+                    type: String,
+                },
+                issuanceDate: {
+                    type: Date,
+                },           
+            }
+        ],
     },
 })
 
