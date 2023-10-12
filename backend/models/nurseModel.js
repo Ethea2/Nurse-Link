@@ -9,20 +9,36 @@ const nurseSchema = new Schema({
         unique: true,
         ref: "User",
     },
+
     firstName: {
         type: String,
+        require: true
     },
     lastName: {
         type: String,
+        require: true
     },
     specialization: {
+        type: String,
+    },
+    about: {
+        type: String,
+    },
+    profilePicture: {
         type: String,
     },
     credentials: {
         education: [
             {
+                degree: {
+                    type: String,
+                },
+                fieldStudy: {
+                    type: String,
+                },
                 institutionName: {
                     type: String,
+                    require: true
                 },
                 startDate: {
                     type: Date,
@@ -34,6 +50,9 @@ const nurseSchema = new Schema({
         ],
         experience: [
             {
+                title: {
+                    type: String,
+                },
                 institutionName: {
                     type: String,
                 },
@@ -48,8 +67,11 @@ const nurseSchema = new Schema({
                 },
             },
         ],
-        organization: [
+        volunteering: [
             {
+                title: {
+                    type: String,
+                },
                 institutionName: {
                     type: String,
                 },
@@ -62,40 +84,33 @@ const nurseSchema = new Schema({
                 description: {
                     type: String,
                 },
-            },
+            }
         ],
-        license: [
+        qualification: [
             {
+                type: {
+                    type: String,
+                    enum: ['license', 'certification', 'award']
+                },
+                title: {
+                    type: String,
+                },
                 institutionName: {
                     type: String,
                 },
-                startDate: {
+                issuanceDate: {
                     type: Date,
                 },
-                endDate: {
+                expirationDate: {
                     type: Date,
                 },
                 description: {
                     type: String,
                 },
-                image: {
+                status: {
                     type: String,
-                },
-            },
-        ],
-        certification: [
-            {
-                institutionName: {
-                    type: String,
-                },
-                startDate: {
-                    type: Date,
-                },
-                endDate: {
-                    type: Date,
-                },
-                description: {
-                    type: String,
+                    enum: ['verified', 'unverified', 'pending'],
+                    default: 'pending'
                 },
                 image: {
                     type: String,
@@ -103,17 +118,24 @@ const nurseSchema = new Schema({
             },
         ],
     },
+    technicalSkill: [
+        {
+            type: String
+        }
+    ],
     youtube: {
         type: String,
     },
     phoneNumber: {
         type: String,
     },
-    profilePicture: {
-        type: String,
-    },
-    about: {
-        type: String,
+    contact: {
+        phoneNumber: {
+            type: String,
+        },
+        email: {
+            type: String,
+        }
     },
     socials: {
         facebook: {
