@@ -1,9 +1,12 @@
 import { useRef, useState } from "react"
 import axios from "axios"
 import { Id, toast } from "react-toastify"
+import { useAuth } from "./useAuth"
+import { Action } from "../contexts/AuthContext"
 
 const useLogin = () => {
     const [state, setState] = useState<string | null>(null)
+    const { dispatch } = useAuth()
     const toastID = useRef<Id>()
 
     const login = async (username: string, password: string) => {
@@ -21,6 +24,8 @@ const useLogin = () => {
             .then((data) => {
                 setState("Success")
                 console.log(data)
+                localStorage.setItem("user", JSON.stringify(data.data));
+                dispatch?.({type: "LOGIN", payload: data.data})
                 toast.update(toastID.current ?? "", {
                     render: "Successfully Logged in!",
                     autoClose: 3000,

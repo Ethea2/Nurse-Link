@@ -4,6 +4,7 @@ import { FiMenu, FiArrowRight } from "react-icons/fi"
 import { Link } from "react-router-dom"
 import routes from "../router/router"
 import { RouteType } from "../../types/routeTypes/routeType"
+import { useAuth } from "../../hooks/useAuth"
 
 const Navbar = () => {
     return (
@@ -91,27 +92,36 @@ const NavLink = ({ text, path }: { text: string; path: string }) => {
 }
 
 const NavRight = () => {
+    const { user } = useAuth()
     return (
-        <div className="flex items-center gap-4">
-            <Link to="/login">
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent font-medium rounded-md whitespace-nowrap"
-                >
-                    Log in
-                </motion.button>
-            </Link>
-            <Link to="/register">
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium rounded-md whitespace-nowrap"
-                >
-                    Sign up
-                </motion.button>
-            </Link>
-        </div>
+        <>
+            <div className="flex items-center gap-4">
+                {user ? (
+                    "Logged in"
+                ) : (
+                    <>
+                        <Link to="/login">
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent font-medium rounded-md whitespace-nowrap"
+                            >
+                                Log in
+                            </motion.button>
+                        </Link>
+                        <Link to="/register">
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium rounded-md whitespace-nowrap"
+                            >
+                                Sign up
+                            </motion.button>
+                        </Link>
+                    </>
+                )}
+            </div>
+        </>
     )
 }
 
