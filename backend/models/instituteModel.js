@@ -68,7 +68,7 @@ const instituteSchema = new Schema({
     roles: [
         {
             user: {
-                type: Object.Types.Schema.ObjectId,
+                type: mongoose.Schema.Types.ObjectId,
                 ref: "User",
             },
             role: {
