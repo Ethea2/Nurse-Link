@@ -69,14 +69,16 @@ const nurseSchema = new Schema({
             type: String,
         },
     },
-    preferredLoc: {
-        country: {
-            type: String,
-        },
-        city: {
-            type: String,
+    preferredLoc: [
+        {
+            country: {
+                type: String,
+            },
+            city: {
+                type: String,
+            }
         }
-    },
+    ],
     credentials: {
         education: [
             {
@@ -149,8 +151,12 @@ const nurseSchema = new Schema({
                 },
             }
         ],
-        license: [
+        document: [
             {
+                type: {
+                    type: String,
+                    enum: ['license', 'certification', 'award']
+                },
                 name: {
                     type: String,
                 },
@@ -167,44 +173,10 @@ const nurseSchema = new Schema({
                     type: String,
                     enum: ['verified', 'unverified', 'pending'],
                     default: 'pending'
-                },            
-            }
-        ],
-        certification: [
-            {
-                name: {
-                    type: String,
                 },
-                description: {
+                link: {
                     type: String,
-                },
-                institutionName: {
-                    type: String,
-                },
-                issuanceDate: {
-                    type: Date,
-                },
-                status: {
-                    type: String,
-                    enum: ['verified', 'unverified', 'pending'],
-                    default: 'pending'
-                },            
-            }
-        ],
-        award: [
-            {
-                name: {
-                    type: String,
-                },
-                description: {
-                    type: String,
-                },
-                institutionName: {
-                    type: String,
-                },
-                issuanceDate: {
-                    type: Date,
-                },           
+                }            
             }
         ],
     },

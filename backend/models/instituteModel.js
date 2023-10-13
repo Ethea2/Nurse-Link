@@ -48,23 +48,6 @@ const instituteSchema = new Schema({
         type: [mongoose.Schema.Types.ObjectId],
         ref: "JobHiring",
     },
-    notification: [
-        {
-            status: {
-                type: String,
-                enum: ["unread", "read"],
-                dafault: "unread",
-                require: true,
-            },
-            description: {
-                type: String,
-                require: true,
-            },
-            userReference: {
-                type: [mongoose.Schema.Types.ObjectId],
-            },
-        },
-    ],
     roles: [
         {
             user: {
