@@ -1,41 +1,4 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router"
-import useRegister from "../../hooks/useRegister"
-
 const RegisterPage = () => {
-    Username, password, email, first name, last name, birthdate, gender, country, city
-    const [username, setUsername] = useState<string>("")
-    const [password, setPassword] = useState<string>("")
-    const [email, setUsername] = useState<string>("")
-    const [retype-password, setPassword] = useState<string>("")
-    const [first-name, setUsername] = useState<string>("")
-    const [last-name, setPassword] = useState<string>("")
-    const [birthdate, setUsername] = useState<string>("")
-    const [password, setPassword] = useState<string>("")
-    const [gender, setUsername] = useState<string>("")
-    const [country, setPassword] = useState<string>("")
-    const [city, setUsername] = useState<string>("")
-
-
-    const {login, state} = useRegister()
-    const navigate = useNavigate()
-
-    const handleLogin = async (
-        e: React.MouseEvent<HTMLButtonElement>,
-        username: string,
-        password: string
-    ) => {
-        e.preventDefault()
-        await login(username, password)
-    }
-
-    useEffect(() => {
-        console.log(state)
-        if(state === "Error") console.log("ERROR")
-        else if (state === "Success") navigate("/homepage")
-    }, [state])
-
-
     return (
         <>
             <div className="registerPage flex items-center w-full h-screen">
@@ -68,17 +31,6 @@ const RegisterPage = () => {
                                     //value={username}
                                 />
                             </label>
-                            <label htmlFor="email">
-                                Email
-                                <br />
-                                <input
-                                    name="email"
-                                    id="email"
-                                    type="email"
-                                    className="bg-slate-200 w-full"
-                                />
-                            </label>
-                            <br />
                             <label htmlFor="password">
                                 Password
                                 <br />
@@ -92,95 +44,6 @@ const RegisterPage = () => {
                                 />
                             </label>
                             <br />
-
-                            <label htmlFor="retype-password">
-                                Retype Password
-                                <br />
-                                <input
-                                    name="retype-password"
-                                    id="retype-password"
-                                    type="password"
-                                    className="bg-slate-200 w-full"
-                                />
-                            </label>
-                            <br />
-
-                            <label htmlFor="first-name">
-                                First Name
-                                <br />
-                                <input
-                                    name="first-name"
-                                    id="first-name"
-                                    type="text"
-                                    className="bg-slate-200 w-full"
-                                />
-                            </label>
-                            <br />
-
-                            <label htmlFor="last-name">
-                                Last Name
-                                <br />
-                                <input
-                                    name="last-name"
-                                    id="last-name"
-                                    type="text"
-                                    className="bg-slate-200 w-full"
-                                />
-                            </label>
-                            <br />
-
-                            <label htmlFor="birth-date">
-                                Birth Date
-                                <br />
-                                <input
-                                    name="birth-date"
-                                    id="birth-date"
-                                    type="date"
-                                    className="bg-slate-200 w-full"
-                                />
-                            </label>
-                            <br />
-
-                            <label htmlFor="gender">
-                            Gender
-                                <br />
-                                <select
-                                    name="gender"
-                                    id="gender"
-                                    className="bg-slate-200 w-full"
-                                >
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Non-binary">Non-binary</option>
-                                    <option value="Prefer not to Say">Prefer not to say</option> 
-                                </select>
-                            </label>
-                            <br />
-
-                            <label htmlFor="country">
-                                Country
-                                <br />
-                                <input
-                                    name="country"
-                                    id="country"
-                                    type="text"
-                                    className="bg-slate-200 w-full"
-                                />
-                            </label>
-                            <br />
-
-                            <label htmlFor="city">
-                                City
-                                <br />
-                                <input
-                                    name="city"
-                                    id="city"
-                                    type="text"
-                                    className="bg-slate-200 w-full"
-                                />
-                            </label>
-                            <br />
-
                             <div className="signIn flex items-center justify-center py-5">
                                 <button className="signInBtn btn btn-wide bg-slate-400 rounded-full center ">
                                     Sign Up
