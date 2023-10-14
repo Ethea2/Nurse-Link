@@ -7,7 +7,9 @@ const register = async (req, res, next) => {
         passport.authenticate("register", (err, user, info) => {
             if (err) return next(err)
             if (!user)
-                return res.status(404).json({ message: "User already exists!" })
+                return res
+                    .status(404)
+                    .json({ message: "User already exists!" })
             res.status(200).json({ message: "Registration Successful!" })
         })(req, res, next)
     } catch (err) {

@@ -9,7 +9,7 @@ const useRegister = () => {
     const { dispatch } = useAuth()
     const toastID = useRef<Id>()
 
-    const register = async (username: string, password: string, email: string, firstname: String, lastname: String, birthdate: String, gender: String, country: String, city: String) => {
+    const register = async (username: string, password: string, email: string, firstname: String, lastname: String, birthdate: String, gender: String, country: String, city: String, userType: String) => {
         toastID.current = toast.loading("Registering...")
         //ported to axios
         await axios({
@@ -23,7 +23,8 @@ const useRegister = () => {
                 birthdate,
                 gender,
                 country,
-                city
+                city,
+                userType
             },
             withCredentials: true,
             url: import.meta.env.VITE_API_URL + "/api/auth/register",

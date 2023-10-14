@@ -26,74 +26,188 @@ passport.deserializeUser(async (user, done) => {
     }
 })
 
+// passport.use(
+//   "register",
+//   new LocalStrategy(
+//     {
+//       usernameField: "username",
+//       passwordField: "password",
+//       passReqToCallback: true,
+//       session: false,
+//     },
+//     async (req, username, password, done) => {
+//       try {
+//         const {
+//           email,
+//           firstname,
+//           lastname,
+//           birthdate,
+//           gender,
+//           country,
+//           city,
+//           userType,
+//         } = req.body;
+
+//         const user = await User.findOne({
+//           $or: [{ username }, { email }],
+//         });
+
+//         if (user !== null)
+//           return done(null, false, {
+//             message: "User already exists",
+//           });
+
+//         if (!validateEmail(email))
+//           return done(null, false, {
+//             message: "Please provide a valid email",
+//           });
+
+//         const salt = await bcrypt.genSalt(BCRYPT_SALT_ROUNDS);
+//         const newPass = await bcrypt.hash(password, salt);
+
+//         const newUser = await User.create({
+//           username,
+//           password: newPass,
+//           email,
+//           firstname,
+//           lastname,
+//           birthdate,
+//           gender,
+//           country,
+//           city,
+//           userType,
+//         });
+
+//         if (userType === "nurse") {
+//           const newNurse = await Nurse.create({
+//             userId: newUser._id,
+//           });
+//           req.login(newUser, (loginErr) => {
+//             if (loginErr) {
+//               return done(loginErr);
+//             }
+
+//             console.log("User created!");
+//             return done(null, newNurse);
+//           });
+//         } else {
+//           const newInstitute = await Institute.create({
+//             userId: newUser._id,
+//           });
+
+//           req.login(newUser, (loginErr) => {
+//             if (loginErr) {
+//               return done(loginErr);
+//             }
+
+//             console.log("Institute created!");
+//             return done(null, newInstitute);
+//           });
+//         }
+//       } catch (e) {
+//         console.log(e);
+//         return done(e);
+//       }
+//     }
+//   )
+// );
+
 passport.use(
     "register",
     new LocalStrategy(
-        {
-            usernameField: "username",
-            passwordField: "password",
-            passReqToCallback: true,
-            session: false,
-        },
-        async (req, username, password, done) => {
-            try {
-                const { email, userType } = req.body //for now it only requires userType
-                const user = await User.findOne({
-                    $or: [{ username }, { email }],
-                })
-                if (user !== null)
-                    return done(null, false, {
-                        message: "User already exists",
-                    })
-                if (!validateEmail(email))
-                    return done(null, false, {
-                        message: "Please provide a valid email",
-                    })
-                const salt = await bcrypt.genSalt(BCRYPT_SALT_ROUNDS)
-                const newPass = await bcrypt.hash(password, salt)
+      {
+        usernameField: "username",
+        passwordField: "password",
+        passReqToCallback: true,
+        session: false,
+      },
+      async (req, username, password, done) => {
+        try {
+          const {
+            email,
+            firstname,
+            lastname,
+            birthdate,
+            gender,
+            country,
+            city,
+            userType,
+          } = req.body;
+  
+          const user = await User.findOne({
+            $or: [{ username }, { email }],
+          });
+  
+          if (user !== null)
+            return done(null, false, {
+              message: "User already exists",
+            });
+  
+          if (!validateEmail(email))
+            return done(null, false, {
+              message: "Please provide a valid email",
+            });
 
-                const newUser = await User.create({
-                    username,
-                    password: newPass,
-                    email,
-                    userType,
-                })
-
-                if (userType === "nurse") {
-                    const newNurse = await Nurse.create({
-                        userId: newUser._id,
-                    })
-                    req.login(newUser, (loginErr) => {
-                        if (loginErr) {
-                            return done(loginErr)
-                        }
-
-                        console.log("User created!")
-                        return done(null, newNurse)
-                    })
-                } else {
-                    const newInstitute = await Institute.create({
-                        userId: newUser._id,
-                    })
-                    
-                    req.login(newUser, (loginErr) => {
-                        if (loginErr) {
-                            return done(loginErr)
-                        }
-
-                        console.log("Institute created!")
-                        return done(null, newInstitute)
-                    })
-                }
-
-                //return done(null, false, { message: "No user type was sent." })
-            } catch (e) {
-                console.log(e)
-                return done(e)
-            }
+        // Check if the email is already in use
+            // const existingUser = await User.findOne({ email });
+            // if (existingUser) {
+            // return done(null, false, {
+            //     message: "Email is already in use",
+            // });
+            // }
+  
+          const salt = await bcrypt.genSalt(BCRYPT_SALT_ROUNDS);
+          const newPass = await bcrypt.hash(password, salt);
+  
+          const newUser = await User.create({
+            username,
+            password: newPass,
+            email,
+            firstname,
+            lastname,
+            birthdate,
+            gender,
+            country,
+            city,
+            userType,
+          });
+  
+          if (userType === "nurse") {
+            const newNurse = await Nurse.create({
+              userId: newUser._id,
+            });
+            req.login(newUser, (loginErr) => {
+              if (loginErr) {
+                return done(loginErr);
+              }
+  
+              console.log("User created!");
+              return done(null, newNurse);
+            });
+          } else {
+            const newInstitute = await Institute.create({
+              userId: newUser._id,
+            });
+  
+            req.login(newUser, (loginErr) => {
+              if (loginErr) {
+                return done(loginErr);
+              }
+  
+              console.log("Institute created!");
+              return done(null, newInstitute);
+            });
+          }
+        } catch (e) {
+          console.log(e);
+          return done(e);
         }
+      }
     )
-)
+  );
+  
+  
+  
 
 passport.use(
     "login",
