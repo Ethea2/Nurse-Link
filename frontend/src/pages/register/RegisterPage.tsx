@@ -14,8 +14,7 @@ const RegisterPage = () => {
     const [country, setCountry] = useState<string>("")
     const [city, setCity] = useState<string>("")
 
-
-    const {registerNurse, state} = useRegister() // register hello
+    const { registerNurse, state } = useRegister() // register hello
     const navigate = useNavigate()
 
     const handleRegister = async (
@@ -34,19 +33,28 @@ const RegisterPage = () => {
         e.preventDefault()
 
         if (password !== retypepassword) {
-            console.error("Passwords do not match");
-            return;
+            console.error("Passwords do not match")
+            return
         }
-        await registerNurse(username, password, email, firstname, lastname, birthdate, gender, country, city);
-        
+
+        await registerNurse(
+            username,
+            password,
+            email,
+            firstname,
+            lastname,
+            birthdate,
+            gender,
+            country,
+            city
+        )
     }
 
     useEffect(() => {
         console.log(state)
-        if(state === "Error") console.log("ERROR")
+        if (state === "Error") console.log("ERROR")
         else if (state === "Success") navigate("/homepage")
     }, [state])
-
 
     return (
         <>
@@ -76,7 +84,9 @@ const RegisterPage = () => {
                                     id="username"
                                     type="text"
                                     className="bg-slate-200 w-full"
-                                    onChange={(e) => setUsername(e.target.value)}
+                                    onChange={(e) =>
+                                        setUsername(e.target.value)
+                                    }
                                     value={username}
                                 />
                             </label>
@@ -101,7 +111,9 @@ const RegisterPage = () => {
                                     id="password"
                                     type="password"
                                     className="bg-slate-200 w-full"
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
                                     value={password}
                                 />
                             </label>
@@ -115,7 +127,9 @@ const RegisterPage = () => {
                                     id="retype-password"
                                     type="password"
                                     className="bg-slate-200 w-full"
-                                    onChange={(e) => setRetypePassword(e.target.value)}
+                                    onChange={(e) =>
+                                        setRetypePassword(e.target.value)
+                                    }
                                     value={retypepassword}
                                 />
                             </label>
@@ -129,7 +143,9 @@ const RegisterPage = () => {
                                     id="firstname"
                                     type="text"
                                     className="bg-slate-200 w-full"
-                                    onChange={(e) => setFirstName(e.target.value)}
+                                    onChange={(e) =>
+                                        setFirstName(e.target.value)
+                                    }
                                     value={firstname}
                                 />
                             </label>
@@ -143,7 +159,9 @@ const RegisterPage = () => {
                                     id="lastname"
                                     type="text"
                                     className="bg-slate-200 w-full"
-                                    onChange={(e) => setLastName(e.target.value)}
+                                    onChange={(e) =>
+                                        setLastName(e.target.value)
+                                    }
                                     value={lastname}
                                 />
                             </label>
@@ -157,14 +175,16 @@ const RegisterPage = () => {
                                     id="birthdate"
                                     type="date"
                                     className="bg-slate-200 w-full"
-                                    onChange={(e) => setBirthDate(e.target.value)}
+                                    onChange={(e) =>
+                                        setBirthDate(e.target.value)
+                                    }
                                     value={birthdate}
                                 />
                             </label>
                             <br />
 
                             <label htmlFor="gender">
-                            Gender
+                                Gender
                                 <br />
                                 <select
                                     name="gender"
@@ -175,8 +195,12 @@ const RegisterPage = () => {
                                 >
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
-                                    <option value="Non-binary">Non-binary</option>
-                                    <option value="Prefer not to Say">Prefer not to say</option> 
+                                    <option value="Non-Binary">
+                                        Non-binary
+                                    </option>
+                                    <option value="Prefer not to Say">
+                                        Prefer not to say
+                                    </option>
                                 </select>
                             </label>
                             <br />
@@ -210,9 +234,25 @@ const RegisterPage = () => {
                             <br />
 
                             <div className="signIn flex items-center justify-center py-5">
-                                <button className="signInBtn btn btn-wide bg-slate-400 rounded-full center ">
+                                <button
+                                    onClick={(e) =>
+                                        handleRegister(
+                                            e,
+                                            username,
+                                            password,
+                                            retypepassword,
+                                            email,
+                                            firstname,
+                                            lastname,
+                                            birthdate,
+                                            gender,
+                                            country,
+                                            city
+                                        )
+                                    }
+                                    className="signInBtn btn btn-wide bg-slate-400 rounded-full center "
+                                >
                                     Sign Up
-                                    onClick={(e) => handleRegister(e, username, password, retypepassword, email, firstname, lastname, birthdate, gender, country, city)};
                                 </button>
                             </div>
                         </form>

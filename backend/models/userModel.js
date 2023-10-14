@@ -23,10 +23,6 @@ const userSchema = new Schema({
         enum: ['nurse', 'institute'],
         dafault: 'nurse'
     },
-    phoneNumber: {
-        type: String,
-        unique: true,
-    }
 })
 
 module.exports = mongoose.model("User", userSchema, "User")
