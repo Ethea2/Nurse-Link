@@ -124,14 +124,21 @@ passport.use(
       async (req, username, password, done) => {
         try {
           const {
+            // general prereqs
+            userType,
             email,
+            country,
+            city,
+
+            //for nurses
             firstname,
             lastname,
             birthdate,
             gender,
-            country,
-            city,
-            userType,
+            
+            //for Institute
+            instituteName
+            
           } = req.body;
   
           const user = await User.findOne({
@@ -147,14 +154,6 @@ passport.use(
             return done(null, false, {
               message: "Please provide a valid email",
             });
-
-        // Check if the email is already in use
-            // const existingUser = await User.findOne({ email });
-            // if (existingUser) {
-            // return done(null, false, {
-            //     message: "Email is already in use",
-            // });
-            // }
   
           const salt = await bcrypt.genSalt(BCRYPT_SALT_ROUNDS);
           const newPass = await bcrypt.hash(password, salt);
@@ -163,20 +162,20 @@ passport.use(
             username,
             password: newPass,
             email,
-            firstname,
-            lastname,
-            birthdate,
-            gender,
-            country,
-            city,
             userType,
           });
   
           if (userType === "nurse") {
             const newNurse = await Nurse.create({
               userId: newUser._id,
+              firstname,
+              lastname,
+              birthdate,
+              gender,
+              country,
+              city,
             });
-            req.login(newUser, (loginErr) => {
+            req.login(newUser, (loginErr) => { 
               if (loginErr) {
                 return done(loginErr);
               }
@@ -187,7 +186,11 @@ passport.use(
           } else {
             const newInstitute = await Institute.create({
               userId: newUser._id,
+              instituteName,
+              country,
+              city,
             });
+            
   
             req.login(newUser, (loginErr) => {
               if (loginErr) {

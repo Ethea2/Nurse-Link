@@ -15,7 +15,7 @@ const RegisterPage = () => {
     const [city, setCity] = useState<string>("")
 
 
-    const {register, state} = useRegister()
+    const {registerNurse, state} = useRegister() // register 
     const navigate = useNavigate()
 
     const handleRegister = async (
@@ -26,7 +26,7 @@ const RegisterPage = () => {
         email: string,
         firstname: string,
         lastname: string,
-        birthdate: Date,
+        birthdate: string,
         gender: string,
         country: string,
         city: string
@@ -37,7 +37,7 @@ const RegisterPage = () => {
             console.error("Passwords do not match");
             return;
         }
-        await register(username, password, email, firstname, lastname, birthdate, gender, country, city);
+        await registerNurse(username, password, email, firstname, lastname, birthdate, gender, country, city);
         
     }
 
@@ -212,7 +212,7 @@ const RegisterPage = () => {
                             <div className="signIn flex items-center justify-center py-5">
                                 <button className="signInBtn btn btn-wide bg-slate-400 rounded-full center ">
                                     Sign Up
-                                    onClick={(e: MouseEvent<HTMLButtonElement, MouseEvent>) => handleRegister(e, username, password, retypepassword, email, firstname, lastname, birthdate, gender, country, city)};
+                                    onClick={(e) => handleRegister(e, username, password, retypepassword, email, firstname, lastname, birthdate, gender, country, city)};
                                 </button>
                             </div>
                         </form>
