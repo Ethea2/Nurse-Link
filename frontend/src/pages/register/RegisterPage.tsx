@@ -1,32 +1,44 @@
-import { useEffect, useState } from "react"
+import { MouseEvent, useEffect, useState } from "react"
 import { useNavigate } from "react-router"
-import useRegister from "../../hooks/useRegister"
+import useRegister from "../../hooks/useRegister.tsx"
 
 const RegisterPage = () => {
-    Username, password, email, firstname, lastname, birthdate, gender, country, city
     const [username, setUsername] = useState<string>("")
+    const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
-    const [email, setUsername] = useState<string>("")
-    const [retype-password, setPassword] = useState<string>("")
-    const [firstname, setUsername] = useState<string>("")
-    const [lastname, setPassword] = useState<string>("")
-    const [birthdate, setUsername] = useState<string>("")
-    const [password, setPassword] = useState<string>("")
-    const [gender, setUsername] = useState<string>("")
-    const [country, setPassword] = useState<string>("")
-    const [city, setUsername] = useState<string>("")
+    const [retypepassword, setRetypePassword] = useState<string>("")
+    const [firstname, setFirstName] = useState<string>("")
+    const [lastname, setLastName] = useState<string>("")
+    const [birthdate, setBirthDate] = useState<string>("")
+    const [gender, setGender] = useState<string>("")
+    const [country, setCountry] = useState<string>("")
+    const [city, setCity] = useState<string>("")
 
 
-    const {login, state} = useRegister()
+    const {register, state} = useRegister()
     const navigate = useNavigate()
 
-    const handleLogin = async (
+    const handleRegister = async (
         e: React.MouseEvent<HTMLButtonElement>,
         username: string,
-        password: string
+        password: string,
+        retypepassword: string,
+        email: string,
+        firstname: string,
+        lastname: string,
+        birthdate: Date,
+        gender: string,
+        country: string,
+        city: string
     ) => {
         e.preventDefault()
-        await login(username, password)
+
+        if (password !== retypepassword) {
+            console.error("Passwords do not match");
+            return;
+        }
+        await register(username, password, email, firstname, lastname, birthdate, gender, country, city);
+        
     }
 
     useEffect(() => {
@@ -64,8 +76,8 @@ const RegisterPage = () => {
                                     id="username"
                                     type="text"
                                     className="bg-slate-200 w-full"
-                                    //onChange={(e) => setUsername(e.target.value)}
-                                    //value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    value={username}
                                 />
                             </label>
                             <label htmlFor="email">
@@ -76,6 +88,8 @@ const RegisterPage = () => {
                                     id="email"
                                     type="email"
                                     className="bg-slate-200 w-full"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={email}
                                 />
                             </label>
                             <br />
@@ -87,8 +101,8 @@ const RegisterPage = () => {
                                     id="password"
                                     type="password"
                                     className="bg-slate-200 w-full"
-                                    //onChange={(e) => setPassword(e.target.value)}
-                                    //value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    value={password}
                                 />
                             </label>
                             <br />
@@ -101,42 +115,50 @@ const RegisterPage = () => {
                                     id="retype-password"
                                     type="password"
                                     className="bg-slate-200 w-full"
+                                    onChange={(e) => setRetypePassword(e.target.value)}
+                                    value={retypepassword}
                                 />
                             </label>
                             <br />
 
-                            <label htmlFor="first-name">
+                            <label htmlFor="firstname">
                                 First Name
                                 <br />
                                 <input
-                                    name="first-name"
-                                    id="first-name"
+                                    name="firstname"
+                                    id="firstname"
                                     type="text"
                                     className="bg-slate-200 w-full"
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    value={firstname}
                                 />
                             </label>
                             <br />
 
-                            <label htmlFor="last-name">
+                            <label htmlFor="lastname">
                                 Last Name
                                 <br />
                                 <input
-                                    name="last-name"
-                                    id="last-name"
+                                    name="lastname"
+                                    id="lastname"
                                     type="text"
                                     className="bg-slate-200 w-full"
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    value={lastname}
                                 />
                             </label>
                             <br />
 
-                            <label htmlFor="birth-date">
+                            <label htmlFor="birthdate">
                                 Birth Date
                                 <br />
                                 <input
-                                    name="birth-date"
-                                    id="birth-date"
+                                    name="birthdate"
+                                    id="birthdate"
                                     type="date"
                                     className="bg-slate-200 w-full"
+                                    onChange={(e) => setBirthDate(e.target.value)}
+                                    value={birthdate}
                                 />
                             </label>
                             <br />
@@ -148,6 +170,8 @@ const RegisterPage = () => {
                                     name="gender"
                                     id="gender"
                                     className="bg-slate-200 w-full"
+                                    onChange={(e) => setGender(e.target.value)}
+                                    value={gender}
                                 >
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -165,6 +189,8 @@ const RegisterPage = () => {
                                     id="country"
                                     type="text"
                                     className="bg-slate-200 w-full"
+                                    onChange={(e) => setCountry(e.target.value)}
+                                    value={country}
                                 />
                             </label>
                             <br />
@@ -177,6 +203,8 @@ const RegisterPage = () => {
                                     id="city"
                                     type="text"
                                     className="bg-slate-200 w-full"
+                                    onChange={(e) => setCity(e.target.value)}
+                                    value={city}
                                 />
                             </label>
                             <br />
@@ -184,6 +212,7 @@ const RegisterPage = () => {
                             <div className="signIn flex items-center justify-center py-5">
                                 <button className="signInBtn btn btn-wide bg-slate-400 rounded-full center ">
                                     Sign Up
+                                    onClick={(e: MouseEvent<HTMLButtonElement, MouseEvent>) => handleRegister(e, username, password, retypepassword, email, firstname, lastname, birthdate, gender, country, city)};
                                 </button>
                             </div>
                         </form>

@@ -9,7 +9,7 @@ const useRegister = () => {
     const { dispatch } = useAuth()
     const toastID = useRef<Id>()
 
-    const register = async (username: string, password: string, email: string, firstname: String, lastname: String, birthdate: String, gender: String, country: String, city: String, userType: String) => {
+    const register = async (username: string, password: string, email: string, firstname: String, lastname: String, birthdate: Date, gender: String, country: String, city: String, userType: String) => {
         toastID.current = toast.loading("Registering...")
         //ported to axios
         await axios({
