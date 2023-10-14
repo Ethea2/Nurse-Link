@@ -15,7 +15,7 @@ const RegisterPage = () => {
     const [city, setCity] = useState<string>("")
 
 
-    const {registerNurse, state} = useRegister() // register 
+    const {registerNurse, state} = useRegister() // register hello
     const navigate = useNavigate()
 
     const handleRegister = async (
