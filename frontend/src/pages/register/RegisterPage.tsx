@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react"
+import { MouseEvent, useEffect, useState } from "react"
 import { useNavigate } from "react-router"
-import useRegister from "../../hooks/useRegister"
-import { register } from "module"
+import useRegister from "../../hooks/useRegister.tsx"
 
 const RegisterPage = () => {
-    //Username, password, email, first name, last name, birthdate, gender, country, city
     const [username, setUsername] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
@@ -17,7 +15,7 @@ const RegisterPage = () => {
     const [city, setCity] = useState<string>("")
 
 
-    const {login, state} = useRegister()
+    const {register, state} = useRegister()
     const navigate = useNavigate()
 
     const handleRegister = async (
@@ -25,6 +23,7 @@ const RegisterPage = () => {
         username: string,
         password: string,
         retypepassword: string,
+        email: string,
         firstname: string,
         lastname: string,
         birthdate: Date,
@@ -38,8 +37,7 @@ const RegisterPage = () => {
             console.error("Passwords do not match");
             return;
         }
-        //const register = async (username: string, password: string, email: string, firstname: String, lastname: String, birthdate: Date, gender: String, country: String, city: String) => {
-        await register(username, password, firstname, lastname, birthdate, gender, country, city)
+        await register(username, password, email, firstname, lastname, birthdate, gender, country, city);
         
     }
 
@@ -214,7 +212,7 @@ const RegisterPage = () => {
                             <div className="signIn flex items-center justify-center py-5">
                                 <button className="signInBtn btn btn-wide bg-slate-400 rounded-full center ">
                                     Sign Up
-                                    onClick={(e) => handleRegister(e, username, password, retypepassword, firstname, lastname, birthdate, gender, country, city)};
+                                    onClick={(e: MouseEvent<HTMLButtonElement, MouseEvent>) => handleRegister(e, username, password, retypepassword, email, firstname, lastname, birthdate, gender, country, city)};
                                 </button>
                             </div>
                         </form>
