@@ -3,13 +3,13 @@ import { useNavigate } from "react-router"
 import useRegister from "../../hooks/useRegister"
 
 const RegisterPage = () => {
-    Username, password, email, first name, last name, birthdate, gender, country, city
+    Username, password, email, firstname, lastname, birthdate, gender, country, city
     const [username, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [email, setUsername] = useState<string>("")
     const [retype-password, setPassword] = useState<string>("")
-    const [first-name, setUsername] = useState<string>("")
-    const [last-name, setPassword] = useState<string>("")
+    const [firstname, setUsername] = useState<string>("")
+    const [lastname, setPassword] = useState<string>("")
     const [birthdate, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [gender, setUsername] = useState<string>("")
