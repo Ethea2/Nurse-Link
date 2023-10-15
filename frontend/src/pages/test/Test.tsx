@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import useFetch from "../../hooks/useFetch"
 import { NurseType } from "../../types/nurseTypes/nurseType"
+import { Link } from "react-router-dom"
 
 const Test = () => {
     const { data, loading } = useFetch("/api/nurse")
@@ -11,11 +12,15 @@ const Test = () => {
             ) : (
                 data?.map((nurse: NurseType, index: number) => (
                     <>
-                        <div className="flex gap-10">
-                            Nurse {index + 1}:
-                            <h1>{nurse.firstName} {nurse.lastName}</h1>
-                            <h2>{nurse.gender}</h2>
-                        </div>
+                        <Link to={`/nurse/${nurse.userId}`}>
+                            <div className="flex gap-10">
+                                Nurse {index + 1}:
+                                <h1>
+                                    {nurse.firstName} {nurse.lastName}
+                                </h1>
+                                <h2>{nurse.gender}</h2>
+                            </div>
+                        </Link>
                     </>
                 ))
             )}
