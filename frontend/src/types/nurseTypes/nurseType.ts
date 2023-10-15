@@ -1,5 +1,11 @@
 export interface NurseType {
     id: string,
-    username: string,
-    email: string,   
-}
+    userId: string,
+    firstName: string,
+    lastName: string,
+    specialization?: string,
+    about?: string,
+    birthdate: Date,
+    gender: string,
+    country: string,
+} //continue updating

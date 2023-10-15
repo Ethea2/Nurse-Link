@@ -1,10 +1,11 @@
 import React, { createContext, useEffect, useReducer, ReactNode } from 'react';
+import UserType from '../types/userTypes/userType';
 
-export const AuthContext = createContext<{ user: null | object, dispatch: React.Dispatch<Action> | undefined }>({ user: null, dispatch: undefined });
+export const AuthContext = createContext<{ user: null | UserType, dispatch: React.Dispatch<Action> | undefined }>({ user: null, dispatch: undefined });
 
-export type Action = { type: 'LOGIN', payload: object } | { type: 'LOGOUT' };
+export type Action = { type: 'LOGIN', payload: UserType } | { type: 'LOGOUT' };
 
-const authReducer = (state: { user: null | object }, action: Action): { user: null | object } => {
+const authReducer = (state: { user: null | UserType }, action: Action): { user: null | UserType } => {
   switch (action.type) {
     case 'LOGIN':
       return { user: action.payload };

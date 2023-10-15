@@ -4,7 +4,6 @@ import { NurseType } from "../../types/nurseTypes/nurseType"
 
 const Test = () => {
     const { data, loading } = useFetch("/api/nurse")
-    useEffect(() => console.log(data), [data])
     return (
         <>
             {loading ? (
@@ -14,8 +13,8 @@ const Test = () => {
                     <>
                         <div className="flex gap-10">
                             Nurse {index + 1}:
-                            <h1>{nurse.username}</h1>
-                            <h2>{nurse.email}</h2>
+                            <h1>{nurse.firstName} {nurse.lastName}</h1>
+                            <h2>{nurse.gender}</h2>
                         </div>
                     </>
                 ))

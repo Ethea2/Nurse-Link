@@ -6,6 +6,8 @@ import LoginPage from "../../pages/login/LoginPage"
 import NurseProfile from "../../pages/profile/NurseProfile"
 import RegisterNurse from "../../pages/registerNurse/RegisterNurse"
 import RegisterInstitute from "../../pages/registerInstitute/RegisterInstitute"
+import Nurse from "../../pages/nurse/Nurse"
+import Institute from "../../pages/institute/Institute"
 
 const routes: Array<RouteType> = [
     { path: "/", element: <Landing /> },
@@ -13,8 +15,10 @@ const routes: Array<RouteType> = [
     { path: "/register", element: <RegisterPage /> },
     { path: "/login", element: <LoginPage /> },
     { path: "/nurse-profile", element: <NurseProfile /> },
-    { path: "/register-nurse", element: <RegisterNurse />},
-    { path: "/register-institute", element: <RegisterInstitute />}
+    { path: "/register-nurse", element: <RegisterNurse /> },
+    { path: "/register-institute", element: <RegisterInstitute /> },
+    { path: "/nurse/:userId", element: <Nurse /> },
+    { path: "/institute/:userId", element: <Institute /> },
 ]
 
 export default routes

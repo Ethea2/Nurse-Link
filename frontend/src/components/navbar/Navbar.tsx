@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import routes from "../router/router"
 import { RouteType } from "../../types/routeTypes/routeType"
 import { useAuth } from "../../hooks/useAuth"
+import UserType from "../../types/userTypes/userType"
 
 const Navbar = () => {
     return (
@@ -97,7 +98,19 @@ const NavRight = () => {
         <>
             <div className="flex items-center gap-4">
                 {user ? (
-                    "Logged in"
+                    user.userType === "institute" ? (
+                        <>
+                            <Link to={`/institute/${user.id}`}>
+                                {user.instituteName}
+                            </Link>
+                        </>
+                    ) : (
+                        <>
+                            <Link to={`/nurse/${user.id}`}>
+                                {user.firstName}
+                            </Link>
+                        </>
+                    )
                 ) : (
                     <>
                         <Link to="/login">
