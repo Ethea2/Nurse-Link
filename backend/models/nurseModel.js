@@ -5,17 +5,17 @@ const Schema = mongoose.Schema
 const nurseSchema = new Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        require: true,
+        required: true,
         unique: true,
         ref: "User",
     },
     firstName: {
         type: String,
-        require: true
+        required: true
     },
     lastName: {
         type: String,
-        require: true
+        required: true
     },
     specialization: {
         type: String,
@@ -24,17 +24,21 @@ const nurseSchema = new Schema({
         type: String,
     },
     birthdate: {
-        type: Date
+        type: Date,
+        required: true
     },
     gender: {
         type: String,
+        required: true,
         enum: ['Male', 'Female', 'Non-Binary', 'Prefer not to Say']
     },
     country: {
-        type: String
+        type: String,
+        required: true
     },
     city: {
-        type: String
+        type: String,
+        required: true
     },
     profilePicture: {
         type: String,
@@ -84,7 +88,7 @@ const nurseSchema = new Schema({
             {
                 institutionName: {
                     type: String,
-                    require: true
+                    required: true
                 },
                 degree: {
                     type: String,
