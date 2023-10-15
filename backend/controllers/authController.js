@@ -10,7 +10,7 @@ const register = async (req, res, next) => {
                 return res
                     .status(404)
                     .json({ message: "User already exists!" })
-            res.status(200).json({ message: "Registration Successful!" })
+            res.status(200).json({ message: "Registration Successful!", id: user._id, username: user.username, userType: user.userType })
         })(req, res, next)
     } catch (err) {
         console.log(err)
