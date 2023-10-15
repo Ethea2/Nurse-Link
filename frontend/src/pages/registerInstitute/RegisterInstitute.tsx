@@ -44,7 +44,7 @@ const RegisterInstitute = () => {
         "ARE YOU SURE TO SUBMIT?",
     ]
 
-    const NUMBER_OF_STEPS = 3
+    const NUMBER_OF_STEPS = 2
 
     const handleSetStep = (num: number) => {
         if (
@@ -164,8 +164,10 @@ const RegisterInstitute = () => {
                                             }
                                         } else if (stepsComplete === 1){
                                             if(instituteName == ""){
+                                                alert("institute name required");
+                                            } else if(country == ""){
                                                 alert("country required");
-                                            } else if(city == ""){
+                                            }else if(city == ""){
                                                 alert("city required");
                                             } else {
                                                 handleSetStep(1)
