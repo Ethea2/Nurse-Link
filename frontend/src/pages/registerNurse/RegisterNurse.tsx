@@ -138,7 +138,13 @@ const RegisterNurse = () => {
                             ) : (
                                 <button
                                     className="px-4 py-1 rounded bg-black text-white"
-                                    onClick={() => handleSetStep(1)}
+                                    onClick={() => {
+                                        if (stepsComplete === 0 && password !== retypepassword) {
+                                            alert("Passwords do not match!");
+                                        } else {
+                                            handleSetStep(1)
+                                        }
+                                    }}
                                 >
                                     Next
                                 </button>
