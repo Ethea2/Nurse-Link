@@ -39,7 +39,14 @@ const RegisterNurse = () => {
             birthdate={birthdate}
             setBirthDate={setBirthDate}
         />,
-        "STEP 3 OUTPUT",
+        <Step3
+            gender = {gender}
+            setGender = {setGender}
+            country = {country}
+            setCountry = {setCountry}
+            city = {city}
+            setCity = {setCity}
+        />,
         "ARE YOU SURE TO SUBMIT?",
     ]
 
@@ -299,6 +306,72 @@ const Step2 = ({
     )
 }
 
+const Step3 = ({
+    gender,
+    setGender,
+    country,
+    setCountry,
+    city,
+    setCity
+}: {
+    gender: string
+    setGender: React.Dispatch<React.SetStateAction<string>>
+    country: string
+    setCountry: React.Dispatch<React.SetStateAction<string>>
+    city: string
+    setCity: React.Dispatch<React.SetStateAction<string>>
+}) => {
+    return (
+        <>
+            <label htmlFor="gender">
+                                Gender
+                                <br />
+                                <input
+                                    name="gender"
+                                    id="gender"
+                                    type="text"
+                                    className="input input-primary bg-slate-200 w-full"
+                                    onChange={(e) =>
+                                        setGender(e.target.value)
+                                    }
+                                    value={gender}
+                                />
+                            </label>
+                            <br />
+
+                            <label htmlFor="country">
+                                Country
+                                <br />
+                                <input
+                                    name="country"
+                                    id="country"
+                                    type="text"
+                                    className="input input-primary bg-slate-200 w-full"
+                                    onChange={(e) =>
+                                        setCountry(e.target.value)
+                                    }
+                                    value={country}
+                                />
+                            </label>
+                            <br />
+
+                            <label htmlFor="city">
+                                City
+                                <br />
+                                <input
+                                    name="city"
+                                    id="city"
+                                    type="text"
+                                    className="border border-primary rounded-md p-3 bg-slate-200 w-full"
+                                    onChange={(e) =>
+                                        setCity(e.target.value)
+                                    }
+                                    value={city}
+                                />
+                            </label>
+        </>
+    )
+}
 
 
 export default RegisterNurse
