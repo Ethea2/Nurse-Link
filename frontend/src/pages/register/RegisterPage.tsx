@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import useRegister from "../../hooks/useRegister.tsx"
 
