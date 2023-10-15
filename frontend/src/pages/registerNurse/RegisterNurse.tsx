@@ -146,11 +146,30 @@ const RegisterNurse = () => {
                                 <button
                                     className="px-4 py-1 rounded bg-black text-white"
                                     onClick={() => {
-                                        if (stepsComplete === 0 && password !== retypepassword) {
-                                            alert("Passwords do not match!");
+                                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                        if (stepsComplete === 0){
+                                            if (password !== retypepassword) {
+                                                alert("Passwords do not match!");
+                                            } else if(username == ""){
+                                                alert("Username required");
+                                            } else if(email == ""){
+                                                alert("Email required");
+                                            } else if(!emailRegex.test(email)){
+                                                alert("Input a valid email");
+                                            } else if(password == ""){
+                                                alert("Password required");
+                                            } else if(retypepassword == ""){
+                                                alert("Retyped Password required");
+                                            } else {
+                                                handleSetStep(1)
+                                            }
+                                        } else if (stepsComplete === 1){
+
                                         } else {
-                                            handleSetStep(1)
+                                            
                                         }
+
+                                        
                                     }}
                                 >
                                     Next
@@ -339,7 +358,7 @@ const Step3 = ({
                                     onChange={(e) => setGender(e.target.value)}
                                     value={gender}
                                 >
-                                    <option value="">Select Gender</option>
+                                    <option value="" disabled>Select Gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Non-Binary">Non-Binary</option>
