@@ -138,7 +138,19 @@ const RegisterNurse = () => {
                             {stepsComplete === NUMBER_OF_STEPS ? (
                                 <button
                                     className="px-4 py-1 rounded bg-black text-white"
-                                    onClick={() => handleRegister} //complete the func
+                                    onClick={(e) => handleRegister(
+                                        e,
+                                        username,
+                                        password,
+                                        retypepassword,
+                                        email,
+                                        firstname,
+                                        lastname,
+                                        birthdate,
+                                        gender,
+                                        country,
+                                        city
+                                    )}
                                 >
                                     Submit
                                 </button>
@@ -168,21 +180,22 @@ const RegisterNurse = () => {
                                                 alert("first name required");
                                             } else if(lastname == ""){
                                                 alert("last name required");
-                                            } else if(birthdate == null){
+                                            } else if(birthdate == ""){
                                                 alert("birth date required");
+                                            } else {
+                                                handleSetStep(1)
                                             }
-
                                         } else {
-                                            if(gender == null){
+                                            if(gender == ""){
                                                 alert("gender required");
                                             } else if(country == ""){
                                                 alert("country required");
                                             } else if(city == ""){
                                                 alert("city required");
+                                            } else {
+                                                handleSetStep(1)
                                             }
-
-                                        
-                                        }}
+                                        }}}
 
                                         // onClick={() => {
                                         //     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
