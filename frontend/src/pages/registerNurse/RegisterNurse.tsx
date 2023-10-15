@@ -31,7 +31,14 @@ const RegisterNurse = () => {
             retypepassword={retypepassword}
             setRetypePassword={setRetypePassword}
         />,
-        "STEP 2 OUTPUT",
+        <Step2 
+            firstname={firstname}
+            setFirstName={setFirstName}
+            lastname={lastname}
+            setLastName={setLastName}
+            birthdate={birthdate}
+            setBirthDate={setBirthDate}
+        />,
         "STEP 3 OUTPUT",
         "ARE YOU SURE TO SUBMIT?",
     ]
@@ -223,6 +230,75 @@ const Step1 = ({
         </>
     )
 }
+
+
+const Step2 = ({
+    firstname,
+    setFirstName,
+    lastname,
+    setLastName,
+    birthdate,
+    setBirthDate
+}: {
+    firstname: string
+    setFirstName: React.Dispatch<React.SetStateAction<string>>
+    lastname: string
+    setLastName: React.Dispatch<React.SetStateAction<string>>
+    birthdate: string
+    setBirthDate: React.Dispatch<React.SetStateAction<string>>
+}) => {
+    return (
+        <>
+            <label htmlFor="firstname">
+                                First Name
+                                <br />
+                                <input
+                                    name="firstname"
+                                    id="firstname"
+                                    type="text"
+                                    className="input input-primary bg-slate-200 w-full"
+                                    onChange={(e) =>
+                                        setFirstName(e.target.value)
+                                    }
+                                    value={firstname}
+                                />
+                            </label>
+                            <br />
+
+                            <label htmlFor="lastname">
+                                Last Name
+                                <br />
+                                <input
+                                    name="lastname"
+                                    id="lastname"
+                                    type="text"
+                                    className="input input-primary bg-slate-200 w-full"
+                                    onChange={(e) =>
+                                        setLastName(e.target.value)
+                                    }
+                                    value={lastname}
+                                />
+                            </label>
+                            <br />
+
+                            <label htmlFor="birthdate">
+                                Birth Date
+                                <br />
+                                <input
+                                    name="birthdate"
+                                    id="birthdate"
+                                    type="date"
+                                    className="border border-primary rounded-md p-3 bg-slate-200 w-full"
+                                    onChange={(e) =>
+                                        setBirthDate(e.target.value)
+                                    }
+                                    value={birthdate}
+                                />
+                            </label>
+        </>
+    )
+}
+
 
 
 export default RegisterNurse
