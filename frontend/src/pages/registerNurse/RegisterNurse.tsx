@@ -332,17 +332,21 @@ const Step3 = ({
             <label htmlFor="gender">
                                 Gender
                                 <br />
-                                <input
+                                <select
                                     name="gender"
                                     id="gender"
-                                    type="text"
                                     className="input input-primary bg-slate-200 w-full"
-                                    onChange={(e) =>
-                                        setGender(e.target.value)
-                                    }
+                                    onChange={(e) => setGender(e.target.value)}
                                     value={gender}
-                                />
+                                >
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Non-Binary">Non-Binary</option>
+                                    <option value="Prefer not to Say">Prefer not to Say</option>
+                                </select>
                             </label>
+
                             <br />
 
                             <label htmlFor="country">
