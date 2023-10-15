@@ -6,10 +6,10 @@ const nurseRouter = express.Router()
 
 nurseRouter.get("/", checkAuth, getNurses)
 
-nurseRouter.get("/:userId", getNurse)
+nurseRouter.get("/:userId", checkAuth, getNurse)
 
-nurseRouter.post("/:userId", editNurse)
+nurseRouter.post("/:userId", checkAuth, editNurse)
 
-nurseRouter.delete("/:userId", deleteNurse)
+nurseRouter.delete("/:userId", checkAuth, deleteNurse)
 
 module.exports = nurseRouter
