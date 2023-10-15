@@ -5,8 +5,11 @@ const { getInstitutes, getInstitute, editInstitute, deleteInstitute } = require(
 const instituteRouter = express.Router()
 
 instituteRouter.get("/", checkAuth, getInstitutes)
+
 instituteRouter.get("/:userId", checkAuth, getInstitute)
+
 instituteRouter.post("/:userId", checkAuth, editInstitute)
+
 instituteRouter.delete("/:userId", checkAuth, deleteInstitute)
 
 module.exports = instituteRouter
