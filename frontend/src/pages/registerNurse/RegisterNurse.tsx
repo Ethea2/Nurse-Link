@@ -164,13 +164,68 @@ const RegisterNurse = () => {
                                                 handleSetStep(1)
                                             }
                                         } else if (stepsComplete === 1){
+                                            if(firstname == ""){
+                                                alert("first name required");
+                                            } else if(lastname == ""){
+                                                alert("last name required");
+                                            } else if(birthdate == null){
+                                                alert("birth date required");
+                                            }
 
                                         } else {
-                                            
-                                        }
+                                            if(gender == null){
+                                                alert("gender required");
+                                            } else if(country == ""){
+                                                alert("country required");
+                                            } else if(city == ""){
+                                                alert("city required");
+                                            }
 
                                         
-                                    }}
+                                        }}
+
+                                        // onClick={() => {
+                                        //     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                        
+                                        //     switch (stepsComplete) {
+                                        //         case 0:
+                                        //             if (password !== retypepassword) {
+                                        //                 alert("Passwords do not match!");
+                                        //             } else if (username === "") {
+                                        //                 alert("Username required");
+                                        //             } else if (email === "") {
+                                        //                 alert("Email required");
+                                        //             } else if (!emailRegex.test(email)) {
+                                        //                 alert("Input a valid email");
+                                        //             } else if (password === "") {
+                                        //                 alert("Password required");
+                                        //             } else if (retypepassword === "") {
+                                        //                 alert("Retyped Password required");
+                                        //             } else {
+                                        //                 handleSetStep(1);
+                                        //             }
+                                        //             break;
+                                        
+                                        //         case 1:
+                                        //             if (firstname === "") {
+                                        //                 alert("First name required");
+                                        //             } else if (lastname === "") {
+                                        //                 alert("Last name required");
+                                        //             } else if (birthdate === null) {
+                                        //                 alert("Birth date required");
+                                        //             }
+                                        //             break;
+                                        
+                                        //         default:
+                                        //             if (gender === null) {
+                                        //                 alert("Gender required");
+                                        //             } else if (country === "") {
+                                        //                 alert("Country required");
+                                        //             } else if (city === "") {
+                                        //                 alert("City required");
+                                        //             }
+                                        //     }
+                                        // }}
                                 >
                                     Next
                                 </button>
