@@ -47,23 +47,7 @@ const useLogin = () => {
                 })
                 setState("Error")
             })
-
-        // const response = await fetch(import.meta.env.VITE_API_URL + "/api/nurse/login", {
-        //   method: "POST",
-        //   body: JSON.stringify({ username, password }),
-        //   credentials: "include",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        // });
-
-        // if (response.ok) {
-        //   setState("Success");
-        // } else {
-        //   setState("Error");
-        // }
     }
-
     return { login, state }
 }
 

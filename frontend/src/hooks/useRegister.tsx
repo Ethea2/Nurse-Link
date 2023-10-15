@@ -2,16 +2,26 @@ import { useRef, useState } from "react"
 import axios from "axios"
 import { Id, toast } from "react-toastify"
 import { useAuth } from "./useAuth"
-import { Action } from "../contexts/AuthContext"
 
 const useRegister = () => {
     const [state, setState] = useState<string | null>(null)
     const { dispatch } = useAuth()
     const toastID = useRef<Id>()
 
-    const registerNurse = async (username: string, password: string, email: string, firstname: String, lastname: String, birthdate: String, gender: String, country: String, city: String) => {
+    const registerNurse = async (
+        username: string,
+        password: string,
+        email: string,
+        firstname: String,
+        lastname: String,
+        birthdate: String,
+        gender: String,
+        country: String,
+        city: String
+    ) => {
         toastID.current = toast.loading("Registering...")
         //ported to axios
+        console.log(import.meta.env.VITE_API_URL)
         await axios({
             method: "post",
             data: {
@@ -24,17 +34,17 @@ const useRegister = () => {
                 gender,
                 country,
                 city,
-                userType: "nurse"
+                userType: "nurse",
             },
             withCredentials: true,
             url: import.meta.env.VITE_API_URL + "/api/auth/register",
         })
-        // for registering: surmount this thingy
+            // for registering: surmount this thingy
             .then((data) => {
                 setState("Success")
                 console.log(data)
-                localStorage.setItem("user", JSON.stringify(data.data));
-                dispatch?.({type: "LOGIN", payload: data.data})
+                localStorage.setItem("user", JSON.stringify(data.data))
+                dispatch?.({ type: "LOGIN", payload: data.data })
                 toast.update(toastID.current ?? "", {
                     render: "Successfully Logged in!",
                     autoClose: 3000,
@@ -56,13 +66,16 @@ const useRegister = () => {
                 })
                 setState("Error")
             })
-
     }
 
-    
-
-
-    const registerInstitute = async (username: string, password: string, email: string, instituteName: String, country: String, city: String) => {
+    const registerInstitute = async (
+        username: string,
+        password: string,
+        email: string,
+        instituteName: String,
+        country: String,
+        city: String
+    ) => {
         toastID.current = toast.loading("Registering...")
         //ported to axios
         await axios({
@@ -74,17 +87,17 @@ const useRegister = () => {
                 email,
                 country,
                 city,
-                userType: "institute"
+                userType: "institute",
             },
             withCredentials: true,
             url: import.meta.env.VITE_API_URL + "/api/auth/register",
         })
-        // for registering: surmount this thingy
+            // for registering: surmount this thingy
             .then((data) => {
                 setState("Success")
                 console.log(data)
-                localStorage.setItem("user", JSON.stringify(data.data));
-                dispatch?.({type: "LOGIN", payload: data.data})
+                localStorage.setItem("user", JSON.stringify(data.data))
+                dispatch?.({ type: "LOGIN", payload: data.data })
                 toast.update(toastID.current ?? "", {
                     render: "Successfully Logged in!",
                     autoClose: 3000,
@@ -109,8 +122,6 @@ const useRegister = () => {
     }
 
     return { registerNurse, registerInstitute, state }
-
 }
-
 
 export default useRegister
