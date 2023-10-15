@@ -164,6 +164,8 @@ const RegisterInstitute = () => {
                                             }
                                         } else if (stepsComplete === 1){
                                             if(instituteName == ""){
+                                                alert("Institute Name required");
+                                            } else if(country == ""){
                                                 alert("country required");
                                             } else if(city == ""){
                                                 alert("city required");
