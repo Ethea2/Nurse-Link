@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
+import { toast } from "react-toastify"
 import useRegister from "../../hooks/useRegister.tsx"
 import Steps from "../../components/registerComponents/Steps.tsx"
 
@@ -15,7 +16,7 @@ const RegisterNurse = () => {
     const [country, setCountry] = useState<string>("")
     const [city, setCity] = useState<string>("")
 
-    const { registerNurse, state } = useRegister() // register hello
+    const { registerNurse, state } = useRegister()
     const navigate = useNavigate()
 
     const [stepsComplete, setStepsComplete] = useState(0)
@@ -31,7 +32,7 @@ const RegisterNurse = () => {
             retypepassword={retypepassword}
             setRetypePassword={setRetypePassword}
         />,
-        <Step2 
+        <Step2
             firstname={firstname}
             setFirstName={setFirstName}
             lastname={lastname}
@@ -40,12 +41,12 @@ const RegisterNurse = () => {
             setBirthDate={setBirthDate}
         />,
         <Step3
-            gender = {gender}
-            setGender = {setGender}
-            country = {country}
-            setCountry = {setCountry}
-            city = {city}
-            setCity = {setCity}
+            gender={gender}
+            setGender={setGender}
+            country={country}
+            setCountry={setCountry}
+            city={city}
+            setCity={setCity}
         />,
         "ARE YOU SURE TO SUBMIT?",
     ]
@@ -59,8 +60,44 @@ const RegisterNurse = () => {
         ) {
             return
         }
-
-        setStepsComplete((pv) => pv + num)
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (stepsComplete === 0) {
+            if (password !== retypepassword) {
+                toast("Passwords do not match!", { type: "error" })
+            } else if (username === "") {
+                toast("Username required", { type: "error" })
+            } else if (email === "") {
+                toast("Email required", { type: "error" })
+            } else if (!emailRegex.test(email)) {
+                toast("Input a valid email", { type: "error" })
+            } else if (password === "") {
+                toast("Password required", { type: "error" })
+            } else if (retypepassword === "") {
+                toast("Retyped Password required", { type: "error" })
+            } else {
+                setStepsComplete((pv) => pv + num)
+            }
+        } else if (stepsComplete === 1) {
+            if (firstname === "") {
+                toast("first name required", { type: "error" })
+            } else if (lastname === "") {
+                toast("last name required", { type: "error" })
+            } else if (birthdate === "") {
+                toast("birth date required", { type: "error" })
+            } else {
+                setStepsComplete((pv) => pv + num)
+            }
+        } else {
+            if (gender === "") {
+                toast("gender required", { type: "error" })
+            } else if (country === "") {
+                toast("country required", { type: "error" })
+            } else if (city === "") {
+                toast("city required", { type: "error" })
+            } else {
+                setStepsComplete((pv) => pv + num)
+            }
+        }
     }
 
     const handleRegister = async (
@@ -106,26 +143,28 @@ const RegisterNurse = () => {
         <>
             <div className="registerPage flex items-center w-full h-screen">
                 <div className="leftPage flex items-center justify-center flex-col w-full h-full">
-                    <div className="titleAndLogo flex bg">
-                        <div className="logoPng ">
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Grey_Square.svg/480px-Grey_Square.svg.png"
-                                className="object-scale-down h-14 w-14"
-                            />
+                    <div className="mb-10">
+                        <div className="titleAndLogo flex">
+                            <div className="logoPng ">
+                                <img
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Grey_Square.svg/480px-Grey_Square.svg.png"
+                                    className="object-scale-down h-14 w-14"
+                                />
+                            </div>
+                            <div className="title text-5xl font-bold ">
+                                NurseLink
+                            </div>
                         </div>
-                        <div className="title text-5xl font-bold ">
-                            NurseLink
+                        <div className="welcomeTitle text-4xl font-semibold ">
+                            Nice to meet you.
                         </div>
-                    </div>
-                    <div className="welcomeTitle text-4xl font-semibold ">
-                        Nice to meet you.
                     </div>
                     <div className="border-2 h-1/2 w-2/3 p-10">
                         <Steps
                             numSteps={NUMBER_OF_STEPS}
                             stepsComplete={stepsComplete}
                         />
-                        <div className="flex flex-col justify-center items-center border-2 border-primary w-full h-[80%] my-4 p-2">
+                        <div className="flex flex-col justify-center items-center w-full h-[80%] my-4 p-2">
                             {fields[stepsComplete]}
                         </div>
                         <div className="flex w-full justify-end">
@@ -138,77 +177,34 @@ const RegisterNurse = () => {
                             {stepsComplete === NUMBER_OF_STEPS ? (
                                 <button
                                     className="px-4 py-1 rounded bg-black text-white"
-                                    onClick={(e) => handleRegister(
-                                        e,
-                                        username,
-                                        password,
-                                        retypepassword,
-                                        email,
-                                        firstname,
-                                        lastname,
-                                        birthdate,
-                                        gender,
-                                        country,
-                                        city
-                                    )}
+                                    onClick={(e) =>
+                                        handleRegister(
+                                            e,
+                                            username,
+                                            password,
+                                            retypepassword,
+                                            email,
+                                            firstname,
+                                            lastname,
+                                            birthdate,
+                                            gender,
+                                            country,
+                                            city
+                                        )
+                                    }
                                 >
                                     Submit
                                 </button>
                             ) : (
                                 <button
                                     className="px-4 py-1 rounded bg-black text-white"
-                                    onClick={() => {
-                                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                                        if (stepsComplete === 0){
-                                            if (password !== retypepassword) {
-                                                alert("Passwords do not match!");
-                                            } else if(username == ""){
-                                                alert("Username required");
-                                            } else if(email == ""){
-                                                alert("Email required");
-                                            } else if(!emailRegex.test(email)){
-                                                alert("Input a valid email");
-                                            } else if(password == ""){
-                                                alert("Password required");
-                                            } else if(retypepassword == ""){
-                                                alert("Retyped Password required");
-                                            } else {
-                                                handleSetStep(1)
-                                            }
-                                        } else if (stepsComplete === 1){
-                                            if(firstname == ""){
-                                                alert("first name required");
-                                            } else if(lastname == ""){
-                                                alert("last name required");
-                                            } else if(birthdate == ""){
-                                                alert("birth date required");
-                                            } else {
-                                                handleSetStep(1)
-                                            }
-                                        } else {
-                                            if(gender == ""){
-                                                alert("gender required");
-                                            } else if(country == ""){
-                                                alert("country required");
-                                            } else if(city == ""){
-                                                alert("city required");
-                                            } else {
-                                                handleSetStep(1)
-                                            }
-                                        }}}
-
+                                    onClick={() => handleSetStep(1)}
                                 >
                                     Next
                                 </button>
                             )}
                         </div>
                     </div>
-                </div>
-                <div className="rightPage flex items-center justify-center flex-col w-full h-full">
-                    <img
-                        className="scale-125"
-                        src="https://t4.ftcdn.net/jpg/00/66/01/29/360_F_66012928_ztFfdS8dnLgghWKWxrDOH8FfhrzAkI2Z.jpg"
-                    />
                 </div>
             </div>
         </>
@@ -248,7 +244,7 @@ const Step1 = ({
                     value={username}
                 />
             </label>
-            <label htmlFor="email"  className="w-[75%]">
+            <label htmlFor="email" className="w-[75%]">
                 Email
                 <br />
                 <input
@@ -260,7 +256,7 @@ const Step1 = ({
                     value={email}
                 />
             </label>
-            <label htmlFor="password"  className="w-[75%]">
+            <label htmlFor="password" className="w-[75%]">
                 Password
                 <br />
                 <input
@@ -273,7 +269,7 @@ const Step1 = ({
                 />
             </label>
 
-            <label htmlFor="retype-password"  className="w-[75%]">
+            <label htmlFor="retype-password" className="w-[75%]">
                 Retype Password
                 <br />
                 <input
@@ -289,14 +285,13 @@ const Step1 = ({
     )
 }
 
-
 const Step2 = ({
     firstname,
     setFirstName,
     lastname,
     setLastName,
     birthdate,
-    setBirthDate
+    setBirthDate,
 }: {
     firstname: string
     setFirstName: React.Dispatch<React.SetStateAction<string>>
@@ -308,51 +303,45 @@ const Step2 = ({
     return (
         <>
             <label htmlFor="firstname">
-                                First Name
-                                <br />
-                                <input
-                                    name="firstname"
-                                    id="firstname"
-                                    type="text"
-                                    className="input input-primary bg-slate-200 w-full"
-                                    onChange={(e) =>
-                                        setFirstName(e.target.value)
-                                    }
-                                    value={firstname}
-                                />
-                            </label>
-                            <br />
+                First Name
+                <br />
+                <input
+                    name="firstname"
+                    id="firstname"
+                    type="text"
+                    className="input input-primary bg-slate-200 w-full"
+                    onChange={(e) => setFirstName(e.target.value)}
+                    value={firstname}
+                />
+            </label>
+            <br />
 
-                            <label htmlFor="lastname">
-                                Last Name
-                                <br />
-                                <input
-                                    name="lastname"
-                                    id="lastname"
-                                    type="text"
-                                    className="input input-primary bg-slate-200 w-full"
-                                    onChange={(e) =>
-                                        setLastName(e.target.value)
-                                    }
-                                    value={lastname}
-                                />
-                            </label>
-                            <br />
+            <label htmlFor="lastname">
+                Last Name
+                <br />
+                <input
+                    name="lastname"
+                    id="lastname"
+                    type="text"
+                    className="input input-primary bg-slate-200 w-full"
+                    onChange={(e) => setLastName(e.target.value)}
+                    value={lastname}
+                />
+            </label>
+            <br />
 
-                            <label htmlFor="birthdate">
-                                Birth Date
-                                <br />
-                                <input
-                                    name="birthdate"
-                                    id="birthdate"
-                                    type="date"
-                                    className="border border-primary rounded-md p-3 bg-slate-200 w-full"
-                                    onChange={(e) =>
-                                        setBirthDate(e.target.value)
-                                    }
-                                    value={birthdate}
-                                />
-                            </label>
+            <label htmlFor="birthdate">
+                Birth Date
+                <br />
+                <input
+                    name="birthdate"
+                    id="birthdate"
+                    type="date"
+                    className="border border-primary rounded-md p-3 bg-slate-200 w-full"
+                    onChange={(e) => setBirthDate(e.target.value)}
+                    value={birthdate}
+                />
+            </label>
         </>
     )
 }
@@ -363,7 +352,7 @@ const Step3 = ({
     country,
     setCountry,
     city,
-    setCity
+    setCity,
 }: {
     gender: string
     setGender: React.Dispatch<React.SetStateAction<string>>
@@ -375,270 +364,55 @@ const Step3 = ({
     return (
         <>
             <label htmlFor="gender">
-                                Gender
-                                <br />
-                                <select
-                                    name="gender"
-                                    id="gender"
-                                    className="input input-primary bg-slate-200 w-full"
-                                    onChange={(e) => setGender(e.target.value)}
-                                    value={gender}
-                                >
-                                    <option value="" disabled>Select Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Non-Binary">Non-Binary</option>
-                                    <option value="Prefer not to Say">Prefer not to Say</option>
-                                </select>
-                            </label>
+                Gender
+                <br />
+                <select
+                    name="gender"
+                    id="gender"
+                    className="input input-primary bg-slate-200 w-full"
+                    onChange={(e) => setGender(e.target.value)}
+                    value={gender}
+                >
+                    <option value="" disabled>
+                        Select Gender
+                    </option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Non-Binary">Non-Binary</option>
+                    <option value="Prefer not to Say">Prefer not to Say</option>
+                </select>
+            </label>
 
-                            <br />
+            <br />
 
-                            <label htmlFor="country">
-                                Country
-                                <br />
-                                <input
-                                    name="country"
-                                    id="country"
-                                    type="text"
-                                    className="input input-primary bg-slate-200 w-full"
-                                    onChange={(e) =>
-                                        setCountry(e.target.value)
-                                    }
-                                    value={country}
-                                />
-                            </label>
-                            <br />
+            <label htmlFor="country">
+                Country
+                <br />
+                <input
+                    name="country"
+                    id="country"
+                    type="text"
+                    className="input input-primary bg-slate-200 w-full"
+                    onChange={(e) => setCountry(e.target.value)}
+                    value={country}
+                />
+            </label>
+            <br />
 
-                            <label htmlFor="city">
-                                City
-                                <br />
-                                <input
-                                    name="city"
-                                    id="city"
-                                    type="text"
-                                    className="border border-primary rounded-md p-3 bg-slate-200 w-full"
-                                    onChange={(e) =>
-                                        setCity(e.target.value)
-                                    }
-                                    value={city}
-                                />
-                            </label>
+            <label htmlFor="city">
+                City
+                <br />
+                <input
+                    name="city"
+                    id="city"
+                    type="text"
+                    className="border border-primary rounded-md p-3 bg-slate-200 w-full"
+                    onChange={(e) => setCity(e.target.value)}
+                    value={city}
+                />
+            </label>
         </>
     )
 }
 
-
 export default RegisterNurse
-
-/*
-<div className="contForm ">
-                        <div className="titleAndLogo flex bg">
-                            <div className="logoPng ">
-                                <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Grey_Square.svg/480px-Grey_Square.svg.png"
-                                    className="object-scale-down h-14 w-14"
-                                />
-                            </div>
-                            <div className="title text-5xl font-bold ">
-                                NurseLink
-                            </div>
-                        </div>
-                        <div className="welcomeTitle text-4xl font-semibold ">
-                            Nice to meet you.
-                        </div>
-                        <form className="pt-5">
-                            <label htmlFor="username">
-                                Username
-                                <br />
-                                <input
-                                    name="username"
-                                    id="username"
-                                    type="text"
-                                    className="input input-primary bg-slate-200 w-full"
-                                    onChange={(e) =>
-                                        setUsername(e.target.value)
-                                    }
-                                    value={username}
-                                />
-                            </label>
-                            <label htmlFor="email">
-                                Email
-                                <br />
-                                <input
-                                    name="email"
-                                    id="email"
-                                    type="email"
-                                    className="input input-primary bg-slate-200 w-full"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    value={email}
-                                />
-                            </label>
-                            <br />
-                            <label htmlFor="password">
-                                Password
-                                <br />
-                                <input
-                                    name="password"
-                                    id="password"
-                                    type="password"
-                                    className="input input-primary bg-slate-200 w-full"
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
-                                    }
-                                    value={password}
-                                />
-                            </label>
-                            <br />
-
-                            <label htmlFor="retype-password">
-                                Retype Password
-                                <br />
-                                <input
-                                    name="retype-password"
-                                    id="retype-password"
-                                    type="password"
-                                    className="input input-primary bg-slate-200 w-full"
-                                    onChange={(e) =>
-                                        setRetypePassword(e.target.value)
-                                    }
-                                    value={retypepassword}
-                                />
-                            </label>
-                            <br />
-
-                            <label htmlFor="firstname">
-                                First Name
-                                <br />
-                                <input
-                                    name="firstname"
-                                    id="firstname"
-                                    type="text"
-                                    className="input input-primary bg-slate-200 w-full"
-                                    onChange={(e) =>
-                                        setFirstName(e.target.value)
-                                    }
-                                    value={firstname}
-                                />
-                            </label>
-                            <br />
-
-                            <label htmlFor="lastname">
-                                Last Name
-                                <br />
-                                <input
-                                    name="lastname"
-                                    id="lastname"
-                                    type="text"
-                                    className="input input-primary bg-slate-200 w-full"
-                                    onChange={(e) =>
-                                        setLastName(e.target.value)
-                                    }
-                                    value={lastname}
-                                />
-                            </label>
-                            <br />
-
-                            <label htmlFor="birthdate">
-                                Birth Date
-                                <br />
-                                <input
-                                    name="birthdate"
-                                    id="birthdate"
-                                    type="date"
-                                    className="border border-primary rounded-md p-3 bg-slate-200 w-full"
-                                    onChange={(e) =>
-                                        setBirthDate(e.target.value)
-                                    }
-                                    value={birthdate}
-                                />
-                            </label>
-                            <br />
-
-                            <label htmlFor="gender">
-                                Gender
-                                <br />
-                                <select
-                                    name="gender"
-                                    id="gender"
-                                    className="select select-primary bg-slate-200 w-full"
-                                    onChange={(e) => setGender(e.target.value)}
-                                >
-                                    <option disabled selected>
-                                        Please Select A Gender
-                                    </option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Non-Binary">
-                                        Non-binary
-                                    </option>
-                                    <option value="Prefer not to Say">
-                                        Prefer not to say
-                                    </option>
-                                </select>
-                            </label>
-                            <br />
-
-                            <label htmlFor="country">
-                                Country
-                                <br />
-                                <input
-                                    name="country"
-                                    id="country"
-                                    type="text"
-                                    className="input input-primary bg-slate-200 w-full"
-                                    onChange={(e) => setCountry(e.target.value)}
-                                    value={country}
-                                />
-                            </label>
-                            <br />
-
-                            <label htmlFor="city">
-                                City
-                                <br />
-                                <input
-                                    name="city"
-                                    id="city"
-                                    type="text"
-                                    className="input input-primary bg-slate-200 w-full"
-                                    onChange={(e) => setCity(e.target.value)}
-                                    value={city}
-                                />
-                            </label>
-                            <br />
-
-                            <div className="signIn flex items-center justify-center py-5">
-                                <button
-                                    onClick={(e) =>
-                                        handleRegister(
-                                            e,
-                                            username,
-                                            password,
-                                            retypepassword,
-                                            email,
-                                            firstname,
-                                            lastname,
-                                            birthdate,
-                                            gender,
-                                            country,
-                                            city
-                                        )
-                                    }
-                                    className="signInBtn btn btn-wide bg-slate-400 rounded-full center "
-                                >
-                                    Sign Up
-                                </button>
-                            </div>
-                        </form>
-                        <div className="divider">
-                            <span className="text">or</span>
-                        </div>
-                        <div className="loginOption text-center">
-                            Already a Member?{" "}
-                            <a href="#" className="font-semibold">
-                                Login.
-                            </a>
-                        </div>
-                    </div>
-
-*/
