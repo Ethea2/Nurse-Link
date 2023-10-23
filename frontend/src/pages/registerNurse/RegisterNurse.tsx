@@ -60,6 +60,12 @@ const RegisterNurse = () => {
         ) {
             return
         }
+
+        if(num === -1){
+            setStepsComplete((pv) => pv + num)
+            return
+        }
+
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         if (stepsComplete === 0) {
             if (password !== retypepassword) {
