@@ -75,7 +75,7 @@ const LoginPage = () => {
 
                     <div>Not a member? Sign up.</div>
                 </div>
-                <div className="rightPage">
+                <div className="rightPage"> 
                     <img src="https://t4.ftcdn.net/jpg/00/66/01/29/360_F_66012928_ztFfdS8dnLgghWKWxrDOH8FfhrzAkI2Z.jpg" />
                 </div>
             </div>

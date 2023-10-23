@@ -28,6 +28,12 @@ const RegisterPage = () => {
                     </div>
                 </Link>
             </div>
+            <div className ="w-full flex gap 5 justify-center">
+                <hr className = "border-black-900"></hr> or <hr className = "border-black-900"></hr>
+            </div>
+            <div>
+                Already a member? <Link to="/homepage"><b>Log in.</b></Link>
+            </div>
         </section>
     )
 }
