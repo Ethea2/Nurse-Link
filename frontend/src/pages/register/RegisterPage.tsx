@@ -16,7 +16,7 @@ const RegisterPage = () => {
                 </div>
                 <p className="text-2xl font-semibold">Join us today!</p>
             </div>
-            <div className="flex gap-5 mt-10">
+            <div className="flex gap-5 mt-10 mb-20">
                 <Link to="/register-nurse">
                     <div className="font-bold h-52 w-52 rounded-lg cursor-pointer flex justify-center items-center">
                         <img src= "https://res.cloudinary.com/dpuuajd0k/image/upload/v1698046770/CSSWENG%20GROUP%203/ex3sr1vwtjqfv5b6ovim.png"></img>
