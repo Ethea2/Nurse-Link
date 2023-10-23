@@ -7,10 +7,22 @@ const register = async (req, res, next) => {
         passport.authenticate("register", (err, user, info) => {
             if (err) return next(err)
             if (!user)
-                return res
-                    .status(404)
-                    .json({ message: "User already exists!" })
-            res.status(200).json({ message: "Registration Successful!", id: user._id, username: user.username, userType: user.userType })
+                return res.status(404).json({ message: "User already exists!" })
+            if (user.firstName)
+                return res.status(200).json({
+                    message: "Welcome to NurseLink!",
+                    id: user.userId,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    userType: "nurse",
+                })
+            else if (user.instituteName)
+                return res.status(200).json({
+                    message: "Welcome to NurseLink",
+                    id: user.userId,
+                    instituteName: user.instituteName,
+                    userType: "institute",
+                })
         })(req, res, next)
     } catch (err) {
         console.log(err)
@@ -30,7 +42,21 @@ const login = async (req, res, next) => {
                 if (loginErr) {
                     return next(loginErr)
                 }
-                res.status(200).json({ message: "Login Successful!", id: user._id, username: user.username, userType: user.userType })
+                if (user.firstName)
+                    res.status(200).json({
+                        message: "Welcome back to NurseLink!",
+                        id: user.userId,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        userType: "nurse",
+                    })
+                else if (user.instituteName)
+                    res.status(200).json({
+                        message: "Welcome back to NurseLink",
+                        id: user.userId,
+                        instituteName: user.instituteName,
+                        userType: "institute",
+                    })
             })
         })(req, res, next)
     } catch (err) {

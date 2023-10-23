@@ -5,18 +5,21 @@ const Schema = mongoose.Schema
 const instituteSchema = new Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        require: true,
+        required: true,
         unique: true,
         ref: "User",
     },
     instituteName: {
         type: String,
+        required: true
     },
     city: {
         type: String,
+        required: true
     },
     country: {
         type: String,
+        required: true
     },
     profilePicture: {
         type: String,
@@ -47,6 +50,9 @@ const instituteSchema = new Schema({
     jobHiringId: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: "JobHiring",
+    },
+    phoneNumber: {
+        type: String,
     },
     roles: [
         {

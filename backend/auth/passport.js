@@ -13,7 +13,7 @@ const validateEmail = (email) =>
 
 passport.serializeUser((user, done) => {
     process.nextTick(() =>
-        done(null, { id: user._id, username: user.username })
+        done(null, { id: user.userId })
     )
 })
 
@@ -88,7 +88,7 @@ passport.use(
                         country,
                         city,
                     })
-                    req.login(newUser, (loginErr) => {
+                    req.login(newNurse, (loginErr) => {
                         if (loginErr) {
                             return done(loginErr)
                         }
@@ -104,7 +104,7 @@ passport.use(
                         city,
                     })
 
-                    req.login(newUser, (loginErr) => {
+                    req.login(newInstitute, (loginErr) => {
                         if (loginErr) {
                             return done(loginErr)
                         }
@@ -149,7 +149,8 @@ passport.use(
                         return done(null, false, {
                             message: "Could not find the nurse account.",
                         })
-                    return done(null, user)
+
+                    return done(null, nurse)
                 } else {
                     const institute = await Institute.findOne({
                         userId: user._id,
@@ -158,11 +159,11 @@ passport.use(
                         return done(null, false, {
                             message: "Could not find the institute account.",
                         })
-                    return done(null, user)
+
+                    return done(null, institute)
                 }
             } catch (e) {
                 console.error(e)
-                return done(e)
             }
         }
     )

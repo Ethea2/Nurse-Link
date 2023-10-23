@@ -5,6 +5,8 @@ import { Link } from "react-router-dom"
 import routes from "../router/router"
 import { RouteType } from "../../types/routeTypes/routeType"
 import { useAuth } from "../../hooks/useAuth"
+import useLogout from "../../hooks/useLogout"
+
 
 const Navbar = () => {
     return (
@@ -92,12 +94,44 @@ const NavLink = ({ text, path }: { text: string; path: string }) => {
 }
 
 const NavRight = () => {
+    const { logout, state } = useLogout()
+    console.log(state)
     const { user } = useAuth()
     return (
         <>
             <div className="flex items-center gap-4">
                 {user ? (
-                    "Logged in"
+                    user.userType === "institute" ? (
+                        <>
+                            <Link to={`/institute/${user.id}`}>
+                                {user.instituteName}
+                            </Link>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium rounded-md whitespace-nowrap"
+                                onClick={logout}
+                            >
+                                Log out
+                            </motion.button>
+
+
+                        </>
+                    ) : (
+                        <>
+                            <Link to={`/nurse/${user.id}`}>
+                                {user.firstName}
+                            </Link>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium rounded-md whitespace-nowrap"
+                                onClick={logout}
+                            >
+                                Log out
+                            </motion.button>
+                        </>
+                    )
                 ) : (
                     <>
                         <Link to="/login">
