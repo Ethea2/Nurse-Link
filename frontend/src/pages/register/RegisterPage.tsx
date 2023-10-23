@@ -18,21 +18,23 @@ const RegisterPage = () => {
             </div>
             <div className="flex gap-5 mt-10">
                 <Link to="/register-nurse">
-                    <div className="font-bold h-52 w-52 border-2 rounded-lg border-primary cursor-pointer flex justify-center items-center">
-                        Add Nurse
+                    <div className="font-bold h-52 w-52 rounded-lg cursor-pointer flex justify-center items-center">
+                        <img src= "https://res.cloudinary.com/dpuuajd0k/image/upload/v1698046770/CSSWENG%20GROUP%203/ex3sr1vwtjqfv5b6ovim.png"></img>
                     </div>
                 </Link>
                 <Link to="/register-institute">
-                    <div className="font-bold h-52 w-52 border-2 rounded-lg border-primary cursor-pointer flex justify-center items-center">
-                        Add Institute
+                    <div className="font-bold h-52 w-52 rounded-lg cursor-pointer flex justify-center items-center">
+                        <img src ="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698046770/CSSWENG%20GROUP%203/kin8tyq4s4htzb7zv7yc.png"></img>
                     </div>
                 </Link>
             </div>
-            <div className ="w-full flex gap 5 justify-center">
-                <hr className = "border-black-900"></hr> or <hr className = "border-black-900"></hr>
+            <div className ="w-1/2 flex gap-5 justify-center items-center">
+                <hr className = "border-t-2 w-1/2 border-black-900"></hr>
+                or
+                <hr className = "border-t-2 w-1/2 border-black-900"></hr>
             </div>
             <div>
-                Already a member? <Link to="/homepage"><b>Log in.</b></Link>
+                Already a member? <Link to="/login"><b>Log in.</b></Link>
             </div>
         </section>
     )
