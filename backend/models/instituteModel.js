@@ -27,6 +27,10 @@ const instituteSchema = new Schema({
     bannerPicture: {
         type: String,
     },
+    type: {
+        type: String,
+        enum: ['School', 'Company']
+    },
     about: {
         type: String,
     },
@@ -45,7 +49,7 @@ const instituteSchema = new Schema({
         type: String,
     },
     employee: {
-        type: [mongoose.Schema.Types.ObjectId],
+        type: [mongoose.Schema.Types.ObjectId]
     },
     jobHiringId: {
         type: [mongoose.Schema.Types.ObjectId],
@@ -66,6 +70,15 @@ const instituteSchema = new Schema({
             },
         },
     ],
+    followers: {
+        type: [mongoose.Schema.Types.ObjectId]
+    },
+    verified: {
+        type: Boolean
+    },
+    deactivate: {
+        type: Boolean
+    }
 })
 
 module.exports = mongoose.model("Institute", instituteSchema, "Institute")

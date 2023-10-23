@@ -13,7 +13,7 @@ const jobHiringSchema = new Schema({
         type: String,
         require: true
     }, 
-    requirements:{
+    qualification:{
         type: [String], //probably not String
         require: true
     },
