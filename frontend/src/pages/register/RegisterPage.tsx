@@ -48,8 +48,8 @@ import { Link } from "react-router-dom"
 const RegisterPage = () => {
     return (
         <section className="w-full min-h-screen flex flex-col justify-center items-center">
-            <div className="titleAndLogo flex flex-col items-center">
-                <div className="flex">
+            <div className="titleAndLogo text-center"> {/* Center the text for smaller screens */}
+                <div className="logoAndTitle flex flex-col items-center">
                     <div className="logoPng">
                         <img
                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Grey_Square.svg/480px-Grey_Square.svg.png"
@@ -60,14 +60,14 @@ const RegisterPage = () => {
                 </div>
                 <p className="text-2xl font-semibold">Join us today!</p>
             </div>
-            <div className="flex flex-col gap-5 mt-10 mb-20"> {/* Adjust layout for smaller screens */}
+            <div className="flex flex-col gap-5 mt-10 mb-20 sm:flex-row"> {/* Use flexbox to arrange links */}
                 <Link to="/register-nurse">
-                    <div className="font-bold rounded-lg cursor-pointer" style={{ width: "100%" }}> {/* Make links full-width */}
+                    <div className="font-bold rounded-lg cursor-pointer" style={{ flex: "1" }}> {/* Make links flexible to adjust width */}
                         <img src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698046770/CSSWENG%20GROUP%203/ex3sr1vwtjqfv5b6ovim.png" alt="Nurse Registration" />
                     </div>
                 </Link>
                 <Link to="/register-institute">
-                    <div className="font-bold rounded-lg cursor-pointer" style={{ width: "100%" }}> {/* Make links full-width */}
+                    <div className="font-bold rounded-lg cursor-pointer" style={{ flex: "1" }}> {/* Make links flexible to adjust width */}
                         <img src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698046770/CSSWENG%20GROUP%203/kin8tyq4s4htzb7zv7yc.png" alt="Institute Registration" />
                     </div>
                 </Link>
@@ -85,4 +85,5 @@ const RegisterPage = () => {
 }
 
 export default RegisterPage
+
 
