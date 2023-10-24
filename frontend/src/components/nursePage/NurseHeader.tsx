@@ -44,7 +44,7 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                     </span>
                 </div>
                 <div className="flex flex-col h-full justify-between items-center p-10">
-                    <span className="flex justify-center items-center">
+                    <span className="flex justify-center items-center text-2xl">
                         <BsFillPersonFill /> connections
                     </span>
                     <button className="btn rounded-full text-[#176B87] bg-white shadow-lg">
