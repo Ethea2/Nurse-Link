@@ -4,9 +4,9 @@ const { getNurses, getNurse, editNurse, deleteNurse } = require("../controllers/
 
 const nurseRouter = express.Router()
 
-nurseRouter.get("/", checkAuth, getNurses)
+nurseRouter.get("/", getNurses)
 
-nurseRouter.get("/:userId", checkAuth, getNurse)
+nurseRouter.get("/:userId", getNurse)
 
 nurseRouter.post("/:userId", checkAuth, editNurse)
 

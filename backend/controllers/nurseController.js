@@ -16,13 +16,13 @@ const getNurse = async (req, res) => {
     const { userId } = req.params
     try {
         const nurse = await Nurse.findOne({ userId })
+        const user = await User.findById(userId)
 
         if (!nurse)
             return res
                 .status(404)
                 .json({ message: "Could not find the nurse!" })
-
-        res.status(200).json(nurse)
+        res.status(200).json({...nurse._doc, username: user.username, email: user.email})
     } catch (e) {
         console.log(e)
         return res.status(500).json({ message: "Something went wrong!" })

@@ -1,6 +1,7 @@
 import { useParams } from "react-router"
 import useFetch from "../../hooks/useFetch"
 import { useEffect } from "react"
+import NurseHeader from "../../components/nursePage/NurseHeader"
 
 const Nurse = () => {
     const { userId } = useParams()
@@ -9,15 +10,13 @@ const Nurse = () => {
         console.log(nurse)
     }, [nurse])
     return (
-        <div>
-            Nurse
-            <div>{userId}</div>
+        <div className="w-full min-h-screen">
             {
                 loading ?
                 (
                     <div>loading...</div>
                 ) : 
-                    <div>{JSON.stringify(nurse)}</div>
+                    <NurseHeader nurse={nurse} />
             }
         </div>
     )
