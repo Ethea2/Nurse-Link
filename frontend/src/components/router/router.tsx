@@ -11,7 +11,7 @@ import Institute from "../../pages/institute/Institute"
 
 const routes: Array<RouteType> = [
     { path: "/", element: <Landing /> },
-    { path: "/homepage", element: <Homepage />, name: "Homepage" },
+    { path: "/homepage", element: <Homepage />, name: "NurseLink" },
     { path: "/register", element: <RegisterPage /> },
     { path: "/login", element: <LoginPage /> },
     { path: "/nurse-profile", element: <NurseProfile /> },
