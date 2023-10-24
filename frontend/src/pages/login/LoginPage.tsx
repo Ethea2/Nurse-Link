@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import useLogin from "../../hooks/useLogin"
+import { Link } from "react-router-dom"
 
 const LoginPage = () => {
     const [username, setUsername] = useState<string>("")
@@ -65,17 +66,24 @@ const LoginPage = () => {
                             />
                         </label>
                         <br />
-                        <button
-                            className="loginBtn btn bg-slate-400 rounded-full"
-                            onClick={(e) => handleLogin(e, username, password)}
-                        >
-                            Log In
-                        </button>
+                        <div className="flex justify-center item-center">
+                            <button
+                                className="loginBtn btn bg-slate-400 rounded-full mt-5"
+                                onClick={(e) => handleLogin(e, username, password)}
+                            >
+                                Log In
+                            </button>
+                        </div>
+                        
                     </div>
-
-                    <div>Not a member? Sign up.</div>
+                    <div className ="w-1/2 flex gap-5 justify-center items-center mt-5">
+                        <hr className = "border-t-2 w-1/2 border-black-900"></hr>
+                        or
+                        <hr className = "border-t-2 w-1/2 border-black-900"></hr>
+                    </div>
+                    <div>Not a member? <Link to ="/register"><b>Sign up.</b></Link></div>
                 </div>
-                <div className="rightPage">
+                <div className="rightPage"> 
                     <img src="https://t4.ftcdn.net/jpg/00/66/01/29/360_F_66012928_ztFfdS8dnLgghWKWxrDOH8FfhrzAkI2Z.jpg" />
                 </div>
             </div>
