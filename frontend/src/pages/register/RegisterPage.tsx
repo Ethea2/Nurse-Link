@@ -64,16 +64,17 @@ const RegisterPage = () => {
                 <Link to="/register-institute">
                     <div className="font-bold rounded-lg cursor-pointer" style={{ flex: "1" }}> 
                         <img src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127921/CSSWENG%20GROUP%203/sjavgndnfnyd9a8pqqye.png" alt="Institute Registration" />
+                        <div className="w-full text-center font-montserrat font-medium">
+                            Add Institution
+                        </div>
                     </div>
                 </Link>
                 <Link to="/register-nurse">
                     <div className="font-bold rounded-lg cursor-pointer" style={{ flex: "1" }}> 
                         <img src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127921/CSSWENG%20GROUP%203/beaagtyscoc3p2euwxl1.png" alt="Nurse Registration" />
+                        <div className="w-full text-center font-montserrat font-medium">Add Nurse</div>
                     </div>
                 </Link>
-            </div>
-            <div>
-                
             </div>
             
             <div className="w-1/2 flex gap-2 justify-center items-center"> 

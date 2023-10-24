@@ -204,7 +204,7 @@ const RegisterNurse = () => {
                             ) : (
                                 <button
                                     className="px-4 py-1 rounded bg-black text-white"
-                                    onClick={() => handleSetStep(1)}
+                                    onClick={() => {handleSetStep(1);}}
                                 >
                                     Next
                                 </button>
