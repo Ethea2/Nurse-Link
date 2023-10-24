@@ -16,7 +16,7 @@ const Navbar = () => {
 const FlipNav = () => {
     const [isOpen, setIsOpen] = useState(false)
     return (
-        <nav className="bg-white p-4 border-b-[1px] border-gray-200 flex items-center justify-between relative">
+        <nav className="bg-white p-3 border-b-[1px] border-gray-200 flex items-center justify-between relative">
             <NavLeft setIsOpen={setIsOpen} />
             <NavRight />
             <NavMenu isOpen={isOpen} />
@@ -25,26 +25,16 @@ const FlipNav = () => {
 }
 
 const Logo = () => {
-    // Temp logo from https://logoipsum.com/
     return (
-        <svg
-            width="50"
-            height="39"
-            viewBox="0 0 50 39"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="fill-gray-800"
-        >
-            <path
-                d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z"
-                stopColor="#000000"
-            ></path>
-            <path
-                d="M17.4224 27.102L11.4192 36H33.5008L49 13.0271H32.7024L23.2064 27.102H17.4224Z"
-                stopColor="#000000"
-            ></path>
-        </svg>
-    )
+        <div className="flex items-center">
+            <img
+                width="50"
+                height="39"
+                src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127920/CSSWENG%20GROUP%203/qt4ozeain5lqwtz5jmb3.png"
+                alt="Logo"
+            />
+        </div>
+    );
 }
 
 const NavLeft = ({
@@ -53,11 +43,11 @@ const NavLeft = ({
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
     return (
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3">
             <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="block lg:hidden text-gray-950 text-2xl"
+                className="block lg:hidden text-[#053B50] text-2xl"
                 onClick={() => setIsOpen((pv) => !pv)}
             >
                 <FiMenu />
@@ -71,7 +61,7 @@ const NavLeft = ({
     )
 }
 
-const NavLink = ({ text, path }: { text: string; path: string }) => {
+const NavLink = ({ text, path }: { text: string, path: string }) => {
     return (
         <Link
             to={path}
@@ -79,10 +69,10 @@ const NavLink = ({ text, path }: { text: string; path: string }) => {
             className="hidden lg:block h-[30px] overflow-hidden font-medium"
         >
             <motion.div whileHover={{ y: -30 }}>
-                <span className="flex items-center h-[30px] text-gray-500">
+                <span className="flex items-center h-[30px] font-bold text-[#053B50] text-3xl">
                     {text}
                 </span>
-                <span className="flex items-center h-[30px] text-indigo-600">
+                <span className="flex items-center h-[30px] font-bold text-[#00CEC8] text-3xl">
                     {text}
                 </span>
             </motion.div>
@@ -93,22 +83,49 @@ const NavLink = ({ text, path }: { text: string; path: string }) => {
 const NavRight = () => {
     return (
         <div className="flex items-center gap-4">
-            <Link to="/login">
+            <Link to="/homepage">
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent font-medium rounded-md whitespace-nowrap"
+                    className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
                 >
-                    Log in
+                    Home
+                </motion.button>
+            </Link>
+            <Link to="/">
+                <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+                >
+                    About
+                </motion.button>
+            </Link>
+            <Link to="/">
+                <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+                >
+                    Contact Us
                 </motion.button>
             </Link>
             <Link to="/register">
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium rounded-md whitespace-nowrap"
+                    className="px-4 py-2 bg-[#FAF9F9] text-[#053B50] font-medium rounded-xl drop-shadow-md"
                 >
-                    Sign up
+                    Sign Up
+                </motion.button>
+            </Link>
+            <Link to="/login">
+                <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-2 bg-[#053B50] text-[#FFFFFF] font-medium rounded-xl drop-shadow-md"
+                >
+                    Log In
                 </motion.button>
             </Link>
         </div>
@@ -123,10 +140,9 @@ const NavMenu = ({ isOpen }: { isOpen: boolean }) => {
             animate={isOpen ? "open" : "closed"}
             className="absolute p-4 bg-white shadow-lg left-0 right-0 top-full origin-top flex flex-col gap-4"
         >
-            <MenuLink text="Solutions" />
-            <MenuLink text="Community" />
-            <MenuLink text="Pricing" />
-            <MenuLink text="Company" />
+            <MenuLink text="Home" />
+            <MenuLink text="About" />
+            <MenuLink text="Contact Us" />
         </motion.div>
     )
 }
@@ -140,13 +156,13 @@ const MenuLink = ({ text }: { text: string }) => {
             className="h-[30px] overflow-hidden font-medium text-lg flex items-start gap-2"
         >
             <motion.span variants={menuLinkArrowVariants}>
-                <FiArrowRight className="h-[30px] text-gray-950" />
+                <FiArrowRight className="h-[30px] text-[#343330]" />
             </motion.span>
             <motion.div whileHover={{ y: -30 }}>
-                <span className="flex items-center h-[30px] text-gray-500">
+                <span className="flex items-center h-[30px] text-[#343330]">
                     {text}
                 </span>
-                <span className="flex items-center h-[30px] text-indigo-600">
+                <span className="flex items-center h-[30px] text-[#00CEC8]">
                     {text}
                 </span>
             </motion.div>
