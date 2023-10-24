@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
 import { FiMenu, FiArrowRight } from "react-icons/fi"
 import { Link } from "react-router-dom"
@@ -6,7 +6,7 @@ import routes from "../router/router"
 import { RouteType } from "../../types/routeTypes/routeType"
 import { useAuth } from "../../hooks/useAuth"
 import useLogout from "../../hooks/useLogout"
-
+import UserType from "../../types/userTypes/userType"
 
 const Navbar = () => {
     return (
@@ -37,7 +37,7 @@ const Logo = () => {
                 alt="Logo"
             />
         </div>
-    );
+    )
 }
 
 const NavLeft = ({
@@ -64,7 +64,7 @@ const NavLeft = ({
     )
 }
 
-const NavLink = ({ text, path }: { text: string, path: string }) => {
+const NavLink = ({ text, path }: { text: string; path: string }) => {
     return (
         <Link
             to={path}
@@ -85,7 +85,6 @@ const NavLink = ({ text, path }: { text: string, path: string }) => {
 
 const NavRight = () => {
     const { logout, state } = useLogout()
-    console.log(state)
     const { user } = useAuth()
     return (
         <div className="flex items-center gap-4">
@@ -116,25 +115,60 @@ const NavRight = () => {
                     Contact Us
                 </motion.button>
             </Link>
-            <Link to="/register">
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-4 py-2 bg-[#FAF9F9] text-[#053B50] font-medium rounded-xl drop-shadow-md"
-                >
-                    Sign Up
-                </motion.button>
-            </Link>
-            <Link to="/login">
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-4 py-2 bg-[#053B50] text-[#FFFFFF] font-medium rounded-xl drop-shadow-md"
-                >
-                    Log In
-                </motion.button>
-            </Link>
+            {!user ? (
+                <>
+                    <Link to="/register">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="px-4 py-2 bg-[#FAF9F9] text-[#053B50] font-medium rounded-xl drop-shadow-md"
+                        >
+                            Sign Up
+                        </motion.button>
+                    </Link>
+                    <Link to="/login">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="px-4 py-2 bg-[#053B50] text-[#FFFFFF] font-medium rounded-xl drop-shadow-md"
+                        >
+                            Log In
+                        </motion.button>
+                    </Link>
+                </>
+            ) : (
+                <>
+                    <LoggedInProfileMenu logout={logout} user={user} />
+                </>
+            )}
         </div>
+    )
+}
+
+const LoggedInProfileMenu = ({
+    user,
+    logout,
+}: {
+    user: UserType
+    logout: Function
+}) => {
+    return (
+        <details className="rounded-full h-14 dropdown dropdown-end">
+            <summary className="h-full avatar">
+                <img
+                    src={user?.img}
+                    className="h-full object-fill hover:scale-105 transition duration-200 ease-in "
+                />
+            </summary>
+            <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 text-center">
+                <li >
+                    <button className="flex justify-center items-center w-full font-bold" onClick={() => logout()}>Sign out</button>
+                </li>
+                <li>
+                    <a>Item 2</a>
+                </li>
+            </ul>
+        </details>
     )
 }
 
@@ -213,4 +247,9 @@ const menuLinkArrowVariants = {
     closed: {
         x: -4,
     },
+}
+const iconVariants = {
+    initial: { rotate: 180, opacity: 0 },
+    animate: { rotate: 0, opacity: 1 },
+    exit: { rotate: -180, opacity: 0 },
 }

@@ -3,8 +3,10 @@ import { ImLocation, ImInstagram } from "react-icons/im"
 import { AiOutlineMail } from "react-icons/ai"
 import { BsFillPersonFill } from "react-icons/bs"
 import { BsFacebook, BsTwitter } from "react-icons/bs"
+import { useAuth } from "../../hooks/useAuth"
 
 const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
+    const { user } = useAuth()
     return (
         <div className="flex flex-col justify-start items-center w-full h-fit md:h-[80vh] border-b-2">
             <div className="h-[50vh] md:h-3/5 w-full flex justify-center items-center">
@@ -47,9 +49,11 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                     <span className="flex justify-center items-center text-2xl">
                         <BsFillPersonFill /> connections
                     </span>
-                    <button className="btn rounded-full text-[#176B87] bg-white shadow-lg">
-                        Edit Profile
-                    </button>
+                    {user?.id === nurse?.userId && (
+                        <button className="btn rounded-full text-[#176B87] bg-white shadow-lg">
+                            Edit Profile
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

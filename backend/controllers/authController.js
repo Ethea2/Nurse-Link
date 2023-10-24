@@ -15,6 +15,7 @@ const register = async (req, res, next) => {
                     firstName: user.firstName,
                     lastName: user.lastName,
                     userType: "nurse",
+                    img: user.profilePicture,
                 })
             else if (user.instituteName)
                 return res.status(200).json({
@@ -22,6 +23,7 @@ const register = async (req, res, next) => {
                     id: user.userId,
                     instituteName: user.instituteName,
                     userType: "institute",
+                    img: user.profilePicture,
                 })
         })(req, res, next)
     } catch (err) {
@@ -49,6 +51,7 @@ const login = async (req, res, next) => {
                         firstName: user.firstName,
                         lastName: user.lastName,
                         userType: "nurse",
+                        img: user.profilePicture,
                     })
                 else if (user.instituteName)
                     res.status(200).json({
@@ -56,6 +59,7 @@ const login = async (req, res, next) => {
                         id: user.userId,
                         instituteName: user.instituteName,
                         userType: "institute",
+                        img: user.profilePicture,
                     })
             })
         })(req, res, next)
