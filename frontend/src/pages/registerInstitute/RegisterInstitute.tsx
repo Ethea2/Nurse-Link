@@ -56,7 +56,6 @@ const RegisterInstitute = () => {
 
         if(num === -1){
             setStepsComplete((pv) => pv + num)
-            return
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
