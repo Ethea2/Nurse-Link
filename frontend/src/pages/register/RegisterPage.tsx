@@ -52,7 +52,7 @@ const RegisterPage = () => {
                 <div className="logoAndTitle flex flex-col items-center">
                     <div className="logoPng">
                         <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Grey_Square.svg/480px-Grey_Square.svg.png"
+                            src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127920/CSSWENG%20GROUP%203/qt4ozeain5lqwtz5jmb3.png"
                             style={{ width: "70px", height: "70px" }} 
                         />
                     </div>
@@ -61,16 +61,19 @@ const RegisterPage = () => {
                 <p className="text-2xl font-semibold">Join us today!</p>
             </div>
             <div className="flex flex-col gap-5 mt-10 mb-20 sm:flex-row"> 
-                <Link to="/register-nurse">
-                    <div className="font-bold rounded-lg cursor-pointer" style={{ flex: "1" }}> 
-                        <img src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698046770/CSSWENG%20GROUP%203/ex3sr1vwtjqfv5b6ovim.png" alt="Nurse Registration" />
-                    </div>
-                </Link>
                 <Link to="/register-institute">
                     <div className="font-bold rounded-lg cursor-pointer" style={{ flex: "1" }}> 
-                        <img src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698046770/CSSWENG%20GROUP%203/kin8tyq4s4htzb7zv7yc.png" alt="Institute Registration" />
+                        <img src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127921/CSSWENG%20GROUP%203/sjavgndnfnyd9a8pqqye.png" alt="Institute Registration" />
                     </div>
                 </Link>
+                <Link to="/register-nurse">
+                    <div className="font-bold rounded-lg cursor-pointer" style={{ flex: "1" }}> 
+                        <img src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127921/CSSWENG%20GROUP%203/beaagtyscoc3p2euwxl1.png" alt="Nurse Registration" />
+                    </div>
+                </Link>
+            </div>
+            <div>
+                
             </div>
             
             <div className="w-1/2 flex gap-2 justify-center items-center"> 
