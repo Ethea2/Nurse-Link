@@ -2,6 +2,24 @@ const passport = require("passport")
 const Nurse = require("../models/nurseModel")
 const User = require("../models/userModel")
 
+const computeNurseProgress = (nurse) => {
+    const skills = [
+        nurse.technicalSkill.length,
+        nurse.credentials.education.length,
+        nurse.credentials.experience.length,
+        nurse.credentials.volunteering.length,
+        nurse.credentials.document.length,
+    ]
+    const maxPercentage = skills.length
+    let score = 0
+    skills.forEach((skill) => {
+        if (skill >= 1) {
+            score += 1
+        }
+    })
+    return (score / maxPercentage) * 100
+}
+
 const getNurses = async (req, res) => {
     try {
         const nurses = await Nurse.find({})
@@ -22,7 +40,14 @@ const getNurse = async (req, res) => {
             return res
                 .status(404)
                 .json({ message: "Could not find the nurse!" })
-        res.status(200).json({...nurse._doc, username: user.username, email: user.email})
+
+        const score = computeNurseProgress(nurse)
+        res.status(200).json({
+            ...nurse._doc,
+            username: user.username,
+            email: user.email,
+            progress: score,
+        })
     } catch (e) {
         console.log(e)
         return res.status(500).json({ message: "Something went wrong!" })

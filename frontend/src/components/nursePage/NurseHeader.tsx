@@ -23,9 +23,9 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                         <span className="text-xl">{nurse?.email}</span>
                     </span>
                     <span className="flex w-full justify-between text-4xl">
-                        <BsFacebook className="hover:text-[#176B87] hover:scale-105 transition-all duration-200 ease-in" />
-                        <BsTwitter className="hover:text-[#176B87]  hover:scale-105 transition-all duration-200 ease-in" />
-                        <ImInstagram className="hover:text-[#176B87]  hover:scale-105 transition-all duration-200 ease-in" />
+                        <BsFacebook className="hover:text-[#00CEC8] hover:scale-105 transition-all duration-200 ease-in" />
+                        <BsTwitter className="hover:text-[#00CEC8]  hover:scale-105 transition-all duration-200 ease-in" />
+                        <ImInstagram className="hover:text-[#00CEC8]  hover:scale-105 transition-all duration-200 ease-in" />
                     </span>
                 </div>
                 <div className="flex flex-col justify-between items-center h-1/2 gap-10 md:mx-auto">
@@ -50,7 +50,7 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                         <BsFillPersonFill /> connections
                     </span>
                     {user?.id === nurse?.userId && (
-                        <button className="btn rounded-full text-[#176B87] bg-white shadow-lg">
+                        <button className="btn rounded-full text-[#176B87] hover:text-[#00CEC8] bg-white shadow-lg">
                             Edit Profile
                         </button>
                     )}

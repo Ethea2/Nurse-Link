@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
 import { FiMenu, FiArrowRight } from "react-icons/fi"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import routes from "../router/router"
 import { RouteType } from "../../types/routeTypes/routeType"
 import { useAuth } from "../../hooks/useAuth"
@@ -152,6 +152,7 @@ const LoggedInProfileMenu = ({
     user: UserType
     logout: Function
 }) => {
+    const nav = useNavigate()
     return (
         <details className="rounded-full h-14 dropdown dropdown-end">
             <summary className="h-full avatar">
@@ -161,11 +162,21 @@ const LoggedInProfileMenu = ({
                 />
             </summary>
             <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 text-center">
-                <li >
-                    <button className="flex justify-center items-center w-full font-bold" onClick={() => logout()}>Sign out</button>
+                <li>
+                    <button
+                        className="flex justify-center items-center w-full font-bold"
+                        onClick={() => logout()}
+                    >
+                        Sign out
+                    </button>
                 </li>
                 <li>
-                    <a>Item 2</a>
+                    <button
+                        className="flex justify-center items-center w-full font-bold"
+                        onClick={() => nav(`/nurse/${user.id}`)}
+                    >
+                        View Profile
+                    </button>
                 </li>
             </ul>
         </details>
