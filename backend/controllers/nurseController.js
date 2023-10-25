@@ -10,14 +10,14 @@ const computeNurseProgress = (nurse) => {
         nurse.credentials.volunteering.length,
         nurse.credentials.document.length,
     ]
-    const maxPercentage = skills.length
-    let score = 0
+    const maxPercentage = skills.length + 1
+    let score = 1
     skills.forEach((skill) => {
         if (skill >= 1) {
             score += 1
         }
     })
-    return (score / maxPercentage) * 100
+    return Math.floor((score / maxPercentage) * 100)
 }
 
 const getNurses = async (req, res) => {

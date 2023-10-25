@@ -6,9 +6,13 @@ const ProgressCard = ({ nurse }: { nurse: NurseType }) => {
     const style = {
         "--value": `${nurse?.progress}`,
         "--size": "12rem",
-        "--thickness": "10px",
+        "--thickness": "15px",
     } as React.CSSProperties
     const profileProg = [
+        {
+            name: "Initial Details",
+            done: true,
+        },
         {
             name: "Technical Skill",
             done: nurse?.technicalSkill.length >= 1,
