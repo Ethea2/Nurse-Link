@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import { useState } from "react"
 import { FiMenu, FiArrowRight } from "react-icons/fi"
 import { Link, useNavigate } from "react-router-dom"
@@ -87,7 +87,7 @@ const NavLink = ({ text, path }: { text: string; path: string }) => {
 }
 
 const NavRight = () => {
-    const { logout, state } = useLogout()
+    const { logout } = useLogout()
     const { user } = useAuth()
     return (
         <div className="flex items-center gap-4">
@@ -261,9 +261,4 @@ const menuLinkArrowVariants = {
     closed: {
         x: -4,
     },
-}
-const iconVariants = {
-    initial: { rotate: 180, opacity: 0 },
-    animate: { rotate: 0, opacity: 1 },
-    exit: { rotate: -180, opacity: 0 },
 }

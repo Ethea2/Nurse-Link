@@ -1,5 +1,4 @@
 import { NurseType } from "../../types/nurseTypes/nurseType"
-import { useState } from "react"
 import { BiCheckCircle } from "react-icons/bi"
 
 const ProgressCard = ({ nurse }: { nurse: NurseType }) => {
