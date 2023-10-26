@@ -4,7 +4,7 @@ import { TiSocialInstagram } from "react-icons/ti"
 const Footer = () => {
     return (
         <div className="flex border-t-2 p-5 justify-between">
-            <div className="flex gap-10">
+            <div className="flex md:gap-10">
                 <span>© NurseLink, Inc. All rights reserved.</span>
                 <span className="cursor-pointer hover:text-[#00CEC8] transition ease-in duration-300">
                     Privacy Policy
@@ -13,7 +13,7 @@ const Footer = () => {
                     Terms of Service
                 </span>
             </div>
-            <div className="flex text-3xl gap-7">
+            <div className="flex flex-col md:flex-row text-3xl gap-2 md:gap-7">
                 <FaFacebookF className="text-[#00CEC8] hover:scale-125 transition ease-in duration-300" />
                 <BsTwitter className="text-[#00CEC8] hover:scale-125 transition ease-in duration-300" />
                 <TiSocialInstagram className="text-[#00CEC8] hover:scale-125 transition ease-in duration-300" />

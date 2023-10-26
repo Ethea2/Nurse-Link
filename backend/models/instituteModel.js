@@ -79,6 +79,6 @@ const instituteSchema = new Schema({
     deactivate: {
         type: Boolean
     }
-})
+},  {timestamps: true})
 
 module.exports = mongoose.model("Institute", instituteSchema, "Institute")

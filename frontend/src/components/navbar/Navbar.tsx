@@ -55,11 +55,14 @@ const NavLeft = ({
             >
                 <FiMenu />
             </motion.button>
-            <Logo />
-            {routes.map((route: RouteType) => {
-                if (route.name)
-                    return <NavLink text={route.name} path={route.path} />
-            })}
+            
+            <Link to="/">
+                <Logo />
+            </Link>
+                {routes.map((route: RouteType) => {
+                    if (route.name)
+                        return <NavLink text={route.name} path="/" />
+                })}
         </div>
     )
 }
@@ -88,7 +91,7 @@ const NavRight = () => {
     const { user } = useAuth()
     return (
         <div className="flex items-center gap-4">
-            <Link to="/homepage">
+            <Link to="/">
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
