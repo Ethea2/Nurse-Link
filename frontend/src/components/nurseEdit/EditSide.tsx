@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import { useAuth } from "../../hooks/useAuth"
 import UserType from "../../types/userTypes/userType"
 
 const EditSide = ({ user }: { user: UserType }) => {
