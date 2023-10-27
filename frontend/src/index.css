@@ -14,7 +14,7 @@
   
   /* Change the color of the thumb */
   ::-webkit-scrollbar-thumb {
-    background: #00CEC8; /* Change the color to #00CEC8 */
+    background: #053B50; /* Change the color to #053B50 */
     border-radius: 20px; /* Match the border radius for the thumb */
   }
   
@@ -26,11 +26,11 @@
   /* For Firefox */
   * {
     scrollbar-width: thin; /* Make the scrollbar thin */
-    scrollbar-color: #00CEC8 #f1f1f1; /* Set the thumb and track colors */
+    scrollbar-color: #053B50 #f1f1f1; /* Set the thumb and track colors */
   }
   
   /* For Internet Explorer and Edge */
   body {
-    scrollbar-base-color: #00CEC8; /* Set the color for IE and Edge */
+    scrollbar-base-color: #053B50; /* Set the color for IE and Edge */
   }
   
