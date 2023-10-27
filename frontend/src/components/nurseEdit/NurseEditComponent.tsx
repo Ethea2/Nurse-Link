@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import useFetch from "../../hooks/useFetch"
-import { BsFillImageFill } from "react-icons/bs"
 
 const NurseEditComponent = ({ userId }: { userId: string }) => {
     const { data: nurse, loading } = useFetch(`/api/nurse/${userId}`)
@@ -54,7 +53,7 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
                         </button>
                     </div>
                 </div>
-                <div id="nurse-edit-details" className="flex flex-col w-full">
+                <div id="nurse-edit-details" className="flex flex-col w-full border-2 rounded-xl mt-2 shadow-lg p-1">
                     <div className="flex justify-between w-full gap-2">
                         <div className="w-1/2">
                             <label className="label">
