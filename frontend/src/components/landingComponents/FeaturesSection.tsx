@@ -19,8 +19,8 @@ const FeaturesSection = () => {
                         NurseLink
                     </span>
                     <span className="text-3xl text-center font-thin text-[#A1AEB7]">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit, sed do eiusmod tempor.
+                        Discover your perfect job in the healthcare field with
+                        NurseLink's assistance.
                     </span>
                     <button className="btn md:w-1/4 rounded-full mt-6 bg-[#176B87] hover:bg-[#00CEC8] border-transparent shadow-inner drop-shadow-lg text-white">
                         Find Jobs
@@ -31,11 +31,12 @@ const FeaturesSection = () => {
             <div className="h-[70vh] w-full flex justify-center items-center p-20">
                 <div className="pr-10 w-[50%] flex flex-col text-[#053B50] items-center">
                     <span className="text-5xl font-bold text-center">
-                        <span className=" font-extrabold">Connections </span>made fast and easy
+                        <span className=" font-extrabold">Connections </span>
+                        made fast and easy
                     </span>
                     <span className="text-3xl text-center font-thin text-[#A1AEB7]">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit, sed do eiusmod tempor.
+                        Effortlessly and swiftly create valuable connections
+                        with ease, thanks to our user-friendly platform.
                     </span>
                     <button className="btn md:w-1/4 rounded-full mt-6 bg-[#176B87] hover:bg-[#00CEC8] border-transparent shadow-inner drop-shadow-lg text-white">
                         Find Connections
@@ -53,12 +54,14 @@ const FeaturesSection = () => {
                 </div>
                 <div className="pl-10 w-[50%] flex flex-col text-[#053B50] items-center">
                     <span className="text-5xl font-bold text-center">
-                        Be part of a growing {" "}
+                        Be part of a growing{" "}
                         <span className=" font-extrabold">community</span>
                     </span>
                     <span className="text-3xl text-center font-thin text-[#A1AEB7]">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit, sed do eiusmod tempor.
+                        Become an integral part of our rapidly growing
+                        community, where you can actively engage and contribute
+                        to its ongoing development for a truly rewarding and
+                        enriching journey.
                     </span>
                     <button className="btn md:w-1/4 rounded-full mt-6 bg-[#176B87] hover:bg-[#00CEC8] border-transparent shadow-inner drop-shadow-lg text-white">
                         Sign Up

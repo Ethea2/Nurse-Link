@@ -42,6 +42,7 @@ const getNurse = async (req, res) => {
                 .json({ message: "Could not find the nurse!" })
 
         const score = computeNurseProgress(nurse)
+        console.log(req.user)
         res.status(200).json({
             ...nurse._doc,
             username: user.username,
@@ -55,7 +56,7 @@ const getNurse = async (req, res) => {
 }
 
 const editNurse = async (req, res) => {
-    const { userId } = req.params
+    const userId = req.user._id
     try {
         const nurse = await Nurse.findOneAndUpdate(
             { userId },
