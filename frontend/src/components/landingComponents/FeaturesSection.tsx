@@ -18,7 +18,7 @@ const FeaturesSection = () => {
                         <span className=" font-extrabold">job </span>with
                         NurseLink
                     </span>
-                    <span className="text-3xl text-center font-thin text-[#A1AEB7]">
+                    <span className="text-3xl text-center font-thin text-[#A1AEB7] mt-2">
                         Discover your perfect job in the healthcare field with
                         NurseLink's assistance.
                     </span>
@@ -34,7 +34,7 @@ const FeaturesSection = () => {
                         <span className=" font-extrabold">Connections </span>
                         made fast and easy
                     </span>
-                    <span className="text-3xl text-center font-thin text-[#A1AEB7]">
+                    <span className="text-3xl text-center font-thin text-[#A1AEB7] mt-2">
                         Effortlessly and swiftly create valuable connections
                         with ease, thanks to our user-friendly platform.
                     </span>
@@ -57,7 +57,7 @@ const FeaturesSection = () => {
                         Be part of a growing{" "}
                         <span className=" font-extrabold">community</span>
                     </span>
-                    <span className="text-3xl text-center font-thin text-[#A1AEB7]">
+                    <span className="text-3xl text-center font-thin text-[#A1AEB7] mt-2">
                         Become an integral part of our rapidly growing
                         community, where you can actively engage and contribute
                         to its ongoing development for a truly rewarding and

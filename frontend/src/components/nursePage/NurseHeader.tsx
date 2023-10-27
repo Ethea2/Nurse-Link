@@ -4,9 +4,11 @@ import { AiOutlineMail } from "react-icons/ai"
 import { BsFillPersonFill } from "react-icons/bs"
 import { BsFacebook, BsTwitter } from "react-icons/bs"
 import { useAuth } from "../../hooks/useAuth"
+import { useNavigate } from "react-router"
 
 const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
     const { user } = useAuth()
+    const nav = useNavigate()
     return (
         <div className="flex flex-col justify-start items-center w-full h-fit md:h-[80vh] border-b-2">
             <div className="h-[50vh] md:h-3/5 w-full flex justify-center items-center">
@@ -50,7 +52,8 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                         <BsFillPersonFill /> connections
                     </span>
                     {user?.id === nurse?.userId && (
-                        <button className="btn rounded-full text-[#176B87] hover:text-[#00CEC8] bg-white shadow-lg">
+                        <button className="btn rounded-full text-[#176B87] hover:text-[#00CEC8] bg-white shadow-lg"
+                        onClick={() => nav(`/nurse/edit/${user.id}`)}>
                             Edit Profile
                         </button>
                     )}

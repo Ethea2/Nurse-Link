@@ -8,6 +8,7 @@ import RegisterNurse from "../../pages/registerNurse/RegisterNurse"
 import RegisterInstitute from "../../pages/registerInstitute/RegisterInstitute"
 import Nurse from "../../pages/nurse/Nurse"
 import Institute from "../../pages/institute/Institute"
+import NurseEditPage from "../../pages/nurseEdit/NurseEditPage"
 
 const routes: Array<RouteType> = [
     { path: "/", element: <Landing /> },
@@ -18,6 +19,7 @@ const routes: Array<RouteType> = [
     { path: "/register-nurse", element: <RegisterNurse /> },
     { path: "/register-institute", element: <RegisterInstitute /> },
     { path: "/nurse/:userId", element: <Nurse /> },
+    { path: "/nurse/edit/:userId", element: <NurseEditPage /> },
     { path: "/institute/:userId", element: <Institute /> },
 ]
 
