@@ -190,6 +190,12 @@ const RegisterNurse = () => {
                             {stepsComplete === NUMBER_OF_STEPS ? (
                                 <button
                                     className="px-4 py-1 rounded bg-black text-white"
+                                    style={{
+                                        backgroundColor: '#053B50',
+                                        borderRadius: '30px',
+                                        fontSize: '16px',
+                                        // marginLeft: '10px',
+                                    }}
                                     onClick={(e) =>
                                         handleRegister(
                                             e,
@@ -206,15 +212,23 @@ const RegisterNurse = () => {
                                         )
                                     }
                                 >
-                                    Submit
+                                Submit
                                 </button>
                             ) : (
                                 <button
                                     className="px-4 py-1 rounded bg-black text-white"
+                                    style={{
+                                        backgroundColor: '#053B50',
+                                        borderRadius: '30px',
+                                        fontSize: '16px',
+                                        // marginLeft: '10px',  
+                                        // borderWidth: '10px',
+                                    }}
                                     onClick={() => {handleSetStep(1);}}
                                 >
                                     Next
                                 </button>
+
                             )}
                         </div>
                     </div>
