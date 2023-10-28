@@ -161,7 +161,7 @@ const LoggedInProfileMenu = ({
             <summary className="h-full avatar">
                 <img
                     src={user?.img}
-                    className="h-full object-fill hover:scale-105 transition duration-200 ease-in "
+                    className="h-full object-fill hover:scale-105 transition duration-200 ease-in border-4 rounded-full shadow-md shadow-[#00CEC8] border-white "
                 />
             </summary>
             <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 text-center">

@@ -33,7 +33,7 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                 <div className="flex flex-col justify-between items-center h-1/2 gap-10 md:mx-auto">
                     <img
                         src={nurse?.profilePicture}
-                        className="object-cover absolute top-[350px]"
+                        className="object-cover absolute top-[350px] border-8 rounded-full shadow-lg border-white"
                         alt="Nurse's Profile Picture"
                     />
                     <span className="text-5xl font-bold flex flex-col text-center">

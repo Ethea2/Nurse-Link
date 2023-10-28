@@ -1,6 +1,8 @@
 const passport = require("passport")
 const Nurse = require("../models/nurseModel")
 const User = require("../models/userModel")
+const cloudinary = require("../utils/cloudinary")
+const fs = require("fs")
 
 const computeNurseProgress = (nurse) => {
     const skills = [
@@ -76,6 +78,46 @@ const editNurse = async (req, res) => {
     }
 }
 
+const editNurseProfilePicture = async (req, res) => {
+    const files = req.files.img
+    const userId = req.user._id
+    try {
+        const result = await cloudinary.uploader.upload(files.tempFilePath, {
+            public_id: Date.now(),
+            folder: "images",
+            width: 200,
+            height: 200,
+            crop: "scale",
+            withcredentials: false,
+        })
+
+        fs.unlink(files.tempFilePath, (err) => {
+            if (err) {
+                console.error("Error deleting the temporary file:", err)
+            } else {
+                console.log("Temporary file deleted.")
+            }
+        })
+
+        const nurse = await Nurse.findOneAndUpdate(
+            { userId: userId },
+            {
+                profilePicture: result.secure_url,
+            }
+        )
+
+        if (!nurse) {
+            return res.status(404).json({ message: "this user does not exist" })
+        }
+        res.status(200).json({
+            message: "The profile picture has been successfully changed!",
+        })
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({ message: "Server Error!" })
+    }
+}
+
 const deleteNurse = async (req, res) => {
     const { userId } = req.params
     try {
@@ -96,4 +138,10 @@ const deleteNurse = async (req, res) => {
     }
 }
 
-module.exports = { getNurses, getNurse, editNurse, deleteNurse }
+module.exports = {
+    getNurses,
+    getNurse,
+    editNurse,
+    deleteNurse,
+    editNurseProfilePicture,
+}

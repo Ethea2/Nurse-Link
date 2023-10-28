@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
 import useFetch from "../../hooks/useFetch"
+import { ChangeProfilePhoto } from "../modals/modals"
+import { BsFillImageFill } from "react-icons/bs"
+import { motion } from "framer-motion"
 
 const NurseEditComponent = ({ userId }: { userId: string }) => {
     const { data: nurse, loading } = useFetch(`/api/nurse/${userId}`)
@@ -7,11 +10,14 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
     const [lastName, setLastName] = useState(nurse?.lastName)
     const [specialization, setSpecialization] = useState(nurse?.lastName)
     const [city, setCity] = useState(nurse?.city)
+    const [showProfileModal, setShowProfileModal] = useState<boolean>(false)
+    const [hoverProfile, setHoverProfile] = useState<boolean>(false)
+    const [hoverBanner, setHoverBanner] = useState<boolean>(false)
     useEffect(() => {
-      setFirstName(nurse?.firstName)
-      setLastName(nurse?.lastName)
-      setSpecialization(nurse?.specialization ?? "")
-      setCity(nurse?.city ?? "")
+        setFirstName(nurse?.firstName)
+        setLastName(nurse?.lastName)
+        setSpecialization(nurse?.specialization ?? "")
+        setCity(nurse?.city ?? "")
     }, [loading])
     return (
         <div
@@ -29,31 +35,69 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
                     id="nurse-edit-img-container"
                     className="flex flex-col w-full h-[80%] border-2 rounded-2xl drop-shadow-xl "
                 >
-                    <div className="w-full h-2/3">
+                    <div
+                        className="relative w-full h-2/3 flex cursor-pointer justify-center items-center"
+                        onMouseEnter={() => setHoverBanner(true)}
+                        onMouseLeave={() => setHoverBanner(false)}
+                    >
+                        {hoverBanner && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.2, ease: "easeIn" }}
+                                className="absolute bg-[#053B50]/50 flex flex-col justify-center items-center w-full h-full rounded-t-2xl"
+                            >
+                                <BsFillImageFill className="text-white text-5xl" />
+                                <span className="text-white font-semibold">
+                                    Edit Profile Banner
+                                </span>
+                            </motion.div>
+                        )}
                         <img
                             src={nurse?.bannerPicture}
-                            className="object-conatin w-full h-full rounded-t-2xl"
+                            className="object-contain w-full h-full rounded-t-2xl"
                         />
                     </div>
                     <div
                         id="nurse-edit-profile"
-                        className="absolute bottom-0 left-20"
+                        className="absolute bottom-5 left-20"
                     >
-                        <img
-                            src={nurse?.profilePicture}
-                            className=" rounded-full"
-                        />
+                        <div
+                            onMouseEnter={() => setHoverProfile(true)}
+                            onMouseLeave={() => setHoverProfile(false)}
+                            className="border-8 border-white shadow-b-2xl flex justify-center bg-white items-center rounded-full cursor-pointer"
+                        >
+                            {hoverProfile && (
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{
+                                        duration: 0.2,
+                                        ease: "easeIn",
+                                    }}
+                                    onClick={() => setShowProfileModal(true)}
+                                    className="absolute bg-[#053B50]/50 flex flex-col justify-center items-center w-full h-full rounded-full"
+                                >
+                                    <BsFillImageFill className="text-white text-5xl" />
+                                    <span className="text-white font-semibold">
+                                        Edit Profile Photo
+                                    </span>
+                                </motion.div>
+                            )}
+                            <img
+                                src={nurse?.profilePicture}
+                                className="w-full h-full rounded-full"
+                            />
+                        </div>
                     </div>
-                    <div className="w-full h-full flex justify-end items-end gap-5 p-5">
-                        <button className="btn hover:bg-[#00CEC8]">
-                            Edit Profile
-                        </button>
-                        <button className="btn hover:bg-[#00CEC8]">
-                            Edit Banner
-                        </button>
-                    </div>
+                    <div className="w-full h-28 flex justify-end items-end gap-5 p-5" />
                 </div>
-                <div id="nurse-edit-details" className="flex flex-col w-full border-2 rounded-xl mt-2 shadow-lg p-1">
+                <div
+                    id="nurse-edit-details"
+                    className="flex flex-col w-full border-2 rounded-xl mt-2 shadow-lg p-1"
+                >
                     <div className="flex justify-between w-full gap-2">
                         <div className="w-1/2">
                             <label className="label">
@@ -92,7 +136,9 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
                                 placeholder="Type here"
                                 className="input input-bordered w-full"
                                 value={specialization}
-                                onChange={(e) => setSpecialization(e.target.value)}
+                                onChange={(e) =>
+                                    setSpecialization(e.target.value)
+                                }
                             />
                         </div>
                         <div className="w-1/2">
@@ -131,6 +177,10 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
                     </button>
                 </div>
             </div>
+            <ChangeProfilePhoto
+                setShow={setShowProfileModal}
+                show={showProfileModal}
+            />
         </div>
     )
 }
