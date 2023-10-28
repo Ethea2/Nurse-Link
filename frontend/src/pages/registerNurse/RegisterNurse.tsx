@@ -6,11 +6,13 @@ import Steps from "../../components/registerComponents/Steps.tsx"
 
 const RegisterNurse = () => {
     const style = document.createElement('style');
-    style.innerHTML = `
-      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-    `;
-    document.head.appendChild(style);
+        style.innerHTML = `
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+        `;
+        document.head.appendChild(style);
+
 
     const [username, setUsername] = useState<string>("")
     const [email, setEmail] = useState<string>("")

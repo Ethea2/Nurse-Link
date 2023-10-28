@@ -4,6 +4,13 @@ import useLogin from "../../hooks/useLogin"
 import { Link } from "react-router-dom"
 
 const LoginPage = () => {
+    const style = document.createElement('style');
+        style.innerHTML = `
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+        `;
+        document.head.appendChild(style);
     const [username, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const {login, state} = useLogin()
@@ -82,9 +89,6 @@ const LoginPage = () => {
                         <hr className = "border-t-2 w-1/2 border-black-900"></hr>
                     </div>
                     <div>Not a member? <Link to ="/register"><b>Sign up.</b></Link></div>
-                </div>
-                <div className="rightPage"> 
-                    <img src="https://t4.ftcdn.net/jpg/00/66/01/29/360_F_66012928_ztFfdS8dnLgghWKWxrDOH8FfhrzAkI2Z.jpg" />
                 </div>
             </div>
         </>
