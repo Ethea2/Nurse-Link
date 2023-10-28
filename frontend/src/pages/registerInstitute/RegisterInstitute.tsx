@@ -178,6 +178,9 @@ const RegisterInstitute = () => {
                         <div className="flex w-full justify-end">
                             <button
                                 className="px-4 py-1 rounded hover:bg-gray-100 text-black"
+                                style={{
+                                    borderRadius: '30px',
+                                }}
                                 onClick={() => handleSetStep(-1)}
                             >
                                 Prev
@@ -203,7 +206,14 @@ const RegisterInstitute = () => {
                             ) : (
                                 <button
                                     className="px-4 py-1 rounded bg-black text-white"
-                                    onClick={() => handleSetStep(1)}
+                                    style={{
+                                        backgroundColor: '#053B50',
+                                        borderRadius: '30px',
+                                        fontSize: '16px',
+                                        // marginLeft: '10px',  
+                                        // borderWidth: '10px',
+                                    }}
+                                    onClick={() => {handleSetStep(1);}}
                                 >
                                     Next
                                 </button>

@@ -185,6 +185,9 @@ const RegisterNurse = () => {
                         <div className="flex w-full justify-end">
                             <button
                                 className="px-4 py-1 rounded hover:bg-gray-100 text-black"
+                                style={{
+                                    borderRadius: '30px',
+                                }}
                                 onClick={() => handleSetStep(-1)}
                             >
                                 Prev
