@@ -43,9 +43,23 @@ const LoginPage = () => {
                     <div className="loginInput flex items-center justify-center flex-col" style={{
                         border: '2px solid #ccc',
                         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-                        padding: '3rem',
-                        borderRadius: '2rem' 
+                        padding: '5rem',
+                        borderRadius: '2rem',
+                        marginLeft: '1000px',
+                        
                         }}>
+
+                        <img
+                            src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127920/CSSWENG%20GROUP%203/qt4ozeain5lqwtz5jmb3.png"
+                            alt="Logo"
+                            style={{
+                                position: 'absolute',
+                                top: '85px',
+                                right: '30px',
+                                width: '100px',
+                            }}
+                        />
+
                         <div className="title text-6xl font-bold" style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 500 }}>
                             Login
                         </div>
@@ -77,7 +91,9 @@ const LoginPage = () => {
                             <br />
                             <div className="flex justify-center item-center">
                                 <button
+                                    
                                     className="loginBtn btn bg-slate-400 rounded-full mt-5 w-full"
+                                    style={{ backgroundColor: '#176B87', color: '#fff' }}
                                     onClick={(e) => handleLogin(e, username, password)}
                                 >
                                     Log In
@@ -86,8 +102,8 @@ const LoginPage = () => {
                             
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <span style={{ marginRight: '10px' }}>Don't have an account?</span>
-                        <Link to="/register"><b>Register.</b></Link>
+                        <span style={{ marginRight: '10px', color: '#176B87'}} >Don't have an account?</span>
+                        <Link to="/register" style={{ color: '#176B87' }} ><b>Register.</b></Link>
                         </div>
                     </div>
                 </div>
