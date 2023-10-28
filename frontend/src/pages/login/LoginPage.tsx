@@ -34,21 +34,24 @@ const LoginPage = () => {
     return (
         <>
             <div className="w-full h-screen" style={{
-            backgroundImage: 'url(https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127921/CSSWENG%20GROUP%203/zkeubixeljnf29buvxmo.png)',
-            backgroundSize: 'auto 100%', 
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'top left'
+                backgroundImage: 'url(https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127921/CSSWENG%20GROUP%203/zkeubixeljnf29buvxmo.png)',
+                backgroundSize: 'auto 100%',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'top left'
             }}>
                 <div className="loginPage flex items-center justify-center w-full gap-2 h-screen">
                     <div className="loginInput flex items-center justify-center flex-col" style={{
+                        background: '#FFFFFF',
                         border: '2px solid #ccc',
                         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
                         padding: '5rem',
                         borderRadius: '2rem',
-                        marginLeft: '1000px',
-                        
-                        }}>
 
+                        // Media query for smaller screens
+                        '@media (max-width: 768px)': {
+                            width: '90%', 
+                        }
+                    }}>
                         <img
                             src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127920/CSSWENG%20GROUP%203/qt4ozeain5lqwtz5jmb3.png"
                             alt="Logo"
@@ -91,27 +94,23 @@ const LoginPage = () => {
                             <br />
                             <div className="flex justify-center item-center">
                                 <button
-                                    
                                     className="loginBtn btn bg-slate-400 rounded-full mt-5 w-full"
                                     style={{ backgroundColor: '#176B87', color: '#fff' }}
                                     onClick={(e) => handleLogin(e, username, password)}
                                 >
-                                    Log In
+                                    Login
                                 </button>
                             </div>
-                            
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <span style={{ marginRight: '10px', color: '#176B87'}} >Don't have an account?</span>
-                        <Link to="/register" style={{ color: '#176B87' }} ><b>Register.</b></Link>
+                            <span style={{ marginRight: '10px', color: '#176B87' }}>Don't have an account?</span>
+                            <Link to="/register" style={{ color: '#176B87' }}><b>Register.</b></Link>
                         </div>
                     </div>
                 </div>
             </div>
-
-            
         </>
-    )
+    );
 }
 
 export default LoginPage
