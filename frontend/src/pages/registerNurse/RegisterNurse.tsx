@@ -157,11 +157,11 @@ const RegisterNurse = () => {
                                     className="object-scale-down h-14 w-14"
                                 />
                             </div>
-                            <div className="title text-5xl font-bold ">
+                            <div className="title text-5xl font-bold" style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700}}>
                                 NurseLink
                             </div>
                         
-                        <div className="welcomeTitle text-4xl font-semibold ">
+                        <div className="welcomeTitle text-2xl font-semibold " style={{fontFamily: 'Montserrat, sans-serif', fontWeight: 500 }}>
                             Join Us Today!
                         </div>
                     </div>
