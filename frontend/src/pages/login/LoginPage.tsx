@@ -33,7 +33,75 @@ const LoginPage = () => {
 
     return (
         <>
-            <div className="loginPage flex items-center justify-center w-full gap-2 h-screen">
+            <div className="w-full h-screen" style={{
+            backgroundImage: 'url(https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127921/CSSWENG%20GROUP%203/zkeubixeljnf29buvxmo.png)',
+            backgroundSize: 'auto 100%', 
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'top left'
+            }}>
+                <div className="loginPage flex items-center justify-center w-full gap-2 h-screen">
+                    <div className="loginInput flex items-center justify-center flex-col" style={{
+                        border: '2px solid #ccc',
+                        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+                        padding: '3rem',
+                        borderRadius: '2rem' 
+                        }}>
+                        <div className="title text-6xl font-bold" style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 500 }}>
+                            Login
+                        </div>
+                        <div className="containPwUsername float-left">
+                            <label htmlFor="username">
+                                Username
+                                <br />
+                                <input
+                                    name="username"
+                                    id="username"
+                                    className="bg-slate-200"
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    value={username}
+                                />
+                            </label>
+                            <br />
+                            <label htmlFor="password">
+                                Password
+                                <br />
+                                <input
+                                    name="password"
+                                    type="password"
+                                    id="password"
+                                    className="bg-slate-200"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    value={password}
+                                />
+                            </label>
+                            <br />
+                            <div className="flex justify-center item-center">
+                                <button
+                                    className="loginBtn btn bg-slate-400 rounded-full mt-5 w-full"
+                                    onClick={(e) => handleLogin(e, username, password)}
+                                >
+                                    Log In
+                                </button>
+                            </div>
+                            
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <span style={{ marginRight: '10px' }}>Don't have an account?</span>
+                        <Link to="/register"><b>Register.</b></Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </>
+    )
+}
+
+export default LoginPage
+{
+    /*
+    <div className="loginPage flex items-center justify-center w-full gap-2 h-screen">
                 <div className="leftPage flex items-center justify-center flex-col">
                     <div className="titleAndLogo flex items-center">
                         <div className="logoPng ">
@@ -83,16 +151,8 @@ const LoginPage = () => {
                         </div>
                         
                     </div>
-                    <div className ="w-1/2 flex gap-5 justify-center items-center mt-5">
-                        <hr className = "border-t-2 w-1/2 border-black-900"></hr>
-                        or
-                        <hr className = "border-t-2 w-1/2 border-black-900"></hr>
-                    </div>
                     <div>Not a member? <Link to ="/register"><b>Sign up.</b></Link></div>
                 </div>
             </div>
-        </>
-    )
+    */
 }
-
-export default LoginPage
