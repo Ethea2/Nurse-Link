@@ -1,6 +1,7 @@
 import React from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
+
 const Steps = ({
     numSteps,
     stepsComplete,
@@ -21,7 +22,8 @@ const Steps = ({
                         {stepNum !== stepArray.length && (
                             <div className="w-full h-1 rounded-full bg-gray-200 relative">
                                 <motion.div
-                                    className="absolute top-0 bottom-0 left-0 bg-indigo-600 rounded-full"
+                                    className="absolute top-0 bottom-0 left-0 rounded-full"
+                                    style={{backgroundColor: "rgba(0, 206, 200)"}}
                                     animate={{ width: isActive ? "100%" : 0 }}
                                     transition={{
                                         ease: "easeIn",
@@ -41,11 +43,13 @@ const Step = ({ num, isActive }: { num: number; isActive: boolean }) => {
     return (
         <div className="relative">
             <div
-                className={`w-10 h-10 flex items-center justify-center shrink-0 border-2 rounded-full font-semibold text-sm relative z-10 transition-colors duration-300 ${
-                    isActive
-                        ? "border-indigo-600 bg-indigo-600 text-white"
-                        : "border-gray-300 text-gray-300"
-                }`}
+                className={`w-10 h-10 flex items-center justify-center shrink-0 border-2 rounded-full font-semibold text-sm relative z-10 transition-colors duration-300`}
+                style={{
+                    border: isActive ? '2px solid #00CEC8' : '2px solid #ccc',
+                    backgroundColor: isActive ? '#00CEC8' : 'transparent',
+                    color: isActive ? '#fff' : '#ccc'
+                }}
+
             >
                 <AnimatePresence mode="wait">
                     {isActive ? (
@@ -79,7 +83,7 @@ const Step = ({ num, isActive }: { num: number; isActive: boolean }) => {
                 </AnimatePresence>
             </div>
             {isActive && (
-                <div className="absolute z-0 -inset-1.5 bg-indigo-100 rounded-full animate-pulse" />
+                <div style={{backgroundColor: "rgba(0, 206, 200,0.4)"}} className="absolute z-0 -inset-1.5 rounded-full animate-pulse" />
             )}
         </div>
     )

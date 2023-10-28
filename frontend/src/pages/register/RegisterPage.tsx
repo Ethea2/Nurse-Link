@@ -76,16 +76,6 @@ const RegisterPage = () => {
                     </div>
                 </Link>
             </div>
-            
-            <div className="w-1/2 flex gap-2 justify-center items-center"> 
-                <hr className="border-t-2 w-1/2 border-black-900" />
-                <span>or</span> 
-                <hr className="border-t-2 w-1/2 border-black-900" />
-            </div> 
-
-            <div>
-                Already a member? <Link to="/login"><b>Log in.</b></Link>
-            </div>
         </section>
     )
 }
