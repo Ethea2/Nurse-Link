@@ -5,6 +5,12 @@ import useRegister from "../../hooks/useRegister.tsx"
 import Steps from "../../components/registerComponents/Steps.tsx"
 
 const RegisterInstitute = () => {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+    `;
+    document.head.appendChild(style);
     //defailt user requirements
     const [username, setUsername] = useState<string>("")
     const [email, setEmail] = useState<string>("")
@@ -144,20 +150,20 @@ const RegisterInstitute = () => {
         <>
             <div className="registerPage flex items-center w-full h-screen">
                 <div className="leftPage flex items-center justify-center flex-col w-full h-full">
-                    <div className="mb-10">
-                        <div className="titleAndLogo flex bg">
+                <div className="mb-10 flex flex-col items-center">
+                        {/*<div className="titleAndLogo flex">*/}
                             <div className="logoPng ">
                                 <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Grey_Square.svg/480px-Grey_Square.svg.png"
+                                    src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127920/CSSWENG%20GROUP%203/qt4ozeain5lqwtz5jmb3.png"
                                     className="object-scale-down h-14 w-14"
                                 />
                             </div>
-                            <div className="title text-5xl font-bold ">
+                            <div className="title text-5xl font-bold" style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, color: '#053B50' }}>
                                 NurseLink
                             </div>
-                        </div>
-                        <div className="welcomeTitle text-4xl font-semibold ">
-                            Nice to meet you.
+                        
+                        <div className="welcomeTitle text-xl font-semibold " style={{fontFamily: 'Montserrat, sans-serif', fontWeight: 500, color: '#053B50'}}>
+                            Join Us Today!
                         </div>
                     </div>
                     <div className="border-2 h-1/2 w-2/3 p-10">

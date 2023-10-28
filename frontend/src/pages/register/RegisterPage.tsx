@@ -46,6 +46,12 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 const RegisterPage = () => {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+    `;
+    document.head.appendChild(style);
     return (
         <section className="w-full min-h-screen flex flex-col justify-center items-center">
             <div className="titleAndLogo text-center"> 
@@ -56,9 +62,9 @@ const RegisterPage = () => {
                             style={{ width: "70px", height: "70px" }} 
                         />
                     </div>
-                    <div className="title text-6xl font-bold" style={{ fontSize: "4rem" }}>NurseLink</div> 
-                </div>
-                <p className="text-2xl font-semibold">Join us today!</p>
+                    <div className="title text-6xl font-bold" style={{ fontSize: "4rem", fontFamily: 'Poppins, sans-serif', fontWeight: 700, color: '#053B50'}}>NurseLink</div> 
+                </div> 
+                <p className="text-2xl font-semibold" style={{fontFamily: 'Montserrat, sans-serif', fontWeight: 500, color: '#053B50'}}>Join us today!</p>
             </div>
             <div className="flex flex-col gap-5 mt-10 mb-20 sm:flex-row"> 
                 <Link to="/register-institute">
