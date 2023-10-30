@@ -23,10 +23,6 @@ const useLogout = () => {
                 url: import.meta.env.VITE_API_URL + "/api/auth/logout",
             });
 
-
-            localStorage.removeItem("user");
-
-
             dispatch?.({ type: "LOGOUT" });
 
             toast.update(toastID.current ?? "", {

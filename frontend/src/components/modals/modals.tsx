@@ -59,6 +59,15 @@ export const ChangeProfilePhoto = ({
         }
     }
 
+    const handleDragDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        const files = e.dataTransfer.files
+        if (files) {
+            setImageName(URL.createObjectURL(files[0]))
+            setImage(files[0])
+        }
+    }
+
     return (
         <>
             {show && (
@@ -83,7 +92,8 @@ export const ChangeProfilePhoto = ({
                         <div
                             className="w-full h-96 border-2 mt-4 flex justify-center items-center text-9xl text-[#00CEC8] border-dashed border-[#00CEC8] rounded-lg"
                             onClick={handleInitialFile}
-                            
+                            onDragOver={(e) => e.preventDefault()}
+                            onDrop={(e) => handleDragDrop(e)}
                         >
                             <input
                                 type="file"

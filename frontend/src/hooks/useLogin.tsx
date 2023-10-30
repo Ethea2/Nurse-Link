@@ -37,9 +37,8 @@ const useLogin = () => {
                 router(`/nurse/${data.data.id}`)
             })
             .catch((e) => {
-                const res = e.response.data.message
                 toast.update(toastID.current ?? "", {
-                    render: res,
+                    render: e.response?.data?.message ?? e.message ,
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,

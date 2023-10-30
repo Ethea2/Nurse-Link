@@ -79,12 +79,17 @@ const editNurse = async (req, res) => {
 }
 
 const editNurseProfilePicture = async (req, res) => {
-    const files = req.files.img
-    const userId = req.user._id
     try {
+        const files = req.files.img
+        const userId = req.user._id
+        console.log(userId)
+        if (userId === undefined) {
+            console.log("sip")
+            return res.status(404).json({ message: "You are not logged in..." })
+        }
         const result = await cloudinary.uploader.upload(files.tempFilePath, {
             public_id: Date.now(),
-            folder: "images",
+            folder: "nurse-link-images",
             width: 200,
             height: 200,
             crop: "scale",

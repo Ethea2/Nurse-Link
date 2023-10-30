@@ -24,9 +24,8 @@ const usePhotoChange = () => {
             })
             .catch((e) => {
                 console.log(e)
-                setState("error")
                 toast.update(toastID.current ?? "", {
-                    render: e.data.message,
+                    render: e.response?.data?.message ?? e.message,
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
