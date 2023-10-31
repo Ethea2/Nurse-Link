@@ -49,7 +49,7 @@ app.use(
         }
     })
 )
-app.use(passport.authenticate("session"), authRouter)
+app.use(passport.authenticate("session"))
 
 //routes
 app.use((req, res, next) => {
@@ -57,13 +57,13 @@ app.use((req, res, next) => {
     next()
 })
 
+app.use("/api/auth", authRouter)
+app.use("/api/nurse", nurseRouter)
+app.use("/api/institute", instituteRouter)
 app.use("/test", async (req, res) => {
     
     res.status(200).json({ message: "WE ARE ON THE GO!" })
 })
-app.use("/api/nurse", nurseRouter)
-app.use("/api/auth", authRouter)
-app.use("/api/institute", instituteRouter)
 
 //start of program
 mongoose

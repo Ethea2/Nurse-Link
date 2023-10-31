@@ -44,7 +44,6 @@ const getNurse = async (req, res) => {
                 .json({ message: "Could not find the nurse!" })
 
         const score = computeNurseProgress(nurse)
-        console.log(req.user)
         res.status(200).json({
             ...nurse._doc,
             username: user.username,
@@ -82,7 +81,6 @@ const editNurseProfilePicture = async (req, res) => {
     try {
         const files = req.files.img
         const userId = req.user._id
-        console.log(userId)
         if (userId === undefined) {
             console.log("sip")
             return res.status(404).json({ message: "You are not logged in..." })
@@ -92,8 +90,9 @@ const editNurseProfilePicture = async (req, res) => {
             folder: "nurse-link-images",
             width: 200,
             height: 200,
-            crop: "scale",
+            crop: "fill",
             withcredentials: false,
+            gravity: "face"
         })
 
         fs.unlink(files.tempFilePath, (err) => {

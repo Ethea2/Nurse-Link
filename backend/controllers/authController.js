@@ -79,14 +79,11 @@ const logout = async (req, res, next) => {
 }
 
 const ping = async (req, res) => {
-    console.log(req.isAuthenticated())
-    console.log(req.user?._id)
-    console.log(req.session)
-    // if(req.isAuthenticated()) {
-    //     return res.status(200).json({message: "Still logged in!"})
-    // } else {
-    //     return res.status(400).json({message: "Session expired..."})
-    // }
+    if(req.isAuthenticated()) {
+        return res.status(200).json({message: "Still logged in!", logged: true})
+    } else {
+        return res.status(400).json({message: "Session expired...", logged: false})
+    }
 }
 
 module.exports = { logout, login, register, ping }

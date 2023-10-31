@@ -3,9 +3,14 @@ import useFetch from "../../hooks/useFetch"
 import { ChangeProfilePhoto } from "../modals/modals"
 import { BsFillImageFill } from "react-icons/bs"
 import { motion } from "framer-motion"
+import useDynamicFetch from "../../hooks/useDynamicFetch"
 
 const NurseEditComponent = ({ userId }: { userId: string }) => {
-    const { data: nurse, loading } = useFetch(`/api/nurse/${userId}`)
+    const [changed, setChanged] = useState<boolean>(false)
+    const { data: nurse, loading } = useDynamicFetch(
+        `/api/nurse/${userId}`,
+        changed
+    )
     const [firstName, setFirstName] = useState<string>(nurse?.firstName)
     const [lastName, setLastName] = useState(nurse?.lastName)
     const [specialization, setSpecialization] = useState(nurse?.lastName)
@@ -180,6 +185,7 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
             <ChangeProfilePhoto
                 setShow={setShowProfileModal}
                 show={showProfileModal}
+                setChanged={setChanged}
             />
         </div>
     )

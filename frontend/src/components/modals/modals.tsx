@@ -7,9 +7,11 @@ import usePhotoChange from "../../hooks/usePhotoChange"
 export const ChangeProfilePhoto = ({
     show,
     setShow,
+    setChanged,
 }: {
     show: boolean
     setShow: React.Dispatch<React.SetStateAction<boolean>>
+    setChanged: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
     const [imageName, setImageName] = useState<string | undefined>(undefined)
     const [image, setImage] = useState<File>()
@@ -48,8 +50,8 @@ export const ChangeProfilePhoto = ({
             form.append("img", image)
             form.append("_method", "PATCH")
             try {
-                const state = await profileUpload(form)
-                console.log(state)
+                const state = await profileUpload(form, setChanged)
+                setShow(false)
             } catch (e) {
                 console.log(e)
                 toast("Something went wrong!", { type: "error" })

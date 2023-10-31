@@ -4,13 +4,20 @@ import { toast, Id } from "react-toastify"
 const usePhotoChange = () => {
     const toastID = useRef<Id>()
     const [state, setState] = useState<string>()
-    const profileUpload = async (data: FormData) => {
+    const profileUpload = async (
+        data: FormData,
+        setChanged: React.Dispatch<React.SetStateAction<boolean>>
+    ) => {
         setState("loading")
         toastID.current = toast.loading("Uploading your photo now...")
         axios
-            .post(import.meta.env.VITE_API_URL + "/api/nurse/edit/profilePhoto", data, {
-                withCredentials: true,
-            })
+            .post(
+                import.meta.env.VITE_API_URL + "/api/nurse/edit/profilePhoto",
+                data,
+                {
+                    withCredentials: true,
+                }
+            )
             .then((datum) => {
                 setState("success")
                 toast.update(toastID.current ?? "", {
@@ -21,6 +28,7 @@ const usePhotoChange = () => {
                     type: "success",
                     isLoading: false,
                 })
+                setChanged((oldValue) => !oldValue)
             })
             .catch((e) => {
                 console.log(e)

@@ -1,14 +1,20 @@
 import { useEffect } from "react"
+import axios from "axios"
+import { useAuth } from "./hooks/useAuth"
+import { toast } from "react-toastify"
+import { useNavigate } from "react-router"
 import usePing from "./hooks/usePing"
 import Layout from "./layouts/Layout"
-import { useAuth } from "./hooks/useAuth"
 
 function App() {
-    const { user } = useAuth()
     const { pingServer } = usePing()
+
     useEffect(() => {
-        pingServer()
-    }, [user])
+        const interval = setInterval(() => {
+            pingServer()
+        }, 10000)
+        return () => clearInterval(interval)
+    }, [])
     return (
         <>
             <Layout />
