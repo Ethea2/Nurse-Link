@@ -49,7 +49,7 @@ app.use(
         }
     })
 )
-app.use(passport.authenticate("session"))
+app.use(passport.authenticate("session"), authRouter)
 
 //routes
 app.use((req, res, next) => {

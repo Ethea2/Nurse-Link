@@ -4,7 +4,7 @@ const { checkAuth } = require("../middlewears/checkAuth")
 
 const authRouter = express.Router()
 
-authRouter.get("/ping", ping)
+authRouter.get("/ping",  checkAuth, ping)
 
 authRouter.post("/register", register)
 
