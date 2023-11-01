@@ -79,7 +79,6 @@ const logout = async (req, res, next) => {
 }
 
 const ping = async (req, res) => {
-    console.log(req.user)
     if(req.isAuthenticated()) {
         return res.status(200).json({message: "Still logged in!", logged: true})
     } else {

@@ -9,7 +9,6 @@ const usePing = () => {
     const nav = useNavigate()
 
     const pingServer = () => {
-        console.log("called")
         axios
             .get(import.meta.env.VITE_API_URL + "/api/auth/ping", {
                 withCredentials: true,

@@ -170,7 +170,7 @@ const LoggedInProfileMenu = ({
                         className="flex justify-center items-center w-full font-bold"
                         onClick={() => logout()}
                     >
-                        Sign out
+                        Sign out!
                     </button>
                 </li>
                 <li>

@@ -42,7 +42,7 @@ app.use(
         saveUninitialized: false,
         store: store,
         cookie: {
-            secure: false,
+            secure: true,
             httpOnly: true,
             maxAge: 1000 * 60 * 5,
             name: "nurse-session"
