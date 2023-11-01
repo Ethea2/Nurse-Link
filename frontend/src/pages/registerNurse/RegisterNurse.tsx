@@ -37,28 +37,30 @@ const RegisterNurse = () => {
           alignItems: "center",
         },
         logoPng: {
-          marginBottom: "10px", // Adjust margin for mobile view
+          marginBottom: "10px",
         },
         title: {
-          fontSize: "4.5rem", // Adjust font size for mobile view
+          fontSize: "4.5rem",
+          marginBottom: "20px",
         },
         welcomeTitle: {
-          fontSize: "1.8rem", // Adjust font size for mobile view
+          fontSize: "1.8rem",
         },
 
         card: {
-            width: "100%", // Adjust the card width for smaller screens
-            maxWidth: "100%", // Ensure the card takes the full width
+            width: "100%",
+            maxWidth: "100%",
           },
           stepContainer: {
-            padding: "10px", // Adjust padding for mobile view
+            padding: "10px",
           },
           button: {
-            fontSize: "14px", // Adjust font size for mobile view
+            fontSize: "16px",
           },
           submitButton: {
-            fontSize: "16px", // Adjust font size for mobile view
+            fontSize: "16px",
           },
+
       };
 
     const fields = [
@@ -215,9 +217,10 @@ const RegisterNurse = () => {
                         </div>
                         <div className="flex w-full justify-end">
                             <button
-                                className="px-4 py-1 rounded hover:bg-gray-100 text-black"
+                                className="px-4 py-1 rounded hover:bg-gray-100 font-bold"
                                 style={{
                                     borderRadius: '30px',
+                                    color: '#053B50',
                                     ...responsiveStyles.button,
                                 }}
                                 onClick={() => handleSetStep(-1)}
