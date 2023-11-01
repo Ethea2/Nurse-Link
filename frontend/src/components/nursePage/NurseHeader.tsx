@@ -14,7 +14,7 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
             <div className="h-[50vh] md:h-3/5 w-full flex justify-center items-center">
                 <img
                     src={nurse?.bannerPicture}
-                    className="h-full object-fill w-full"
+                    className="h-full object-cover w-full"
                     alt="Nurse's Profile Banner"
                 />
             </div>
@@ -42,18 +42,25 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                             @{nurse?.username}
                         </span>
                     </span>
-                    <span className="flex justify-center items-center">
-                        <ImLocation className="mr-1" />
-                        {nurse?.country}, {nurse?.city}
-                    </span>
+                    <div>
+                        <span className="flex justify-center items-center text-3xl">
+                            {nurse?.specialization}
+                        </span>
+                        <span className="flex justify-center items-center">
+                            <ImLocation className="mr-1" />
+                            {nurse?.country}, {nurse?.city}
+                        </span>
+                    </div>
                 </div>
                 <div className="flex flex-col h-full justify-between items-center p-10">
                     <span className="flex justify-center items-center text-2xl">
                         <BsFillPersonFill /> connections
                     </span>
                     {user?.id === nurse?.userId && (
-                        <button className="btn rounded-full text-[#176B87] hover:text-[#00CEC8] bg-white shadow-lg"
-                        onClick={() => nav(`/nurse/edit/${user.id}`)}>
+                        <button
+                            className="btn rounded-full text-[#176B87] hover:text-[#00CEC8] bg-white shadow-lg"
+                            onClick={() => nav(`/nurse/edit/${user.id}`)}
+                        >
                             Edit Profile
                         </button>
                     )}

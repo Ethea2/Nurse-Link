@@ -157,14 +157,14 @@ const LoggedInProfileMenu = ({
 }) => {
     const nav = useNavigate()
     return (
-        <details className="rounded-full h-14 dropdown dropdown-end">
-            <summary className="h-full avatar">
+        <div className="rounded-full h-14 dropdown dropdown-end">
+            <label  tabIndex={0} className="h-full avatar">
                 <img
                     src={user?.img}
                     className="h-full object-fill hover:scale-105 transition duration-200 ease-in border-4 rounded-full shadow-md shadow-[#00CEC8] border-white "
                 />
-            </summary>
-            <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 text-center">
+            </label>
+            <ul  tabIndex={0} className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 text-center">
                 <li>
                     <button
                         className="flex justify-center items-center w-full font-bold"
@@ -182,7 +182,7 @@ const LoggedInProfileMenu = ({
                     </button>
                 </li>
             </ul>
-        </details>
+        </div>
     )
 }
 

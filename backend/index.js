@@ -30,7 +30,6 @@ app.use(cookieParser())
 app.use(file_upload({useTempFiles: true}))
 
 //authentication
-app.use(passport.initialize())
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI,
     collection: "sessions",
@@ -42,13 +41,16 @@ app.use(
         saveUninitialized: false,
         store: store,
         cookie: {
-            secure: true,
+            secure: false,
             httpOnly: true,
-            maxAge: 1000 * 60 * 5,
+            maxAge: 1000 * 60 * 60,
             name: "nurse-session"
         }
     })
-)
+);
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use(passport.authenticate("session"))
 
 //routes

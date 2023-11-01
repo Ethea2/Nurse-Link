@@ -82,7 +82,6 @@ const editNurseProfilePicture = async (req, res) => {
         const files = req.files.img
         const userId = req.user._id
         if (userId === undefined) {
-            console.log("sip")
             return res.status(404).json({ message: "You are not logged in..." })
         }
         const result = await cloudinary.uploader.upload(files.tempFilePath, {
@@ -107,6 +106,49 @@ const editNurseProfilePicture = async (req, res) => {
             { userId: userId },
             {
                 profilePicture: result.secure_url,
+            }
+        )
+
+        if (!nurse) {
+            return res.status(404).json({ message: "this user does not exist" })
+        }
+        res.status(200).json({
+            message: "The profile picture has been successfully changed!",
+        })
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({ message: "Server Error!" })
+    }
+}
+
+const editNurseBanner = async (req, res) => {
+    try {
+        const files = req.files.img
+        const userId = req.user._id
+        if (userId === undefined) {
+            return res.status(404).json({ message: "You are not logged in..." })
+        }
+        const result = await cloudinary.uploader.upload(files.tempFilePath, {
+            public_id: Date.now(),
+            folder: "nurse-link-images",
+            width: 1920,
+            height: 1080,
+            crop: "fill",
+            withcredentials: false,
+        })
+
+        fs.unlink(files.tempFilePath, (err) => {
+            if (err) {
+                console.error("Error deleting the temporary file:", err)
+            } else {
+                console.log("Temporary file deleted.")
+            }
+        })
+
+        const nurse = await Nurse.findOneAndUpdate(
+            { userId: userId },
+            {
+                bannerPicture: result.secure_url,
             }
         )
 
@@ -148,4 +190,5 @@ module.exports = {
     editNurse,
     deleteNurse,
     editNurseProfilePicture,
+    editNurseBanner
 }

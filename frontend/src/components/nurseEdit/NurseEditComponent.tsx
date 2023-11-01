@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import useFetch from "../../hooks/useFetch"
-import { ChangeProfilePhoto } from "../modals/modals"
+import { ChangeBannerPhoto, ChangeProfilePhoto } from "../modals/modals"
 import { BsFillImageFill } from "react-icons/bs"
 import { motion } from "framer-motion"
 import useDynamicFetch from "../../hooks/useDynamicFetch"
+import useNurseEdit from "../../hooks/useNurseEdit"
 
 const NurseEditComponent = ({ userId }: { userId: string }) => {
     const [changed, setChanged] = useState<boolean>(false)
@@ -11,19 +12,31 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
         `/api/nurse/${userId}`,
         changed
     )
+    const { editDetails } = useNurseEdit()
     const [firstName, setFirstName] = useState<string>(nurse?.firstName)
     const [lastName, setLastName] = useState(nurse?.lastName)
     const [specialization, setSpecialization] = useState(nurse?.lastName)
     const [city, setCity] = useState(nurse?.city)
     const [showProfileModal, setShowProfileModal] = useState<boolean>(false)
+    const [showBannerModal, setShowBannerModal] = useState<boolean>(false)
     const [hoverProfile, setHoverProfile] = useState<boolean>(false)
     const [hoverBanner, setHoverBanner] = useState<boolean>(false)
+
     useEffect(() => {
         setFirstName(nurse?.firstName)
         setLastName(nurse?.lastName)
         setSpecialization(nurse?.specialization ?? "")
         setCity(nurse?.city ?? "")
     }, [loading])
+
+    const handleSubmit = async () => {
+        await editDetails({
+            specialization,
+            firstName,
+            lastName,
+            city,
+        })
+    }
     return (
         <div
             id="nurse-edit-container"
@@ -38,7 +51,7 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
             <div id="nurse-edit-details" className="w-full h-full">
                 <div
                     id="nurse-edit-img-container"
-                    className="flex flex-col w-full h-[80%] border-2 rounded-2xl drop-shadow-xl "
+                    className="flex flex-col border-2 rounded-2xl drop-shadow-xl h-[450px]"
                 >
                     <div
                         className="relative w-full h-2/3 flex cursor-pointer justify-center items-center"
@@ -52,7 +65,8 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
                                 exit={{ opacity: 0 }}
                                 transition={{ duration: 0.2, ease: "easeIn" }}
                                 className="absolute bg-[#053B50]/50 flex flex-col justify-center items-center w-full h-full rounded-t-2xl"
-                            >
+                                onClick={() => setShowBannerModal(true)}
+                           >
                                 <BsFillImageFill className="text-white text-5xl" />
                                 <span className="text-white font-semibold">
                                     Edit Profile Banner
@@ -61,7 +75,7 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
                         )}
                         <img
                             src={nurse?.bannerPicture}
-                            className="object-contain w-full h-full rounded-t-2xl"
+                            className="object-cover w-full h-full rounded-t-2xl"
                         />
                     </div>
                     <div
@@ -177,7 +191,7 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
                             No
                         </div>
                     </small>
-                    <button className="btn rounded-full bg-[#176B87] hover:bg-[#00CEC8] text-white hover:text-neutral">
+                    <button onClick={handleSubmit} className="btn rounded-full bg-[#176B87] hover:bg-[#00CEC8] text-white hover:text-neutral">
                         save
                     </button>
                 </div>
@@ -185,6 +199,11 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
             <ChangeProfilePhoto
                 setShow={setShowProfileModal}
                 show={showProfileModal}
+                setChanged={setChanged}
+            />
+            <ChangeBannerPhoto 
+                show={showBannerModal}
+                setShow={setShowBannerModal}
                 setChanged={setChanged}
             />
         </div>
