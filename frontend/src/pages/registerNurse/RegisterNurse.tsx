@@ -40,12 +40,25 @@ const RegisterNurse = () => {
           marginBottom: "10px", // Adjust margin for mobile view
         },
         title: {
-          fontSize: "3rem", // Adjust font size for mobile view
+          fontSize: "4.5rem", // Adjust font size for mobile view
         },
         welcomeTitle: {
-          fontSize: "1.5rem", // Adjust font size for mobile view
+          fontSize: "1.8rem", // Adjust font size for mobile view
         },
-        // Add more styles here for other elements if needed
+
+        card: {
+            width: "100%", // Adjust the card width for smaller screens
+            maxWidth: "100%", // Ensure the card takes the full width
+          },
+          stepContainer: {
+            padding: "10px", // Adjust padding for mobile view
+          },
+          button: {
+            fontSize: "14px", // Adjust font size for mobile view
+          },
+          submitButton: {
+            fontSize: "16px", // Adjust font size for mobile view
+          },
       };
 
     const fields = [
@@ -177,7 +190,7 @@ const RegisterNurse = () => {
             <div className="registerPage flex items-center w-full h-screen">
                 <div className="leftPage flex items-center justify-center flex-col w-full h-full">
 
-                    <div className="mb-10 flex flex-col items-center" style={responsiveStyles.container}>
+                    <div className="mb-10 flex flex-col items-center" style={responsiveStyles.card}>
                             <div className="logoPng" style={responsiveStyles.logoPng}>
                                 <img
                                 src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127920/CSSWENG%20GROUP%203/qt4ozeain5lqwtz5jmb3.png"
@@ -205,6 +218,7 @@ const RegisterNurse = () => {
                                 className="px-4 py-1 rounded hover:bg-gray-100 text-black"
                                 style={{
                                     borderRadius: '30px',
+                                    ...responsiveStyles.button,
                                 }}
                                 onClick={() => handleSetStep(-1)}
                             >
@@ -216,7 +230,8 @@ const RegisterNurse = () => {
                                     style={{
                                         backgroundColor: '#053B50',
                                         borderRadius: '30px',
-                                        fontSize: '16px',
+                                        // fontSize: '16px',
+                                        ...responsiveStyles.submitButton,
                                         // marginLeft: '10px',
                                     }}
                                     onClick={(e) =>
@@ -243,7 +258,8 @@ const RegisterNurse = () => {
                                     style={{
                                         backgroundColor: '#053B50',
                                         borderRadius: '30px',
-                                        fontSize: '16px',
+                                        // fontSize: '16px',
+                                        ...responsiveStyles.button,
                                         // marginLeft: '10px',  
                                         // borderWidth: '10px',
                                     }}
@@ -284,7 +300,7 @@ const Step1 = ({
 }) => {
     return (
         <>
-            <label htmlFor="username" className="w-[75%]">
+            <label htmlFor="username" className="w-[100%]">
                 Username
                 <br />
                 <input
@@ -296,7 +312,7 @@ const Step1 = ({
                     value={username}
                 />
             </label>
-            <label htmlFor="email" className="w-[75%]">
+            <label htmlFor="email" className="w-[100%]">
                 Email
                 <br />
                 <input
@@ -308,7 +324,7 @@ const Step1 = ({
                     value={email}
                 />
             </label>
-            <label htmlFor="password" className="w-[75%]">
+            <label htmlFor="password" className="w-[100%]">
                 Password
                 <br />
                 <input
@@ -321,7 +337,7 @@ const Step1 = ({
                 />
             </label>
 
-            <label htmlFor="retype-password" className="w-[75%]">
+            <label htmlFor="retype-password" className="w-[100%]">
                 Retype Password
                 <br />
                 <input
@@ -354,7 +370,7 @@ const Step2 = ({
 }) => {
     return (
         <>
-            <label htmlFor="firstname">
+            <label htmlFor="firstname" className="w-[100%]">
                 First Name
                 <br />
                 <input
@@ -368,7 +384,7 @@ const Step2 = ({
             </label>
             <br />
 
-            <label htmlFor="lastname">
+            <label htmlFor="lastname" className="w-[100%]">
                 Last Name
                 <br />
                 <input
@@ -382,7 +398,7 @@ const Step2 = ({
             </label>
             <br />
 
-            <label htmlFor="birthdate">
+            <label htmlFor="birthdate" className="w-[100%]">
                 Birth Date
                 <br />
                 <input
@@ -415,7 +431,7 @@ const Step3 = ({
 }) => {
     return (
         <>
-            <label htmlFor="gender">
+            <label htmlFor="gender" className="w-[100%]">
                 Gender
                 <br />
                 <select
@@ -437,7 +453,7 @@ const Step3 = ({
 
             <br />
 
-            <label htmlFor="country">
+            <label htmlFor="country" className="w-[100%]">
                 Country
                 <br />
                 <input
@@ -451,7 +467,7 @@ const Step3 = ({
             </label>
             <br />
 
-            <label htmlFor="city">
+            <label htmlFor="city" className="w-[100%]">
                 City
                 <br />
                 <input
