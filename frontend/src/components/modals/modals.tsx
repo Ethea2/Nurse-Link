@@ -208,7 +208,7 @@ export const ChangeBannerPhoto = ({
                     setImageName(URL.createObjectURL(selectedImage));
                     setImage(selectedImage);
                 } else {
-                    toast("Please select an image with a 16:9 aspect ratio (1920x1080).", { type: "error" });
+                    toast("We only allow 16:9 photos", { type: "error" });
                 }
             };
         }
@@ -261,7 +261,7 @@ export const ChangeBannerPhoto = ({
                     setImageName(URL.createObjectURL(selectedImage));
                     setImage(selectedImage);
                 } else {
-                    toast("Please select an image with a 16:9 aspect ratio (1920x1080).", { type: "error" });
+                    toast("We only allow 16:9 photos", { type: "error" });
                 }
             };
         }
