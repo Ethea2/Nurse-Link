@@ -2,12 +2,13 @@ import { useRef, useState } from "react"
 import axios from "axios"
 import { Id, toast } from "react-toastify"
 import { useAuth } from "./useAuth"
-import { Action } from "../contexts/AuthContext"
+import { useNavigate } from "react-router"
 
 const useLogin = () => {
     const [state, setState] = useState<string | null>(null)
     const { dispatch } = useAuth()
     const toastID = useRef<Id>()
+    const router = useNavigate()
 
     const login = async (username: string, password: string) => {
         toastID.current = toast.loading("Logging in...")
@@ -23,7 +24,6 @@ const useLogin = () => {
         })
             .then((data) => {
                 setState("Success")
-                console.log(data)
                 localStorage.setItem("user", JSON.stringify(data.data));
                 dispatch?.({type: "LOGIN", payload: data.data})
                 toast.update(toastID.current ?? "", {
@@ -34,11 +34,11 @@ const useLogin = () => {
                     type: "success",
                     isLoading: false,
                 })
+                router(`/nurse/${data.data.id}`)
             })
             .catch((e) => {
-                const res = e.response.data.message
                 toast.update(toastID.current ?? "", {
-                    render: res,
+                    render: e.response?.data?.message ?? e.message ,
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,

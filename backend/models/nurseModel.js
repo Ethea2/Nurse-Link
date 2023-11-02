@@ -184,6 +184,6 @@ const nurseSchema = new Schema({
             }
         ],
     },
-})
+}, {timestamps: true})
 
 module.exports = mongoose.model("Nurse", nurseSchema, "Nurse")

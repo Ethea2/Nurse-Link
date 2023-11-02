@@ -1,12 +1,12 @@
 import { motion } from "framer-motion"
 import { useState } from "react"
 import { FiMenu, FiArrowRight } from "react-icons/fi"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import routes from "../router/router"
 import { RouteType } from "../../types/routeTypes/routeType"
 import { useAuth } from "../../hooks/useAuth"
 import useLogout from "../../hooks/useLogout"
-
+import UserType from "../../types/userTypes/userType"
 
 const Navbar = () => {
     return (
@@ -19,7 +19,7 @@ const Navbar = () => {
 const FlipNav = () => {
     const [isOpen, setIsOpen] = useState(false)
     return (
-        <nav className="bg-white p-4 border-b-[1px] border-gray-200 flex items-center justify-between relative">
+        <nav className="bg-white p-3 border-b-[1px] border-gray-200 flex items-center justify-between relative">
             <NavLeft setIsOpen={setIsOpen} />
             <NavRight />
             <NavMenu isOpen={isOpen} />
@@ -28,25 +28,15 @@ const FlipNav = () => {
 }
 
 const Logo = () => {
-    // Temp logo from https://logoipsum.com/
     return (
-        <svg
-            width="50"
-            height="39"
-            viewBox="0 0 50 39"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="fill-gray-800"
-        >
-            <path
-                d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z"
-                stopColor="#000000"
-            ></path>
-            <path
-                d="M17.4224 27.102L11.4192 36H33.5008L49 13.0271H32.7024L23.2064 27.102H17.4224Z"
-                stopColor="#000000"
-            ></path>
-        </svg>
+        <div className="flex items-center">
+            <img
+                width="50"
+                height="39"
+                src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127920/CSSWENG%20GROUP%203/qt4ozeain5lqwtz5jmb3.png"
+                alt="Logo"
+            />
+        </div>
     )
 }
 
@@ -56,20 +46,23 @@ const NavLeft = ({
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
     return (
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3">
             <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="block lg:hidden text-gray-950 text-2xl"
+                className="block lg:hidden text-[#053B50] text-2xl"
                 onClick={() => setIsOpen((pv) => !pv)}
             >
                 <FiMenu />
             </motion.button>
-            <Logo />
-            {routes.map((route: RouteType) => {
-                if (route.name)
-                    return <NavLink text={route.name} path={route.path} />
-            })}
+            
+            <Link to="/">
+                <Logo />
+            </Link>
+                {routes.map((route: RouteType) => {
+                    if (route.name)
+                        return <NavLink text={route.name} path="/" />
+                })}
         </div>
     )
 }
@@ -82,10 +75,10 @@ const NavLink = ({ text, path }: { text: string; path: string }) => {
             className="hidden lg:block h-[30px] overflow-hidden font-medium"
         >
             <motion.div whileHover={{ y: -30 }}>
-                <span className="flex items-center h-[30px] text-gray-500">
+                <span className="flex items-center h-[30px] font-bold text-[#053B50] text-3xl">
                     {text}
                 </span>
-                <span className="flex items-center h-[30px] text-indigo-600">
+                <span className="flex items-center h-[30px] font-bold text-[#00CEC8] text-3xl">
                     {text}
                 </span>
             </motion.div>
@@ -94,68 +87,102 @@ const NavLink = ({ text, path }: { text: string; path: string }) => {
 }
 
 const NavRight = () => {
-    const { logout, state } = useLogout()
-    console.log(state)
+    const { logout } = useLogout()
     const { user } = useAuth()
     return (
-        <>
-            <div className="flex items-center gap-4">
-                {user ? (
-                    user.userType === "institute" ? (
-                        <>
-                            <Link to={`/institute/${user.id}`}>
-                                {user.instituteName}
-                            </Link>
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium rounded-md whitespace-nowrap"
-                                onClick={logout}
-                            >
-                                Log out
-                            </motion.button>
+        <div className="flex items-center gap-4">
+            <Link to="/">
+                <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+                >
+                    Home
+                </motion.button>
+            </Link>
+            <Link to="/">
+                <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+                >
+                    About
+                </motion.button>
+            </Link>
+            <Link to="/">
+                <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+                >
+                    Contact Us
+                </motion.button>
+            </Link>
+            {!user ? (
+                <>
+                    <Link to="/register">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="px-4 py-2 bg-[#FAF9F9] text-[#053B50] font-medium rounded-xl drop-shadow-md"
+                        >
+                            Sign Up
+                        </motion.button>
+                    </Link>
+                    <Link to="/login">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="px-4 py-2 bg-[#053B50] text-[#FFFFFF] font-medium rounded-xl drop-shadow-md"
+                        >
+                            Log In
+                        </motion.button>
+                    </Link>
+                </>
+            ) : (
+                <>
+                    <LoggedInProfileMenu logout={logout} user={user} />
+                </>
+            )}
+        </div>
+    )
+}
 
-
-                        </>
-                    ) : (
-                        <>
-                            <Link to={`/nurse/${user.id}`}>
-                                {user.firstName}
-                            </Link>
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium rounded-md whitespace-nowrap"
-                                onClick={logout}
-                            >
-                                Log out
-                            </motion.button>
-                        </>
-                    )
-                ) : (
-                    <>
-                        <Link to="/login">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent font-medium rounded-md whitespace-nowrap"
-                            >
-                                Log in
-                            </motion.button>
-                        </Link>
-                        <Link to="/register">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium rounded-md whitespace-nowrap"
-                            >
-                                Sign up
-                            </motion.button>
-                        </Link>
-                    </>
-                )}
-            </div>
-        </>
+const LoggedInProfileMenu = ({
+    user,
+    logout,
+}: {
+    user: UserType
+    logout: Function
+}) => {
+    const nav = useNavigate()
+    return (
+        <div className="rounded-full h-14 dropdown dropdown-end">
+            <label  tabIndex={0} className="h-full avatar">
+                <img
+                    src={user?.img}
+                    className="h-full object-fill hover:scale-105 transition duration-200 ease-in border-4 rounded-full shadow-md shadow-[#00CEC8] border-white "
+                />
+            </label>
+            <ul  tabIndex={0} className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 text-center">
+                <li>
+                    <button
+                        className="flex justify-center items-center w-full font-bold"
+                        onClick={() => logout()}
+                    >
+                        Sign out!
+                    </button>
+                </li>
+                <li>
+                    <button
+                        className="flex justify-center items-center w-full font-bold"
+                        onClick={() => nav(`/nurse/${user.id}`)}
+                    >
+                        View Profile
+                    </button>
+                </li>
+            </ul>
+        </div>
     )
 }
 
@@ -167,10 +194,9 @@ const NavMenu = ({ isOpen }: { isOpen: boolean }) => {
             animate={isOpen ? "open" : "closed"}
             className="absolute p-4 bg-white shadow-lg left-0 right-0 top-full origin-top flex flex-col gap-4"
         >
-            <MenuLink text="Solutions" />
-            <MenuLink text="Community" />
-            <MenuLink text="Pricing" />
-            <MenuLink text="Company" />
+            <MenuLink text="Home" />
+            <MenuLink text="About" />
+            <MenuLink text="Contact Us" />
         </motion.div>
     )
 }
@@ -184,13 +210,13 @@ const MenuLink = ({ text }: { text: string }) => {
             className="h-[30px] overflow-hidden font-medium text-lg flex items-start gap-2"
         >
             <motion.span variants={menuLinkArrowVariants}>
-                <FiArrowRight className="h-[30px] text-gray-950" />
+                <FiArrowRight className="h-[30px] text-[#343330]" />
             </motion.span>
             <motion.div whileHover={{ y: -30 }}>
-                <span className="flex items-center h-[30px] text-gray-500">
+                <span className="flex items-center h-[30px] text-[#343330]">
                     {text}
                 </span>
-                <span className="flex items-center h-[30px] text-indigo-600">
+                <span className="flex items-center h-[30px] text-[#00CEC8]">
                     {text}
                 </span>
             </motion.div>

@@ -11,10 +11,19 @@ const Institute = require("../models/instituteModel")
 const validateEmail = (email) =>
     /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 
+const MALE_PF =
+    "https://res.cloudinary.com/dtocowzq2/image/upload/v1698166263/nurse-link/bkskgjjrgf1klrqptjk4.png"
+const FEMALE_PF =
+    "https://res.cloudinary.com/dtocowzq2/image/upload/v1698166301/nurse-link/ygygiflaamzjeqkm6usn.png"
+const COMPANY_PF =
+    "https://res.cloudinary.com/dtocowzq2/image/upload/v1698166313/nurse-link/mjfmyd8wwlkw0koxnfvo.png"
+const NURSE_BANNER =
+    "https://res.cloudinary.com/dtocowzq2/image/upload/v1698166580/nurse-link/e5fmcxucsawasumnv9ke.png"
+const COMPANY_BANNER =
+    "https://res.cloudinary.com/dtocowzq2/image/upload/v1698166669/nurse-link/pbmj4mmytiq8q1u884el.png"
+
 passport.serializeUser((user, done) => {
-    process.nextTick(() =>
-        done(null, { id: user.userId })
-    )
+    process.nextTick(() => done(null, { id: user.userId }))
 })
 
 passport.deserializeUser(async (user, done) => {
@@ -79,6 +88,14 @@ passport.use(
                 })
 
                 if (userType === "nurse") {
+                    let pf = ""
+                    if (gender === "Male") {
+                        pf = MALE_PF
+                    } else if (gender === "Female") {
+                        pf = FEMALE_PF
+                    } else {
+                        pf = COMPANY_PF
+                    }
                     const newNurse = await Nurse.create({
                         userId: newUser._id,
                         firstName: firstname,
@@ -87,6 +104,8 @@ passport.use(
                         gender,
                         country,
                         city,
+                        profilePicture: pf,
+                        bannerPicture: NURSE_BANNER,
                     })
                     req.login(newNurse, (loginErr) => {
                         if (loginErr) {
@@ -102,6 +121,8 @@ passport.use(
                         instituteName,
                         country,
                         city,
+                        profilePicture: COMPANY_PF,
+                        bannerPicture: COMPANY_BANNER,
                     })
 
                     req.login(newInstitute, (loginErr) => {

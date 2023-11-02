@@ -6,6 +6,7 @@ const mongoose = require("mongoose")
 const passport = require("./auth/passport")
 const session = require("express-session")
 const cookieParser = require("cookie-parser")
+const file_upload = require('express-fileupload')
 const MongoDBStore = require("connect-mongodb-session")(session)
 const nurseRouter = require("./routes/nurseRoutes")
 const authRouter = require('./routes/authRoutes')
@@ -26,9 +27,9 @@ app.use(bodyParser.json())
 app.use(express.json())
 app.use(express.json({ limit: "50mb" }))
 app.use(cookieParser())
+app.use(file_upload({useTempFiles: true}))
 
 //authentication
-app.use(passport.initialize())
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI,
     collection: "sessions",
@@ -42,11 +43,14 @@ app.use(
         cookie: {
             secure: false,
             httpOnly: true,
-            maxAge: 1000 * 60 * 5,
+            maxAge: 1000 * 60 * 60,
             name: "nurse-session"
         }
     })
-)
+);
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use(passport.authenticate("session"))
 
 //routes
@@ -55,13 +59,13 @@ app.use((req, res, next) => {
     next()
 })
 
+app.use("/api/auth", authRouter)
+app.use("/api/nurse", nurseRouter)
+app.use("/api/institute", instituteRouter)
 app.use("/test", async (req, res) => {
     
     res.status(200).json({ message: "WE ARE ON THE GO!" })
 })
-app.use("/api/nurse", nurseRouter)
-app.use("/api/auth", authRouter)
-app.use("/api/institute", instituteRouter)
 
 //start of program
 mongoose

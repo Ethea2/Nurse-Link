@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+
 import useFetch from "../../hooks/useFetch"
 import { NurseType } from "../../types/nurseTypes/nurseType"
 import { Link } from "react-router-dom"

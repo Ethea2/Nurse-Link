@@ -23,6 +23,6 @@ const userSchema = new Schema({
         enum: ['nurse', 'institute'],
         dafault: 'nurse'
     },
-})
+},  {timestamps: true})
 
 module.exports = mongoose.model("User", userSchema, "User")
