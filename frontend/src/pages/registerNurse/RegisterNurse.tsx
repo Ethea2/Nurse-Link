@@ -5,6 +5,15 @@ import useRegister from "../../hooks/useRegister.tsx"
 import Steps from "../../components/registerComponents/Steps.tsx"
 
 const RegisterNurse = () => {
+    const style = document.createElement('style');
+        style.innerHTML = `
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+        `;
+        document.head.appendChild(style);
+
+
     const [username, setUsername] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
@@ -20,6 +29,66 @@ const RegisterNurse = () => {
     const navigate = useNavigate()
 
     const [stepsComplete, setStepsComplete] = useState(0)
+
+    const [titleFontSize, setTitleFontSize] = useState('3rem'); // State to store font size
+
+    useEffect(() => {
+        const handleResize = () => {
+        // Update font size based on window width
+        if (window.innerWidth >= 600) { // if its tablet change font to 4rem
+            setTitleFontSize('4rem');
+        } else {
+            setTitleFontSize('3rem');
+        }
+        };
+
+        // Attach the event listener
+        window.addEventListener('resize', handleResize);
+
+        // Clean up the event listener on component unmount
+        return () => {
+        window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    const commonStyles = {
+        logoPng: {
+          marginBottom: "10px",
+        },
+        title: {
+          fontSize: titleFontSize,
+          marginBottom: "20px",
+          fontFamily: "Poppins, sans-serif",
+          fontWeight: 700,
+          color: "#053B50",
+        },
+        welcomeTitle: {
+          fontSize: "1.8rem",
+          fontFamily: "Montserrat, sans-serif",
+          fontWeight: 500,
+          color: "#053B50",
+        },
+        card: {
+          width: "100%",
+          maxWidth: "100%",
+        },
+        button: {
+          fontSize: "16px",
+          borderRadius: "30px",
+        },
+        nextButton: {
+            fontSize: "16px",
+            borderRadius: "30px",
+            backgroundColor: "#053B50",
+        },
+
+        submitButton: {
+          fontSize: "16px",
+          backgroundColor: "#053B50",
+          borderRadius: "30px",
+          color: "white",
+        },
+      };
 
     const fields = [
         <Step1
@@ -149,33 +218,34 @@ const RegisterNurse = () => {
         <>
             <div className="registerPage flex items-center w-full h-screen">
                 <div className="leftPage flex items-center justify-center flex-col w-full h-full">
-                    <div className="mb-10">
-                        <div className="titleAndLogo flex">
-                            <div className="logoPng ">
+
+                    <div className="mb-10 flex flex-col items-center" style={commonStyles.card}>
+                            <div className="logoPng" style={commonStyles.logoPng}>
                                 <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Grey_Square.svg/480px-Grey_Square.svg.png"
-                                    className="object-scale-down h-14 w-14"
+                                src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127920/CSSWENG%20GROUP%203/qt4ozeain5lqwtz5jmb3.png"
+                                className="object-scale-down h-14 w-14"
                                 />
                             </div>
-                            <div className="title text-5xl font-bold ">
-                                NurseLink
+                                <div className="title font-bold" style={commonStyles.title}>
+                                    NurseLink
+                                </div>
+                                <div className="welcomeTitle font-semibold " style={commonStyles.welcomeTitle}>
+                                Join Us Today!
+                                </div>
                             </div>
-                        </div>
-                        <div className="welcomeTitle text-4xl font-semibold ">
-                            Nice to meet you.
-                        </div>
-                    </div>
-                    <div className="border-2 h-1/2 w-2/3 p-10">
+                    {/* <div className="border-2 h-1/2 w-2/3 p-10"> */}
+                    <div className="border-0 w-1/2">
                         <Steps
                             numSteps={NUMBER_OF_STEPS}
                             stepsComplete={stepsComplete}
                         />
-                        <div className="flex flex-col justify-center items-center w-full h-[80%] my-4 p-2">
+                        <div className="flex flex-col justify-start items-center w-full my-4 p-2">
                             {fields[stepsComplete]}
                         </div>
                         <div className="flex w-full justify-end">
                             <button
-                                className="px-4 py-1 rounded hover:bg-gray-100 text-black"
+                                className="px-4 py-1 rounded hover:bg-gray-100 font-bold"
+                                style={commonStyles.button}
                                 onClick={() => handleSetStep(-1)}
                             >
                                 Prev
@@ -183,6 +253,13 @@ const RegisterNurse = () => {
                             {stepsComplete === NUMBER_OF_STEPS ? (
                                 <button
                                     className="px-4 py-1 rounded bg-black text-white"
+                                    style={{
+                                        backgroundColor: '#053B50',
+                                        borderRadius: '30px',
+                                        // fontSize: '16px',
+                                        // marginLeft: '10px',
+                                    }}
+                                    //style={commonStyles.nextButton}
                                     onClick={(e) =>
                                         handleRegister(
                                             e,
@@ -199,15 +276,25 @@ const RegisterNurse = () => {
                                         )
                                     }
                                 >
-                                    Submit
+                                Submit
                                 </button>
                             ) : (
                                 <button
                                     className="px-4 py-1 rounded bg-black text-white"
+                                    //style={{
+                                    //    backgroundColor: '#053B50',
+                                    //    borderRadius: '30px',
+                                        // fontSize: '16px',
+                                    //    ...responsiveStyles.button,
+                                        // marginLeft: '10px',  
+                                        // borderWidth: '10px',
+                                    //}}
+                                    style={commonStyles.nextButton}
                                     onClick={() => {handleSetStep(1);}}
                                 >
                                     Next
                                 </button>
+
                             )}
                         </div>
                     </div>
@@ -215,6 +302,8 @@ const RegisterNurse = () => {
             </div>
         </>
     )
+
+    
 }
 
 const Step1 = ({
@@ -238,7 +327,7 @@ const Step1 = ({
 }) => {
     return (
         <>
-            <label htmlFor="username" className="w-[75%]">
+            <label htmlFor="username" className="w-[100%]">
                 Username
                 <br />
                 <input
@@ -250,7 +339,7 @@ const Step1 = ({
                     value={username}
                 />
             </label>
-            <label htmlFor="email" className="w-[75%]">
+            <label htmlFor="email" className="w-[100%]">
                 Email
                 <br />
                 <input
@@ -262,7 +351,7 @@ const Step1 = ({
                     value={email}
                 />
             </label>
-            <label htmlFor="password" className="w-[75%]">
+            <label htmlFor="password" className="w-[100%]">
                 Password
                 <br />
                 <input
@@ -275,7 +364,7 @@ const Step1 = ({
                 />
             </label>
 
-            <label htmlFor="retype-password" className="w-[75%]">
+            <label htmlFor="retype-password" className="w-[100%]">
                 Retype Password
                 <br />
                 <input
@@ -308,7 +397,7 @@ const Step2 = ({
 }) => {
     return (
         <>
-            <label htmlFor="firstname">
+            <label htmlFor="firstname" className="w-[100%]">
                 First Name
                 <br />
                 <input
@@ -322,7 +411,7 @@ const Step2 = ({
             </label>
             <br />
 
-            <label htmlFor="lastname">
+            <label htmlFor="lastname" className="w-[100%]">
                 Last Name
                 <br />
                 <input
@@ -336,7 +425,7 @@ const Step2 = ({
             </label>
             <br />
 
-            <label htmlFor="birthdate">
+            <label htmlFor="birthdate" className="w-[100%]">
                 Birth Date
                 <br />
                 <input
@@ -369,7 +458,7 @@ const Step3 = ({
 }) => {
     return (
         <>
-            <label htmlFor="gender">
+            <label htmlFor="gender" className="w-[100%]">
                 Gender
                 <br />
                 <select
@@ -391,7 +480,7 @@ const Step3 = ({
 
             <br />
 
-            <label htmlFor="country">
+            <label htmlFor="country" className="w-[100%]">
                 Country
                 <br />
                 <input
@@ -405,7 +494,7 @@ const Step3 = ({
             </label>
             <br />
 
-            <label htmlFor="city">
+            <label htmlFor="city" className="w-[100%]">
                 City
                 <br />
                 <input
