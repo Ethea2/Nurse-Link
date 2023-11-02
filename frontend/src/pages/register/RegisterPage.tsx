@@ -42,7 +42,7 @@
 
 // export default RegisterPage
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 const RegisterPage = () => {
@@ -53,6 +53,29 @@ const RegisterPage = () => {
       @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
     `;
     document.head.appendChild(style);
+
+    const [titleFontSize, setFontSize] = useState('3rem'); // State to store font size
+
+    useEffect(() => {
+        const handleResize = () => {
+        // Update font size based on window width
+        if (window.innerWidth >= 600) { // if its tablet change font to 4rem
+            setFontSize('4rem');
+        } else {
+            setFontSize('3rem');
+        }
+        };
+
+        // Attach the event listener
+        window.addEventListener('resize', handleResize);
+
+        // Clean up the event listener on component unmount
+        return () => {
+        window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+      
+
     return (
         <section className="w-full min-h-screen flex flex-col justify-center items-center">
             <div className="titleAndLogo text-center"> 
@@ -63,7 +86,7 @@ const RegisterPage = () => {
                             style={{ width: "70px", height: "70px" }} 
                         />
                     </div>
-                    <div className="title text-6xl font-bold" style={{ fontSize: "4rem", fontFamily: 'Poppins, sans-serif', fontWeight: 700, color: '#053B50'}}>NurseLink</div> 
+                    <div className="title font-bold" style={{fontSize: titleFontSize, fontFamily: 'Poppins, sans-serif', fontWeight: 700, color: '#053B50'}}>NurseLink</div> 
                 </div> 
                 <p className="text-2xl font-semibold" style={{fontFamily: 'Montserrat, sans-serif', fontWeight: 500, color: '#053B50'}}>Join us today!</p>
             </div>

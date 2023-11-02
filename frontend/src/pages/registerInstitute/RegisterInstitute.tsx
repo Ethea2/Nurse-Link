@@ -28,12 +28,33 @@ const RegisterInstitute = () => {
 
     const [stepsComplete, setStepsComplete] = useState(0)
 
+    const [titleFontSize, setTitleFontSize] = useState('3rem'); // State to store font size
+
+    useEffect(() => {
+        const handleResize = () => {
+        // Update font size based on window width
+        if (window.innerWidth >= 600) { // if its tablet change font to 4rem
+            setTitleFontSize('4rem');
+        } else {
+            setTitleFontSize('3rem');
+        }
+        };
+
+        // Attach the event listener
+        window.addEventListener('resize', handleResize);
+
+        // Clean up the event listener on component unmount
+        return () => {
+        window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     const commonStyles = {
         logoPng: {
           marginBottom: "10px",
         },
         title: {
-          fontSize: "4.5rem",
+          fontSize: titleFontSize,
           marginBottom: "20px",
           fontFamily: "Poppins, sans-serif",
           fontWeight: 700,
@@ -64,6 +85,10 @@ const RegisterInstitute = () => {
           backgroundColor: "#053B50",
           borderRadius: "30px",
           color: "white",
+          px: "1rem",
+          py: "0.25rem",
+          bg: "black",
+          text: "white"
         },
       };
 
@@ -198,20 +223,20 @@ const RegisterInstitute = () => {
                                     className="object-scale-down h-14 w-14"
                                 />
                             </div>
-                            <div className="title text-5xl font-bold" style={commonStyles.title}>
+                            <div className="title font-bold" style={commonStyles.title}>
                                 NurseLink
                             </div>
                         
-                        <div className="welcomeTitle text-xl font-semibold " style={commonStyles.welcomeTitle}>
-                            Join Us Today!
-                        </div>
+                            <div className="welcomeTitle font-semibold " style={commonStyles.welcomeTitle}>
+                                Join Us Today!
+                            </div>
                     </div>
                     <div className="border-0 h-1/2 w-1/3 p-10">
                         <Steps
                             numSteps={NUMBER_OF_STEPS}
                             stepsComplete={stepsComplete}
                         />
-                        <div className="flex flex-col justify-center items-center w-full h-[80%] my-4 p-2">
+                        <div className="flex flex-col justify-start items-center w-full my-4 p-2">
                             {fields[stepsComplete]}
                         </div>
                         <div className="flex w-full justify-end">
@@ -228,7 +253,9 @@ const RegisterInstitute = () => {
                             </button>
                             {stepsComplete === NUMBER_OF_STEPS ? (
                                 <button
-                                    className="px-4 py-1 rounded bg-black text-white"
+                                className="px-4 py-1 rounded bg-black text-white"
+                                    
+                                    style={commonStyles.submitButton}
                                     onClick={(e) =>
                                         handleRegister(
                                             e,
@@ -361,7 +388,7 @@ const Step2 = ({
     return (
         <>
             <label htmlFor="instituteName" className="w-[100%]">
-                instituteName
+                Institute Name
                 <br />
                 <input
                     name="instituteName"
