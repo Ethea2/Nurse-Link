@@ -234,7 +234,7 @@ const RegisterNurse = () => {
                                 </div>
                             </div>
                     {/* <div className="border-2 h-1/2 w-2/3 p-10"> */}
-                    <div className="border-0 w-1/3 h-1/2 p-10">
+                    <div className="border-0 w-1/2">
                         <Steps
                             numSteps={NUMBER_OF_STEPS}
                             stepsComplete={stepsComplete}
