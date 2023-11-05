@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react"
-import { ChangeBannerPhoto, ChangeProfilePhoto } from "../modals/modals"
-import useDynamicFetch from "../../hooks/useDynamicFetch"
-import useNurseEdit from "../../hooks/useNurseEdit"
+import { useState } from "react"
+import { AddDocumentSection } from "../modals/modals"
 
 const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
-
+    const [showDocumentModal, setShowDocumentModal] = useState<boolean>(false)
+    const [changed, setChanged] = useState<boolean>(false)
     return (
         <div
             id="nurse-edit-container"
@@ -18,7 +17,7 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
                 <button
                     className="btn ml-auto bg-[#176B87] hover:bg-[#00CEC8] text-white rounded-full"
                     onClick={() => {
-                        // Implement functionality to add a new document
+                        setShowDocumentModal(true)
                     }}
                 >
                     Add Section
@@ -27,7 +26,13 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
             <div id="nurse-edit-details" className="w-full h-full">
                 {/* The rest of your code for managing nurse documents */}
             </div>
+            <AddDocumentSection
+                setShow = {setShowDocumentModal}
+                show = {showDocumentModal}
+                setChanged = {setChanged}
+            />
         </div>
+
     )
 }
 

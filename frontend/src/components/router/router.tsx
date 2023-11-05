@@ -22,7 +22,7 @@ const routes: Array<RouteType> = [
     { path: "/nurse/:userId", element: <Nurse /> },
     { path: "/nurse/edit/:userId", element: <NurseEditPage /> },
     { path: "/institute/:userId", element: <Institute /> },
-    { path: "/nurse/edit/documents/:userId", element: <NurseEditDocumentPage />, name: "Documents"}
+    { path: "/nurse/edit/documents/:userId", element: <NurseEditDocumentPage />}
 ]
 
 export default routes
