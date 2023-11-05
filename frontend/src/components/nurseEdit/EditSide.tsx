@@ -7,6 +7,11 @@ const EditSide = ({ user }: { user: UserType }) => {
             <Link to={`/nurse/edit/${user?.id}`}>
                 <span className="text-xl">Edit Profile</span>
             </Link>
+            <br/>
+            <Link to={`/nurse/edit/documents/${user?.id}`}>
+                <span className="text-xl">Documents</span>
+            </Link>
+
         </div>
     )
 }

@@ -9,6 +9,7 @@ import RegisterInstitute from "../../pages/registerInstitute/RegisterInstitute"
 import Nurse from "../../pages/nurse/Nurse"
 import Institute from "../../pages/institute/Institute"
 import NurseEditPage from "../../pages/nurseEdit/NurseEditPage"
+import NurseEditDocumentPage from "../../pages/nurseEdit/NurseEditDocumentPage.tsx"
 
 const routes: Array<RouteType> = [
     { path: "/", element: <Landing /> },
@@ -21,6 +22,7 @@ const routes: Array<RouteType> = [
     { path: "/nurse/:userId", element: <Nurse /> },
     { path: "/nurse/edit/:userId", element: <NurseEditPage /> },
     { path: "/institute/:userId", element: <Institute /> },
+    { path: "/nurse/edit/documents/:userId", element: <NurseEditDocumentPage />, name: "Documents"}
 ]
 
 export default routes
