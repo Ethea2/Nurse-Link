@@ -4,6 +4,7 @@ import { NurseType } from "../../types/nurseTypes/nurseType"
 import ProgressCard from "./ProgressCard"
 import { color } from "framer-motion"
 import EmptyProfile from "./EmptyProfile"
+import ProfileDetails from "./ProfileDetails"
 
 const SideContainer = ({ nurse }: { nurse: NurseType }) => {
     const { user } = useAuth()
@@ -34,7 +35,7 @@ const SideContainer = ({ nurse }: { nurse: NurseType }) => {
     return (
         <div className="flex w-full p-10 gap-10">
             <div className="leftContainer w-1/4">
-                {user && user?.id === nurse?.userId && <ProgressCard nurse={nurse} />}
+                {user?.id === nurse?.userId && <ProgressCard nurse={nurse} />}
             </div>
             <div className="rightContainer bg-white w-full">
                 {isEmpty ? (
@@ -43,8 +44,7 @@ const SideContainer = ({ nurse }: { nurse: NurseType }) => {
                     </div>
                 ) : (
                     <div className="isNotEmpty ">
-                        {/* for "profileDetails" */}
-                        <EmptyProfile nurse={nurse}/>
+                        <ProfileDetails nurse={nurse}/>
                     </div>
                 )}
             </div>

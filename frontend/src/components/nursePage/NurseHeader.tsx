@@ -1,8 +1,4 @@
 import { NurseType } from "../../types/nurseTypes/nurseType"
-import { ImLocation, ImInstagram } from "react-icons/im"
-import { AiOutlineMail } from "react-icons/ai"
-import { BsFillPersonFill } from "react-icons/bs"
-import { BsFacebook, BsTwitter } from "react-icons/bs"
 import { useAuth } from "../../hooks/useAuth"
 import { useNavigate } from "react-router"
 
