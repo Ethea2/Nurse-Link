@@ -1,7 +1,12 @@
 import { NurseType } from "../../types/nurseTypes/nurseType"
-import { BiCheckCircle } from "react-icons/bi"
+import { PiCheckCircleBold } from "react-icons/pi"
+import { useAuth } from "../../hooks/useAuth"
+import { useNavigate } from "react-router"
 
 const ProgressCard = ({ nurse }: { nurse: NurseType }) => {
+    const { user } = useAuth()
+    const nav = useNavigate()
+
     const style = {
         "--value": `${nurse?.progress}`,
         "--size": "12rem",
@@ -35,36 +40,47 @@ const ProgressCard = ({ nurse }: { nurse: NurseType }) => {
     ]
 
     return (
-        <div className="flex flex-col justify-center items-center gap-6 w-full border-2 p-4">
-            <div className="w-full flex flex-row md:flex-col justify-center items-center">
-                <div className="w-[40%] md:w-full">
-                    <p className="font-bold text-center md:text-2xl">
-                        Your profile is making progress!
-                    </p>
-                    <p className="text-center text-sm">
-                        Check out what else you can add to complete you profile.
-                    </p>
-                </div>
+        <div className="progressCard flex flex-col justify-center items-center w-full border-2 px-6 pt-6 rounded-lg font-open-sans">
+            <div className="textContainer">
+                <p className="textHeader font-bold md:text-2xl text-left">
+                    Your profile is making progress!
+                </p>
+                <p className="textBody text-left text-sm pt-2">
+                    Check out what else you can add to complete you profile.
+                </p>
+            </div>
+            <div className="progressContainer pt-5 items-center text-center">
                 <div
-                    className="radial-progress transition-all ease-in duration-150 text-3xl text-[#00CEC8] md:mt-5"
+                    className="radial-progress transition-all ease-in duration-150 text-3xl text-primary"
                     style={style}
                 >
-                    {nurse?.progress}%
+                    <p className="percentage font-bold text-center text-4xl">
+                        {nurse?.progress}%
+                    </p>
+                    <p className="complete text-xl text-center">COMPLETE</p>
                 </div>
-            </div>
-            <div className="w-full flex flex-wrap items-center gap-1 justify-center">
-                {profileProg.map((prog) => (
-                    <div
-                        className={`w-[48%] flex gap-0.5 items-center  font-semibold px-2 py-0.5 rounded-lg text-base border-2  ${
-                            prog.done
-                                ? " border-[#00CEC8] text-[#00CEC8]"
-                                : "border-neutral-300 text-neutral-300"
-                        }`}
-                    >
-                        <BiCheckCircle />
-                        <p>{prog.name}</p>
-                    </div>
-                ))}
+                <div className="progressChecklist py-5">
+                    {profileProg.map((prog) => (
+                        <div
+                            className={`flex ${
+                                prog.done
+                                    ? " text-primary"
+                                    : "text-outline-text opacity-30"
+                            }`}
+                        >
+                            <div className="progressName flex items-center gap-2">
+                                <PiCheckCircleBold className="w-11 h-11" />
+                                <p className="w-44 text-left">{prog.name}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div className="editProfileBtn border-t py-2">
+                    <button className="button cursor-pointer" onClick={() => nav(`/nurse/edit/${user!.id}`)}>
+                        Edit Profile
+                    </button>
+                    
+                </div>
             </div>
         </div>
     )

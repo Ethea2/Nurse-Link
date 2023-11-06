@@ -3,12 +3,13 @@ import { useAuth } from "../../hooks/useAuth"
 import { NurseType } from "../../types/nurseTypes/nurseType"
 import ProgressCard from "./ProgressCard"
 import { color } from "framer-motion"
-import EmptyProfileCard from "./EmptyProfileCard"
+import EmptyProfile from "./EmptyProfile"
 
 const SideContainer = ({ nurse }: { nurse: NurseType }) => {
     const { user } = useAuth()
     const [isSearcher, setIsSearcher] = useState<boolean>(false)
     const [isAboutVisible, setIsAboutVisible] = useState<string>("none")
+    const [isEmpty, setIsEmpty] = useState<boolean>(true)
 
     useEffect(() => {
         if (user?.id === nurse?.userId) {
@@ -24,21 +25,28 @@ const SideContainer = ({ nurse }: { nurse: NurseType }) => {
             nurse?.credentials.volunteering.length >= 1 &&
             nurse?.credentials.document.length >= 1
         ) {
-            setIsAboutVisible("block")
+            setIsEmpty(false)
         }
 
         console.log("Is Searcher:", isSearcher)
     }, [user, nurse])
 
     return (
-        <div className="flex w-full lg:w-1/4 p-4">
-            {user?.id === nurse?.userId && <ProgressCard nurse={nurse} />}
-            {/*<EmptyProfileCard nurse={nurse}/>*/}
-            <div
-                className="flex flex-col justify-center items-center gap-6 w-full border-2 p-4"
-                style={{ display: isAboutVisible }}
-            >
-                if finished
+        <div className="flex w-full p-10 gap-10">
+            <div className="leftContainer w-1/4">
+                {user && user?.id === nurse?.userId && <ProgressCard nurse={nurse} />}
+            </div>
+            <div className="rightContainer bg-white w-full">
+                {isEmpty ? (
+                    <div className="isEmpty">
+                        <EmptyProfile nurse={nurse}/>
+                    </div>
+                ) : (
+                    <div className="isNotEmpty ">
+                        {/* for "profileDetails" */}
+                        <EmptyProfile nurse={nurse}/>
+                    </div>
+                )}
             </div>
         </div>
     )
