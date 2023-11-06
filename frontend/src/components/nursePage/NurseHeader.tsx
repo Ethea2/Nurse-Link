@@ -6,11 +6,15 @@ import { BsFacebook, BsTwitter } from "react-icons/bs"
 import { useAuth } from "../../hooks/useAuth"
 import { useNavigate } from "react-router"
 
+// icons
+import { PiPhoneFill } from "react-icons/pi";
+import { PiEnvelopeSimpleBold } from "react-icons/pi";
+
 const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
     const { user } = useAuth()
     const nav = useNavigate()
     return (
-        <div className="flex flex-col justify-start items-center w-full h-fit md:h-[80vh] border-b-2">
+        <div className="headerPic flex flex-col justify-start items-center w-full h-fit md:h-[80vh] border-b-2">
             <div className="h-[50vh] md:h-3/5 w-full flex justify-center items-center">
                 <img
                     src={nurse?.bannerPicture}
@@ -18,7 +22,30 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                     alt="Nurse's Profile Banner"
                 />
             </div>
-            <div className="h-2/5 flex md:flex-row flex-col w-full justify-center items-center md:items-start pt-20">
+            <div className="headerDetails flex px-20 bg-teal-100 w-full">
+                <div className="leftDetails flex-1">
+                    <div className="phoneNumber">
+                        <PiPhoneFill className="Phone w-8 h-8 pl-1 pr-[3px] pt-[3px] pb-1 justify-center items-center inline-flex text-outline-text"/>{" "}
+                        {nurse?.phoneNumber} phoneNumber
+                    </div>
+                    <div className="email font-open-sans">
+                        <PiEnvelopeSimpleBold className="Email w-8 h-8 pl-1 pr-[3px] pt-[3px] pb-1 justify-center items-center inline-flex text-outline-text"/>
+                    {nurse?.email}
+                    </div>
+                    
+                </div>
+                <div className="centerDetails flex-1 flex items-center justify-center">
+                    <img
+                            src={nurse?.profilePicture}
+                            className="profilePicture absolute top-[350px] w-[250px] h-[250px] object-cover rounded-full shadow border-4 border-white"
+                            alt="Nurse's Profile Picture"
+                        />
+                </div>
+                <div className="rightDetails flex-1 flex items-center justify-end">
+                    right
+                </div>
+            </div>
+            {/* <div className="h-2/5 flex md:flex-row flex-col w-full justify-center items-center md:items-start pt-20">
                 <div className="flex flex-col p-10 h-full justify-between">
                     <span className="flex justify-center items-center text-2xl gap-1">
                         <AiOutlineMail />{" "}
@@ -65,7 +92,7 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                         </button>
                     )}
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
