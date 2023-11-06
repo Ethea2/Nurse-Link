@@ -59,12 +59,12 @@ const RegisterPage = () => {
 
     useEffect(() => {
         const handleResize = () => {
-        // Update font size based on window width
-        if (window.innerWidth >= 600) { // if its tablet change font to 4rem
-            setFontSize('4rem');
-        } else {
-            setFontSize('3rem');
-        }
+            // Update font size based on window width
+            if (window.innerWidth >= 600) { // if its tablet change font to 4rem
+                setFontSize('4rem');
+            } else {
+                setFontSize('3rem');
+            }
         };
 
         // Attach the event listener
@@ -72,28 +72,30 @@ const RegisterPage = () => {
 
         // Clean up the event listener on component unmount
         return () => {
-        window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', handleResize);
         };
     }, []);
-      
+
 
     return (
         <section className="w-full min-h-screen flex flex-col justify-center items-center">
-            <div className="titleAndLogo text-center"> 
+            <div className="titleAndLogo text-center">
                 <div className="logoAndTitle flex flex-col items-center">
-                    <div className="logoPng">
-                        <img
-                            src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127920/CSSWENG%20GROUP%203/qt4ozeain5lqwtz5jmb3.png"
-                            style={{ width: "70px", height: "70px" }} 
-                        />
-                    </div>
-                    <div className="title font-bold" style={{fontSize: titleFontSize, fontFamily: 'Poppins, sans-serif', fontWeight: 700, color: '#053B50'}}>NurseLink</div> 
-                </div> 
-                <p className="text-2xl font-semibold" style={{fontFamily: 'Montserrat, sans-serif', fontWeight: 500, color: '#053B50'}}>Join us today!</p>
+                    <Link to="/">
+                        <div className="logoPng">
+                            <img
+                                src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127920/CSSWENG%20GROUP%203/qt4ozeain5lqwtz5jmb3.png"
+                                style={{ width: "70px", height: "70px" }}
+                            />
+                        </div>
+                    </Link>
+                    <div className="title font-bold" style={{ fontSize: titleFontSize, fontFamily: 'Poppins, sans-serif', fontWeight: 700, color: '#053B50' }}>NurseLink</div>
+                </div>
+                <p className="text-2xl font-semibold" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 500, color: '#053B50' }}>Join us today!</p>
             </div>
-            <div className="flex flex-col gap-5 mt-10 mb-20 sm:flex-row"> 
+            <div className="flex flex-col gap-5 mt-10 mb-20 sm:flex-row">
                 <Link to="/register-institute">
-                    <div className="font-bold rounded-lg cursor-pointer" style={{ flex: "1" }}> 
+                    <div className="font-bold rounded-lg cursor-pointer" style={{ flex: "1" }}>
                         <img src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127921/CSSWENG%20GROUP%203/sjavgndnfnyd9a8pqqye.png" alt="Institute Registration" />
                         <div className="w-full text-center font-montserrat font-medium">
                             Add Institution
@@ -101,7 +103,7 @@ const RegisterPage = () => {
                     </div>
                 </Link>
                 <Link to="/register-nurse">
-                    <div className="font-bold rounded-lg cursor-pointer" style={{ flex: "1" }}> 
+                    <div className="font-bold rounded-lg cursor-pointer" style={{ flex: "1" }}>
                         <img src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127921/CSSWENG%20GROUP%203/beaagtyscoc3p2euwxl1.png" alt="Nurse Registration" />
                         <div className="w-full text-center font-montserrat font-medium">Add Nurse</div>
                     </div>
