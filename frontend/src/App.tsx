@@ -11,7 +11,7 @@ function App() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            pingServer()
+            //pingServer()
         }, 10000)
         return () => clearInterval(interval)
     }, [])

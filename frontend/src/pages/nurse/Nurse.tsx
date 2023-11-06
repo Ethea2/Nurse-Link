@@ -9,7 +9,7 @@ const Nurse = () => {
     const { data: nurse, loading } = useFetch(`/api/nurse/${userId}`)
 
     useEffect(() => {
-        console.log(nurse)
+        //console.log(nurse)
     }, [nurse])
     return (
         <>
