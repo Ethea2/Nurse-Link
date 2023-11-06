@@ -43,7 +43,7 @@ app.use(
         cookie: {
             secure: false,
             httpOnly: true,
-            maxAge: 1000 * 60 * 60,
+            maxAge: 1000 * 60 * 1,
             name: "nurse-session"
         }
     })

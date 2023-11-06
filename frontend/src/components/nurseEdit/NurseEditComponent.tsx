@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import useFetch from "../../hooks/useFetch"
-import { ChangeBannerPhoto, ChangeProfilePhoto } from "../modals/modals"
+import { ChangeBannerPhoto, ChangeProfilePhoto } from "../modals/editProfileModals"
 import { BsFillImageFill } from "react-icons/bs"
 import { motion } from "framer-motion"
 import useDynamicFetch from "../../hooks/useDynamicFetch"
