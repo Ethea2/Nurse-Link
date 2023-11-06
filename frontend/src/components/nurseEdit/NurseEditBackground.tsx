@@ -18,6 +18,34 @@ const NurseBackgroundEditComponent = ({ userId }: { userId: string }) => {
     marginBottom: "16px",
   };
 
+  //   useEffect(() => {
+//     // Fetch data from mongo database dito tapos update the sections state hehe
+//     axios.get("your-database-endpoint").then((response) => {
+//       setSections(response.data); // Assuming your data is an array of sections
+//     });
+//   }, []); // The empty dependency array makes the effect run once on mount
+
+//   const handleEditSection = (id) => {
+//     // Handle editing section content
+//   };
+
+//   const handleDeleteSection = (id) => {
+//     // Handle deleting the section with the given ID
+//     // Make an API request to delete the section in your database
+//     axios.delete(`your-database-endpoint/${id}`).then(() => {
+//       setSections((prevSections) => prevSections.filter((section) => section.id !== id));
+//     });
+//   };
+
+//   const handleAddSection = () => {
+//     // Handle adding a new section
+//     // Make an API request to add the new section in your database
+//     const newSection = { title: "New Section", content: "Lorem ipsum new section text" };
+//     axios.post("your-database-endpoint", newSection).then((response) => {
+//       setSections((prevSections) => [...prevSections, response.data]);
+//     });
+//   };
+
   return (
     <div id="nurse-edit-container" className="w-full h-fit flex flex-col p-10">
       <div
@@ -70,82 +98,3 @@ const NurseBackgroundEditComponent = ({ userId }: { userId: string }) => {
 };
 
 export default NurseBackgroundEditComponent;
-
-
-// import React, { useState, useEffect } from "react";
-// import axios from "axios"; // You may need to install axios or use another HTTP library
-
-// const NurseBackgroundEditComponent = ({ userId }: { userId: string }) => {
-//   const [sections, setSections] = useState([]);
-//   const titleStyle = {
-//     fontFamily: "Open Sans",
-//     fontWeight: "bold",
-//     fontSize: "21px",
-//     lineHeight: "31px",
-//   };
-//   const boxStyle = {
-//     background: "#FFFFFF",
-//     boxShadow: "0px 4px 4px 0px #176B8740",
-//     marginBottom: "16px",
-//     position: "relative",
-//   };
-
-//   useEffect(() => {
-//     // Fetch data from your database here and update the sections state
-//     axios.get("your-database-endpoint").then((response) => {
-//       setSections(response.data); // Assuming your data is an array of sections
-//     });
-//   }, []); // The empty dependency array makes the effect run once on mount
-
-//   const handleEditSection = (id) => {
-//     // Handle editing section content
-//   };
-
-//   const handleDeleteSection = (id) => {
-//     // Handle deleting the section with the given ID
-//     // Make an API request to delete the section in your database
-//     axios.delete(`your-database-endpoint/${id}`).then(() => {
-//       setSections((prevSections) => prevSections.filter((section) => section.id !== id));
-//     });
-//   };
-
-//   const handleAddSection = () => {
-//     // Handle adding a new section
-//     // Make an API request to add the new section in your database
-//     const newSection = { title: "New Section", content: "Lorem ipsum new section text" };
-//     axios.post("your-database-endpoint", newSection).then((response) => {
-//       setSections((prevSections) => [...prevSections, response.data]);
-//     });
-//   };
-
-//   return (
-//     <div id="nurse-edit-container" className="w-full h-fit flex flex-col p-10">
-//       <div
-//         id="nurse-edit-title-container"
-//         className="text-6xl font-bold text-[#053B50] flex items-center"
-//       >
-//         <span>Background</span>
-//         <button
-//           className="btn ml-auto bg-[#176B87] hover.bg-[#00CEC8] text-white rounded-full"
-//           onClick={handleAddSection}
-//         >
-//           Add Section
-//         </button>
-//       </div>
-//       <div id="nurse-edit-details" className="w-full h-full">
-//         {sections.map((section) => (
-//           <div key={section.id} className="bg-[#F4F4F4] rounded-lg p-4 mb-4" style={boxStyle}>
-//             <h2 style={titleStyle}>{section.title}</h2>
-//             <p>{section.content}</p>
-//             <div>
-//               <button onClick={() => handleEditSection(section.id)}>Edit</button>
-//               <button onClick={() => handleDeleteSection(section.id)}>Delete</button>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default NurseBackgroundEditComponent;
