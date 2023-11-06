@@ -32,7 +32,7 @@ const SideContainer = ({ nurse }: { nurse: NurseType }) => {
     return (
         <div className="flex w-full lg:w-1/4 p-4">
             {user?.id === nurse?.userId && <ProgressCard nurse={nurse} />}
-            {<EmptyProfileCard nurse={nurse}/>}
+            {/*<EmptyProfileCard nurse={nurse}/>*/}
             <div className="flex flex-col justify-center items-center gap-6 w-full border-2 p-4" style={{display: isAboutVisible}}>
                 if finished
             </div>
