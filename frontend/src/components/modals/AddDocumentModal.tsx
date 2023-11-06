@@ -15,10 +15,15 @@ export const AddDocumentSection = ({
     const [imageName, setImageName] = useState<string | undefined>(undefined)
     const [image, setImage] = useState<File | undefined>()
     const { bannerUpload } = usePhotoChange()
-    const [documentType, setDocumentType] = useState<string>("") // Default to "license"
 
-    const [documentFile, setDocumentFile] = useState<File | undefined>()
+    const [documentType, setDocumentType] = useState<string>("") // Default to "license"
+    const [issuer, setIssuer] = useState<string>("")
+    const [issueDate, setIssueDate] = useState<Date>("")
     const [documentName, setDocumentName] = useState<string>("")
+    const [documentFile, setDocumentFile] = useState<File | undefined>()
+
+
+
     const handleInitialFile = () => {
         if (imageName) return
         const profileInput = document.querySelector(
@@ -88,7 +93,29 @@ export const AddDocumentSection = ({
             label.innerText = selectedFile.name;
 
         }
+        console.log(documentFile)
+        console.log(documentName)
     };
+
+    const handleSave = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        if (documentFile) {
+            const form = new FormData();
+            form.append("document", documentFile);
+            form.append("documentType", documentType);
+            form.append("issuer", issuer);
+            form.append("issueDate", issueDate.toString());
+            form.append("documentName", documentName);
+            try {
+                // await documentUpload(form, setChanged, setShow);
+            } catch (e) {
+                console.log(e);
+                toast("Something went wrong!", { type: "error" });
+            }
+        } else {
+            toast("Please add a document first", { type: "error" });
+        }
+    }
 
     return (
         <>
@@ -136,6 +163,7 @@ export const AddDocumentSection = ({
                                 type="text"
                                 id="document-name"
                                 className="input input-bordered w-full mt-2"
+                                onChange = {(e) => setDocumentName(e.target.value)}
                             />
                         </div>
                         <div className="mt-5">
@@ -144,6 +172,7 @@ export const AddDocumentSection = ({
                                 type="text"
                                 id="document-issuer"
                                 className="input input-bordered w-full mt-2"
+                                onChange = {(e) => setIssuer(e.target.value)}
                             />
                         </div>
                         <div className="mt-5">
@@ -151,10 +180,15 @@ export const AddDocumentSection = ({
                                 Issuance Date:
                             </label>
                             <input
-                                type="text"
+                                type="date"
                                 id="document-issuance-date"
                                 className="input input-bordered w-full mt-2"
+                                onChange={(e) => {
+                                    const selectedDate = new Date(e.target.value);
+                                    setIssueDate(selectedDate)
+                                }}
                             />
+
                         </div>
                         <div className="mt-5">
                             <label

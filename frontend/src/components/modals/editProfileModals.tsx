@@ -30,6 +30,7 @@ export const ChangeProfilePhoto = ({
         if (files) {
             setImageName(URL.createObjectURL(files[0]))
             setImage(files[0])
+
         }
     }
 
