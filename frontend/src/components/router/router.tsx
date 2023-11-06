@@ -10,6 +10,8 @@ import Nurse from "../../pages/nurse/Nurse"
 import Institute from "../../pages/institute/Institute"
 import NurseEditPage from "../../pages/nurseEdit/NurseEditPage"
 import NurseEditDocumentPage from "../../pages/nurseEdit/NurseEditDocumentPage.tsx"
+import NurseEditBackgroundPage from "../../pages/nurseEdit/NurseEditBackgroundPage.tsx"
+import NurseEditContactPage from "../../pages/nurseEdit/NurseEditContactPage.tsx"
 
 const routes: Array<RouteType> = [
     { path: "/", element: <Landing /> },
@@ -22,7 +24,9 @@ const routes: Array<RouteType> = [
     { path: "/nurse/:userId", element: <Nurse /> },
     { path: "/nurse/edit/:userId", element: <NurseEditPage /> },
     { path: "/institute/:userId", element: <Institute /> },
-    { path: "/nurse/edit/documents/:userId", element: <NurseEditDocumentPage />}
+    { path: "/nurse/edit/documents/:userId", element: <NurseEditDocumentPage />},
+    { path: "/nurse/edit/background/:userId", element: <NurseEditBackgroundPage />},
+    { path: "/nurse/edit/contact/:userId", element: <NurseEditContactPage />}
 ]
 
 export default routes
