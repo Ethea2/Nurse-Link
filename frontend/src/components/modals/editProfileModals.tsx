@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { BiSolidCloudUpload } from "react-icons/bi"
 import { motion } from "framer-motion"
 import { toast } from "react-toastify"
@@ -16,6 +16,9 @@ export const ChangeProfilePhoto = ({
     const [imageName, setImageName] = useState<string | undefined>(undefined)
     const [image, setImage] = useState<File>()
     const { profileUpload } = usePhotoChange()
+
+
+
     const handleInitialFile = () => {
         if (imageName) return
         const profileInput = document.querySelector(
@@ -32,6 +35,7 @@ export const ChangeProfilePhoto = ({
             setImage(files[0])
 
         }
+
     }
 
     const reset = () => {

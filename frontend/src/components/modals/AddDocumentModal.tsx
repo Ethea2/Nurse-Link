@@ -1,8 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import usePhotoChange from "../../hooks/usePhotoChange.tsx"
 import { toast } from "react-toastify"
 import { motion } from "framer-motion"
-
+import  useAddDocument  from "../../hooks/useAddDocument.tsx"
 export const AddDocumentSection = ({
     show,
     setShow,
@@ -16,11 +16,13 @@ export const AddDocumentSection = ({
     const [image, setImage] = useState<File | undefined>()
     const { bannerUpload } = usePhotoChange()
 
-    const [documentType, setDocumentType] = useState<string>("") // Default to "license"
+    const [documentType, setDocumentType] = useState<string>("License") // Default to "license"
     const [issuer, setIssuer] = useState<string>("")
     const [issueDate, setIssueDate] = useState<Date>("")
     const [documentName, setDocumentName] = useState<string>("")
     const [documentFile, setDocumentFile] = useState<File | undefined>()
+    const { addDocument } = useAddDocument()
+
 
 
 
@@ -53,24 +55,24 @@ export const AddDocumentSection = ({
         profileInput.value = ""
     }
 
-    const handleSubmit = async (
-        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-        e.preventDefault()
-        if (image) {
-            const form = new FormData()
-            form.append("img", image)
-            form.append("_method", "PATCH")
-            try {
-                await bannerUpload(form, setChanged, setShow)
-            } catch (e) {
-                console.log(e)
-                toast("Something went wrong!", { type: "error" })
-            }
-        } else {
-            toast("Please add an image first", { type: "error" })
-        }
-    }
+    // const handleSubmit = async (
+    //     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    // ) => {
+    //     e.preventDefault()
+    //     if (image) {
+    //         const form = new FormData()
+    //         form.append("img", image)
+    //         form.append("_method", "PATCH")
+    //         try {
+    //             await bannerUpload(form, setChanged, setShow)
+    //         } catch (e) {
+    //             console.log(e)
+    //             toast("Something went wrong!", { type: "error" })
+    //         }
+    //     } else {
+    //         toast("Please add an image first", { type: "error" })
+    //     }
+    // }
 
     const handleDragDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
@@ -107,7 +109,7 @@ export const AddDocumentSection = ({
             form.append("issueDate", issueDate.toString());
             form.append("documentName", documentName);
             try {
-                // await documentUpload(form, setChanged, setShow);
+                await addDocument(form, setChanged, setShow);
             } catch (e) {
                 console.log(e);
                 toast("Something went wrong!", { type: "error" });
@@ -147,8 +149,10 @@ export const AddDocumentSection = ({
                                 id="document-type"
                                 className="select select-bordered w-full mt-2"
                                 value={documentType}
-                                onChange={(e) =>
+                                onChange={(e) => {
                                     setDocumentType(e.target.value)
+                                }
+
                                 }
                             >
                                 <option value="license">License</option>
@@ -184,7 +188,9 @@ export const AddDocumentSection = ({
                                 id="document-issuance-date"
                                 className="input input-bordered w-full mt-2"
                                 onChange={(e) => {
+                                    //convert to date object without time
                                     const selectedDate = new Date(e.target.value);
+                                    console.log(selectedDate)
                                     setIssueDate(selectedDate)
                                 }}
                             />
@@ -233,8 +239,9 @@ export const AddDocumentSection = ({
                                 </motion.button>
                             )}
                             <button
+                                id = "save-document-button"
                                 className="btn"
-                                onClick={(e) => handleSubmit(e)}
+                                onClick={(e) => handleSave(e)}
                             >
                                 Save
                             </button>

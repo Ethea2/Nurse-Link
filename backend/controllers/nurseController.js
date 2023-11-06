@@ -79,6 +79,7 @@ const editNurse = async (req, res) => {
 
 const editNurseProfilePicture = async (req, res) => {
     try {
+
         const files = req.files.img
         const userId = req.user._id
         if (userId === undefined) {
@@ -123,6 +124,7 @@ const editNurseProfilePicture = async (req, res) => {
 
 const editNurseBanner = async (req, res) => {
     try {
+
         const files = req.files.img
         const userId = req.user._id
         if (userId === undefined) {
@@ -185,7 +187,84 @@ const deleteNurse = async (req, res) => {
 }
 
 const addDocument = async (req, res) => {
-    const {userId, documentType, documentName, documentUrl} = req.body
+    // console.log("log")
+    // console.log("files")
+    // console.log(req.files)
+    // console.log("body")
+    // console.log( req.body)
+    // console.log("user")
+    // console.log(req.user)
+    // console.log("params")
+    // console.log(req.params)
+    // console.log("end of log")
+
+    const documentFile = req.files.document
+    const documentName = req.body.documentName
+    const documentType = req.body.documentType
+    const documentIssuer = req.body.issuer
+    const documentIssueDate = req.body.issueDate
+    const userId = req.user._id
+    console.log("logging all the variables")
+    console.log(documentFile, documentName, documentType, documentIssuer, documentIssueDate, userId)
+    console.log("end of log")
+
+    const result = await cloudinary.uploader.upload(documentFile.tempFilePath, {
+        public_id: Date.now(),
+        folder: "nurse-link-images",
+        withcredentials: false,
+    })
+    fs.unlink(documentFile.tempFilePath, (err) => {
+        if (err) {
+            console.error("Error deleting the temporary file:", err)
+        } else {
+            console.log("Temporary file deleted.")
+        }
+    })
+    console.log("url:" + result.secure_url)
+    if (result.secure_url){
+        const nurse = await Nurse.findOne({ userId: userId })
+        const type = documentType
+        const name = documentName
+        const description = ""
+        const institutionName = documentIssuer
+        const issuanceDate = documentIssueDate
+        const status = "pending"
+        const link = result.secure_url
+        const nurseToUpdate = await Nurse.findOneAndUpdate(
+            { userId: userId },
+            {
+
+                $push: {
+                    "credentials.document": {
+                        type,
+                        name,
+                        description,
+                        institutionName,
+                        issuanceDate,
+                        status,
+                        link
+
+                    }
+                }
+            }
+        )
+
+
+
+
+
+    }else{
+        console.log("error")
+        console.log(result)
+    }
+
+
+
+
+
+
+
+
 
 }
 
@@ -195,5 +274,6 @@ module.exports = {
     editNurse,
     deleteNurse,
     editNurseProfilePicture,
-    editNurseBanner
+    editNurseBanner,
+    addDocument
 }
