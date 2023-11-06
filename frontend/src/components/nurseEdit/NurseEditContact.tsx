@@ -17,11 +17,11 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
   };
 
   const boxStyle = {
-    background: "#F4F4F4",
+    background: "#FFFFFF",
     boxShadow: "0px 4px 4px 0px #176B8740",
     marginBottom: "16px",
-  padding: "16px",
-  borderRadius: "8px",
+    padding: "16px",
+    borderRadius: "8px",
   };
 
   const handleEditEmail = () => {
