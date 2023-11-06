@@ -21,7 +21,7 @@ const EmptyProfileCard = ({ nurse }: { nurse: NurseType }) => {
 
     return (
         <div className="flex flex-col justify-center items-center w-full border-2 p-5 rounded-lg ">
-            <img src = {imageLink} className="w-1/4" ></img>
+            <img src = {imageLink} className="w-1/2" ></img>
             {isOwnProfile ? ( 
                 <div className="flex flex-col justify-center items-center ">
                 <div className="font-bold text-2xl"> Fill out a section in your profile! </div>

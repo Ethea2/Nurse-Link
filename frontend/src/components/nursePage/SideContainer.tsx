@@ -37,7 +37,7 @@ const SideContainer = ({ nurse }: { nurse: NurseType }) => {
             <div className="leftContainer w-1/4">
                 {user?.id === nurse?.userId && <ProgressCard nurse={nurse} />}
             </div>
-            <div className="rightContainer bg-white w-full">
+            <div className="rightContainer bg-white w-full h-auto">
                 {isEmpty ? (
                     <div className="isEmpty">
                         <EmptyProfile nurse={nurse}/>
