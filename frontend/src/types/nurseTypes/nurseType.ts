@@ -57,7 +57,7 @@ export interface VolunteeringType {
 }
 
 export interface DocumentType {
-    type: 'license' | 'certification' | 'award';
+    type: 'license' | 'certification' | 'award' | 'resume';
     name: string;
     description: string;
     institutionName: string;

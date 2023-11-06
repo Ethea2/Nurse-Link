@@ -1,9 +1,33 @@
 import { useState } from "react"
-import { AddDocumentSection } from "../modals/modals"
-
+import { AddDocumentSection } from "../modals/AddDocumentModal.tsx"
+import useDynamicFetch from "../../hooks/useDynamicFetch.tsx"
+import { AiOutlinePlusCircle } from "react-icons/ai"
 const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
     const [showDocumentModal, setShowDocumentModal] = useState<boolean>(false)
     const [changed, setChanged] = useState<boolean>(false)
+    const { data: nurse, loading } = useDynamicFetch(
+        `/api/nurse/${userId}`,
+        changed
+    )
+    const documentsArray = nurse?.credentials.document || []
+    const hasResumeDocument = documentsArray.some(
+        (document) => document.type === "resume"
+    )
+    const hasLicenseDocument = documentsArray.some(
+        (document) => document.type === "license"
+    )
+    const hasCertificateDocument = documentsArray.some(
+        (document) => document.type === "certificate"
+    )
+    const hasAwardDocument = documentsArray.some(
+        (document) => document.type === "award"
+    )
+
+
+
+
+
+    console.log(documentsArray)
     return (
         <div
             id="nurse-edit-container"
@@ -11,28 +35,159 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
         >
             <div
                 id="nurse-edit-title-container"
-                className="text-6xl font-bold text-[#053B50] flex items-center"
+                className="text-6xl font-bold text-[#053B50] flex items-center mb-6"
             >
                 <span>Documents</span>
                 <button
-                    className="btn ml-auto bg-[#176B87] hover:bg-[#00CEC8] text-white rounded-full"
+                    className="btn ml-auto bg-[#176B87] hover:bg-[#00CEC8] text-white rounded-full normal-case"
                     onClick={() => {
-                        setShowDocumentModal(true)
+                        setShowDocumentModal(true);
                     }}
                 >
                     Add Section
                 </button>
             </div>
-            <div id="nurse-edit-details" className="w-full h-full">
-                {/* The rest of your code for managing nurse documents */}
+            <div
+                id="nurse-resume"
+                className="w-full p-4 rounded-lg shadow-xl flex flex-col relative mb-6"
+            >
+                <div className="text-3xl font-bold text-[#053B50] ml-4 flex items-center">
+                    Resume
+                    <button
+                        className="ml-auto hover:bg-[#176B87] text-white rounded-full p-1"
+                        onClick={() => {
+                            setShowDocumentModal(true)
+                        }}
+                    >
+                        <AiOutlinePlusCircle
+                            size={40}
+                            style={{ color: "black" }}
+                        />{" "}
+                        {/* Set color to black using inline style */}
+                    </button>
+                </div>
+                <div id="nurse-resume-list-container" className="text-xl mt-5">
+                    {hasResumeDocument ? (
+                        <div className="flex ml-4 items-center">
+                            <p className="text-[#053B50]">{`Resume: ${resume}`}</p>
+                        </div>
+                    ) : (
+                        <div className="flex ml-4 items-center">
+                            <p className="text-[#053B50]">
+                                No resume added yet
+                            </p>
+                        </div>
+                    )}
+                </div>
             </div>
+            <div
+                id="nurse-license"
+                className="w-full p-4 rounded-lg shadow-xl flex flex-col relative mb-6"
+            >
+                <div className="text-3xl font-bold text-[#053B50] ml-4 flex items-center">
+                    License
+                    <button
+                        className="ml-auto hover:bg-[#176B87] text-white rounded-full p-1"
+                        onClick={() => {
+                            setShowDocumentModal(true)
+                        }}
+                    >
+                        <AiOutlinePlusCircle
+                            size={40}
+                            style={{ color: "black" }}
+                        />{" "}
+                        {/* Set color to black using inline style */}
+                    </button>
+                </div>
+                <div id="nurse-resume-list-container" className="text-xl mt-5">
+                    {hasLicenseDocument ? (
+                        <div className="flex ml-4 items-center">
+                            <p className="text-[#053B50]">{`Resume: ${resume}`}</p>
+                        </div>
+                    ) : (
+                        <div className="flex ml-4 items-center">
+                            <p className="text-[#053B50]">
+                                No license added yet
+                            </p>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            <div
+                id="nurse-documents"
+                className="w-full p-4 rounded-lg shadow-xl flex flex-col relative mb-6"
+            >
+                <div className="text-3xl font-bold text-[#053B50] ml-4 flex items-center">
+                    Documents
+                    <button
+                        className="ml-auto hover:bg-[#176B87] text-white rounded-full p-1"
+                        onClick={() => {
+                            setShowDocumentModal(true)
+                        }}
+                    >
+                        <AiOutlinePlusCircle
+                            size={40}
+                            style={{ color: "black" }}
+                        />{" "}
+                        {/* Set color to black using inline style */}
+                    </button>
+                </div>
+                <div id="nurse-resume-list-container" className="text-xl mt-5">
+                    {hasCertificateDocument ? (
+                        <div className="flex ml-4 items-center">
+                            <p className="text-[#053B50]">{`Resume: ${resume}`}</p>
+                        </div>
+                    ) : (
+                        <div className="flex ml-4 items-center">
+                            <p className="text-[#053B50]">
+                                No certificate added yet
+                            </p>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            <div
+                id="nurse-awards"
+                className="w-full p-4 rounded-lg shadow-xl flex flex-col relative mb-6"
+            >
+                <div className="text-3xl font-bold text-[#053B50] ml-4 flex items-center">
+                    Awards
+                    <button
+                        className="ml-auto hover:bg-[#176B87] text-white rounded-full p-1"
+                        onClick={() => {
+                            setShowDocumentModal(true)
+                        }}
+                    >
+                        <AiOutlinePlusCircle
+                            size={40}
+                            style={{ color: "black" }}
+                        />{" "}
+                        {/* Set color to black using inline style */}
+                    </button>
+                </div>
+                <div id="nurse-resume-list-container" className="text-xl mt-5">
+                    {hasAwardDocument ? (
+                        <div className="flex ml-4 items-center">
+                            <p className="text-[#053B50]">{`Resume: ${resume}`}</p>
+                        </div>
+                    ) : (
+                        <div className="flex ml-4 items-center">
+                            <p className="text-[#053B50]">
+                                No awards added yet
+                            </p>
+                        </div>
+                    )}
+                </div>
+            </div>
+
             <AddDocumentSection
-                setShow = {setShowDocumentModal}
-                show = {showDocumentModal}
-                setChanged = {setChanged}
+                setShow={setShowDocumentModal}
+                show={showDocumentModal}
+                setChanged={setChanged}
             />
         </div>
-
     )
 }
 

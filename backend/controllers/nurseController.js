@@ -184,6 +184,11 @@ const deleteNurse = async (req, res) => {
     }
 }
 
+const addDocument = async (req, res) => {
+    const {userId, documentType, documentName, documentUrl} = req.body
+
+}
+
 module.exports = {
     getNurses,
     getNurse,
