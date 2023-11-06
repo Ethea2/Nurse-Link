@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import useFetch from "../../hooks/useFetch"
 import { ChangeBannerPhoto, ChangeProfilePhoto } from "../modals/modals"
-import { BsFillImageFill } from "react-icons/bs"
+import { BsFillCloudArrowDownFill, BsFillImageFill } from "react-icons/bs"
 import { motion } from "framer-motion"
 import useDynamicFetch from "../../hooks/useDynamicFetch"
 import useNurseEdit from "../../hooks/useNurseEdit"
@@ -66,7 +66,7 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
                                 transition={{ duration: 0.2, ease: "easeIn" }}
                                 className="absolute bg-[#053B50]/50 flex flex-col justify-center items-center w-full h-full rounded-t-2xl"
                                 onClick={() => setShowBannerModal(true)}
-                           >
+                            >
                                 <BsFillImageFill className="text-white text-5xl" />
                                 <span className="text-white font-semibold">
                                     Edit Profile Banner
@@ -191,7 +191,10 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
                             No
                         </div>
                     </small>
-                    <button onClick={handleSubmit} className="btn rounded-full bg-[#176B87] hover:bg-[#00CEC8] text-white hover:text-neutral">
+                    <button
+                        onClick={handleSubmit}
+                        className="btn rounded-full bg-[#176B87] hover:bg-[#00CEC8] text-white hover:text-neutral"
+                    >
                         save
                     </button>
                 </div>
@@ -201,7 +204,7 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
                 show={showProfileModal}
                 setChanged={setChanged}
             />
-            <ChangeBannerPhoto 
+            <ChangeBannerPhoto
                 show={showBannerModal}
                 setShow={setShowBannerModal}
                 setChanged={setChanged}
