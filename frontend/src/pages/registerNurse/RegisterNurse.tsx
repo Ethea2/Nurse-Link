@@ -556,28 +556,28 @@ const Step4 = ({
                 <p className="font-semibold text-outline-text text-lg text-center mt-5 lg:text-xl">Welcome to NurseLink!</p>
                 <p className="text-outline-text text-base text-center mb-10 lg:text-lg">Please review your information below.</p>
                 <div className="flex xs:flex-col sm:flex-col lg:flex-row">
-                    <div className="lg:mr-20">
-                        <p className="text-base font-semibold text-outline-text lg:text-lg">Name</p>
-                        <p className="text-base text-outline-text mb-4 lg:text-lg">{firstname} {lastname}</p>
+                    <div className="lg:mr-20 text-base text-outline-text lg:text-lg">
+                        <p className="font-semibold">Name</p>
+                        <p className="mb-4">{firstname} {lastname}</p>
 
-                        <p className="text-base font-semibold text-outline-text lg:text-lg">Username</p>
-                        <p className="text-base text-outline-text mb-4 lg:text-lg">{username}</p>
+                        <p className="font-semibold">Username</p>
+                        <p className="mb-4">{username}</p>
 
-                        <p className="text-base font-semibold text-outline-text lg:text-lg">Email</p>
-                        <p className="text-base text-outline-text mb-4 lg:text-lg">{email}</p>
+                        <p className="font-semibold">Email</p>
+                        <p className="mb-4">{email}</p>
 
-                        <p className="text-base font-semibold text-outline-text lg:text-lg">Birth Date</p>
-                        <p className="text-base text-outline-text mb-4 lg:text-lg">{birthdate}</p>
+                        <p className="font-semibold">Birth Date</p>
+                        <p className="mb-4">{birthdate}</p>
                     </div>
                     <div>
-                        <p className="text-base font-semibold text-outline-text lg:text-lg">Gender</p>
-                        <p className="text-base text-outline-text mb-4 lg:text-lg">{gender}</p>
+                        <p className="font-semibold">Gender</p>
+                        <p className="mb-4">{gender}</p>
 
-                        <p className="text-base font-semibold text-outline-text lg:text-lg">Country</p>
-                        <p className="text-base text-outline-text mb-4 lg:text-lg">{country}</p>
+                        <p className="font-semibold">Country</p>
+                        <p className="mb-4">{country}</p>
 
-                        <p className="text-base font-semibold text-outline-text lg:text-lg">City</p>
-                        <p className="text-base text-outline-text mb-4 lg:text-lg">{city}</p>
+                        <p className="font-semibold">City</p>
+                        <p className="mb-4">{city}</p>
                     </div>
                 </div>
             </div>
