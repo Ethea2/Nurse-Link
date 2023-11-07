@@ -38,7 +38,9 @@ export const ChangeEducation = ({
     const [educationStartYear, seteducationStartYear] = useState<Date>()
     const [educationEndYear, seteducationEndYear] = useState<Date>()
 
-    // return()
+    return(
+        <div>hello</div>
+    )
 }
 
 export const ChangeExperience = ({

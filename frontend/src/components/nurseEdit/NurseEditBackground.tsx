@@ -236,6 +236,13 @@ const hasTechnicalSkill = typeof technicalSkill === "string" && technicalSkill.t
                 show={showAboutModal}
                 setChanged={setChanged}
             />
+
+        <ChangeEducation
+                setShow={setShowEducationModal}
+                show={showEducationModal}
+                setChanged={setChanged}
+            />
+        
       </div>
     </div>
 
