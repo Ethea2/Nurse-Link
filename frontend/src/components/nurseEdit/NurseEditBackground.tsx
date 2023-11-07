@@ -67,7 +67,8 @@ const hasTechnicalSkill = typeof technicalSkill === "string" && technicalSkill.t
                 <button
                     className="ml-auto hover:bg-[#176B87] text-white rounded-full p-1"
                     onClick={() => {
-                        setShowBackgroundModal(true)
+                        // setShowBackgroundModal(true)
+                        setShowAboutModal(true)
                     }}
                 >
                     <AiOutlinePlusCircle

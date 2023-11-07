@@ -2,6 +2,7 @@ import { useState } from "react"
 import usePhotoChange from "../../hooks/usePhotoChange.tsx"
 import { toast } from "react-toastify"
 import { motion } from "framer-motion"
+import useNurseEdit from "../../hooks/useNurseEdit"
 
 
 
@@ -15,11 +16,105 @@ export const ChangeAbout = ({
     setChanged: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
 
+    const { editDetails } = useNurseEdit()
     const [about, setAbout] = useState<string>("")
+    const [imageName, setImageName] = useState<string | undefined>(undefined)
+    const [image, setImage] = useState<File | undefined>()
+
+    const reset = () => {
+        
+    const profileInput = document.getElementById(
+        "profile-input"
+    ) as HTMLInputElement
+    setImageName(undefined)
+    setImage(undefined)
+    setShow(false)
+    profileInput.value = ""
+    }
+
+    // useEffect(() => {
+    //     setAbout(nurse?.firstName)
+    // }, [loading])
+
+    const handleSubmit = async () => {
+        await editDetails({
+            about,
+        })
+    }
 
 
     return( 
-        <div>hello</div> // test
+        <>
+        {show && (
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                    duration: 0.2,
+                    ease: "easeIn",
+                }}
+                className="fixed w-full h-screen flex justify-center items-center top-0 left-0"
+            >
+                <div
+                    className="absolute w-full h-screen bg-[#053B50]/60"
+                    onClick={() => setShow(false)}
+                />
+                <div className="bg-white rounded-lg shadow-2xl border-2 z-10 p-10 w-1/2">
+                    <span className="text-3xl font-bold text-[#053B50]">
+                        {imageName ? "Preview" : "Edit About"}
+                    </span>
+                
+                    {/* Input fields for About details */}
+                    <div className="mt-5">
+                        <label htmlFor="about">Edit About</label>
+                        <input
+                            type="text"
+                            id="about"
+                            className="input input-bordered w-full mt-2"
+                            onChange = {(e) => setAbout(e.target.value)}
+                        />
+                    </div>
+
+                    
+                    <div className="flex w-full justify-end mt-5 gap-4">
+                        <button
+                            className="btn"
+                            onClick={() => {
+                                reset()
+                                setShow(false)
+                            }}
+                        >
+                            Cancel
+                        </button>
+                        {imageName && (
+                            <motion.button
+                                className="btn"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{
+                                    duration: 0.2,
+                                    ease: "easeIn",
+                                }}
+                                onClick={reset}
+                            >
+                                Reset
+                            </motion.button>
+                        )}
+                        <button
+                            id = "save-document-button"
+                            className="btn"
+                            // onClick={(e) => handleSave(e)}
+                            onClick={(e) => handleSubmit(e)}
+                        >
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </motion.div>
+        )}
+    </>
     )
 }
 
