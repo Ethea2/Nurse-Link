@@ -103,7 +103,7 @@ const hasTechnicalSkill = typeof technicalSkill === "string" && technicalSkill.t
                 <button
                     className="ml-auto hover:bg-[#176B87] text-white rounded-full p-1"
                     onClick={() => {
-                        setShowBackgroundModal(true)
+                        setShowEducationModal(true)
                     }}
                 >
                     <AiOutlinePlusCircle
@@ -138,7 +138,7 @@ const hasTechnicalSkill = typeof technicalSkill === "string" && technicalSkill.t
                 <button
                     className="ml-auto hover:bg-[#176B87] text-white rounded-full p-1"
                     onClick={() => {
-                        setShowBackgroundModal(true)
+                        setShowExperienceModal(true)
                     }}
                 >
                     <AiOutlinePlusCircle
@@ -173,7 +173,7 @@ const hasTechnicalSkill = typeof technicalSkill === "string" && technicalSkill.t
                 <button
                     className="ml-auto hover:bg-[#176B87] text-white rounded-full p-1"
                     onClick={() => {
-                        setShowBackgroundModal(true)
+                        setShowVolunteeringModal(true)
                     }}
                 >
                     <AiOutlinePlusCircle
@@ -208,7 +208,7 @@ const hasTechnicalSkill = typeof technicalSkill === "string" && technicalSkill.t
                 <button
                     className="ml-auto hover:bg-[#176B87] text-white rounded-full p-1"
                     onClick={() => {
-                        setShowBackgroundModal(true)
+                        setShowTechnicalSkillModal(true)
                     }}
                 >
                     <AiOutlinePlusCircle
@@ -241,6 +241,24 @@ const hasTechnicalSkill = typeof technicalSkill === "string" && technicalSkill.t
         <ChangeEducation
                 setShow={setShowEducationModal}
                 show={showEducationModal}
+                setChanged={setChanged}
+            />
+
+        <ChangeExperience
+                setShow={setShowExperienceModal}
+                show={showExperienceModal}
+                setChanged={setChanged}
+            />
+
+        <ChangeVolunteering
+                setShow={setShowVolunteeringModal}
+                show={showVolunteeringModal}
+                setChanged={setChanged}
+            />
+
+        <ChangeTechnicalSkill
+                setShow={setShowTechnicalSkillModal}
+                show={showTechnicalSkillModal}
                 setChanged={setChanged}
             />
         
