@@ -2,66 +2,71 @@ import { useEffect, useState } from "react"
 import { AddDocumentSection } from "../modals/AddDocumentModal.tsx"
 import useDynamicFetch from "../../hooks/useDynamicFetch.tsx"
 import { AiOutlinePlusCircle } from "react-icons/ai"
+import { FaMagnifyingGlass } from "react-icons/fa6"
 const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
-    const [showDocumentModal, setShowDocumentModal] = useState<boolean>(false);
-    const [changed, setChanged] = useState<boolean>(false);
-    const { data: nurse, loading } = useDynamicFetch(`/api/nurse/${userId}`, changed);
+    const [showDocumentModal, setShowDocumentModal] = useState<boolean>(false)
+    const [changed, setChanged] = useState<boolean>(false)
+    const { data: nurse, loading } = useDynamicFetch(
+        `/api/nurse/${userId}`,
+        changed
+    )
 
-    const documentsArray = nurse?.credentials.document || [];
+    const documentsArray = nurse?.credentials.document || []
 
-    const [resume, setResume] = useState<string>();
-    const [license, setLicense] = useState<string>();
-    const [licenseLink, setLicenseLink] = useState<string>();
-    const [certificate, setCertificate] = useState<string>();
-    const [award, setAward] = useState<string>();
+    const [resume, setResume] = useState<string>()
+    const [resumeLink, setResumeLink] = useState<string>()
+
+    const [license, setLicense] = useState<string>()
+    const [licenseLink, setLicenseLink] = useState<string>()
+
+    const [certificate, setCertificate] = useState<string>()
+    const [certificateLink, setCertificateLink] = useState<string>()
+
+    const [award, setAward] = useState<string>()
+    const [awardLink, setAwardLink] = useState<string>()
 
     useEffect(() => {
         if (!loading && documentsArray.length > 0) {
             // Check if the nurse has documents
             const documentTypes = {
-                Resume: 'Resume',
-                License: 'License',
-                Certificate: 'Certificate',
-                Award: 'Award',
-            };
+                Resume: "Resume",
+                License: "License",
+                Certificate: "Certificate",
+                Award: "Award",
+            }
 
             const documentLinks = {
-                Resume: { link: '', name: '' },
-                License: { link: '', name: '' },
-                Certificate: { link: '', name: '' },
-                Award: { link: '', name: '' },
-            };
+                Resume: { link: "", name: "" },
+                License: { link: "", name: "" },
+                Certificate: { link: "", name: "" },
+                Award: { link: "", name: "" },
+            }
 
             documentsArray.forEach((document) => {
-                const type = document.type;
-                const name = document.name;
-                const link = document.link;
-                const mappedType = documentTypes[type];
-
+                const type = document.type
+                const name = document.name
+                const link = document.link
+                const mappedType = documentTypes[type]
+                console.log("mappedType: " + mappedType)
                 if (mappedType) {
-                    documentLinks[mappedType].link = link;
-                    documentLinks[mappedType].name = name;
+                    documentLinks[mappedType].link = link
+                    documentLinks[mappedType].name = name
                 }
-            });
+            })
 
-            setResume(documentLinks.Resume.link || '');
-            setLicenseLink(documentLinks.License.link || '');
-            setLicense(documentLinks.License.name || '')
-            setCertificate(documentLinks.Certificate.link || '');
-            setAward(documentLinks.Award.link || '');
+            setResume(documentLinks.Resume.name || "")
+            setResumeLink(documentLinks.Resume.link || "")
+
+            setLicenseLink(documentLinks.License.link || "")
+            setLicense(documentLinks.License.name || "")
+
+            setCertificate(documentLinks.Certificate.name || "")
+            setCertificateLink(documentLinks.Certificate.link || "")
+
+            setAward(documentLinks.Award.name || "")
+            setAwardLink(documentLinks.Award.link || "")
         }
-    }, [loading, documentsArray]);
-
-
-
-
-
-
-
-
-
-
-
+    }, [loading, documentsArray])
 
     console.log(documentsArray)
     return (
@@ -77,7 +82,7 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
                 <button
                     className="btn ml-auto bg-[#176B87] hover:bg-[#00CEC8] text-white rounded-full normal-case"
                     onClick={() => {
-                        setShowDocumentModal(true);
+                        setShowDocumentModal(true)
                     }}
                 >
                     Add Section
@@ -140,8 +145,12 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
                         <div className="flex ml-4 items-center">
                             <p className="text-[#053B50] rounded">
                                 <a
-                                    className={`text-[#053B50] ${licenseLink ? 'hover:text-blue-500' : 'text-gray-400 cursor-not-allowed'}`}
-                                    href={licenseLink || '#'}
+                                    className={`text-[#053B50] ${
+                                        licenseLink
+                                            ? "hover:text-blue-500"
+                                            : "text-gray-400 cursor-not-allowed"
+                                    }`}
+                                    href={licenseLink || "#"}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -151,7 +160,9 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
                         </div>
                     ) : (
                         <div className="flex ml-4 items-center">
-                            <p className="text-[#053B50">No license added yet</p>
+                            <p className="text-[#053B50">
+                                No license added yet
+                            </p>
                         </div>
                     )}
                 </div>
@@ -172,14 +183,26 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
                         <AiOutlinePlusCircle
                             size={40}
                             style={{ color: "black" }}
-                        />{" "}
-                        {/* Set color to black using inline style */}
+                        />
                     </button>
                 </div>
                 <div id="nurse-resume-list-container" className="text-xl mt-5">
                     {certificate ? (
                         <div className="flex ml-4 items-center">
-                            <p className="text-[#053B50]">{`Resume: ${resume}`}</p>
+                            <p className="text-[#053B50]">
+                                <a
+                                    className={`text-[#053B50] ${
+                                        certificateLink
+                                            ? "hover:text-blue-500"
+                                            : "text-gray-400 cursor-not-allowed"
+                                    }`}
+                                    href={certificateLink || "#"}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {certificate}
+                                </a>
+                            </p>
                         </div>
                     ) : (
                         <div className="flex ml-4 items-center">
@@ -213,7 +236,20 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
                 <div id="nurse-resume-list-container" className="text-xl mt-5">
                     {award ? (
                         <div className="flex ml-4 items-center">
-                            <p className="text-[#053B50]">{`Resume: ${resume}`}</p>
+                            <p className="text-[#053B50]">
+                                <a
+                                    className={`text-[#053B50] ${
+                                        awardLink
+                                            ? "hover:text-blue-500"
+                                            : "text-gray-400 cursor-not-allowed"
+                                    }`}
+                                    href={awardLink || "#"}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {award}
+                                </a>
+                            </p>
                         </div>
                     ) : (
                         <div className="flex ml-4 items-center">

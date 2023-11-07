@@ -26,24 +26,8 @@ export const AddDocumentSection = ({
 
 
 
-    const handleInitialFile = () => {
-        if (imageName) return
-        const profileInput = document.querySelector(
-            "#profile-input"
-        ) as HTMLElement
-        if (profileInput) {
-            profileInput.click()
-        }
-    }
 
-    const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files
-        if (files) {
-            const selectedImage = files[0]
-            setImageName(selectedImage.name)
-            setImage(selectedImage)
-        }
-    }
+
 
     const reset = () => {
         const profileInput = document.getElementById(
@@ -74,15 +58,6 @@ export const AddDocumentSection = ({
     //     }
     // }
 
-    const handleDragDrop = (e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault()
-        const files = e.dataTransfer.files
-        if (files) {
-            const selectedImage = files[0]
-            setImageName(selectedImage.name)
-            setImage(selectedImage)
-        }
-    }
     const handleDocumentUpload = async (e : React.ChangeEvent<HTMLInputElement>) => {
         const fileInput = document.getElementById("document-upload");
         const label = document.getElementById("document-upload-label");
@@ -110,6 +85,11 @@ export const AddDocumentSection = ({
             form.append("documentName", documentName);
             try {
                 await addDocument(form, setChanged, setShow);
+                if (show){
+                    toast("Document added successfully!", { type: "success" });
+                    reset();
+                }
+
             } catch (e) {
                 console.log(e);
                 toast("Something went wrong!", { type: "error" });
@@ -155,9 +135,9 @@ export const AddDocumentSection = ({
 
                                 }
                             >
-                                <option value="license">License</option>
-                                <option value="certificate">Certificate</option>
-                                <option value="award">Award</option>
+                                <option value="License">License</option>
+                                <option value="Certificate">Certificate</option>
+                                <option value="Award">Award</option>
                             </select>
                         </div>
                         {/* Input fields for document details */}
@@ -209,6 +189,7 @@ export const AddDocumentSection = ({
                                 type="file"
                                 id="document-upload"
                                 className="btn file-input file-input-bordered file-input-info w-full"
+                                accept=".pdf"
                                 hidden
                                 onChange={(e) => handleDocumentUpload(e)}
                             />

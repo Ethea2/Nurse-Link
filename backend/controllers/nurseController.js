@@ -197,7 +197,7 @@ const addDocument = async (req, res) => {
     // console.log("params")
     // console.log(req.params)
     // console.log("end of log")
-
+    console.log("you are currently in add document")
     const documentFile = req.files.document
     const documentName = req.body.documentName
     const documentType = req.body.documentType
@@ -210,7 +210,7 @@ const addDocument = async (req, res) => {
 
     const result = await cloudinary.uploader.upload(documentFile.tempFilePath, {
         public_id: Date.now(),
-        folder: "nurse-link-images",
+        folder: "nurse-link-pdfs",
         withcredentials: false,
     })
     fs.unlink(documentFile.tempFilePath, (err) => {
