@@ -18,7 +18,7 @@ export const AddDocumentSection = ({
 
     const [documentType, setDocumentType] = useState<string>("License") // Default to "license"
     const [issuer, setIssuer] = useState<string>("")
-    const [issueDate, setIssueDate] = useState<Date>("")
+    const [issueDate, setIssueDate] = useState<Date | string>("")
     const [documentName, setDocumentName] = useState<string>("")
     const [documentFile, setDocumentFile] = useState<File | undefined>()
     const { addDocument } = useAddDocument()
