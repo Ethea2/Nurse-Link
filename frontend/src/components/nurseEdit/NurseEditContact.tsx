@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AiOutlinePlusCircle } from "react-icons/ai"
 
 const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
   const [emailText, setEmailText] = useState("Email Address");
@@ -42,12 +43,12 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
         id="nurse-edit-title-container"
         className="text-6xl font-bold text-[#053B50] flex items-center"
       >
-        <span>Contact</span>
+        <span>Contact Details</span>
       </div>
       <div id="nurse-edit-details" className="w-full h-full">
         {/* Email Address Section */}
         <div className="bg-[#F4F4F4] rounded-lg p-4 mb-4" style={boxStyle}>
-          <h2 style={titleStyle}>Email Address</h2>
+          <h2 style={titleStyle} className="">Email Address</h2>
           {isEditingEmail ? (
             <div>
               <input
@@ -100,9 +101,23 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
         </div>
 
         {/* Socials Section */}
-        <div className="bg-[#F4F4F4] rounded-lg p-4 mb-4" style={boxStyle}>
-          <h2 style={titleStyle}>Socials</h2>
-          {isEditingSocials ? (
+        <div className="bg-[#F4F4F4] rounded-lg p-4 mb-4 " style={boxStyle}>
+          <div style={titleStyle} className="flex"> Socials   
+              <button
+                    className="ml-auto hover:bg-[#176B87] text-white rounded-full"
+                        onClick={() => {
+                            /*condition for setting add socials modal to true*/
+                        }}
+                    >
+                        <AiOutlinePlusCircle
+                            size={30}
+                            style={{ color: "black" }}
+                        />{" "}
+                       
+              </button>
+          </div>
+        
+          {isEditingSocials ? ( 
             <div>
               <input
                 type="text"
@@ -112,7 +127,9 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
               <button onClick={() => setIsEditingSocials(false)}>Save</button>
             </div>
           ) : (
-            <button onClick={handleEditSocials}>Edit</button>
+            <button onClick={handleEditSocials}>
+                 Edit
+            </button>
           )}
         </div>
       </div>
