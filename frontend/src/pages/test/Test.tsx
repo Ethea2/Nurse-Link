@@ -2,7 +2,7 @@
 import useFetch from "../../hooks/useFetch"
 import { NurseType } from "../../types/nurseTypes/nurseType"
 import { Link } from "react-router-dom"
-
+// TEST
 const Test = () => {
     const { data, loading } = useFetch("/api/nurse")
     return (
