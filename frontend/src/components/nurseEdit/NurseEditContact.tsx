@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ChangeAbout, ChangeEducation, ChangeExperience, ChangeTechnicalSkill, ChangeVolunteering } from "../modals/EditBackgroundModals.tsx";
 import useDynamicFetch from "../../hooks/useDynamicFetch.tsx"
 import { AiOutlinePlusCircle } from "react-icons/ai"
 import ContactSection from "../landingComponents/ContactSection.tsx";
+import { ChangeContactnumber, ChangeEmail, ChangeSocials, ChangeVideo } from "../modals/EditContactModals.tsx";
 
 const NurseBackgroundEditComponent = ({ userId }: { userId: string }) => {
 const [showContactModal, setShowContactModal] = useState<boolean>(false);
@@ -199,27 +199,27 @@ const hasSocials = typeof socials === "string" && socials.trim() !== "";
             </div>
         </div>
   
-        <ChangeAbout
-                setShow={setShowAboutModal}
-                show={showAboutModal}
+        <ChangeEmail
+                setShow={setShowEmailModal}
+                show={showEmailModal}
                 setChanged={setChanged}
             />
 
-        <ChangeEducation
-                setShow={setShowEducationModal}
-                show={showEducationModal}
+        <ChangeContactnumber
+                setShow={setShowContactModal}
+                show={showContactnumberModal}
                 setChanged={setChanged}
             />
 
-        <ChangeExperience
-                setShow={setShowExperienceModal}
-                show={showExperienceModal}
+        <ChangeVideo
+                setShow={setShowVideoModal}
+                show={showVideoModal}
                 setChanged={setChanged}
             />
 
-        <ChangeVolunteering
-                setShow={setShowVolunteeringModal}
-                show={showVolunteeringModal}
+        <ChangeSocials
+                setShow={setShowSocialModal}
+                show={showSocialModal}
                 setChanged={setChanged}
             />
 

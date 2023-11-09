@@ -115,7 +115,7 @@ export const ChangeEmail = ({
     )
 }
 
-export const ChangeEducation = ({
+export const ChangeContactnumber = ({
     show,
     setShow,
     setChanged,
@@ -125,10 +125,7 @@ export const ChangeEducation = ({
     setChanged: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
 
-    const [educationInstitution, seteducationInstitution] = useState<string>("")
-    const [educationPosition, seteducationPosition] = useState<string>("")
-    const [educationStartYear, seteducationStartYear] = useState<Date>()
-    const [educationEndYear, seteducationEndYear] = useState<Date>()
+    const [Contactnumber, setContactnumber] = useState<string>("")
 
     const [imageName, setImageName] = useState<string | undefined>(undefined)
     const [image, setImage] = useState<File | undefined>()
@@ -145,16 +142,9 @@ export const ChangeEducation = ({
     // profileInput.value = ""
     }
 
-    // useEffect(() => {
-    //     setAbout(nurse?.firstName)
-    // }, [loading])
-
     const handleSubmit = async () => {
         await editDetails({
-            educationInstitution,
-            educationPosition,
-            educationStartYear,
-            educationEndYear
+            Contactnumber,
         })
     }
 
@@ -177,64 +167,19 @@ export const ChangeEducation = ({
                 />
                 <div className="bg-white rounded-lg shadow-2xl border-2 z-10 p-10 w-1/2">
                     <span className="text-3xl font-bold text-[#053B50]">
-                        {imageName ? "Preview" : "Edit Education"}
+                        {imageName ? "Preview" : "Edit Contact Number"}
                     </span>
                 
                     {/* Input fields for About details */}
                     <div className="mt-5">
-                        <label htmlFor="institution">Institution</label>
+                        <label htmlFor="contactnumber">Contact Number</label>
                         <input
                             type="text"
-                            id="institution"
+                            id="contactnumber"
                             className="input input-bordered w-full mt-2"
-                            onChange = {(e) => seteducationInstitution(e.target.value)}
+                            onChange = {(e) => setContactnumber(e.target.value)}
                         />
                     </div>
-
-                    <div className="mt-5">
-                        <label htmlFor="position">Position</label>
-                        <input
-                            type="text"
-                            id="position"
-                            className="input input-bordered w-full mt-2"
-                            onChange = {(e) => seteducationPosition(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="mt-5">
-                            <label htmlFor="education-start-date">
-                                Start Year:
-                            </label>
-                            <input
-                                type="date"
-                                id="education-start-date"
-                                className="input input-bordered w-full mt-2"
-                                onChange={(e) => {
-                                    //convert to date object without time
-                                    const selectedDate = new Date(e.target.value);
-                                    console.log(selectedDate)
-                                    seteducationStartYear(selectedDate)
-                                }}
-                            />
-                    </div>
-
-                    <div className="mt-5">
-                            <label htmlFor="education-end-date">
-                                End Year:
-                            </label>
-                            <input
-                                type="date"
-                                id="education-end-date"
-                                className="input input-bordered w-full mt-2"
-                                onChange={(e) => {
-                                    //convert to date object without time
-                                    const selectedDate = new Date(e.target.value);
-                                    console.log(selectedDate)
-                                    seteducationEndYear(selectedDate)
-                                }}
-                            />
-                    </div>
-
              
                     <div className="flex w-full justify-end mt-5 gap-4">
                         <button
@@ -277,7 +222,7 @@ export const ChangeEducation = ({
     )
 }
 
-export const ChangeExperience = ({
+export const ChangeVideo = ({
     show,
     setShow,
     setChanged,
@@ -287,12 +232,7 @@ export const ChangeExperience = ({
     setChanged: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
 
-    const [experienceCompany, setexperienceCompany] = useState<string>("")
-    const [experienceSpecialization, setexperienceSpecialization] = useState<string>("")
-    const [experienceEmploymentType, setexperienceEmploymentType] = useState<string>("")
-    const [experienceDescription, setexperienceDescription] = useState<string>("")
-    const [experienceStartYear, setexperienceStartYear] = useState<Date>()
-    const [experienceEndYear, setexperienceEndYear] = useState<Date>()
+    const [video, setVideo] = useState<string>("")
 
     const [imageName, setImageName] = useState<string | undefined>(undefined)
     const [image, setImage] = useState<File | undefined>()
@@ -309,18 +249,9 @@ export const ChangeExperience = ({
     profileInput.value = ""
     }
 
-    // useEffect(() => {
-    //     setAbout(nurse?.firstName)
-    // }, [loading])
-
     const handleSubmit = async () => {
         await editDetails({
-            experienceCompany,
-            experienceSpecialization,
-            experienceDescription,
-            experienceEmploymentType,
-            experienceStartYear,
-            experienceEndYear
+            video,
         })
     }
 
@@ -347,77 +278,13 @@ export const ChangeExperience = ({
                 
                     {/* Input fields for About details */}
                     <div className="mt-5">
-                        <label htmlFor="company">Company</label>
+                        <label htmlFor="video">YouTube Video</label>
                         <input
                             type="text"
-                            id="company"
+                            id="video"
                             className="input input-bordered w-full mt-2"
-                            onChange = {(e) => setexperienceCompany(e.target.value)}
+                            onChange = {(e) => setVideo(e.target.value)}
                         />
-                    </div>
-
-                    <div className="mt-5">
-                        <label htmlFor="specialization">Specialization</label>
-                        <input
-                            type="text"
-                            id="specialization"
-                            className="input input-bordered w-full mt-2"
-                            onChange = {(e) => setexperienceSpecialization(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="mt-5">
-                        <label htmlFor="employment-type">Employment Type</label>
-                        <input
-                            type="text"
-                            id="employment-type"
-                            className="input input-bordered w-full mt-2"
-                            onChange = {(e) => setexperienceEmploymentType(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="mt-5">
-                        <label htmlFor="description">Description</label>
-                        <input
-                            type="text"
-                            id="description"
-                            className="input input-bordered w-full mt-2"
-                            onChange = {(e) => setexperienceDescription(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="mt-5">
-                            <label htmlFor="experiece-start-date">
-                                Start Year:
-                            </label>
-                            <input
-                                type="date"
-                                id="experiece-start-date"
-                                className="input input-bordered w-full mt-2"
-                                onChange={(e) => {
-                                    //convert to date object without time
-                                    const selectedDate = new Date(e.target.value);
-                                    console.log(selectedDate)
-                                    setexperienceStartYear(selectedDate)
-                                }}
-                            />
-                    </div>
-
-                    <div className="mt-5">
-                            <label htmlFor="experience-end-date">
-                                End Year:
-                            </label>
-                            <input
-                                type="date"
-                                id="experience-end-date"
-                                className="input input-bordered w-full mt-2"
-                                onChange={(e) => {
-                                    //convert to date object without time
-                                    const selectedDate = new Date(e.target.value);
-                                    console.log(selectedDate)
-                                    setexperienceEndYear(selectedDate)
-                                }}
-                            />
                     </div>
              
                     <div className="flex w-full justify-end mt-5 gap-4">
@@ -460,7 +327,7 @@ export const ChangeExperience = ({
     </>)
 }
 
-export const ChangeVolunteering = ({
+export const ChangeSocials = ({
     show,
     setShow,
     setChanged,
@@ -470,11 +337,8 @@ export const ChangeVolunteering = ({
     setChanged: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
 
-    const [volunteeringCompany, setvolunteeringCompany] = useState<string>("")
-    const [volunteeringSpecialization, setvolunteeringSpecialization] = useState<string>("")
-    const [volunteeringDescription, setvolunteeringDescription] = useState<string>("")
-    const [volunteeringStartYear, setvolunteeringStartYear] = useState<Date>()
-    const [volunteeringEndYear, setvolunteeringEndYear] = useState<Date>()
+    const [type, setType] = useState<string>("")
+    const [link, setLink] = useState<string>("")
 
     const [imageName, setImageName] = useState<string | undefined>(undefined)
     const [image, setImage] = useState<File | undefined>()
@@ -482,24 +346,17 @@ export const ChangeVolunteering = ({
 
     const reset = () => {
         
-    // const profileInput = document.getElementById(
-    //     "profile-input"
-    // ) as HTMLInputElement
     setImageName(undefined)
     setImage(undefined)
     setShow(false)
-    // profileInput.value = ""
     }
 
 
 
     const handleSubmit = async () => {
         await editDetails({
-            volunteeringCompany,
-            volunteeringSpecialization,
-            volunteeringDescription,
-            volunteeringStartYear,
-            volunteeringEndYear
+            type,
+            link,
         })
     }
 
@@ -522,74 +379,29 @@ export const ChangeVolunteering = ({
                 />
                 <div className="bg-white rounded-lg shadow-2xl border-2 z-10 p-10 w-1/2">
                     <span className="text-3xl font-bold text-[#053B50]">
-                        {imageName ? "Preview" : "Edit Volunteering"}
+                        {imageName ? "Preview" : "Edit Socials"}
                     </span>
                 
                     {/* Input fields for About details */}
                     <div className="mt-5">
-                        <label htmlFor="volunteeringCompany">Company/Institution</label>
+                        <label htmlFor="social-type">Type</label>
                         <input
                             type="text"
-                            id="volunteeringCompany"
+                            id="social-type"
                             className="input input-bordered w-full mt-2"
-                            onChange = {(e) => setvolunteeringCompany(e.target.value)}
+                            onChange = {(e) => setType(e.target.value)}
                         />
                     </div>
 
                     <div className="mt-5">
-                        <label htmlFor="volunteeringSpecialization">Specialization</label>
+                        <label htmlFor="socials-link">Link</label>
                         <input
                             type="text"
-                            id="volunteeringSpecialization"
+                            id="socials-link"
                             className="input input-bordered w-full mt-2"
-                            onChange = {(e) => setvolunteeringSpecialization(e.target.value)}
+                            onChange = {(e) => setLink(e.target.value)}
                         />
                     </div>
-
-                    <div className="mt-5">
-                        <label htmlFor="volunteeringDescription">Description</label>
-                        <input
-                            type="text"
-                            id="volunteeringDescription"
-                            className="input input-bordered w-full mt-2"
-                            onChange = {(e) => setvolunteeringDescription(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="mt-5">
-                            <label htmlFor="volunteering-start-date">
-                                Start Year:
-                            </label>
-                            <input
-                                type="date"
-                                id="volunteering-start-date"
-                                className="input input-bordered w-full mt-2"
-                                onChange={(e) => {
-                                    //convert to date object without time
-                                    const selectedDate = new Date(e.target.value);
-                                    console.log(selectedDate)
-                                    setvolunteeringStartYear(selectedDate)
-                                }}
-                            />
-                    </div>
-
-                    <div className="mt-5">
-                            <label htmlFor="volunteering-end-date">
-                                End Year:
-                            </label>
-                            <input
-                                type="date"
-                                id="volunteering-end-date"
-                                className="input input-bordered w-full mt-2"
-                                onChange={(e) => {
-                                    //convert to date object without time
-                                    const selectedDate = new Date(e.target.value);
-                                    console.log(selectedDate)
-                                    setvolunteeringEndYear(selectedDate)
-                                }}
-                            />
-                    </div>
-
              
                     <div className="flex w-full justify-end mt-5 gap-4">
                         <button
