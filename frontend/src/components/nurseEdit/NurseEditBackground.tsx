@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChangeAbout, ChangeEducation, ChangeExperience, ChangeTechnicalSkill, ChangeVolunteering } from "../modals/EditBackgroundModals.tsx";
+import { ChangeAbout, ChangeEducation, ChangeExperience, ChangeTechnicalSkill, ChangeVolunteering } from "../modals/editBackgroundModals.tsx";
 import useDynamicFetch from "../../hooks/useDynamicFetch.tsx"
 import { AiOutlinePlusCircle } from "react-icons/ai"
 
