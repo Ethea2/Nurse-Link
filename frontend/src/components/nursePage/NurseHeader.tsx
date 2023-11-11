@@ -5,8 +5,22 @@ import { BsFillPersonFill } from "react-icons/bs"
 import { BsFacebook, BsTwitter } from "react-icons/bs"
 import { useAuth } from "../../hooks/useAuth"
 import { useNavigate } from "react-router"
+import useAddConnection from "../../hooks/useAddDocument"
 
 const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
+
+    const { addNurseConnection } = useAddConnection()
+
+    const handleAddConnection = async (
+        e: React.MouseEvent<HTMLButtonElement>,
+        connectionSender: string,
+        connectionReceiver: string
+    ) => {
+        e.preventDefault()
+        await addNurseConnection(connectionSender, connectionReceiver)
+    }
+
+
     const { user } = useAuth()
     const nav = useNavigate()
     return (
@@ -62,6 +76,19 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                             onClick={() => nav(`/nurse/edit/${user.id}`)}
                         >
                             Edit Profile
+                        </button>
+                    )}
+                    {user?.id !== nurse?.userId && (
+                        <button
+                            className="btn rounded-full text-[#176B87] hover:text-[#00CEC8] bg-white shadow-lg"
+                            //className="btn rounded-full bg-secondary hover:bg-accent-blue border-transparent shadow-inner drop-shadow-lg text-white normal-case"
+                            onClick={(e) => {
+                                if (user) {
+                                  handleAddConnection(e, user?.id, nurse.userId);
+                                }
+                              }}
+                        >
+                            CONNECT
                         </button>
                     )}
                 </div>
