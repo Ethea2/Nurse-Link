@@ -258,14 +258,20 @@ const addDocument = async (req, res) => {
         console.log(result)
     }
 
+}
 
+const getNurseConnections = async (req, res) => {
+    const { userId } = req.params
+    try {
+        const connections = await Nurse.find({ userId }, { connections: 1, _id: 0})
+        if (!connections)
+            return res.status(404).json({ message: "Could not find connections for user!" })
 
-
-
-
-
-
-
+        return res.status(200).json(connections)
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({ message: "Something went wrong!" })
+    }
 }
 
 module.exports = {
@@ -275,5 +281,6 @@ module.exports = {
     deleteNurse,
     editNurseProfilePicture,
     editNurseBanner,
-    addDocument
+    addDocument,
+    getNurseConnections
 }

@@ -21,7 +21,7 @@ const userSchema = new Schema({
     userType: {
         type: String,
         enum: ['nurse', 'institute'],
-        dafault: 'nurse'
+        default: 'nurse'
     },
 },  {timestamps: true})
 

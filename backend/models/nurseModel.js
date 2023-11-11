@@ -184,6 +184,36 @@ const nurseSchema = new Schema({
             }
         ],
     },
+    connections: {
+        type: [mongoose.Schema.Types.ObjectId]
+    },
+    connectionSent: {
+        type: [mongoose.Schema.Types.ObjectId]
+    },
+    connectionReceived: {
+        type: [mongoose.Schema.Types.ObjectId]
+    },
+    notification: [{
+        type: {
+            type: String,
+            enum: ['connectionRequest', 'recommendation', 'hiring', 'account'],
+            default: 'account',
+            required: true
+        },
+        status: {
+            type: String,
+            enum: ['read', 'unread',],
+            default: 'unread',
+            required: true
+        },
+        userInvolved: {
+            type: mongoose.Schema.Types.ObjectId
+        },
+        date: {
+            type: Date,
+            required: true
+        }
+    }]
 }, {timestamps: true})
 
 module.exports = mongoose.model("Nurse", nurseSchema, "Nurse")
