@@ -20,10 +20,10 @@ const SideContainer = ({ nurse }: { nurse: NurseType }) => {
         }
 
         if (
-            nurse?.technicalSkill.length >= 1 &&
-            nurse?.credentials.education.length >= 1 &&
-            nurse?.credentials.experience.length >= 1 &&
-            nurse?.credentials.volunteering.length >= 1 &&
+            nurse?.technicalSkill.length >= 1 ||
+            nurse?.credentials.education.length >= 1 ||
+            nurse?.credentials.experience.length >= 1 ||
+            nurse?.credentials.volunteering.length >= 1 ||
             nurse?.credentials.document.length >= 1
         ) {
             setIsEmpty(false)
