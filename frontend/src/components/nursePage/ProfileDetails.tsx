@@ -8,7 +8,7 @@ const ProfileDetails = ({ nurse }: { nurse: NurseType }) => {
   useEffect(() => {
     console.log(nurse);
   });
-
+// Set up the logic for conditional rendering, also added the nurse data na.
   return (
     <div className="detailsContainer flex flex-col w-full rounded-lg font-open-sans">
       {nurse?.about && (
