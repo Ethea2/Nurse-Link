@@ -274,10 +274,15 @@ const getNurseConnections = async (req, res) => {
     }
 }
 
-const addNurseConnection = async (req, res) => {
+const acceptNurseConnection = async (req, res) => {
+    req.connectionReceiver
+    req.connectionSender
     return res.status(200).json(connections)
 }
 
+//const sendNurseConnection
+
+//const rejectNurseConnection
 
 const deleteNurseConnection = async (req, res) => {
     return res.status(200).json(connections)
@@ -293,5 +298,5 @@ module.exports = {
     editNurseBanner,
     addDocument,
     getNurseConnections,
-    addNurseConnection
+    acceptNurseConnection
 }

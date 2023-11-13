@@ -1,6 +1,6 @@
 const express = require("express")
 const { checkAuth } = require("../middlewears/checkAuth")
-const { getNurses, getNurse, editNurse, deleteNurse, editNurseProfilePicture, editNurseBanner, addDocument } = require("../controllers/nurseController")
+const { getNurses, getNurse, editNurse, deleteNurse, editNurseProfilePicture, editNurseBanner, addDocument, acceptNurseConnection } = require("../controllers/nurseController")
 
 const nurseRouter = express.Router()
 
@@ -17,5 +17,7 @@ nurseRouter.post("/edit/addDocument", checkAuth, addDocument)
 nurseRouter.post("/edit/details", checkAuth, editNurse)
 
 nurseRouter.delete("/:userId", checkAuth, deleteNurse)
+
+nurseRouter.post("/connection/acceptNurseConnection", checkAuth, acceptNurseConnection)
 
 module.exports = nurseRouter
