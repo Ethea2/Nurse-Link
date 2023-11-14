@@ -7,11 +7,12 @@ const ProgressCard = ({ nurse }: { nurse: NurseType }) => {
     const { user } = useAuth()
     const nav = useNavigate()
 
-    const style = {
+    const outerStyle = {
         "--value": `${nurse?.progress}`,
         "--size": "12rem",
-        "--thickness": "15px",
+        "--thickness": "8px",
     } as React.CSSProperties
+
     const profileProg = [
         {
             name: "Initial Details",
@@ -40,49 +41,55 @@ const ProgressCard = ({ nurse }: { nurse: NurseType }) => {
     ]
 
     return (
-        <div className="progressCard flex flex-col justify-center items-center w-full border-2 px-6 pt-6 rounded-lg font-open-sans">
-            <div className="textContainer">
+        <div className="progressCard flex flex-col justify-center items-center w-full pt-8 rounded-lg font-open-sans bg-white border">
+            <div className="textContainer px-8">
                 <p className="textHeader font-bold md:text-2xl text-left">
                     Your profile is making progress!
                 </p>
-                <p className="textBody text-left text-sm pt-2">
-                    Check out what else you can add to complete you profile.
+                <p className="textBody text-left text-base pt-4">
+                    Check out what else you can add to complete your profile.
                 </p>
             </div>
             <div className="progressContainer pt-5 items-center text-center">
                 <div
-                    className="radial-progress transition-all ease-in duration-150 text-3xl text-primary"
-                    style={style}
+                    className="relative radial-progress transition-all ease-in duration-150"
+                    style={outerStyle}
                 >
-                    <p className="percentage font-bold text-center text-4xl">
-                        {nurse?.progress}%
-                    </p>
-                    <p className="complete text-xl text-center">COMPLETE</p>
+                    <div
+                        className="flex flex-col items-center justify-center border-8 rounded-full"
+                        style={{
+                            width: "12rem",
+                            height: "12rem",
+                        }}
+                    >
+                        <p className="percentage font-bold text-3xl text-primary">
+                            {nurse?.progress}%
+                        </p>
+                        <p className="complete text-xl text-primary mt-2 font-bold">COMPLETE</p>
+                    </div>
                 </div>
-                <div className="progressChecklist py-5">
+                <div className="progressChecklist px-8 py-6">
                     {profileProg.map((prog) => (
                         <div
-                            className={`flex ${
-                                prog.done
-                                    ? " text-primary"
-                                    : "text-outline-text opacity-30"
-                            }`}
+                            className={`flex ${prog.done
+                                ? "text-primary"
+                                : "text-outline-text opacity-30"
+                                }`}
                         >
-                            <div className="progressName flex items-center gap-2">
-                                <PiCheckCircleBold className="w-11 h-11" />
+                            <div className="progressName flex items-center gap-2 mt-2">
+                                <PiCheckCircleBold className="w-8 h-8" />
                                 <p className="w-44 text-left">{prog.name}</p>
                             </div>
                         </div>
                     ))}
                 </div>
-                <div className="editProfileBtn border-t py-2">
-                    <button className="button cursor-pointer" onClick={() => nav(`/nurse/edit/${user!.id}`)}>
+                <div className="editProfileBtn border-t py-3">
+                    <button className="button cursor-pointer font-bold" onClick={() => nav(`/nurse/edit/${user!.id}`)}>
                         Edit Profile
                     </button>
-                    
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

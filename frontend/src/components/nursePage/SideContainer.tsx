@@ -33,18 +33,18 @@ const SideContainer = ({ nurse }: { nurse: NurseType }) => {
     }, [user, nurse])
 
     return (
-        <div className="flex w-full p-10 gap-10">
-            <div className="leftContainer w-1/4">
+        <div className="flex w-full">
+            <div className={`leftContainer ${user?.id === nurse?.userId ? 'pr-10' : ''}`}>
                 {user?.id === nurse?.userId && <ProgressCard nurse={nurse} />}
             </div>
-            <div className="rightContainer bg-white w-full h-auto">
+            <div className="rightContainer">
                 {isEmpty ? (
                     <div className="isEmpty">
-                        <EmptyProfile nurse={nurse}/>
+                        <EmptyProfile nurse={nurse} />
                     </div>
                 ) : (
-                    <div className="isNotEmpty ">
-                        <ProfileDetails nurse={nurse}/>
+                    <div className="isNotEmpty">
+                        <ProfileDetails nurse={nurse} />
                     </div>
                 )}
             </div>
