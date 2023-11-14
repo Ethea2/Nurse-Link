@@ -163,7 +163,7 @@ const LoggedInProfileMenu = ({
             <label tabIndex={0} className="h-full avatar">
                 <img
                     src={user?.img}
-                    className="h-full object-fill hover:scale-105 transition duration-200 ease-in rounded-full border-white border-2 shadow"
+                    className="h-full object-fill hover:scale-105 transition duration-200 ease-in rounded-full border-white border-4 shadow"
                 />
             </label>
             <ul tabIndex={0} className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-40">

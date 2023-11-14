@@ -28,7 +28,7 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                 <div className="leftDetails flex-1 text-xl font-semibold font-open-sans">
                     <div className="phoneNumber text-lg">
                         <PiPhoneFill className="Phone w-8 h-8 mr-5 justify-center items-center inline-flex text-outline-text" />{" "}
-                        0905 467 2750
+                        {nurse?.phoneNum}
                     </div>
                     <div className="email pt-5 text-lg">
                         <PiEnvelopeSimpleBold className="Email w-8 h-8 mr-5 justify-center items-center inline-flex text-outline-text" />

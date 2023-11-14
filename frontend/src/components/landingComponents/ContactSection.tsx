@@ -12,18 +12,18 @@ const ContactSection = () => {
                 <p className="text-5xl lg:text-6xl font-bold font-poppins">
                     Have any more questions?
                 </p>
-                <p className="text-2xl lg:text-3xl mt-10 font-semibold font-montserrat">
+                <p className="text-2xl lg:text-xl mt-10 font-semibold font-montserrat">
                     Contact us at
                 </p>
-                <p className="text-2xl lg:text-3xl flex items-center gap-4 mt-5 font-open-sans">
+                <p className="text-2xl lg:text-xl flex items-center gap-4 mt-5 font-open-sans">
                     <IoCall /> +02 8623 8911{" "}
                 </p>
-                <p className="text-2xl lg:text-3xl mt-5 font-open-sans">
+                <p className="text-2xl lg:text-xl mt-5 font-open-sans">
                     <span className="icon-wrapper flex items-center justify center text-md gap-4">
                         <AiOutlineMail /> nurselink@gmail.com
                     </span>
                 </p>
-                <p className="text-2xl lg:text-3xl flex items-center gap-4 mt-5 font-open-sans">
+                <p className="text-2xl lg:text-xl flex items-center gap-4 mt-5 font-open-sans">
                     <FaLocationDot /> 2401 Taft Ave, Malate, <br /> Manila, Metro
                     Manila 1004{" "}
                 </p>

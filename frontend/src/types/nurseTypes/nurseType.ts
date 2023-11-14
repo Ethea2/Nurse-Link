@@ -16,6 +16,7 @@ export interface NurseType {
     bannerPicture: string
     username: string
     email: string
+    phoneNum: string
     progress: number
     technicalSkill: Array<string>
     credentials: CredentialsType

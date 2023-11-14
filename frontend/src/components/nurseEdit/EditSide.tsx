@@ -4,7 +4,7 @@ import UserType from "../../types/userTypes/userType"
 const EditSide = ({ user }: { user: UserType }) => {
     return (
         <div className="invisible md:visible flex flex-col w-1/4 text-outline-text">
-            <p className="text-4xl font-bold mb-5">Edit Profile</p>
+            <p className="text-3xl font-bold mb-5">Edit Profile</p>
             <Link to={`/nurse/edit/${user?.id}`}>
                 <p className="text-xl mb-2 hover:text-secondary">Personal Information</p>
             </Link>

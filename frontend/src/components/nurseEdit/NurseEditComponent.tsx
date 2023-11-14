@@ -29,6 +29,13 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
         setCity(nurse?.city ?? "")
     }, [loading])
 
+    const handleReset = () => {
+        setFirstName("");
+        setLastName("");
+        setSpecialization("");
+        setCity("");
+    };
+
     const handleSubmit = async () => {
         await editDetails({
             specialization,
@@ -42,7 +49,7 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
         <div id="nurse-edit-container" className="w-full h-fit flex flex-col">
 
             {/*Title*/}
-            <div id="nurse-edit-title-container" className="text-5xl font-bold text-primary mb-5">
+            <div id="nurse-edit-title-container" className="text-4xl font-bold text-primary mb-8">
                 Personal Information
             </div>
 
@@ -196,7 +203,7 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
 
                 <div className="flex justify-center w-full">
                     <button
-                        onClick={handleSubmit}
+                        onClick={handleReset}
                         className="btn w-[15%] mr-5 rounded-full bg-white hover:bg-accent-blue text-secondary hover:text-neutral normal-case drop-shadow-md"
                     >
                         Reset

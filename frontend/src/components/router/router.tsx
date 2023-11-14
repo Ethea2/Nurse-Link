@@ -3,7 +3,6 @@ import Landing from "../../pages/landing/Landing"
 import Homepage from "../../pages/homepage/Homepage"
 import RegisterPage from "../../pages/register/RegisterPage"
 import LoginPage from "../../pages/login/LoginPage"
-import NurseProfile from "../../pages/profile/NurseProfile"
 import RegisterNurse from "../../pages/registerNurse/RegisterNurse"
 import RegisterInstitute from "../../pages/registerInstitute/RegisterInstitute"
 import Nurse from "../../pages/nurse/Nurse"
@@ -18,15 +17,14 @@ const routes: Array<RouteType> = [
     { path: "/homepage", element: <Homepage />, name: "NurseLink" },
     { path: "/register", element: <RegisterPage /> },
     { path: "/login", element: <LoginPage /> },
-    { path: "/nurse-profile", element: <NurseProfile /> },
     { path: "/register-nurse", element: <RegisterNurse /> },
     { path: "/register-institute", element: <RegisterInstitute /> },
     { path: "/nurse/:userId", element: <Nurse /> },
     { path: "/nurse/edit/:userId", element: <NurseEditPage /> },
     { path: "/institute/:userId", element: <Institute /> },
-    { path: "/nurse/edit/documents/:userId", element: <NurseEditDocumentPage />},
-    { path: "/nurse/edit/background/:userId", element: <NurseEditBackgroundPage />},
-    { path: "/nurse/edit/contact/:userId", element: <NurseEditContactPage />}
+    { path: "/nurse/edit/documents/:userId", element: <NurseEditDocumentPage /> },
+    { path: "/nurse/edit/background/:userId", element: <NurseEditBackgroundPage /> },
+    { path: "/nurse/edit/contact/:userId", element: <NurseEditContactPage /> }
 ]
 
 export default routes
