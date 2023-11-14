@@ -55,14 +55,14 @@ const NavLeft = ({
             >
                 <FiMenu />
             </motion.button>
-            
+
             <Link to="/">
                 <Logo />
             </Link>
-                {routes.map((route: RouteType) => {
-                    if (route.name)
-                        return <NavLink text={route.name} path="/" />
-                })}
+            {routes.map((route: RouteType) => {
+                if (route.name)
+                    return <NavLink text={route.name} path="/" />
+            })}
         </div>
     )
 }
@@ -155,30 +155,51 @@ const LoggedInProfileMenu = ({
     user: UserType
     logout: Function
 }) => {
+
     const nav = useNavigate()
+
     return (
         <div className="rounded-full h-14 dropdown dropdown-end">
-            <label  tabIndex={0} className="h-full avatar">
+            <label tabIndex={0} className="h-full avatar">
                 <img
                     src={user?.img}
-                    className="h-full object-fill hover:scale-105 transition duration-200 ease-in border-4 rounded-full shadow-md shadow-[#00CEC8] border-white "
+                    className="h-full object-fill hover:scale-105 transition duration-200 ease-in rounded-full border-white "
                 />
             </label>
-            <ul  tabIndex={0} className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 text-center">
+            <ul tabIndex={0} className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-43">
                 <li>
                     <button
-                        className="flex justify-center items-center w-full font-bold"
-                        onClick={() => logout()}
+                        onClick={() => nav(`/nurse/${user.id}`)}
                     >
-                        Sign out!
+                        View Profile
                     </button>
                 </li>
                 <li>
                     <button
-                        className="flex justify-center items-center w-full font-bold"
                         onClick={() => nav(`/nurse/${user.id}`)}
                     >
-                        View Profile
+                        Requests
+                    </button>
+                </li>
+                <li>
+                    <button
+                        onClick={() => nav(`/nurse/recommendations/receive/${user.id}`)}
+                    >
+                        Recommendations
+                    </button>
+                </li>
+                <li>
+                    <button
+                        onClick={() => nav(`/nurse/${user.id}`)}
+                    >
+                        Fast Pass
+                    </button>
+                </li>
+                <li>
+                    <button
+                        onClick={() => logout()}
+                    >
+                        Sign Out
                     </button>
                 </li>
             </ul>
