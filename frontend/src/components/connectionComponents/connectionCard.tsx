@@ -9,34 +9,47 @@ const ConnectionCard = ({ nurseId }: { nurseId: string }) => {
   const { data: nurse, loading } = useFetch(`/api/nurse/${nurseId}`);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
-  useEffect(() => {
-    // Add any additional logic you need
-  }, [nurse]);
+  const [isHovered, setIsHovered] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
 
   return (
-    <div className="connection-card bg-blue-800 rounded-lg p-4 flex items-center justify-between w-100 h-[8rem]">
-      <div className="profile-picture w-16 h-16 bg-white rounded-full">
+    <div
+            className={`connection-card rounded-lg p-4 flex items-center justify-between w-100 h-[10rem] ${
+                isHovered ? "hovered" : ""
+            }`}
+            style={{ backgroundColor: isHovered ? "#176B87" : "#FFFFFF",
+                     boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)"}}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            
+        >
+      <div className="profile-picture w-1/5 bg-white rounded-full">
         <img src={nurse?.profilePicture}/>
       </div>
-      <div className="names flex flex-col ml-4">
-        <div className="text-white">{nurse?.firstName}</div>
-        <div className="text-white">{nurse?.lastName}</div>
+      <div className={`names flex flex-col w-1/3 ${isHovered ? "text-white" : "text-black"}`}
+            style={{fontFamily: "Poppins"}}>
+        <div className="text-xl font-bold">{nurse?.firstName} {nurse?.lastName}</div>
+        <div className="text-l italic">{nurse?.city}</div>
       </div>
       <div className="dropdown relative">
         <button
           onClick={toggleDropdown}
           className="dropdown-button bg-white text-blue-800 px-2 py-1 rounded"
+          style={{ backgroundColor: isHovered ? "#176B87" : "#FFFFFF",
+                   cursor: "pointer"}}
         >
-          Options
+          <img src="https://res.cloudinary.com/dialvcsco/image/upload/v1699954243/DotsThreeOutlinethreeblack_io5446.png"
+          style={{ display: isHovered ? "none" : "block" }}/>
+          <img src="https://res.cloudinary.com/dialvcsco/image/upload/v1699954243/DotsThreeOutlinethreewhite_amhcq2.png"
+          style={{ display: isHovered ? "block" : "none" }}/>
         </button>
         {dropdownVisible && (
-          <div className="dropdown-content absolute bg-white shadow-md rounded mt-2">
-            <div className="px-2 py-1">Disconnect</div>
-            <div className="px-2 py-1">Recommend</div>
+          <div className="dropdown-content absolute bg-white shadow-md rounded mt-2" style={{ fontFamily: "Poppins" }}>
+            <div className="px-2 py-1" style={{ cursor: "pointer"}}>Disconnect</div>
+            <div className="px-2 py-1" style={{ cursor: "pointer"}}>Recommend</div>
           </div>
         )}
       </div>
