@@ -37,168 +37,179 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
             city,
         })
     }
+
     return (
-        <div
-            id="nurse-edit-container"
-            className="w-full h-fit flex flex-col p-10"
-        >
-            <div
-                id="nurse-edit-title-container"
-                className="text-6xl font-bold text-[#053B50] "
-            >
-                Edit Profile
+        <div id="nurse-edit-container" className="w-full h-fit flex flex-col">
+
+            {/*Title*/}
+            <div id="nurse-edit-title-container" className="text-5xl font-bold text-primary mb-5">
+                Personal Information
             </div>
-            <div id="nurse-edit-details" className="w-full h-full">
+
+            {/*Profile Banner and Image*/}
+            <div id="nurse-edit-img-container" className="flex flex-col rounded-2xl drop-shadow-lg h-[450px] mb-5 bg-white">
                 <div
-                    id="nurse-edit-img-container"
-                    className="flex flex-col border-2 rounded-2xl drop-shadow-xl h-[450px]"
+                    className="relative w-full h-2/3 flex cursor-pointer justify-center items-center"
+                    onMouseEnter={() => setHoverBanner(true)}
+                    onMouseLeave={() => setHoverBanner(false)}
+                >
+                    {hoverBanner && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2, ease: "easeIn" }}
+                            className="absolute bg-primary/50 flex flex-col justify-center items-center w-full h-full rounded-t-2xl"
+                            onClick={() => setShowBannerModal(true)}
+                        >
+                            <BsFillImageFill className="text-white text-4xl" />
+                            <p className="text-white font-semibold mt-2">
+                                Edit Profile Banner
+                            </p>
+                        </motion.div>
+                    )}
+                    <img
+                        src={nurse?.bannerPicture}
+                        className="object-cover w-full h-full rounded-t-2xl"
+                    />
+                </div>
+                <div
+                    id="nurse-edit-profile"
+                    className="absolute bottom-5 left-20 mb-10"
                 >
                     <div
-                        className="relative w-full h-2/3 flex cursor-pointer justify-center items-center"
-                        onMouseEnter={() => setHoverBanner(true)}
-                        onMouseLeave={() => setHoverBanner(false)}
+                        onMouseEnter={() => setHoverProfile(true)}
+                        onMouseLeave={() => setHoverProfile(false)}
+                        className="border-8 border-white shadow-b-2xl flex justify-center bg-white items-center rounded-full cursor-pointer"
                     >
-                        {hoverBanner && (
+                        {hoverProfile && (
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                transition={{ duration: 0.2, ease: "easeIn" }}
-                                className="absolute bg-[#053B50]/50 flex flex-col justify-center items-center w-full h-full rounded-t-2xl"
-                                onClick={() => setShowBannerModal(true)}
+                                transition={{
+                                    duration: 0.2,
+                                    ease: "easeIn",
+                                }}
+                                onClick={() => setShowProfileModal(true)}
+                                className="absolute bg-[#053B50]/50 flex flex-col justify-center items-center w-full h-full rounded-full"
                             >
-                                <BsFillImageFill className="text-white text-5xl" />
-                                <span className="text-white font-semibold">
-                                    Edit Profile Banner
-                                </span>
+                                <BsFillImageFill className="text-white text-4xl" />
+                                <p className="text-white font-semibold mt-2">
+                                    Edit Profile Photo
+                                </p>
                             </motion.div>
                         )}
                         <img
-                            src={nurse?.bannerPicture}
-                            className="object-cover w-full h-full rounded-t-2xl"
+                            src={nurse?.profilePicture}
+                            className="w-full h-full rounded-full"
                         />
                     </div>
-                    <div
-                        id="nurse-edit-profile"
-                        className="absolute bottom-5 left-20"
-                    >
-                        <div
-                            onMouseEnter={() => setHoverProfile(true)}
-                            onMouseLeave={() => setHoverProfile(false)}
-                            className="border-8 border-white shadow-b-2xl flex justify-center bg-white items-center rounded-full cursor-pointer"
-                        >
-                            {hoverProfile && (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{
-                                        duration: 0.2,
-                                        ease: "easeIn",
-                                    }}
-                                    onClick={() => setShowProfileModal(true)}
-                                    className="absolute bg-[#053B50]/50 flex flex-col justify-center items-center w-full h-full rounded-full"
-                                >
-                                    <BsFillImageFill className="text-white text-5xl" />
-                                    <span className="text-white font-semibold">
-                                        Edit Profile Photo
-                                    </span>
-                                </motion.div>
-                            )}
-                            <img
-                                src={nurse?.profilePicture}
-                                className="w-full h-full rounded-full"
-                            />
-                        </div>
-                    </div>
-                    <div className="w-full h-28 flex justify-end items-end gap-5 p-5" />
                 </div>
-                <div
-                    id="nurse-edit-details"
-                    className="flex flex-col w-full border-2 rounded-xl mt-2 shadow-lg p-1"
-                >
-                    <div className="flex justify-between w-full gap-2">
-                        <div className="w-1/2">
-                            <label className="label">
-                                <span className="label-text">First Name</span>
-                            </label>
-                            <input
-                                type="text"
-                                placeholder="Type here"
-                                className="input input-bordered w-full"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
-                            />
-                        </div>
-                        <div className="w-1/2">
-                            <label className="label">
-                                <span className="label-text">Last Name</span>
-                            </label>
-                            <input
-                                type="text"
-                                placeholder="Type here"
-                                className="input input-bordered w-full"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                            />
-                        </div>
+            </div>
+
+            {/*Profile Information*/}
+            <div id="nurse-edit-details" className="flex flex-col w-full mt-3">
+
+                {/*Name*/}
+                <div className="flex justify-between w-full gap-8">
+                    <div className="w-full">
+                        <label className="label relative text-outline-text text-sm w-[25%] h-5 bg-white ml-3 z-40 justify-center">
+                            First Name
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Type here"
+                            className="bg-transparent border-outline-text border-solid border rounded-md z-30 w-full"
+                            style={{ paddingLeft: '15px', padding: '10px', height: '45px', marginTop: '-10px' }}
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                        />
                     </div>
-                    <div className="flex justify-between w-full gap-2">
-                        <div className="w-1/2">
-                            <label className="label">
-                                <span className="label-text">
-                                    Specialization
-                                </span>
-                            </label>
-                            <input
-                                type="text"
-                                placeholder="Type here"
-                                className="input input-bordered w-full"
-                                value={specialization}
-                                onChange={(e) =>
-                                    setSpecialization(e.target.value)
-                                }
-                            />
-                        </div>
-                        <div className="w-1/2">
-                            <label className="label">
-                                <span className="label-text">City</span>
-                            </label>
-                            <input
-                                type="text"
-                                placeholder="Type here"
-                                className="input input-bordered w-full"
-                                value={city}
-                                onChange={(e) => setCity(e.target.value)}
-                            />
-                        </div>
+                    <div className="w-full">
+                        <label className="label relative text-outline-text text-sm w-[25%] h-5 bg-white ml-3 z-40 justify-center">
+                            Last Name
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Type here"
+                            className="bg-transparent border-outline-text border-solid border rounded-md z-30 w-full"
+                            style={{ paddingLeft: '15px', padding: '10px', height: '45px', marginTop: '-10px' }}
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                        />
                     </div>
-                    <small className="flex items-center gap-10 m-5">
-                        Do you want your recommendations to be shown in your
-                        profile?{" "}
-                        <div className="flex items-center gap-3">
-                            <input
-                                type="radio"
-                                name="radio-1"
-                                className="radio"
-                            />
-                            Yes
-                            <input
-                                type="radio"
-                                name="radio-1"
-                                className="radio"
-                            />
-                            No
-                        </div>
+                </div>
+
+                {/*Specialization and City*/}
+                <div className="flex justify-between w-full gap-8 mt-5">
+                    <div className="w-full">
+                        <label className="label relative text-outline-text text-sm w-[30%] h-5 bg-white ml-3 z-40 justify-center">
+                            Specialization
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Type here"
+                            className="bg-transparent border-outline-text border-solid border rounded-md z-30 w-full"
+                            style={{ paddingLeft: '15px', padding: '10px', height: '45px', marginTop: '-10px' }}
+                            value={specialization}
+                            onChange={(e) => setSpecialization(e.target.value)}
+                        />
+                    </div>
+                    <div className="w-full">
+                        <label className="label relative text-outline-text text-sm w-[15%] h-5 bg-white ml-3 z-40 justify-center">
+                            City
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Type here"
+                            className="bg-transparent border-outline-text border-solid border rounded-md z-30 w-full"
+                            style={{ paddingLeft: '15px', padding: '10px', height: '45px', marginTop: '-10px' }}
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                        />
+                    </div>
+                </div>
+
+                {/*Recommendations*/}
+                <div className="flex my-8 w-full">
+                    <small className="mr-5">
+                        Do you want your recommendations to be shown in your profile?{" "}
                     </small>
+                    <input
+                        type="radio"
+                        name="radio-1"
+                        className="radio"
+                    />
+                    <small className="ml-2 mr-4">
+                        Yes{" "}
+                    </small>
+                    <input
+                        type="radio"
+                        name="radio-1"
+                        className="radio "
+                    />
+                    <small className="ml-2">
+                        No{" "}
+                    </small>
+                </div>
+
+                <div className="flex justify-center w-full">
                     <button
                         onClick={handleSubmit}
-                        className="btn rounded-full bg-[#176B87] hover:bg-[#00CEC8] text-white hover:text-neutral"
+                        className="btn w-[15%] mr-5 rounded-full bg-white hover:bg-accent-blue text-secondary hover:text-neutral normal-case drop-shadow-md"
                     >
-                        save
+                        Reset
+                    </button>
+                    <button
+                        onClick={handleSubmit}
+                        className="btn w-[15%] rounded-full bg-secondary hover:bg-accent-blue text-white hover:text-neutral normal-case drop-shadow-md"
+                    >
+                        Save
                     </button>
                 </div>
             </div>
+
             <ChangeProfilePhoto
                 setShow={setShowProfileModal}
                 show={showProfileModal}

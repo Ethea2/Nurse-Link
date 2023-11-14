@@ -52,7 +52,7 @@ const ProgressCard = ({ nurse }: { nurse: NurseType }) => {
             </div>
             <div className="progressContainer pt-5 items-center text-center">
                 <div
-                    className="relative radial-progress transition-all ease-in duration-150"
+                    className="relative radial-progress transition-all ease-in duration-150 text-secondary"
                     style={outerStyle}
                 >
                     <div
@@ -62,10 +62,10 @@ const ProgressCard = ({ nurse }: { nurse: NurseType }) => {
                             height: "12rem",
                         }}
                     >
-                        <p className="percentage font-bold text-3xl text-primary">
+                        <p className="percentage font-bold text-3xl text-secondary">
                             {nurse?.progress}%
                         </p>
-                        <p className="complete text-xl text-primary mt-2 font-bold">COMPLETE</p>
+                        <p className="complete text-xl text-secondary mt-2 font-bold">COMPLETE</p>
                     </div>
                 </div>
                 <div className="progressChecklist px-8 py-6">

@@ -166,7 +166,7 @@ const LoggedInProfileMenu = ({
                     className="h-full object-fill hover:scale-105 transition duration-200 ease-in rounded-full border-white border-2 shadow"
                 />
             </label>
-            <ul tabIndex={0} className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-43">
+            <ul tabIndex={0} className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-40">
                 <li>
                     <button
                         onClick={() => nav(`/nurse/${user.id}`)}
@@ -183,16 +183,16 @@ const LoggedInProfileMenu = ({
                 </li>
                 <li>
                     <button
-                        onClick={() => nav(`/nurse/recommendations/receive/${user.id}`)}
+                        onClick={() => nav(`/nurse/${user.id}`)}
                     >
-                        Recommendations
+                        Fast Pass
                     </button>
                 </li>
                 <li>
                     <button
                         onClick={() => nav(`/nurse/${user.id}`)}
                     >
-                        Fast Pass
+                        Settings
                     </button>
                 </li>
                 <li>

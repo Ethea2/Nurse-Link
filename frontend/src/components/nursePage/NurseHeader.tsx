@@ -54,9 +54,9 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                             {nurse?.firstName} {nurse?.lastName}
                         </div>
                         {/*This only shows up when they are fully verified*/}
-                        <BsFillCheckCircleFill className="w-6 h-full ml-2 inline-flex text-secondary" />
+                        {/*<BsFillCheckCircleFill className="w-6 h-full ml-2 inline-flex text-secondary" />*/}
                     </div>
-                    <div className="username font-pt-sans opacity-80 text-lg">
+                    <div className="username font-pt-sans opacity-80 text-lg mt-2">
                         @{nurse?.username}
                     </div>
                     <div className="specialization text-[23px] font-open-sans pt-7">
@@ -75,7 +75,7 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                     <div className="editProfile flex items-center justify-end pt-20">
                         {user?.id === nurse?.userId && (
                             <button
-                                className="btn w-1/2 text-lg rounded-full mt-6 bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                                className="btn w-[45%] text-lg rounded-full mt-6 bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
                                 onClick={() => nav(`/nurse/edit/${user.id}`)}
                             >
                                 Edit Profile
