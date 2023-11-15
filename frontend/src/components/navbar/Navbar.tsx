@@ -183,6 +183,13 @@ const LoggedInProfileMenu = ({
                 </li>
                 <li>
                     <button
+                        onClick={() => nav(`/nurse/recommendations/receive/${user.id}`)}
+                    >
+                        Recommendations
+                    </button>
+                </li>
+                <li>
+                    <button
                         onClick={() => nav(`/nurse/${user.id}`)}
                     >
                         Fast Pass

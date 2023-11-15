@@ -16,7 +16,7 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
     const { user } = useAuth()
     const nav = useNavigate()
     return (
-        <div className="nurseHeader flex flex-col h-[630px]">
+        <div className="nurseHeader flex flex-col h-[640px]">
             <div className="h-[50vh] md:h-3/5 w-full flex justify-center items-center">
                 <img
                     src={nurse?.bannerPicture}
@@ -70,16 +70,52 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                 <div className="rightDetails flex-1 flex-col">
                     <div className="connections text-lg font-semibold text-outline-text font-open-sans flex items-center justify-end">
                         <PiUserFill className="w-8 h-8 relative flex-col justify-start items-start inline-flex text-outline-text mr-3" />
-                        6 connections
+                        6 connections {/*Place connections code here*/}
                     </div>
-                    <div className="editProfile flex items-center justify-end pt-20">
-                        {user?.id === nurse?.userId && (
+                    <div className="profileButtons flex flex-col items-end mt-20">
+                        {user?.id === nurse?.userId ? (
                             <button
-                                className="btn w-[45%] text-lg rounded-full mt-6 bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                                className="btn w-[45%] text-lg rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
                                 onClick={() => nav(`/nurse/edit/${user.id}`)}
                             >
                                 Edit Profile
                             </button>
+                        ) : (
+                            <div className="flex flex-col w-full items-end">
+                                <button
+                                    className="btn text-lg w-40 mb-4 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                                >
+                                    Connect
+                                </button>
+                                <div className="dropdown dropdown-end w-full flex flex-col items-end relative">
+                                    <label tabIndex={0}>
+                                        <button
+                                            className="btn text-lg w-40 rounded-full bg-secondary text-white border-transparent shadow-inner drop-shadow-lg normal-case relative z-[2]"
+                                        >
+                                            More
+                                        </button>
+                                    </label>
+                                    <ul tabIndex={0} className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-40 z-[1] absolute right-0 top-10 mt-2">
+                                        <li>
+                                            <button>
+                                                Message
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button>
+                                                Recommend
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button>
+                                                Request Recommendation
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
                         )}
                     </div>
                 </div>
