@@ -17,14 +17,14 @@ const Connection = () => {
             {loading ? (
                 <div>loading...</div>
             ) : (
-                <div className="flex flex-row  w-full min-h-screen">
+                <div className="flex flex-row md:p-20 gap-10 w-full min-h-screen">
                     <div className="sidebar w-1/4 min-h-screen"> 
                         <NurseCard nurse={nurse}/>
                     </div>
-                    <div className="flex flex-col main-section w-3/4 p-12">
+                    <div className="flex flex-col main-section w-3/4">
                         <div>
                             <p style={{ fontFamily: "Poppins", color: "#053B50", fontSize: "2rem", fontWeight: 900 }}>
-                                {nurse?.connections?.length} Connections Requests
+                                {nurse?.connections?.length} Connections
                             </p>
                         </div>
                         <div className="grid grid-cols-2 gap-4 w-100">

@@ -17,11 +17,11 @@ const ConnectionRequest = () => {
             {loading ? (
                 <div>loading...</div>
             ) : (
-                <div className="flex flex-row  w-full min-h-screen">
+                <div className="flex flex-row md:p-20 gap-10 w-full min-h-screen">
                     <div className="sidebar w-1/4 min-h-screen"> 
                         <NurseCard nurse={nurse}/>
                     </div>
-                    <div className="flex flex-col main-section w-3/4 p-12">
+                    <div className="flex flex-col main-section w-3/4">
                         <div>
                             <p style={{ fontFamily: "Poppins", color: "#053B50", fontSize: "2rem", fontWeight: 900 }}>
                                 {nurse?.connectionReceived?.length} Connections
