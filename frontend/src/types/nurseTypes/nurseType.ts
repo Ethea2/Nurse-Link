@@ -21,6 +21,7 @@ export interface NurseType {
     technicalSkill: Array<string>
     credentials: CredentialsType
     education: EducationType
+    youtube: string
 } //continue updating
 
 export interface CredentialsType {

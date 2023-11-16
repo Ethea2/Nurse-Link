@@ -23,8 +23,7 @@ const ProfileDetails = ({ nurse }: { nurse: NurseType }) => {
                     <div className="video w-full">
                         <iframe
                             className="w-full h-96 rounded-2xl border"
-                            // TODO: import the url for the video in edit Contacts
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=1ZZfmVr8WRK9qpYh"
+                            src={nurse?.video}
                             title="YouTube video player"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowFullScreen
@@ -119,71 +118,83 @@ const ProfileDetails = ({ nurse }: { nurse: NurseType }) => {
             </div>
             <div className="licenses flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
                 <div className="title text-3xl font-bold">Licenses</div>
-                <div className="experienceDetails flex font-pt-sans text-lg">
-                    <div className="leftContainer pr-5">
+                <div className="licensesDetails flex font-pt-sans text-lg">
+                    {nurse?.credentials.document.map((document, index) => (
+                        document.type == 'license' && (
+                            <div key={index} className="pt-5 flex">
+                                    <div className="leftContainer pr-5">
                         <PiFileBold className="w-6 h-8" />
                     </div>
                     <div className="rightContainer w-1/8">
-                        <p className="name font-bold">License Name</p>
-                        <p className="description font-normal ">
-                            {" "}
-                            Description{" "}
-                        </p>
-                        <p className="institutionName font-normal ">
-                            {" "}
-                            Institution Name{" "}
-                        </p>
+                        <p className="name font-bold">{document.name}</p>
+                        <p className="description font-normal "> {document.description} </p>
+                        <p className="institutionName font-normal "> {document.institutionName} </p>
                         <p className="date font-normal opacity-60 pt-5">
-                            {" "}
-                            Issued "Date"
+                            Issued &nbsp;
+                            {new Date(document.issuanceDate).toLocaleDateString('en-US', {
+                                month: 'long',
+                                day: 'numeric',
+                                year: 'numeric'
+                            })}
                         </p>
+                        </div>
                     </div>
+                        )      
+                    ))}
                 </div>
             </div>
             <div className="certifications flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
                 <div className="title text-3xl font-bold">Certifications</div>
-                <div className="experienceDetails flex font-pt-sans text-lg pt-5">
-                    <div className="leftContainer pr-5">
+                <div className="cetificationsDetails flex font-pt-sans text-lg">
+                {nurse?.credentials.document.map((document, index) => (
+                        document.type == 'certification' && (
+                            <div key={index} className="pt-5 flex">
+                                    <div className="leftContainer pr-5">
                         <PiFileBold className="w-6 h-8" />
                     </div>
                     <div className="rightContainer w-1/8">
-                        <p className="name font-bold">License Name</p>
-                        <p className="description font-normal ">
-                            {" "}
-                            Description{" "}
-                        </p>
-                        <p className="institutionName font-normal ">
-                            {" "}
-                            Institution Name{" "}
-                        </p>
+                        <p className="name font-bold">{document.name}</p>
+                        <p className="description font-normal "> {document.description} </p>
+                        <p className="institutionName font-normal "> {document.institutionName} </p>
                         <p className="date font-normal opacity-60 pt-5">
-                            {" "}
-                            Issued "Date"
+                            Issued &nbsp;
+                            {new Date(document.issuanceDate).toLocaleDateString('en-US', {
+                                month: 'long',
+                                day: 'numeric',
+                                year: 'numeric'
+                            })}
                         </p>
+                        </div>
                     </div>
+                        )      
+                    ))}
                 </div>
             </div>
             <div className="awards flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
                 <div className="title text-3xl font-bold">Awards</div>
-                <div className="experienceDetails flex font-pt-sans text-lg pt-5">
-                    <div className="leftContainer pr-5">
+                <div className="awardsDetails flex font-pt-sans text-lg">
+                {nurse?.credentials.document.map((document, index) => (
+                        document.type == 'award' && (
+                            <div key={index} className="pt-5 flex">
+                                    <div className="leftContainer pr-5">
                         <PiFileBold className="w-6 h-8" />
                     </div>
                     <div className="rightContainer w-1/8">
-                        <p className="name font-bold">License Name</p>
-                        <p className="description font-normal ">
-                            {" "}
-                            Description{" "}
-                        </p>
-                        <p className="institutionName font-normal ">
-                            {" "}
-                            Institution Name{" "}
-                        </p>
+                        <p className="name font-bold">{document.name}</p>
+                        <p className="description font-normal "> {document.description} </p>
+                        <p className="institutionName font-normal "> {document.institutionName} </p>
                         <p className="date font-normal opacity-60 pt-5">
-                            {" "}
-                            Issued "Date"
+                            Issued &nbsp;
+                            {new Date(document.issuanceDate).toLocaleDateString('en-US', {
+                                month: 'long',
+                                day: 'numeric',
+                                year: 'numeric'
+                            })}
                         </p>
+                        </div>
                     </div>
+                        )      
+                    ))}
                 </div>
             </div>
         </div>
