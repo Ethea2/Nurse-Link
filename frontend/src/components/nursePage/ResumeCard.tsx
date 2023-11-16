@@ -9,7 +9,7 @@ const ResumeCard = ({ nurse }: { nurse: NurseType }) => {
 
     const renderResumeCard = () => {
         return (
-            nurse.credentials.document.some(doc => doc.type === 'resume') && nurse?.credentials.document.length >= 1 && (
+            nurse?.credentials.document.some(doc => doc.type === 'resume') && nurse?.credentials.document.length >= 1 && (
                 <div className="recoCard flex flex-col w-full py-8 px-8 rounded-lg font-open-sans bg-white border mb-5">
             <div className="headerContainer ">
                 <p className="textHeader font-bold text-xl text-left">
