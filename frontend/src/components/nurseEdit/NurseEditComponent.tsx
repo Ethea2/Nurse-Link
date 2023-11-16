@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 import useDynamicFetch from "../../hooks/useDynamicFetch"
 import useNurseEdit from "../../hooks/useNurseEdit"
 
-const NurseEditComponent = ({ userId }: { userId: string }) => {
+const NurseEditComponent = ({ userId }: { userId: string }) => {    
     const [changed, setChanged] = useState<boolean>(false)
     const { data: nurse, loading } = useDynamicFetch(
         `/api/nurse/${userId}`,

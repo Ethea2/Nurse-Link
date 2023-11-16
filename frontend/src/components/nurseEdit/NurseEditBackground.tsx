@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChangeAbout, ChangeEducation, ChangeExperience, ChangeTechnicalSkill, ChangeVolunteering } from "../modals/editBackgroundModals.tsx";
 import useDynamicFetch from "../../hooks/useDynamicFetch.tsx"
 import { AiOutlinePlusCircle } from "react-icons/ai"
@@ -31,11 +31,26 @@ const NurseBackgroundEditComponent = ({ userId }: { userId: string }) => {
     const volunteering = nurse?.credentials.volunteering || "";
     const technicalSkill = nurse?.credentials.technicalskill || "";
 
+    // const [about, setAbout] = useState<string>(nurse?.about)
+    // const [education, setEducation] = useState<string>(nurse?.education)
+    // const [experience, setExperience] = useState<string>(nurse?.experience)
+    // const [volunteering, setVolunteering] = useState<string>(nurse?.volunteering)
+    // const [technicalSkill, setTechnicalSkill] = useState<string>(nurse?.technicalSkill)
+
     const hasAbout = typeof about === "string" && about.trim() !== "";
     const hasEducation = typeof education === "string" && education.trim() !== "";
     const hasExperience = typeof experience === "string" && experience.trim() !== "";
     const hasVolunteering = typeof volunteering === "string" && volunteering.trim() !== "";
     const hasTechnicalSkill = typeof technicalSkill === "string" && technicalSkill.trim() !== "";
+
+    // useEffect(() => {
+
+    //     setAbout(nurse?.about)
+    //     setEducation(nurse?.education)
+    //     setExperience(nurse?.experiece)
+    //     setVolunteering(nurse?.volunteering)
+    //     setTechnicalSkill(nurse?.technicalSkill)
+    // }, [loading])
 
     return (
 
