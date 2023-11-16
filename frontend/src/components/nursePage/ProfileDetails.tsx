@@ -9,20 +9,23 @@ const ProfileDetails = ({ nurse }: { nurse: NurseType }) => {
         console.log(nurse);
     });
 
-    return (
-        <div className="detailsContainer flex flex-col w-full rounded-lg font-open-sans">
-            {nurse?.about && (
+    const renderAboutSection = () => {
+        return (
+            nurse?.about && (
                 <div className="introduction flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 bg-white">
-                    {/* {nurse?.about} */}
                     <div className="title text-3xl font-bold">
                         Hi! I'm {nurse?.firstName} {nurse?.lastName}
                     </div>
-                    <div className="text-lg body py-4">
-                        {nurse?.about}
-                    </div>
-                    <div className="video w-full">
+                    { nurse?.about && nurse?.about.trim().length >= 1 && (
+                        <div className="text-lg body py-4">
+                            {nurse?.about}
+                        </div>
+                    )}
+                    { nurse?.video && nurse?.video.trim().length >= 1 && (
+                        <div className="video w-full">
                         <iframe
                             className="w-full h-96 rounded-2xl border"
+                            // video link must be embed
                             src={nurse?.video}
                             title="YouTube video player"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -30,9 +33,17 @@ const ProfileDetails = ({ nurse }: { nurse: NurseType }) => {
                         >
                         </iframe>
                     </div>
+                    )}
                 </div>
-            )}
-            <div className="education flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
+            )
+        )    
+        }
+
+    const renderEducationSection = () => {
+        console.log("exp length:", nurse?.credentials.experience.length)
+        return (
+            nurse?.credentials.education.length >=1 && (
+                <div className="education flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
                 <div className="title text-3xl font-bold">Education</div>
                 <div className="educationDetails font-pt-sans text-lg">
                     {nurse?.credentials.education.map((education, index) => (
@@ -59,7 +70,15 @@ const ProfileDetails = ({ nurse }: { nurse: NurseType }) => {
                     ))}
                 </div>
             </div>
-            <div className="experience flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
+            )
+        )
+        
+    }
+
+    const renderExperienceSection = () => {
+        return (
+            nurse?.credentials.experience.length >=1 && (
+                <div className="experience flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
                 <div className="title text-3xl font-bold">Experience</div>
                 <div className="experienceDetails font-pt-sans text-lg">
                     {nurse?.credentials.experience.map((experience, index) => (
@@ -88,7 +107,16 @@ const ProfileDetails = ({ nurse }: { nurse: NurseType }) => {
                         ))}
                 </div>
             </div>
-            <div className="volunteering flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
+            )
+            
+        )
+        
+    }
+
+    const renderVolunteeringection = () => {
+        return (
+            nurse?.credentials.volunteering.length >=1 && (
+                <div className="volunteering flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
                 <div className="title text-3xl font-bold">Volunteering</div>
                 <div className="volunteeringDetails font-pt-sans text-lg">
                 {nurse?.credentials.volunteering.map((volunteering, index) => (
@@ -116,7 +144,35 @@ const ProfileDetails = ({ nurse }: { nurse: NurseType }) => {
                         ))}
                 </div>
             </div>
-            <div className="licenses flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
+            )
+            
+        )
+        
+    }
+
+    const renderTechSkillsSection = () => {
+        return (
+            nurse?.technicalSkill.length >=1 && (
+                <div className="technicalSkills flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
+                <div className="title text-3xl font-bold">Technical Skills</div>
+                <div className="volunteeringDetails font-pt-sans text-lg">
+                    <div className="leftContainer w-1/3">
+                        <p className="techSkillName font-bold"> {nurse?.technicalSkill} </p>
+                    </div>
+                    <div className="rightContainer">
+                        <p className="description"> THIS IS HARDCODED. walang description for technical skill sa db LOL </p>
+                    </div>
+                </div>
+            </div>
+            )
+            
+        )
+    }
+
+    const renderLicenseSection = () => {
+        return (
+            nurse.credentials.document.some(doc => doc.type === 'license') && nurse?.credentials.document.length >= 1 && (
+                <div className="licenses flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
                 <div className="title text-3xl font-bold">Licenses</div>
                 <div className="licensesDetails flex font-pt-sans text-lg">
                     {nurse?.credentials.document.map((document, index) => (
@@ -143,7 +199,14 @@ const ProfileDetails = ({ nurse }: { nurse: NurseType }) => {
                     ))}
                 </div>
             </div>
-            <div className="certifications flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
+            )
+        )
+    }
+
+    const renderCertificationSection = () => {
+        return (
+            nurse.credentials.document.some(doc => doc.type === 'certification') && nurse?.credentials.document.length >= 1 && (
+                <div className="certifications flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
                 <div className="title text-3xl font-bold">Certifications</div>
                 <div className="cetificationsDetails flex font-pt-sans text-lg">
                 {nurse?.credentials.document.map((document, index) => (
@@ -170,7 +233,15 @@ const ProfileDetails = ({ nurse }: { nurse: NurseType }) => {
                     ))}
                 </div>
             </div>
-            <div className="awards flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
+            )
+            
+        )
+    }
+
+    const renderAwardSection = () => {
+        return (
+            nurse.credentials.document.some(doc => doc.type === 'award') && nurse?.credentials.document.length >= 1 && (
+                <div className="awards flex flex-col w-full border-2 px-10 py-8 rounded-lg mb-5 text-outline-text bg-white">
                 <div className="title text-3xl font-bold">Awards</div>
                 <div className="awardsDetails flex font-pt-sans text-lg">
                 {nurse?.credentials.document.map((document, index) => (
@@ -197,6 +268,20 @@ const ProfileDetails = ({ nurse }: { nurse: NurseType }) => {
                     ))}
                 </div>
             </div>
+            )  
+        )
+    }
+
+    return (
+        <div className="detailsContainer flex flex-col w-full rounded-lg font-open-sans">
+            {renderAboutSection()}
+            {renderEducationSection()}
+            {renderExperienceSection()}
+            {renderVolunteeringection()}
+            {renderTechSkillsSection()}
+            {renderLicenseSection()}
+            {renderCertificationSection()}
+            {renderAwardSection()}  
         </div>
     );
 };
