@@ -58,6 +58,18 @@ const NurseBackgroundEditComponent = ({ userId }: { userId: string }) => {
 
             <div id="nurse-edit-title-container" className="flex mb-8">
                 <p className="text-4xl font-bold text-primary mr-5">Background</p>
+                <div className="ml-auto">
+                    <button
+                        className="btn ml-auto bg-secondary hover:bg-accent-blue text-white rounded-full normal-case"
+                        onClick={() => {
+                            setShowBackgroundModal(true)
+                        }}
+                    >
+                        Add Section
+                    </button>
+                </div>
+
+                {/* DROPDOWN OPTION
                 <div className="dropdown dropdown-end ml-auto">
                     <label tabIndex={0}>
                         <button
@@ -78,7 +90,7 @@ const NurseBackgroundEditComponent = ({ userId }: { userId: string }) => {
                             </button>
                         </li>
                     </ul>
-                </div>
+                </div>*/}
             </div>
 
 

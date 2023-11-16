@@ -15,7 +15,7 @@ const RecoCard = ({ nurse }: { nurse: NurseType }) => {
                 <div className="flex items-start">
                     <img
                         src={nurse?.profilePicture}
-                        className="object-cover rounded-full border-white w-[9%]"
+                        className="object-cover rounded-full border-white border-4 w-[9%] drop-shadow"
                         alt="Nurse's Profile Picture"
                     />
                     <div className="flex flex-col text-left text-base ml-5">

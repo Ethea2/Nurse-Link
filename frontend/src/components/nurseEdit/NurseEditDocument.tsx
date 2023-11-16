@@ -70,86 +70,85 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
 
     console.log(documentsArray)
     return (
-        <div
-            id="nurse-edit-container"
-            className="w-full h-fit flex flex-col p-10"
-        >
-            <div
-                id="nurse-edit-title-container"
-                className="text-6xl font-bold text-[#053B50] flex items-center mb-6"
-            >
-                <span>Documents</span>
-                <button
-                    className="btn ml-auto bg-[#176B87] hover:bg-[#00CEC8] text-white rounded-full normal-case"
-                    onClick={() => {
-                        setShowDocumentModal(true)
-                    }}
-                >
-                    Add Section
-                </button>
+
+        <div id="nurse-edit-container" className="w-full h-fit flex flex-col">
+
+            <div id="nurse-edit-title-container" className="flex mb-8">
+                <p className="text-4xl font-bold text-primary mr-5">Documents</p>
+                <div className="ml-auto">
+                    <button
+                        className="btn ml-auto bg-secondary hover:bg-accent-blue text-white rounded-full normal-case"
+                        onClick={() => {
+                            setShowDocumentModal(true)
+                        }}
+                    >
+                        Add Section
+                    </button>
+                </div>
             </div>
+
+            {/* Section 1: Resume */}
             <div
                 id="nurse-resume"
-                className="w-full p-4 rounded-lg shadow-xl flex flex-col relative mb-6"
+                className="w-full p-8 rounded-lg shadow-xl flex flex-col relative mb-6"
             >
-                <div className="text-3xl font-bold text-[#053B50] ml-4 flex items-center">
+                <div className="text-3xl font-bold text-primary flex items-center">
                     Resume
                     <button
-                        className="ml-auto hover:bg-[#176B87] text-white rounded-full p-1"
+                        className="ml-auto rounded-full"
                         onClick={() => {
                             setShowDocumentModal(true)
                         }}
                     >
                         <AiOutlinePlusCircle
-                            size={40}
-                            style={{ color: "black" }}
+                            size={30}
+                            className="text-primary hover:text-accent-blue"
                         />{" "}
-                        {/* Set color to black using inline style */}
                     </button>
                 </div>
-                <div id="nurse-resume-list-container" className="text-xl mt-5">
+                <div id="nurse-resume-list-container" className="text-lg mt-2">
                     {resume ? (
-                        <div className="flex ml-4 items-center">
-                            <p className="text-[#053B50]">{`Resume: ${resume}`}</p>
+                        <div className="flex items-center">
+                            <p className="text-primary">{`Resume: ${resume}`}</p>
                         </div>
                     ) : (
-                        <div className="flex ml-4 items-center">
-                            <p className="text-[#053B50]">
+                        <div className="flex items-center">
+                            <p className="text-primary">
                                 No resume added yet
                             </p>
                         </div>
                     )}
                 </div>
             </div>
+
+            {/* Section 2: Licenses */}
             <div
                 id="nurse-license"
-                className="w-full p-4 rounded-lg shadow-xl flex flex-col relative mb-6"
+                className="w-full p-8 rounded-lg shadow-xl flex flex-col relative mb-6"
             >
-                <div className="text-3xl font-bold text-[#053B50] ml-4 flex items-center">
+                <div className="text-3xl font-bold text-primary flex items-center">
                     License
                     <button
-                        className="ml-auto hover:bg-[#176B87] text-white rounded-full p-1"
+                        className="ml-auto rounded-full"
                         onClick={() => {
                             setShowDocumentModal(true)
                         }}
                     >
                         <AiOutlinePlusCircle
-                            size={40}
-                            style={{ color: "black" }}
+                            size={30}
+                            className="text-primary hover:text-accent-blue"
                         />{" "}
-                        {/* Set color to black using inline style */}
                     </button>
                 </div>
-                <div id="nurse-resume-list-container" className="text-xl mt-5">
+                <div id="nurse-resume-list-container" className="text-xl mt-2">
                     {license ? (
-                        <div className="flex ml-4 items-center">
-                            <p className="text-[#053B50] rounded">
+                        <div className="flex items-center">
+                            <p className="text-primary">
                                 <a
-                                    className={`text-[#053B50] ${
-                                        licenseLink
-                                            ? "hover:text-blue-500"
-                                            : "text-gray-400 cursor-not-allowed"
-                                    }`}
+                                    className={`text-primary text-lg ${licenseLink
+                                        ? "hover:text-blue-500"
+                                        : "text-gray-400 cursor-not-allowed"
+                                        }`}
                                     href={licenseLink || "#"}
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -159,8 +158,8 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
                             </p>
                         </div>
                     ) : (
-                        <div className="flex ml-4 items-center">
-                            <p className="text-[#053B50">
+                        <div className="flex items-center">
+                            <p className="text-primary">
                                 No license added yet
                             </p>
                         </div>
@@ -170,32 +169,31 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
 
             <div
                 id="nurse-documents"
-                className="w-full p-4 rounded-lg shadow-xl flex flex-col relative mb-6"
+                className="w-full p-8 rounded-lg shadow-xl flex flex-col relative mb-6"
             >
-                <div className="text-3xl font-bold text-[#053B50] ml-4 flex items-center">
+                <div className="text-3xl font-bold text-primary flex items-center">
                     Documents
                     <button
-                        className="ml-auto hover:bg-[#176B87] text-white rounded-full p-1"
+                        className="ml-auto rounded-full"
                         onClick={() => {
                             setShowDocumentModal(true)
                         }}
                     >
                         <AiOutlinePlusCircle
-                            size={40}
-                            style={{ color: "black" }}
+                            size={30}
+                            className="text-primary hover:text-accent-blue"
                         />
                     </button>
                 </div>
-                <div id="nurse-resume-list-container" className="text-xl mt-5">
+                <div id="nurse-resume-list-container" className="text-xl mt-2">
                     {certificate ? (
-                        <div className="flex ml-4 items-center">
-                            <p className="text-[#053B50]">
+                        <div className="flex items-center">
+                            <p className="text-primary">
                                 <a
-                                    className={`text-[#053B50] ${
-                                        certificateLink
-                                            ? "hover:text-blue-500"
-                                            : "text-gray-400 cursor-not-allowed"
-                                    }`}
+                                    className={`text-primary text-lg ${certificateLink
+                                        ? "hover:text-blue-500"
+                                        : "text-gray-400 cursor-not-allowed"
+                                        }`}
                                     href={certificateLink || "#"}
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -205,8 +203,8 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
                             </p>
                         </div>
                     ) : (
-                        <div className="flex ml-4 items-center">
-                            <p className="text-[#053B50]">
+                        <div className="flex items-center">
+                            <p className="text-primary">
                                 No certificate added yet
                             </p>
                         </div>
@@ -216,33 +214,31 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
 
             <div
                 id="nurse-awards"
-                className="w-full p-4 rounded-lg shadow-xl flex flex-col relative mb-6"
+                className="w-full p-8 rounded-lg shadow-xl flex flex-col relative mb-6"
             >
-                <div className="text-3xl font-bold text-[#053B50] ml-4 flex items-center">
+                <div className="text-3xl font-bold text-primary flex items-center">
                     Awards
                     <button
-                        className="ml-auto hover:bg-[#176B87] text-white rounded-full p-1"
+                        className="ml-auto rounded-full"
                         onClick={() => {
                             setShowDocumentModal(true)
                         }}
                     >
                         <AiOutlinePlusCircle
-                            size={40}
-                            style={{ color: "black" }}
+                            size={30}
+                            className="text-primary hover:text-accent-blue"
                         />{" "}
-                        {/* Set color to black using inline style */}
                     </button>
                 </div>
-                <div id="nurse-resume-list-container" className="text-xl mt-5">
+                <div id="nurse-resume-list-container" className="text-xl mt-2">
                     {award ? (
-                        <div className="flex ml-4 items-center">
-                            <p className="text-[#053B50]">
+                        <div className="flex items-center">
+                            <p className="text-primary">
                                 <a
-                                    className={`text-[#053B50] ${
-                                        awardLink
-                                            ? "hover:text-blue-500"
-                                            : "text-gray-400 cursor-not-allowed"
-                                    }`}
+                                    className={`text-primary text-lg ${awardLink
+                                        ? "hover:text-blue-500"
+                                        : "text-gray-400 cursor-not-allowed"
+                                        }`}
                                     href={awardLink || "#"}
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -252,8 +248,8 @@ const NurseDocumentEditComponent = ({ userId }: { userId: string }) => {
                             </p>
                         </div>
                     ) : (
-                        <div className="flex ml-4 items-center">
-                            <p className="text-[#053B50]">
+                        <div className="flex items-center">
+                            <p className="text-primary text-lg">
                                 No awards added yet
                             </p>
                         </div>

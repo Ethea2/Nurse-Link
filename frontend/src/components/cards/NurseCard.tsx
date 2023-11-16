@@ -11,7 +11,7 @@ const NurseCard = ({ nurse }: { nurse: NurseType }) => {
             <div className="flex items-center mb-5">
                 <img
                     src={nurse?.profilePicture}
-                    className="object-cover rounded-full border-white w-1/3"
+                    className="object-cover rounded-full border-white border-4 w-1/3 drop-shadow"
                     alt="Nurse's Profile Picture"
                 />
                 <div className="flex flex-col text-left ml-5">

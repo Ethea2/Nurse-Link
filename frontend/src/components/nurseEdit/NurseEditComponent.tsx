@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 import useDynamicFetch from "../../hooks/useDynamicFetch"
 import useNurseEdit from "../../hooks/useNurseEdit"
 
-const NurseEditComponent = ({ userId }: { userId: string }) => {    
+const NurseEditComponent = ({ userId }: { userId: string }) => {
     const [changed, setChanged] = useState<boolean>(false)
     const { data: nurse, loading } = useDynamicFetch(
         `/api/nurse/${userId}`,
@@ -121,26 +121,26 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
                 {/*Name*/}
                 <div className="flex justify-between w-full gap-8">
                     <div className="w-full">
-                        <label className="label relative text-outline-text text-sm w-[25%] h-5 bg-white ml-3 z-40 justify-center">
+                        <label className="label relative text-outline-text text-sm w-[100px] h-5 bg-white ml-3 justify-center">
                             First Name
                         </label>
                         <input
                             type="text"
                             placeholder="Type here"
-                            className="bg-transparent border-outline-text border-solid border rounded-md z-30 w-full"
+                            className="bg-transparent border-outline-text border-solid border rounded-md w-full"
                             style={{ paddingLeft: '15px', padding: '10px', height: '45px', marginTop: '-10px' }}
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
                         />
                     </div>
                     <div className="w-full">
-                        <label className="label relative text-outline-text text-sm w-[25%] h-5 bg-white ml-3 z-40 justify-center">
+                        <label className="label relative text-outline-text text-sm w-[100px] h-5 bg-white ml-3 justify-center">
                             Last Name
                         </label>
                         <input
                             type="text"
                             placeholder="Type here"
-                            className="bg-transparent border-outline-text border-solid border rounded-md z-30 w-full"
+                            className="bg-transparent border-outline-text border-solid border rounded-md w-full"
                             style={{ paddingLeft: '15px', padding: '10px', height: '45px', marginTop: '-10px' }}
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
@@ -151,26 +151,26 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
                 {/*Specialization and City*/}
                 <div className="flex justify-between w-full gap-8 mt-5">
                     <div className="w-full">
-                        <label className="label relative text-outline-text text-sm w-[30%] h-5 bg-white ml-3 z-40 justify-center">
+                        <label className="label relative text-outline-text text-sm w-[120px] h-5 bg-white ml-3 justify-center">
                             Specialization
                         </label>
                         <input
                             type="text"
                             placeholder="Type here"
-                            className="bg-transparent border-outline-text border-solid border rounded-md z-30 w-full"
+                            className="bg-transparent border-outline-text border-solid border rounded-md w-full"
                             style={{ paddingLeft: '15px', padding: '10px', height: '45px', marginTop: '-10px' }}
                             value={specialization}
                             onChange={(e) => setSpecialization(e.target.value)}
                         />
                     </div>
                     <div className="w-full">
-                        <label className="label relative text-outline-text text-sm w-[15%] h-5 bg-white ml-3 z-40 justify-center">
+                        <label className="label relative text-outline-text text-sm w-[60px] h-5 bg-white ml-3 justify-center">
                             City
                         </label>
                         <input
                             type="text"
                             placeholder="Type here"
-                            className="bg-transparent border-outline-text border-solid border rounded-md z-30 w-full"
+                            className="bg-transparent border-outline-text border-solid border rounded-md w-full"
                             style={{ paddingLeft: '15px', padding: '10px', height: '45px', marginTop: '-10px' }}
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
