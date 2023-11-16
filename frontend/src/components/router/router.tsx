@@ -13,6 +13,8 @@ import NurseEditDocumentPage from "../../pages/nurseEdit/NurseEditDocumentPage.t
 import NurseEditBackgroundPage from "../../pages/nurseEdit/NurseEditBackgroundPage.tsx"
 import NurseEditContactPage from "../../pages/nurseEdit/NurseEditContactPage.tsx"
 import Connection from "../../pages/connection/Connection.tsx"
+import ConnectionRequest from "../../pages/connection/ConnectionRequest.tsx"
+
 
 const routes: Array<RouteType> = [
     { path: "/", element: <Landing /> },
@@ -29,6 +31,7 @@ const routes: Array<RouteType> = [
     { path: "/nurse/edit/background/:userId", element: <NurseEditBackgroundPage />},
     { path: "/nurse/edit/contact/:userId", element: <NurseEditContactPage />},
     { path: "/connection/:userId", element: <Connection /> },
+    { path: "/connection-request/:userId", element: <ConnectionRequest />} 
 ]
 
 export default routes

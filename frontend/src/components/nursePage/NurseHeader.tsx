@@ -67,8 +67,9 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                     </div>
                 </div>
                 <div className="flex flex-col h-full justify-between items-center p-10">
+                    
                     <span className="flex justify-center items-center text-2xl cursor-pointer"
-                        onClick={() => nav(`/connection/${user?.id}`)}>
+                        onClick={() => nav(`/connection/${nurse?.userId}`)}>
                         <BsFillPersonFill />connections
                     </span>
                     {user?.id === nurse?.userId && (
@@ -80,17 +81,43 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                         </button>
                     )}
                     {user?.id !== nurse?.userId && (
-                        <button
-                            className="btn rounded-full text-[#176B87] hover:text-[#00CEC8] bg-white shadow-lg"
-                            //className="btn rounded-full bg-secondary hover:bg-accent-blue border-transparent shadow-inner drop-shadow-lg text-white normal-case"
-                            onClick={(e) => {
-                                if (user) {
-                                  handleAddConnection(e, user?.id, nurse.userId);
-                                }
-                              }}
-                        >
-                            CONNECT
-                        </button>
+
+                        <div className="flex flex-col w-full items-end">
+                                <button
+                                    className="btn text-lg w-40 mb-4 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                                >
+                                    Connect
+                                </button>
+                                <div className="dropdown dropdown-end w-full flex flex-col items-end relative">
+
+                                    <label tabIndex={0}>
+                                        <button
+                                            className="btn text-lg w-40 rounded-full bg-secondary text-white border-transparent shadow-inner drop-shadow-lg normal-case relative z-[2]"
+                                        >
+                                            More
+                                        </button>
+                                    </label>
+                                    <ul tabIndex={0} className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-40 z-[1] absolute right-0 top-10 mt-5">
+                                        <li>
+                                            {/* TODO: connect to message page */}
+                                            <button>
+                                                Message 
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button onClick={() => nav(`/nurse/recommendations/give/${nurse?.userId}`)}>
+                                                Recommend
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button onClick={() => nav(`/nurse/recommendations/receive/${nurse?.userId}`)}>
+                                                Request Recommendation
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
                     )}
                 </div>
             </div>
