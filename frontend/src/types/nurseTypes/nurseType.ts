@@ -20,6 +20,7 @@ export interface NurseType {
     progress: number
     technicalSkill: Array<string>
     credentials: CredentialsType
+    education: EducationType
 } //continue updating
 
 export interface CredentialsType {
