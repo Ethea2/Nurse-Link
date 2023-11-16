@@ -88,6 +88,7 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                                     Connect
                                 </button>
                                 <div className="dropdown dropdown-end w-full flex flex-col items-end relative">
+
                                     <label tabIndex={0}>
                                         <button
                                             className="btn text-lg w-40 rounded-full bg-secondary text-white border-transparent shadow-inner drop-shadow-lg normal-case relative z-[2]"
@@ -95,19 +96,20 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                                             More
                                         </button>
                                     </label>
-                                    <ul tabIndex={0} className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-40 z-[1] absolute right-0 top-10 mt-2">
+                                    <ul tabIndex={0} className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-40 z-[1] absolute right-0 top-10 mt-5">
                                         <li>
+                                            {/* TODO: connect to message page */}
                                             <button>
-                                                Message
+                                                Message 
                                             </button>
                                         </li>
                                         <li>
-                                            <button>
+                                            <button onClick={() => nav(`/nurse/recommendations/give/${nurse?.userId}`)}>
                                                 Recommend
                                             </button>
                                         </li>
                                         <li>
-                                            <button>
+                                            <button onClick={() => nav(`/nurse/recommendations/receive/${nurse?.userId}`)}>
                                                 Request Recommendation
                                             </button>
                                         </li>

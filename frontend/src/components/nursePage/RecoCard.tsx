@@ -17,7 +17,7 @@ const RecoCard = ({ nurse }: { nurse: NurseType }) => {
 
             </div>
             <div className="recoBtn border-t w-full text-center py-3">
-                <button className="button cursor-pointer font-bold" onClick={() => nav(`/nurse/edit/${user!.id}`)}>
+                <button className="button cursor-pointer font-bold" onClick={() => nav(`/nurse/recommendations/receive/${user!.id}`)}>
                     Recommendations
                 </button>
             </div>
