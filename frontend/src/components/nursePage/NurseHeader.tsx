@@ -1,7 +1,8 @@
 import { NurseType } from "../../types/nurseTypes/nurseType"
 import { useAuth } from "../../hooks/useAuth"
 import { useNavigate } from "react-router"
-
+import { useState } from "react"
+import { GiveRecommendationSection } from "../modals/GiveRecommendationModal"
 // Icons
 import { BsFillCheckCircleFill } from "react-icons/bs"
 import { PiPhoneFill } from "react-icons/pi";
@@ -15,6 +16,7 @@ import { PiUserFill } from "react-icons/pi";
 const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
     const { user } = useAuth()
     const nav = useNavigate()
+    const [showGiveRecoModal, setShowGiveRecoModal] = useState<boolean>(false)
     return (
         <div className="nurseHeader flex flex-col h-[640px]">
             <div className="h-[50vh] md:h-3/5 w-full flex justify-center items-center">
@@ -104,7 +106,10 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                                             </button>
                                         </li>
                                         <li>
-                                            <button onClick={() => nav(`/nurse/recommendations/give/${nurse?.userId}`)}>
+                                            <button onClick={() => 
+                                                //nav(`/nurse/recommendations/give/${nurse?.userId}`)
+                                                setShowGiveRecoModal(true)
+                                                }>
                                                 Recommend
                                             </button>
                                         </li>
@@ -122,6 +127,11 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                     </div>
                 </div>
             </div>
+            <GiveRecommendationSection
+                show={showGiveRecoModal}
+                setShow={setShowGiveRecoModal}
+                name={nurse?.firstName}
+            />
         </div>
     )
 }
