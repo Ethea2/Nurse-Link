@@ -6,7 +6,12 @@ const nurseRouter = express.Router()
 
 nurseRouter.get("/", getNurses)
 
+
 nurseRouter.get("/:userId", getNurse)
+
+nurseRouter.get("/:userId/connections", (req, res) => {
+  return res.status(200).send("Hello!")
+})
 
 nurseRouter.post("/edit/profilePhoto", checkAuth, editNurseProfilePicture)
 
