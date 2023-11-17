@@ -7,7 +7,7 @@ import { useAuth } from "../../hooks/useAuth"
 const NurseCard = ({ nurse }: { nurse: NurseType }) => {
     const { user } = useAuth()
     return (
-        <div className="invisible md:visible rounded-lg p-8 shadow-md">
+        <div className="invisible md:visible rounded-lg p-8 shadow-md mb-10">
             <div className="flex items-center mb-5">
                 <img
                     src={nurse?.profilePicture}

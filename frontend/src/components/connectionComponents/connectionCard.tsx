@@ -17,7 +17,7 @@ const ConnectionCard = ({ nurseId }: { nurseId: string }) => {
 
   return (
     <div
-            className={`connection-card rounded-lg p-4 flex items-center justify-between w-100 h-[10rem] ${
+            className={`connection-card rounded-3xl p-4 flex items-center justify-between w-100 h-[10rem] ${
                 isHovered ? "hovered" : ""
             }`}
             style={{ backgroundColor: isHovered ? "#176B87" : "#FFFFFF",

@@ -22,8 +22,8 @@ const Connection = () => {
                         <NurseCard nurse={nurse}/>
                     </div>
                     <div className="flex flex-col main-section w-3/4">
-                        <div>
-                            <p style={{ fontFamily: "Poppins", color: "#053B50", fontSize: "2rem", fontWeight: 900 }}>
+                        <div className="mb-5">
+                            <p style={{ fontFamily: "Poppins", color: "#053B50", fontSize: "3rem", fontWeight: 900 }}>
                                 {nurse?.connections?.length} Connections
                             </p>
                         </div>
