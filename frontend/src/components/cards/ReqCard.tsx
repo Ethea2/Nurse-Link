@@ -5,7 +5,7 @@ const ReqCard = ({ nurse }: { nurse: NurseType }) => {
     const { user } = useAuth()
 
     return (
-        <div className="rounded-lg h-auto w-[300px] p-6 shadow-md hover:bg-secondary hover:text-white">
+        <div className="rounded-lg h-auto w-full p-6 shadow-md hover:bg-secondary hover:text-white">
             <div className="flex justify-center items-center mb-5">
                 <img
                     src={nurse?.profilePicture}
@@ -18,10 +18,10 @@ const ReqCard = ({ nurse }: { nurse: NurseType }) => {
                 </div>
             </div>
             <div className="flex flex-col items-center ">
-                <button className="btn w-[50%] text-lg rounded-full bg-white text-secondary border-transparent drop-shadow-lg normal-case">
+                <button className="btn w-[60%] text-lg rounded-full bg-white text-secondary border-transparent drop-shadow-lg normal-case">
                     Accept
                 </button>
-                <button className="btn w-[50%] mt-5 text-lg rounded-full bg-white text-secondary border-transparent drop-shadow-lg normal-case">
+                <button className="btn w-[60%] mt-5 text-lg rounded-full bg-white text-secondary border-transparent drop-shadow-lg normal-case">
                     Reject
                 </button>
             </div>

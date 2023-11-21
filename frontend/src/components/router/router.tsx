@@ -14,6 +14,7 @@ import NurseEditContactPage from "../../pages/nurseEdit/NurseEditContactPage.tsx
 import NurseRecoRecievePage from "../../pages/recommendations/NurseRecoReceivePage.tsx"
 import NurseRecoGivePage from "../../pages/recommendations/NurseRecoGivePage.tsx"
 import NurseRecoRequestsPage from "../../pages/recommendations/NurseRecoRequestsPage.tsx"
+import Notifs from "../../pages/notifications/Notifs.tsx"
 
 const routes: Array<RouteType> = [
     { path: "/", element: <Landing /> },
@@ -30,7 +31,8 @@ const routes: Array<RouteType> = [
     { path: "/nurse/edit/contact/:userId", element: <NurseEditContactPage /> },
     { path: "/nurse/recommendations/receive/:userId", element: <NurseRecoRecievePage /> },
     { path: "/nurse/recommendations/give/:userId", element: <NurseRecoGivePage /> },
-    { path: "/nurse/recommendations/requests/:userId", element: <NurseRecoRequestsPage /> }
+    { path: "/nurse/recommendations/requests/:userId", element: <NurseRecoRequestsPage /> },
+    { path: "/nurse/notifications/:userId", element: <Notifs /> }
 ]
 
 export default routes

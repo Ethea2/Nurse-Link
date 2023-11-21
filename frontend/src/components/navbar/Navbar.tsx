@@ -320,7 +320,7 @@ const LoggedInProfileMenu = ({
                 </li>
                 <li>
                     <button
-                        onClick={() => nav(`/nurse/${user.id}`)}
+                        onClick={() => nav(`/nurse/notifications/${user.id}`)}
                     >
                         Notifications
                     </button>
