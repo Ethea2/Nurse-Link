@@ -102,21 +102,6 @@ export const GiveRecommendationSection=({
                             >
                                 Cancel
                             </button>
-                           {/*  {imageName && (
-                                <motion.button
-                                    className="btn"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{
-                                        duration: 0.2,
-                                        ease: "easeIn",
-                                    }}
-                                    //onClick={reset}
-                                >
-                                    Reset
-                                </motion.button>
-                            )}*/}
                             <button
                                 id = "submit-document-button"
                                 className="btn"
