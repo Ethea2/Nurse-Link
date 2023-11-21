@@ -40,47 +40,6 @@ export const GiveRecommendationSection=({
                                 This recommendation will appear on {name}'s profile.
                             </span>
                         </div>
-                       
-                        {/* Relationship selection */}
-                        <div className="mt-5">
-                            <label htmlFor="relationship-type">
-                                Relationship:
-                            </label>
-                            <select
-                                id="relationship-type"
-                                className="select select-bordered w-full mt-2"
-                                
-                                onChange={(e) => {
-                                   // setDocumentType(e.target.value)
-                                }
-
-                                }
-                            >
-                                <option value="Relationship1">Relationship 1</option>
-                                <option value="Relationship2">Relationship 2</option>
-                                <option value="Relationship3">Relationship 3</option>
-                            </select>
-                        </div>
-                        {/* Position selection */}
-                        <div className="mt-5">
-                            <label htmlFor="position-type">
-                                Position
-                            </label>
-                            <select
-                                id="position-type"
-                                className="select select-bordered w-full mt-2"
-                                
-                                onChange={(e) => {
-                                   // setDocumentType(e.target.value)
-                                }
-
-                                }
-                            >
-                                <option value="Position1">Position 1</option>
-                                <option value="Position2">Position 2</option>
-                                <option value="Position3">Position 3</option>
-                            </select>
-                        </div>
                         {/* Input field for recommendation */}
                         <div className="mt-5">
                             <label htmlFor="add-reco">Add Recommendation</label>
@@ -102,21 +61,6 @@ export const GiveRecommendationSection=({
                             >
                                 Cancel
                             </button>
-                           {/*  {imageName && (
-                                <motion.button
-                                    className="btn"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{
-                                        duration: 0.2,
-                                        ease: "easeIn",
-                                    }}
-                                    //onClick={reset}
-                                >
-                                    Reset
-                                </motion.button>
-                            )}*/}
                             <button
                                 id = "submit-document-button"
                                 className="btn"
