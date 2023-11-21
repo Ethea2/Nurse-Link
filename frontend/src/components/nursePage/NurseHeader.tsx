@@ -12,11 +12,13 @@ import { FaTwitter } from "react-icons/fa";
 import { TiSocialInstagram } from "react-icons/ti";
 import { PiMapPinFill } from "react-icons/pi";
 import { PiUserFill } from "react-icons/pi";
+import useAddRecommendation from "../../hooks/useAddRecommendation"
 
 const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
     const { user } = useAuth()
     const nav = useNavigate()
     const [showGiveRecoModal, setShowGiveRecoModal] = useState<boolean>(false)
+
     return (
         <div className="nurseHeader flex flex-col h-[640px]">
             <div className="h-[50vh] md:h-3/5 w-full flex justify-center items-center">
@@ -107,7 +109,6 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                                         </li>
                                         <li>
                                             <button onClick={() => 
-                                                //nav(`/nurse/recommendations/give/${nurse?.userId}`)
                                                 setShowGiveRecoModal(true)
                                                 }>
                                                 Recommend
@@ -131,6 +132,8 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                 show={showGiveRecoModal}
                 setShow={setShowGiveRecoModal}
                 name={nurse?.firstName}
+                authorId={user && user.id ? user.id : ''}
+                receiverId={nurse?.userId}
             />
         </div>
     )

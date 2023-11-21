@@ -7,7 +7,8 @@ const useAddRecommendation = () => {
   const [state, setState] = useState<string>("");
 
   const addRecommendation = async (
-    userId: string,
+    authorId: string,
+    receiverId: string,
     date: Date,
     description: string
   ) => {
@@ -15,8 +16,9 @@ const useAddRecommendation = () => {
 
     try {
       const response = await axios.post(
-        import.meta.env.VITE_API_URL + `/api/nurse/${userId}/addRecommendation`,
+        import.meta.env.VITE_API_URL + `/api/nurse/${authorId}/addRecommendation`,
         {
+          receiverId,
           date,
           description,
         },

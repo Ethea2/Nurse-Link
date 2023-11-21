@@ -1,16 +1,40 @@
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { motion } from "framer-motion"
+import useAddRecommendation from "../../hooks/useAddRecommendation"
 
 export const GiveRecommendationSection=({
     show,
     setShow,
     name,
+    authorId,
+    receiverId
 }:{
     show: boolean
     setShow: React.Dispatch<React.SetStateAction<boolean>>
     name: string
+    authorId: string
+    receiverId: string
 })=>{
+    const { addRecommendation } = useAddRecommendation()
+    const [recommendation, setRecommendation] = useState("")
+    console.log(authorId)
+    const handleSubmit = async () => {
+        try {
+            // Call addRecommendation function with necessary information
+            const response = await addRecommendation(authorId, receiverId, new Date(), recommendation);
+
+            // Handle success if needed
+            console.log(response);
+
+            // Close the modal
+            setShow(false);
+        } catch (error) {
+            // Handle error if needed
+            console.error(error);
+        }
+    };
+
     return (
         <>
             {show && (
@@ -47,7 +71,8 @@ export const GiveRecommendationSection=({
                                 type="text"
                                 id="add-reco"
                                 className="input input-bordered w-full mt-2"
-                                //onChange = {(e) => setDocumentName(e.target.value)}
+                                value = {recommendation}
+                                onChange={(e) => setRecommendation(e.target.value)}
                             />
                         </div>
                         
@@ -64,7 +89,7 @@ export const GiveRecommendationSection=({
                             <button
                                 id = "submit-document-button"
                                 className="btn"
-                                //onClick={(e) => handleSave(e)}
+                                onClick={handleSubmit}
                             >
                                 Submit
                             </button>

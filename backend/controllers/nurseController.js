@@ -276,7 +276,7 @@ const getNurseConnections = async (req, res) => {
 
 const addRecommendation = async (req, res) => {
     try{
-        const userId = req.params
+        const userId = req.params.userId
         const date = req.body.date
         const description = req.body.description
 
@@ -306,7 +306,7 @@ const addRecommendation = async (req, res) => {
         return savedRecommendation
     } catch (e) {
         console.e('Error adding recommendation: ', error)
-        throw error
+        throw e
     }
 }
 
