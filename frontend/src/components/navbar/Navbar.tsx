@@ -141,33 +141,9 @@ const NavRight = () => {
                 </>
             ) : (
                 <>
-                    <Link to="/">
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
-                        >
-                            Jobs
-                        </motion.button>
-                    </Link>
-                    <Link to="/">
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
-                        >
-                            Connections
-                        </motion.button>
-                    </Link>
-                    <Link to={`/nurse/recommendations/receive/${user.id}`}>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
-                        >
-                            Recommendations
-                        </motion.button>
-                    </Link>
+                    <Jobs user={user} />
+                    <Connections user={user} />
+                    <Recommendations user={user} />
                     <Link to="/">
                         <motion.button
                             whileHover={{ scale: 1.05 }}
@@ -180,6 +156,138 @@ const NavRight = () => {
                     <LoggedInProfileMenu logout={logout} user={user} />
                 </>
             )}
+        </div>
+    )
+}
+
+const Jobs = ({
+    user
+}: {
+    user: UserType
+}) => {
+
+    const nav = useNavigate()
+
+    return (
+        <div className="dropdown dropdown-end mx-4">
+            <motion.button tabIndex={0}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+            >
+                Jobs
+            </motion.button>
+            <ul tabIndex={0} className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-40">
+                <li>
+                    <button
+                        onClick={() => nav(`/nurse/${user.id}`)}
+                    >
+                        All Jobs
+                    </button>
+                </li>
+                <li>
+                    <button
+                        onClick={() => nav(`/nurse/${user.id}`)}
+                    >
+                        Find Jobs
+                    </button>
+                </li>
+                <li>
+                    <button
+                        onClick={() => nav(`/nurse/${user.id}`)}
+                    >
+                        Fast Pass
+                    </button>
+                </li>
+            </ul>
+        </div>
+    )
+}
+
+const Connections = ({
+    user
+}: {
+    user: UserType
+}) => {
+
+    const nav = useNavigate()
+
+    return (
+        <div className="dropdown dropdown-end mx-4">
+            <motion.button tabIndex={0}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+            >
+                Connections
+            </motion.button>
+            <ul tabIndex={0} className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-40">
+                <li>
+                    <button
+                        onClick={() => nav(`/nurse/${user.id}`)}
+                    >
+                        All Connections
+                    </button>
+                </li>
+                <li>
+                    <button
+                        onClick={() => nav(`/nurse/${user.id}`)}
+                    >
+                        Find Connections
+                    </button>
+                </li>
+                <li>
+                    <button
+                        onClick={() => nav(`/nurse/${user.id}`)}
+                    >
+                        Requests
+                    </button>
+                </li>
+            </ul>
+        </div>
+    )
+}
+
+const Recommendations = ({
+    user
+}: {
+    user: UserType
+}) => {
+
+    const nav = useNavigate()
+
+    return (
+        <div className="dropdown dropdown-end mx-4">
+            <motion.button tabIndex={0}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+            >
+                Recommendations
+            </motion.button>
+            <ul tabIndex={0} className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-40">
+                <li>
+                    <button
+                        onClick={() => nav(`/nurse/recommendations/give/${user.id}`)}
+                    >
+                        Given
+                    </button>
+                </li>
+                <li>
+                    <button
+                        onClick={() => nav(`/nurse/recommendations/receive/${user.id}`)}
+                    >
+                        Received
+                    </button>
+                </li>
+                <li>
+                    <button
+                        onClick={() => nav(`/nurse/recommendations/requests/${user.id}`)}
+                    >
+                        Requests
+                    </button>
+                </li>
+            </ul>
         </div>
     )
 }
