@@ -3,6 +3,7 @@ const Nurse = require("../models/nurseModel")
 const User = require("../models/userModel")
 const cloudinary = require("../utils/cloudinary")
 const fs = require("fs")
+const Recommendations = require("../models/recommendationModel")
 
 const computeNurseProgress = (nurse) => {
     const skills = [
@@ -277,36 +278,54 @@ const getNurseConnections = async (req, res) => {
 const addRecommendation = async (req, res) => {
     try{
         const userId = req.params.userId
+        const receiverId = req.body.receiverId
         const date = req.body.date
         const description = req.body.description
 
-        const authorID = await User.findOne({userId})
-        const receiverID = await Nurse.findOne({_id: userId})
+        const author = await User.findOne({ userId });
+        const receiver = await Nurse.findById(userId);
 
-        const newRecommendation = new recommendationModel({
-            authorID,
-            receiverID,
+        if (!author || !receiver) {
+            console.error('Author or receiver not found');
+        }
+
+        const newRecommendation = new Recommendations({
+            authorID: userId,
+            receiverID: receiverId,
             date,
             description
         })
 
         const savedRecommendation = await newRecommendation.save();
+        const recommendationsToAdd = [savedRecommendation];
 
-        await Nurse.updateOne(
-            { _id: receiverID },
-            { $push: { 'recommendations.received': savedRecommendation._id } }
-        )
+        const nurseReceived = await Nurse.findOneAndUpdate(
+            { userId: receiverId },
+            {
+                $push: {
+                    'recommendations.received': {
+                        $each: recommendationsToAdd
+                    }
+                }
+            }
+        );
 
-        await Nurse.updateOne(
-            { _id: authorID },
-            { $push: { 'recommendations.given': savedRecommendation._id } }
-        )
+        const nurseGiven = await Nurse.findOneAndUpdate(
+            { userId: userId },
+            {
+                $push: {
+                    'recommendations.given': {
+                        $each: recommendationsToAdd
+                    }
+                }
+            }
+        );
 
-        console.log(savedRecommendation)
-        return savedRecommendation
+        console.log(newRecommendation)
+        return res.status(200).json({ message: "Recommendations added successfully" });
     } catch (e) {
-        console.e('Error adding recommendation: ', error)
-        throw e
+        console.error('Error adding recommendation: ', e);
+        return res.status(500).json({ message: "Server Error!" });
     }
 }
 

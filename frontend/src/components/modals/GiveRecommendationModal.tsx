@@ -18,7 +18,8 @@ export const GiveRecommendationSection=({
 })=>{
     const { addRecommendation } = useAddRecommendation()
     const [recommendation, setRecommendation] = useState("")
-    console.log(authorId)
+    console.log("authorID:", authorId)
+    console.log("receiverID:", receiverId)
     const handleSubmit = async () => {
         try {
             // Call addRecommendation function with necessary information
