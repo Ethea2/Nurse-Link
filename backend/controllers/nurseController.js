@@ -274,6 +274,43 @@ const getNurseConnections = async (req, res) => {
     }
 }
 
+const addRecommendation = async (req, res) => {
+    try{
+        const userId = req.params
+        const date = req.body.date
+        const description = req.body.description
+
+        const authorID = await User.findOne({userId})
+        const receiverID = await Nurse.findOne({_id: userId})
+
+        const newRecommendation = new recommendationModel({
+            authorID,
+            receiverID,
+            date,
+            description
+        })
+
+        const savedRecommendation = await newRecommendation.save();
+
+        await Nurse.updateOne(
+            { _id: receiverID },
+            { $push: { 'recommendations.received': savedRecommendation._id } }
+        )
+
+        await Nurse.updateOne(
+            { _id: authorID },
+            { $push: { 'recommendations.given': savedRecommendation._id } }
+        )
+
+        console.log(savedRecommendation)
+        return savedRecommendation
+    } catch (e) {
+        console.e('Error adding recommendation: ', error)
+        throw error
+    }
+}
+
+
 module.exports = {
     getNurses,
     getNurse,
@@ -282,5 +319,6 @@ module.exports = {
     editNurseProfilePicture,
     editNurseBanner,
     addDocument,
-    getNurseConnections
+    getNurseConnections,
+    addRecommendation
 }
