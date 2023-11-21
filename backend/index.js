@@ -13,6 +13,9 @@ const authRouter = require('./routes/authRoutes')
 const instituteRouter = require("./routes/instituteRoutes")
 const { generateSecret } = require("./utils/sessionSecret")
 
+//
+const Recommendations = require("./models/recommendationsModel")
+
 const app = express()
 
 //middlewears
@@ -82,3 +85,28 @@ mongoose
     .catch((error) => {
         console.log(error)
     })
+
+    const newRecommendation = new Recommendations({
+        author: {
+          authorID: new mongoose.Types.ObjectId(),
+          firstName: "John",
+          lastName: "Doe",
+          position: "Senior Nurse",
+        },
+        receiver: {
+          receiverID: new mongoose.Types.ObjectId(),
+          firstName: "Jane",
+          lastName: "Smith",
+        },
+        date: new Date(),
+        description: "John Doe is an excellent nurse!",
+      });
+      
+      // Save the document to the "Recommendations" collection
+      newRecommendation.save()
+        .then(savedRecommendation => {
+          console.log("Saved Recommendation:", savedRecommendation);
+        })
+        .catch(error => {
+          console.error("Error saving recommendation:", error);
+        });

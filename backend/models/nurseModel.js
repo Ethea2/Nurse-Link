@@ -216,10 +216,16 @@ const nurseSchema = new Schema({
             required: true
         }
     }],
-    recommendations: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Recommendations"
-    }],
+    recommendations: {
+        given: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Recommendations"
+          }],
+          received: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Recommendations"
+          }], 
+    }
 }, {timestamps: true})
 
 module.exports = mongoose.model("Nurse", nurseSchema, "Nurse")

@@ -48,9 +48,4 @@ const recommendationSchema = new Schema({
     }
 })
 
-const recommendationsSchema = new Schema({
-    given: [recommendationSchema],
-    received: [recommendationSchema]
-})
-
-module.exports = mongoose.model("Recommendations", recommendationsSchema, "Recommendations")
+module.exports = mongoose.model("Recommendations", recommendationSchema, "Recommendations")
