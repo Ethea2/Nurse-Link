@@ -1,6 +1,8 @@
 const mongoose = require("mongoose")
-
 const Schema = mongoose.Schema
+
+// import recommendationsModel
+const recommendationsSchema = require("./recommendationsModel.js")
 
 const nurseSchema = new Schema({
     userId: {
@@ -213,7 +215,8 @@ const nurseSchema = new Schema({
             type: Date,
             required: true
         }
-    }]
+    }],
+    recommendations: {recommendationsSchema}
 }, {timestamps: true})
 
 module.exports = mongoose.model("Nurse", nurseSchema, "Nurse")

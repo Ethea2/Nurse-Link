@@ -16,6 +16,9 @@ const recommendationsSchema = new Schema({
                 lastName: {
                     type: String,
                     required: true
+                },
+                position: {
+                    type: String
                 }
             },
             receiver: {
