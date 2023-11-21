@@ -84,7 +84,7 @@ const RegisterPage = () => {
                     <Link to="/">
                         <div className="logoPng">
                             <img
-                                src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127920/CSSWENG%20GROUP%203/qt4ozeain5lqwtz5jmb3.png"
+                                src="https://res.cloudinary.com/dqmt7dqxw/image/upload/v1700546195/dpt7oddbxosgt9ngkolt.png"
                                 style={{ width: "70px", height: "70px" }}
                             />
                         </div>
@@ -95,17 +95,19 @@ const RegisterPage = () => {
             </div>
             <div className="flex flex-col gap-5 mt-10 mb-20 sm:flex-row">
                 <Link to="/register-institute">
-                    <div className="font-bold rounded-lg cursor-pointer" style={{ flex: "1" }}>
-                        <img src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127921/CSSWENG%20GROUP%203/sjavgndnfnyd9a8pqqye.png" alt="Institute Registration" />
-                        <div className="w-full text-center font-montserrat font-medium">
+                    <div className="font-bold rounded-lg cursor-pointer mr-5" style={{ flex: "1" }}>
+                        <img className="rounded-full border border-primary w-[150px] h-[150px]" src="https://res.cloudinary.com/dqmt7dqxw/image/upload/v1700545794/bqhdberwigkummqswcqg.png" alt="Institute Registration" />
+                        <div className="mt-3 w-full text-center font-montserrat font-medium">
                             Add Institution
                         </div>
                     </div>
                 </Link>
                 <Link to="/register-nurse">
                     <div className="font-bold rounded-lg cursor-pointer" style={{ flex: "1" }}>
-                        <img src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127921/CSSWENG%20GROUP%203/beaagtyscoc3p2euwxl1.png" alt="Nurse Registration" />
-                        <div className="w-full text-center font-montserrat font-medium">Add Nurse</div>
+                        <img className="rounded-full border border-primary w-[150px] h-[150px]" src="https://res.cloudinary.com/dqmt7dqxw/image/upload/v1700545690/cl0dptop0sshcbulxzqz.png" alt="Nurse Registration" />
+                        <div className="mt-3 w-full text-center font-montserrat font-medium">
+                            Add Nurse
+                        </div>
                     </div>
                 </Link>
             </div>

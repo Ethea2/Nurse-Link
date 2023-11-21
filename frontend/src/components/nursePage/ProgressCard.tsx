@@ -83,11 +83,11 @@ const ProgressCard = ({ nurse }: { nurse: NurseType }) => {
                         </div>
                     ))}
                 </div>
-                <div className="editProfileBtn border-t py-3">
-                    <button className="button cursor-pointer font-bold" onClick={() => nav(`/nurse/edit/${user!.id}`)}>
-                        Edit Profile
-                    </button>
-                </div>
+            </div>
+            <div className="editProfileBtn flex w-full justify-center border-t py-3">
+                <button className="button cursor-pointer font-bold" onClick={() => nav(`/nurse/edit/${user!.id}`)}>
+                    Edit Profile
+                </button>
             </div>
         </div >
     )

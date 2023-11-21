@@ -12,11 +12,11 @@ const validateEmail = (email) =>
     /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 
 const MALE_PF =
-    "https://res.cloudinary.com/dtocowzq2/image/upload/v1698166263/nurse-link/bkskgjjrgf1klrqptjk4.png"
+    "https://res.cloudinary.com/dqmt7dqxw/image/upload/v1700545758/ni6f8ahncorvimw8yaxr.png"
 const FEMALE_PF =
-    "https://res.cloudinary.com/dtocowzq2/image/upload/v1698166301/nurse-link/ygygiflaamzjeqkm6usn.png"
+    "https://res.cloudinary.com/dqmt7dqxw/image/upload/v1700545690/cl0dptop0sshcbulxzqz.png"
 const COMPANY_PF =
-    "https://res.cloudinary.com/dtocowzq2/image/upload/v1698166313/nurse-link/mjfmyd8wwlkw0koxnfvo.png"
+    "https://res.cloudinary.com/dqmt7dqxw/image/upload/v1700545794/bqhdberwigkummqswcqg.png"
 const NURSE_BANNER =
     "https://res.cloudinary.com/dtocowzq2/image/upload/v1698166580/nurse-link/e5fmcxucsawasumnv9ke.png"
 const COMPANY_BANNER =

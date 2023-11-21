@@ -15,7 +15,7 @@ const NurseCard = ({ nurse }: { nurse: NurseType }) => {
                     alt="Nurse's Profile Picture"
                 />
                 <div className="flex flex-col text-left ml-5">
-                    <p className="font-poppins font-black text-xl">{nurse?.firstName} {nurse?.lastName}</p>
+                    <p className="font-poppins font-bold text-xl">{nurse?.firstName} {nurse?.lastName}</p>
                     <p className="font-pt-sans italic text-sm">{nurse?.country}, {nurse?.city}</p>
                 </div>
             </div>

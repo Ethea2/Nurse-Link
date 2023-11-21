@@ -15,6 +15,8 @@ import NurseRecoRecievePage from "../../pages/recommendations/NurseRecoReceivePa
 import NurseRecoGivePage from "../../pages/recommendations/NurseRecoGivePage.tsx"
 import NurseRecoRequestsPage from "../../pages/recommendations/NurseRecoRequestsPage.tsx"
 import Notifs from "../../pages/notifications/Notifs.tsx"
+import SettingsPreferences from "../../pages/settings/SettingsPreferences.tsx"
+import SettingsManage from "../../pages/settings/SettingsManage.tsx"
 
 const routes: Array<RouteType> = [
     { path: "/", element: <Landing /> },
@@ -32,7 +34,9 @@ const routes: Array<RouteType> = [
     { path: "/nurse/recommendations/receive/:userId", element: <NurseRecoRecievePage /> },
     { path: "/nurse/recommendations/give/:userId", element: <NurseRecoGivePage /> },
     { path: "/nurse/recommendations/requests/:userId", element: <NurseRecoRequestsPage /> },
-    { path: "/nurse/notifications/:userId", element: <Notifs /> }
+    { path: "/nurse/notifications/:userId", element: <Notifs /> },
+    { path: "/nurse/settings/preferences/:userId", element: <SettingsPreferences /> },
+    { path: "/nurse/settings/management/:userId", element: <SettingsManage /> }
 ]
 
 export default routes

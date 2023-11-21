@@ -31,9 +31,9 @@ const Logo = () => {
     return (
         <div className="flex items-center">
             <img
-                width="50"
-                height="39"
-                src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127920/CSSWENG%20GROUP%203/qt4ozeain5lqwtz5jmb3.png"
+                width="40"
+                height="40"
+                src="https://res.cloudinary.com/dqmt7dqxw/image/upload/v1700546195/dpt7oddbxosgt9ngkolt.png"
                 alt="Logo"
             />
         </div>
@@ -327,7 +327,7 @@ const LoggedInProfileMenu = ({
                 </li>
                 <li>
                     <button
-                        onClick={() => nav(`/nurse/${user.id}`)}
+                        onClick={() => nav(`/nurse/settings/preferences/${user.id}`)}
                     >
                         Settings
                     </button>

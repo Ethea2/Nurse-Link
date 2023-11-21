@@ -230,7 +230,7 @@ const RegisterNurse = () => {
                     <div className="mb-10 flex flex-col items-center" style={commonStyles.card}>
                         <div className="logoPng" style={commonStyles.logoPng}>
                             <img
-                                src="https://res.cloudinary.com/dpuuajd0k/image/upload/v1698127920/CSSWENG%20GROUP%203/qt4ozeain5lqwtz5jmb3.png"
+                                src="https://res.cloudinary.com/dqmt7dqxw/image/upload/v1700546195/dpt7oddbxosgt9ngkolt.png"
                                 className="object-scale-down h-14 w-14"
                             />
                         </div>

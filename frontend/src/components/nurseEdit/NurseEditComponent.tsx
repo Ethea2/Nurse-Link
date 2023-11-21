@@ -109,7 +109,7 @@ const NurseEditComponent = ({ userId }: { userId: string }) => {
                         )}
                         <img
                             src={nurse?.profilePicture}
-                            className="w-full h-full rounded-full"
+                            className="w-[180px] h-[180px] rounded-full"
                         />
                     </div>
                 </div>
