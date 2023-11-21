@@ -274,6 +274,42 @@ const getNurseConnections = async (req, res) => {
     }
 }
 
+const addRecommendation = async (req, res) => {
+    const { userId } = req.params
+    const { authorID, receiverID, description, type } = req.body
+    try {
+        const authorExists = await Nurse.exists({ userId: authorID })
+        const receiverExists = await Nurse.exists({ userId: receiverID })
+
+        if (!authorExists || !receiverExists) {
+            return res.status(404).json({ message: "Author or receiver not found!" })
+        }
+
+        const newRecommendation = {
+            author: { authorID },
+            receiver: { receiverID },
+            date: Date.now(),
+            description,
+        }
+
+        const updateField = type === 'given' ? 'given' : 'received'
+        const nurse = await Nurse.findOneAndUpdate(
+            { userId },
+            { $push: { [`recommendations.${updateField}`]: newRecommendation } },
+            { new: true }
+        )
+
+        if (!nurse) {
+            return res.status(404).json({ message: "Could not find the nurse!" })
+        }
+        res.status(201).json({ message: "Recommendation created successfully!" })
+
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({ message: "Something went wrong!" })
+    }
+};
+
 module.exports = {
     getNurses,
     getNurse,
@@ -282,5 +318,6 @@ module.exports = {
     editNurseProfilePicture,
     editNurseBanner,
     addDocument,
-    getNurseConnections
+    getNurseConnections,
+    addRecommendation
 }

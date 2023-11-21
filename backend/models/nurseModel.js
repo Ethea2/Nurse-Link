@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 // import recommendationsModel
-const recommendationsSchema = require("./recommendationsModel.js")
+const Recommendations = require("./recommendationsModel.js")
 
 const nurseSchema = new Schema({
     userId: {
@@ -216,7 +216,10 @@ const nurseSchema = new Schema({
             required: true
         }
     }],
-    recommendations: {recommendationsSchema}
+    recommendations: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Recommendations"
+    }],
 }, {timestamps: true})
 
 module.exports = mongoose.model("Nurse", nurseSchema, "Nurse")

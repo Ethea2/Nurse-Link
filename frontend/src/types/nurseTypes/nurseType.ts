@@ -22,6 +22,7 @@ export interface NurseType {
     credentials: CredentialsType
     education: EducationType
     video: string
+    recommendations: RecommendationType[]
 } //continue updating
 
 export interface CredentialsType {
@@ -68,3 +69,23 @@ export interface DocumentType {
     status: 'verified' | 'unverified' | 'pending';
     link: string;
   }
+
+export interface RecommendationType {
+  author: authorType;
+  receiver: receiverType;
+  date: Date;
+  description: string
+}
+
+export interface authorType {
+  authorID: string;
+  firstName: string;
+  lastName: string;
+  position?: string;
+}
+
+export interface receiverType {
+  receiverID: string;
+  firstName: string;
+  lastName: string;
+}
