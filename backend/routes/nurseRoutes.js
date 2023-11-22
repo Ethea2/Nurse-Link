@@ -10,6 +10,16 @@ nurseRouter.get("/:userId", getNurse)
 
 nurseRouter.get("/:userId/connections", getNurseConnections)
 
+nurseRouter.post("/:userId/try", sendNurseConnection)
+
+nurseRouter.post("/:userId/try2", checkConnectionRequest)
+
+nurseRouter.post("/:userId/try3", checkConnection)
+
+nurseRouter.post("/:userId/try4", rejectNurseConnection)
+
+nurseRouter.post("/:userId/try5", deleteNurseConnection)
+
 nurseRouter.post("/edit/profilePhoto", checkAuth, editNurseProfilePicture)
 
 nurseRouter.post("/edit/profileBanner", checkAuth, editNurseBanner)
