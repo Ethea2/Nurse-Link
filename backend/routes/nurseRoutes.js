@@ -22,4 +22,6 @@ nurseRouter.delete("/:userId", checkAuth, deleteNurse)
 
 nurseRouter.post("/connection/acceptNurseConnection", checkAuth, acceptNurseConnection)
 
+nurseRouter.post("/connection/sendNurseConnection", checkAuth, sendNurseConnection)
+
 module.exports = nurseRouter

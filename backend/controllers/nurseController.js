@@ -305,6 +305,9 @@ const acceptNurseConnection = async (req, res) => {
 }
 
 const sendNurseConnection = async (req, res) => {
+    console.log("hello is this working")
+    
+    console.log(req.body);
     const senderId = req.body.senderId
     const receiverId = req.body.receiverId
 
