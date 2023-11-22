@@ -4,12 +4,26 @@ import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
+import useConnections from "../../hooks/useConnections.tsx"
 
 const ConnectionRequestCard = ({ nurseId }: { nurseId: string }) => {
   const { data: nurse, loading } = useFetch(`/api/nurse/${nurseId}`);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const [isHovered, setIsHovered] = useState(false);
+
+  const { acceptConnection, state } = useConnections()
+  const { user } = useAuth()
+  const nav = useNavigate()
+
+  const handleAcceptConnection = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    connectionSender: string,
+    connectionReceiver: string
+) => {
+    e.preventDefault()
+    await acceptConnection(connectionSender, connectionReceiver)
+}
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
@@ -33,7 +47,14 @@ const ConnectionRequestCard = ({ nurseId }: { nurseId: string }) => {
                 <div className="text-l italic">{nurse?.city}</div>
             </div>
         </div>
-        <button className="btn text-lg w-40 mb-4 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case">
+        <button className="btn text-lg w-40 mb-4 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+        onClick={(e) => {
+          if (user) {
+            handleAcceptConnection(e, user?.id, nurseId)
+          } else {
+              {() => nav(`/login`)}
+          }
+      }}>
             Accept
         </button>
         <button

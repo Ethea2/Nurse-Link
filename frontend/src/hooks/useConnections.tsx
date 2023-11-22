@@ -8,15 +8,16 @@ const useConnections = () =>{
     const [state, setState] = useState<string>("")
     
     const acceptConnection = async (
-        senderId: String,
-        receiverId: String
+        accepterId: String,
+        senderId: String
     ) => {
+        toastID.current = toast.loading("Accepting Connection")
         await axios
             .post(
             import.meta.env.VITE_API_URL + "/api/nurse/connection/acceptNurseConnection",
             {
-                senderId,
-                receiverId
+                accepterId,
+                senderId
             },
             {
                 withCredentials: true
@@ -24,6 +25,7 @@ const useConnections = () =>{
 
         )
         .then((res) => {
+            toastID.current = toast.loading("Connection Successfully Accepted")
             setState("success")
             toast.update(toastID.current ?? "", {
                 render: res.data.message,
@@ -35,6 +37,7 @@ const useConnections = () =>{
             })
         })
         .catch((e) => {
+            console.log(e)
             setState("error")
             toast.update(toastID.current ?? "", {
                 render: e.response?.data?.message ?? e.message,
@@ -49,14 +52,14 @@ const useConnections = () =>{
     }
 
     const rejectConnection = async (
-        senderId: String,
-        receiverId: String
+        rejecterId: String,
+        rejecteeId: String
         ) => {
             await axios({
                 method: "post",
                 data: {
-                    senderId,
-                    receiverId
+                    rejecterId,
+                    rejecteeId
                 }
     
             })
@@ -73,6 +76,7 @@ const useConnections = () =>{
         senderId: String,
         receiverId: String
         ) => {
+            toastID.current = toast.loading("Sending Connection")
             await axios({
                 method: "post",
                 data: {
@@ -83,6 +87,7 @@ const useConnections = () =>{
                 url: import.meta.env.VITE_API_URL + "/api/nurse/connection/sendNurseConnection",
             })
         .then((res) => {
+            toastID.current = toast.loading("Connection Successfully Sent")
             setState("success")
             toast.update(toastID.current ?? "", {
                 render: res.data.message,
