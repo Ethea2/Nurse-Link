@@ -271,23 +271,23 @@ const getNurseConnections = async (req, res) => {
 }
 
 const acceptNurseConnection = async (req, res) => {
+    const accepterId = req.body.accepterId
     const senderId = req.body.senderId
-    const receiverId = req.body.receiverId
 
-    helperCheckConnectionRequest(receiverId, senderId).then(async function(result){
+    helperCheckConnectionRequest(senderId, accepterId).then(async function(result){
         if (result) {
             try {
-                const acceptSenderRequest = await Nurse.findOneAndUpdate({ userId: senderId },
+                const acceptSenderRequest = await Nurse.findOneAndUpdate({ userId: accepterId },
                     {
-                        $pull: { connectionSent: receiverId },
-                        $push: { connections: receiverId } 
+                        $pull: { connectionReceived: senderId },
+                        $push: { connections: senderId } 
                     }   
                 )
 
-                const acceptReceiverRequest = await Nurse.findOneAndUpdate({ userId: receiverId },
+                const acceptReceiverRequest = await Nurse.findOneAndUpdate({ userId: senderId },
                     {
-                        $pull: { connectionReceived: senderId },
-                        $push: { connections: senderId }  
+                        $pull: { connectionSent: accepterId },
+                        $push: { connections: accepterId }  
                     }
                 )
 
@@ -302,14 +302,11 @@ const acceptNurseConnection = async (req, res) => {
                 return res.status(500).json({ message: "Something went wrong!" })
             }
         }
-        return res.status(400).json({ message: "Could not accept connection request!"})
+        return res.status(404).json({ message: "Could not accept connection request!"})
     }) 
 }
 
 const sendNurseConnection = async (req, res) => {
-    console.log("hello is this working")
-    
-    console.log(req.body);
     const senderId = req.body.senderId
     const receiverId = req.body.receiverId
 
@@ -322,12 +319,12 @@ const sendNurseConnection = async (req, res) => {
     try {
         const sendRequest = await Nurse.findOneAndUpdate(
             { userId: senderId },
-            { $push: { connectionSent: receiverId } }
+            { $addToSet: { connectionSent: receiverId } }
         )
 
         const receiveRequest = await Nurse.findOneAndUpdate(
             { userId: receiverId },
-            { $push: { connectionReceived: senderId } }
+            { $addToSet: { connectionReceived: senderId } }
         )
 
         if (!sendRequest && !receiveRequest)
@@ -456,23 +453,25 @@ const helperCheckConnection = async (senderId, receiverId) => {
 }
 
 const rejectNurseConnection = async (req, res) => {
-    const senderId = req.body.senderId 
-    const receiverId = req.body.receiverId
+    const rejecterId = req.body.rejecterId 
+    const rejecteeId = req.body.rejecteeId
 
-    helperCheckConnectionRequest(receiverId, senderId).then(async function(result){
+    helperCheckConnectionRequest(rejecteeId, rejecterId).then(async function(result){
+        console.log(result)
         if (result) {
             try {
-                const acceptSenderRequest = await Nurse.findOneAndUpdate(
-                    { userId: senderId },
-                    { $pull: { connectionSent: receiverId } }
+                const rejectSenderRequest = await Nurse.findOneAndUpdate(
+                    { userId: rejecterId },
+                    { $pull: { connectionReceived: rejecteeId } }
                 )
     
-                const acceptReceiverRequest = await Nurse.findOneAndUpdate(
-                    { userId: receiverId },
-                    { $pull: { connectionReceived: senderId } }
+                const rejectReceiverRequest = await Nurse.findOneAndUpdate(
+
+                    { userId: rejecteeId},
+                    { $pull: { connectionSent: rejecterId } }
                 )
     
-                if (!acceptSenderRequest && !acceptReceiverRequest)
+                if (!rejectSenderRequest && !rejectReceiverRequest)
                     return res
                         .status(400)
                         .json({ message: "Could not reject connection request!"})

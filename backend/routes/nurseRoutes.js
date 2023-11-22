@@ -20,6 +20,8 @@ nurseRouter.post("/:userId/try4", rejectNurseConnection)
 
 nurseRouter.post("/:userId/try5", deleteNurseConnection)
 
+nurseRouter.post("/:userId/try6", acceptNurseConnection)
+
 nurseRouter.post("/edit/profilePhoto", checkAuth, editNurseProfilePicture)
 
 nurseRouter.post("/edit/profileBanner", checkAuth, editNurseBanner)
