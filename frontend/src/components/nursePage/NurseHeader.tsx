@@ -5,19 +5,19 @@ import { BsFillPersonFill } from "react-icons/bs"
 import { BsFacebook, BsTwitter } from "react-icons/bs"
 import { useAuth } from "../../hooks/useAuth"
 import { useNavigate } from "react-router"
-import useAddConnection from "../../hooks/useAddDocument"
+import useConnections from "../../hooks/useConnections.tsx"
 
 const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
 
-    const { addNurseConnection } = useAddConnection()
+    const { sendConnection, state } = useConnections()
 
-    const handleAddConnection = async (
+    const handleSendConnection = async (
         e: React.MouseEvent<HTMLButtonElement>,
         connectionSender: string,
         connectionReceiver: string
     ) => {
         e.preventDefault()
-        await addNurseConnection(connectionSender, connectionReceiver)
+        await sendConnection(connectionSender, connectionReceiver)
     }
 
 
@@ -85,6 +85,13 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                         <div className="flex flex-col w-full items-end">
                                 <button
                                     className="btn text-lg w-40 mb-4 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                                    onClick={(e) => {
+                                        if (user) {
+                                            handleSendConnection(e, user.id, nurse.userId)
+                                        } else {
+                                            {() => nav(`/login`)}
+                                        }
+                                    }}
                                 >
                                     Connect
                                 </button>
