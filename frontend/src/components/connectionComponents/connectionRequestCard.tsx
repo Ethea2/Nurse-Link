@@ -12,7 +12,8 @@ const ConnectionRequestCard = ({ nurseId }: { nurseId: string }) => {
 
   const [isHovered, setIsHovered] = useState(false);
 
-  const { acceptConnection, state } = useConnections()
+  const { acceptConnection } = useConnections()
+  const { rejectConnection } = useConnections()
   const { user } = useAuth()
   const nav = useNavigate()
 
@@ -23,6 +24,15 @@ const ConnectionRequestCard = ({ nurseId }: { nurseId: string }) => {
 ) => {
     e.preventDefault()
     await acceptConnection(connectionSender, connectionReceiver)
+}
+
+const handleRejectConnection = async (
+  e: React.MouseEvent<HTMLButtonElement>,
+  connectionRejecter: string,
+  connectionRejectee: string
+) => {
+  e.preventDefault()
+  await rejectConnection(connectionRejecter, connectionRejectee)
 }
 
   const toggleDropdown = () => {
@@ -62,7 +72,15 @@ const ConnectionRequestCard = ({ nurseId }: { nurseId: string }) => {
           isHovered
             ? "bg-white text-secondary"
             : "bg-secondary text-white"
-        } border-transparent shadow-inner drop-shadow-lg normal-case`}
+        } border-transparent shadow-inner drop-shadow-lg normal-case`
+        }
+        onClick={(e) => {
+          if (user) {
+            handleRejectConnection(e, nurseId, user?.id)
+          } else {
+              {() => nav(`/login`)}
+          }
+      }}  
       >            Reject
         </button>
     </div>

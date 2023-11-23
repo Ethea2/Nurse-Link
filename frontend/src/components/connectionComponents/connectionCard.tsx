@@ -4,12 +4,25 @@ import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
+import useConnections from "../../hooks/useConnections.tsx"
 
 const ConnectionCard = ({ nurseId }: { nurseId: string }) => {
   const { data: nurse, loading } = useFetch(`/api/nurse/${nurseId}`);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const [isHovered, setIsHovered] = useState(false);
+  const { disconnectConnection } = useConnections()
+  const { user } = useAuth()
+  const nav = useNavigate()
+
+  const handleRejectConnection = async (
+    //e: React.MouseEvent<HTMLButtonElement>,
+    connectionSender: string,
+    connectionReceiver: string
+) => {
+    //e.preventDefault()
+    await disconnectConnection(connectionSender, connectionReceiver)
+}
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
@@ -48,7 +61,14 @@ const ConnectionCard = ({ nurseId }: { nurseId: string }) => {
         </button>
         {dropdownVisible && (
           <div className="dropdown-content absolute bg-white shadow-md rounded mt-2" style={{ fontFamily: "Poppins" }}>
-            <div className="px-2 py-1" style={{ cursor: "pointer"}}>Disconnect</div>
+            <div className="px-2 py-1" style={{ cursor: "pointer"}}        onClick={() => {
+          if (user) {
+            handleRejectConnection(nurseId, user?.id)
+          } else {
+              {() => nav(`/login`)}
+          }
+        }}  
+              >Disconnect</div>
             <div className="px-2 py-1" style={{ cursor: "pointer"}}>Recommend</div>
           </div>
         )}
