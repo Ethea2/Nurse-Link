@@ -25,7 +25,6 @@ const useConnections = () =>{
 
         )
         .then((res) => {
-            toastID.current = toast.loading("Connection Successfully Accepted")
             setState("success")
             toast.update(toastID.current ?? "", {
                 render: res.data.message,
@@ -52,15 +51,15 @@ const useConnections = () =>{
     }
 
     const rejectConnection = async (
-        rejecterId: String,
-        rejecteeId: String
+        rejecteeId: String,
+        rejecterId: String
         ) => {
             toastID.current = toast.loading("Rejecting Connection Request")
             await axios({
                 method: "post",
                 data: {
-                    rejecterId,
-                    rejecteeId
+                    rejecteeId,
+                    rejecterId
                 },
                 withCredentials: true,
                 url: import.meta.env.VITE_API_URL + "/api/nurse/connection/rejectNurseConnection",
@@ -148,7 +147,6 @@ const useConnections = () =>{
                 url: import.meta.env.VITE_API_URL + "/api/nurse/connection/deleteConnection",
             })
             .then((res) => {
-                toastID.current = toast.loading("Successfully Disconnected Connection")
                 setState("success")
                 toast.update(toastID.current ?? "", {
                     render: res.data.message,
@@ -213,6 +211,8 @@ const useConnections = () =>{
         })
         return state
         }
+
+
         return {acceptConnection, rejectConnection, cancelConnection, disconnectConnection, sendConnection, state}
 }
 

@@ -49,7 +49,4 @@ nurseRouter.post("/connection/rejectNurseConnection", checkAuth, rejectNurseConn
 
 nurseRouter.post("/connection/deleteConnection", checkAuth, deleteNurseConnection)
 
-
-//nurseRouter.post("/connection/disconnectConnection", checkAuth, disconnect)
-
 module.exports = nurseRouter

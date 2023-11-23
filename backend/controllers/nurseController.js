@@ -254,7 +254,7 @@ const addDocument = async (req, res) => {
         console.log(result)
     }
 
-}
+} 
 
 const getNurseConnections = async (req, res) => {
     const { userId } = req.params

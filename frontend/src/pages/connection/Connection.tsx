@@ -29,7 +29,7 @@ const Connection = () => {
                         </div>
                         <div className="grid grid-cols-2 gap-4 w-100">
                         {nurse?.connections?.map((connectionId, index) => (
-                            <ConnectionCard key={index} nurseId={connectionId} />
+                            <ConnectionCard key={index} userId={userId} nurseId={connectionId} />
                         ))}
                         </div>
                     </div>

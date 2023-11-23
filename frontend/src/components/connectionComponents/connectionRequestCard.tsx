@@ -76,7 +76,7 @@ const handleRejectConnection = async (
         }
         onClick={(e) => {
           if (user) {
-            handleRejectConnection(e, nurseId, user?.id)
+            handleRejectConnection(e, user?.id, nurseId)
           } else {
               {() => nav(`/login`)}
           }

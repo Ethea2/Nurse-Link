@@ -10,6 +10,7 @@ import useConnections from "../../hooks/useConnections.tsx"
 const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
 
     const { sendConnection, state } = useConnections()
+    const { checkConnectionRequest, found} = useConnections()
 
     const handleSendConnection = async (
         e: React.MouseEvent<HTMLButtonElement>,
@@ -18,6 +19,15 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
     ) => {
         e.preventDefault()
         await sendConnection(connectionSender, connectionReceiver)
+    }
+
+    const handleCheckConnection = async (
+        e: React.MouseEvent<HTMLButtonElement>,
+        connectionSender: string,
+        connectionReceiver: string
+    ) => {
+        e.preventDefault()
+        await checkConnectionRequest(connectionSender, connectionReceiver, found).then(res)
     }
 
 

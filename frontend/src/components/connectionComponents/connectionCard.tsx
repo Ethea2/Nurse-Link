@@ -6,26 +6,38 @@ import { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 import useConnections from "../../hooks/useConnections.tsx"
 
-const ConnectionCard = ({ nurseId }: { nurseId: string }) => {
+const ConnectionCard = ({userId , nurseId }: {userId:string, nurseId: string }) => {
+  // We are currently looking at userId's connection page
+  // userId is connected with nurseId
   const { data: nurse, loading } = useFetch(`/api/nurse/${nurseId}`);
+  const { data: checkC, error: error1} = useFetch(`/api/nurse/${userId}/connection/${nurseId}`)
+  //const { data: checkCL, error: error2} = useFetch(`/api/nurse/${userId}/connectionRequest/${nurseId}`)
+  console.log(error1)
+  //console.log(checkCL)
+
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const [isHovered, setIsHovered] = useState(false);
   const { disconnectConnection } = useConnections()
   const { user } = useAuth()
+  // user is who is currently logged in
   const nav = useNavigate()
 
   const handleRejectConnection = async (
-    //e: React.MouseEvent<HTMLButtonElement>,
+    e: React.MouseEvent<HTMLDivElement>,
     connectionSender: string,
     connectionReceiver: string
 ) => {
-    //e.preventDefault()
+    e.preventDefault()
     await disconnectConnection(connectionSender, connectionReceiver)
 }
 
   const toggleDropdown = () => {
-    setDropdownVisible(!dropdownVisible);
+    
+    if(userId === user?.id) // cannot disconnect or reccomend people if you are not viewing your own page
+      setDropdownVisible(!dropdownVisible);
+
+    
   };
 
   return (
@@ -61,15 +73,16 @@ const ConnectionCard = ({ nurseId }: { nurseId: string }) => {
         </button>
         {dropdownVisible && (
           <div className="dropdown-content absolute bg-white shadow-md rounded mt-2" style={{ fontFamily: "Poppins" }}>
-            <div className="px-2 py-1" style={{ cursor: "pointer"}}        onClick={() => {
+            <button className="px-2 py-1" style={{ cursor: "pointer"}}        onClick={(e) => {
           if (user) {
-            handleRejectConnection(nurseId, user?.id)
+            handleRejectConnection(e, nurseId, user?.id)
+            console.log("pressed")
           } else {
               {() => nav(`/login`)}
           }
         }}  
-              >Disconnect</div>
-            <div className="px-2 py-1" style={{ cursor: "pointer"}}>Recommend</div>
+              >Disconnect</button>
+            <button className="px-2 py-1" style={{ cursor: "pointer"}}>Recommend</button>
           </div>
         )}
       </div>
