@@ -63,7 +63,7 @@ const useConnections = () =>{
                     rejecteeId
                 },
                 withCredentials: true,
-                url: import.meta.env.VITE_API_URL + "/api/nurse/connection/sendNurseConnection",
+                url: import.meta.env.VITE_API_URL + "/api/nurse/connection/rejectNurseConnection",
             })
             .then((res) => {
                 toastID.current = toast.loading("Successfully Rejected Connection Request")
@@ -104,7 +104,7 @@ const useConnections = () =>{
                     receiverId
                 },
                 withCredentials: true,
-                url: import.meta.env.VITE_API_URL + "/api/nurse/connection/sendNurseConnection",
+                url: import.meta.env.VITE_API_URL + "/api/nurse/connection/cancelNurseConnection",
             })
             .then((res) => {
                 toastID.current = toast.loading("Successfully Cancelled Connection Request")
@@ -145,7 +145,7 @@ const useConnections = () =>{
                     receiverId
                 },
                 withCredentials: true,
-                url: import.meta.env.VITE_API_URL + "/api/nurse/connection/sendNurseConnection",
+                url: import.meta.env.VITE_API_URL + "/api/nurse/connection/deleteConnection",
             })
             .then((res) => {
                 toastID.current = toast.loading("Successfully Disconnected Connection")
