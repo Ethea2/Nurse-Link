@@ -405,10 +405,12 @@ const rejectNurseConnection = async (req, res) => {
     })
 }
 
-const checkConnectionRequest = async (req, res) => {
-    const senderId = req.body.senderId
-    const receiverId = req.body.receiverId
+const getNurseConnectionRequest = async (req, res) => {
+    const senderId = req.params.senderId
+    const receiverId = req.params.receiverId
 
+    console.log(senderId)
+    console.log(receiverId)
     try {
         const senderRequest = await Nurse.findOne(
             {$and: [
@@ -427,18 +429,24 @@ const checkConnectionRequest = async (req, res) => {
         if (senderRequest && receiverRequest)
             return res
                 .status(200)
-                .json({ message: "Connection request successfully found!"})
+                .json({
+                    message: "Connection request successfully found!", 
+                    result: true 
+                })
 
-        return res.status(404).json({ message: "Connection request not found!"})
+        return res.status(404).json({
+                                        message: "Connection request not found!",
+                                        result: false 
+                                    })
     } catch (e) {
         console.log(e)
         return res.status(500).json({ message: "Something went wrong!" })
     }
 }
 
-const checkConnection = async (req, res) => {
-    const senderId = req.body.senderId
-    const receiverId = req.body.receiverId
+const getNurseConnection = async (req, res) => {
+    const senderId = req.params.senderId
+    const receiverId = req.params.receiverId
 
     try {
         const senderConnection = await Nurse.findOne(
@@ -458,9 +466,15 @@ const checkConnection = async (req, res) => {
         if (senderConnection && receiverConnection)
             return res
                 .status(200)
-                .json({ message: "Connection successfully found!" })
+                .json({
+                    message: "Connection successfully found!", 
+                    result: true 
+                })
 
-        return res.status(404).json({ message: "Connection not found!" })
+        return res.status(404).json({
+                                        message: "Connection not found!",
+                                        result: false 
+                                    })
     } catch (e) {
         console.log(e)
         return res.status(500).json({ message: "Something went wrong!" })
@@ -561,8 +575,8 @@ module.exports = {
     editNurseBanner,
     addDocument,
     getNurseConnections,
-    checkConnectionRequest,
-    checkConnection,
+    getNurseConnection,
+    getNurseConnectionRequest,
     sendNurseConnection,
     cancelNurseConnectionRequest,
     acceptNurseConnection,
