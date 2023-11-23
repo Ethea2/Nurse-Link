@@ -70,7 +70,7 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                     
                     <span className="flex justify-center items-center text-2xl cursor-pointer"
                         onClick={() => nav(`/connection/${nurse?.userId}`)}>
-                        <BsFillPersonFill /> <strong>{(nurse?.connections || []).length || 0}</strong>&nbsp;connections
+                        <BsFillPersonFill /> <strong>{(nurse?.connections || []).length || 0}</strong>&nbsp; connections
                     </span>
                     {user?.id === nurse?.userId && (
                         <button
