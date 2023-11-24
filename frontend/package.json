@@ -10,12 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/antd": "^1.0.0",
     "@types/jest": "^29.5.5",
     "@types/node": "^20.7.1",
     "@types/react-router": "^5.1.20",
+    "antd": "^5.11.3",
     "axios": "^1.5.1",
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",
+    "react-chat-engine-advanced": "^0.1.28",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
     "react-router-dom": "^6.16.0",

@@ -6,8 +6,17 @@ import { useNavigate } from "react-router"
 import usePing from "./hooks/usePing"
 import Layout from "./layouts/Layout"
 
+
+//for chat
+
+import ChatsPage from "./ChatsPage"
+import { Context } from "./chatFunctions/context"
+
 function App() {
     const { pingServer } = usePing()
+
+    //for chat
+    // const { user } = useContext(Context);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -17,7 +26,8 @@ function App() {
     }, [])
     return (
         <>
-            <Layout />
+            {/* <Layout /> */}
+            <ChatsPage />
         </>
     )
 }
