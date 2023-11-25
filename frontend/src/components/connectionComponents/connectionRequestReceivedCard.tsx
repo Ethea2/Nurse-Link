@@ -56,7 +56,7 @@ const ConnectionRequestReceivedCard = ({ nurseId }: { nurseId: string }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="flex items-center justify-between gap-10 mb-5">
-        <div className="profile-picture bg-white rounded-full w-20"
+        <div className="profile-picture bg-white rounded-full w-20 cursor-pointer"
           onClick={() => nav(`/nurse/${nurseId}`)} // Navigate to the nurse's page on click
           >
           <img src={nurse?.profilePicture} alt={`Profile of ${nurse?.firstName}`} />

@@ -212,7 +212,9 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                 </div>
 
                 <div className="rightDetails flex-1 flex-col">
-                    <div className="connections text-lg font-semibold text-outline-text font-open-sans flex items-center justify-end">
+                    <div className="connections text-lg font-semibold text-outline-text font-open-sans flex items-center justify-end cursor-pointer"
+                        onClick={() => nav(`/connection/${nurse.userId}`)}
+                        >
                         <PiUserFill className="w-8 h-8 relative flex-col justify-start items-start inline-flex text-outline-text mr-3" />
                         <strong>{(nurse?.connections || []).length || 0}</strong>&nbsp; connections
                     </div>
@@ -260,7 +262,7 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                                     </ul>
                                 </div>
 
-                            </div>
+                            </div>)}
                     </div>
 
                 </div>
