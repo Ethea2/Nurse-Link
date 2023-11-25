@@ -6,12 +6,19 @@ import { BsFacebook, BsTwitter } from "react-icons/bs"
 import { useAuth } from "../../hooks/useAuth"
 import { useNavigate } from "react-router"
 import useConnections from "../../hooks/useConnections.tsx"
+import useFetch from "../../hooks/useFetch"
+
 
 const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
 
-    const { sendConnection, state } = useConnections()
-    const { checkConnectionRequest, found} = useConnections()
-
+    const { user } = useAuth()
+    const { sendConnection, acceptConnection, rejectConnection, cancelConnection, disconnectConnection } = useConnections()
+    
+    const { data: checkConnection, error: errorConnection} = useFetch(`/api/nurse/${user?.id}/connection/${nurse?.userId}`)
+    const { data: checkSent, error: errorSent} = useFetch(`/api/nurse/${user?.id}/connectionRequest/${nurse?.userId}`)
+    const { data: checkRequest, error: errorRequest} = useFetch(`/api/nurse/${nurse?.userId}/connectionRequest/${user?.id}`)
+    console.log("testing")
+    
     const handleSendConnection = async (
         e: React.MouseEvent<HTMLButtonElement>,
         connectionSender: string,
@@ -21,18 +28,127 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
         await sendConnection(connectionSender, connectionReceiver)
     }
 
-    const handleCheckConnection = async (
+    const handleDeleteConnection = async (
         e: React.MouseEvent<HTMLButtonElement>,
         connectionSender: string,
         connectionReceiver: string
     ) => {
         e.preventDefault()
-        await checkConnectionRequest(connectionSender, connectionReceiver, found).then(res)
+        await disconnectConnection(connectionSender, connectionReceiver)
     }
 
+    const handleCancelConnection = async (
+        e: React.MouseEvent<HTMLButtonElement>,
+        connectionRejecter: string,
+        connectionRejectee: string
+      ) => {
+        e.preventDefault()
+        await cancelConnection(connectionRejecter, connectionRejectee)
+    }
 
-    const { user } = useAuth()
+    const handleAcceptConnection = async (
+        e: React.MouseEvent<HTMLButtonElement>,
+        connectionSender: string,
+        connectionReceiver: string
+      ) => {
+        e.preventDefault();
+        await acceptConnection(connectionSender, connectionReceiver);
+    };
+    
+    const handleRejectConnection = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    connectionRejecter: string,
+    connectionRejectee: string
+    ) => {
+        e.preventDefault();
+        await rejectConnection(connectionRejecter, connectionRejectee);
+    };
+
+    
+
     const nav = useNavigate()
+
+    let connectButton;
+
+    if (checkConnection) {
+        // If there is a connection, show "Disconnect" button
+        connectButton = (
+            <button
+                className="btn text-lg w-40 mb-4 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                onClick={(e) => {
+                    if (user) {
+                        handleDeleteConnection(e, user.id, nurse.userId);
+                    } else {
+                        nav(`/login`);
+                    }
+                }}
+            >
+                Disconnect
+            </button>
+        );
+    } else if (checkSent) {
+        // If there is a connection request sent, show "Cancel" button
+        connectButton = (
+            <button
+                className="btn text-lg w-40 mb-4 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                onClick={(e) => {
+                    if (user) {
+                      handleCancelConnection(e, user?.id, nurse.userId)
+                    } else {
+                        {() => nav(`/login`)}
+                    }}}
+            >
+                Cancel
+            </button>
+        );
+    } else if (checkRequest) {
+        // If there is a connection request received, show "Accept" and "Reject" buttons
+        connectButton = (
+            <div className="flex space-x-4">
+                <button
+                    className="btn text-lg w-20 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                    onClick={(e) => {
+                        if (user) {
+                          handleAcceptConnection(e, user?.id, nurse.userId);
+                        } else {
+                          nav(`/login`);
+                        }
+                    }}
+                >
+                    Accept
+                </button>
+                <button
+                    className="btn text-lg w-20 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                    onClick={(e) => {
+                        if (user) {
+                          handleRejectConnection(e, nurse.userId, user?.id);nurse.userId
+                        } else {
+                          nav(`/login`);
+                        }
+                    }}
+                >
+                    Reject
+                </button>
+            </div>
+        );
+    } else {
+        // If there is no connection or request, show "Connect" button
+        connectButton = (
+            <button
+                className="btn text-lg w-40 mb-4 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                onClick={(e) => {
+                    if (user) {
+                        handleSendConnection(e, user.id, nurse.userId);
+                    } else {
+                        nav(`/login`);
+                    }
+                }}
+            >
+                Connect
+            </button>
+        );
+    }
+
     return (
         <div className="flex flex-col justify-start items-center w-full h-fit md:h-[80vh] border-b-2">
             <div className="h-[50vh] md:h-3/5 w-full flex justify-center items-center">
@@ -93,19 +209,9 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                     {user?.id !== nurse?.userId && (
 
                         <div className="flex flex-col w-full items-end">
-                                
-                                <button
-                                    className="btn text-lg w-40 mb-4 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
-                                    onClick={(e) => {
-                                        if (user) {
-                                            handleSendConnection(e, user.id, nurse.userId)
-                                        } else {
-                                            {() => nav(`/login`)}
-                                        }
-                                    }}
-                                >
-                                    Connect
-                                </button>
+
+                                {connectButton}
+
                                 <div className="dropdown dropdown-end w-full flex flex-col items-end relative">
 
                                     <label tabIndex={0}>

@@ -456,7 +456,7 @@ const getNurseConnection = async (req, res) => {
                 { connections: receiverId }
             ]}
         )
-        if(senderConnection)
+        if(!senderConnection)
             return res.status(404).json({
                 message: "Connection not found! for SENDER",
                 result: false 
@@ -467,7 +467,7 @@ const getNurseConnection = async (req, res) => {
                 { connections: senderId }
             ]}
         )
-        if(receiverConnection)
+        if(!receiverConnection)
             return res.status(404).json({
                 message: "Connection not found!for RECEIVER",
                 result: false 

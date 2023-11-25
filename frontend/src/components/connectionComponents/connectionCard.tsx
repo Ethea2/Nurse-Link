@@ -10,12 +10,6 @@ const ConnectionCard = ({userId , nurseId }: {userId:string, nurseId: string }) 
   // We are currently looking at userId's connection page
   // userId is connected with nurseId
   const { data: nurse, loading } = useFetch(`/api/nurse/${nurseId}`);
-  //const { data: checkC, error: error1} = useFetch(`/api/nurse/${userId}/connection/${nurseId}`)
-  //const { data: checkCL, error: error2} = useFetch(`/api/nurse/${userId}/connectionRequest/${nurseId}`)
-  //console.log("testing")
-  //console.log(checkC)
-  //console.log(error1)
-  //console.log(checkCL)
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
