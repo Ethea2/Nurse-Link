@@ -3,7 +3,6 @@ import useFetch from "../../hooks/useFetch"
 import { useEffect } from "react"
 import NurseHeader from "../../components/nursePage/NurseHeader"
 import SideContainer from "../../components/nursePage/SideContainer"
-import EmptyProfileCard from "../../components/nursePage/EmptyProfileCard"
 
 const Nurse = () => {
     const { userId } = useParams()
@@ -15,13 +14,12 @@ const Nurse = () => {
     return (
         <>
             {loading ? (
-                <div>loading...</div>
+                <div>Loading...</div>
             ) : (
-                <div className="w-full min-h-screen">
+                <div className="flex flex-col w-full min-h-screen">
                     <NurseHeader nurse={nurse} />
-                    <div className="flex w-full">
+                    <div className="w-full bg-[#EEEEEE] mt-10 py-10 px-20">
                         <SideContainer nurse={nurse} />
-                        {<EmptyProfileCard nurse={nurse}/>}
                     </div>
                 </div>
             )}

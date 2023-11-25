@@ -3,21 +3,19 @@ import UserType from "../../types/userTypes/userType"
 
 const EditSide = ({ user }: { user: UserType }) => {
     return (
-        <div className="invisible md:visible border-2 border-slate-300 drop shadow-xl rounded-lg p-10 w-1/5">
+        <div className="invisible md:visible flex flex-col w-1/4 text-outline-text">
+            <p className="text-3xl font-bold mb-5">Edit Profile</p>
             <Link to={`/nurse/edit/${user?.id}`}>
-                <span className="text-xl">Edit Profile</span>
+                <p className="text-xl mb-2 hover:text-secondary">Personal Information</p>
             </Link>
-            <br/>
             <Link to={`/nurse/edit/background/${user?.id}`}>
-                <span className="text-xl">Background</span>
+                <p className="text-xl mb-2 hover:text-secondary">Background</p>
             </Link>
-            <br/>
             <Link to={`/nurse/edit/contact/${user?.id}`}>
-                <span className="text-xl">Contact Details</span>
+                <p className="text-xl mb-2 hover:text-secondary">Contact Details</p>
             </Link>
-            <br/>
             <Link to={`/nurse/edit/documents/${user?.id}`}>
-                <span className="text-xl">Documents</span>
+                <p className="text-xl mb-2 hover:text-secondary">Documents</p>
             </Link>
 
         </div>

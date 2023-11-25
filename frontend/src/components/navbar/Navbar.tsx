@@ -55,14 +55,14 @@ const NavLeft = ({
             >
                 <FiMenu />
             </motion.button>
-            
+
             <Link to="/">
                 <Logo />
             </Link>
-                {routes.map((route: RouteType) => {
-                    if (route.name)
-                        return <NavLink text={route.name} path="/" />
-                })}
+            {routes.map((route: RouteType) => {
+                if (route.name)
+                    return <NavLink text={route.name} path="/" />
+            })}
         </div>
     )
 }
@@ -90,41 +90,41 @@ const NavRight = () => {
     const { logout } = useLogout()
     const { user } = useAuth()
     return (
-        <div className="flex items-center gap-4">
-            <Link to="/">
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
-                >
-                    Home
-                </motion.button>
-            </Link>
-            <Link to="/">
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
-                >
-                    About
-                </motion.button>
-            </Link>
-            <Link to="/">
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
-                >
-                    Contact Us
-                </motion.button>
-            </Link>
+        <div className="flex items-center gap-2">
             {!user ? (
                 <>
+                    <Link to="/">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+                        >
+                            Home
+                        </motion.button>
+                    </Link>
+                    <Link to="/">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+                        >
+                            About
+                        </motion.button>
+                    </Link>
+                    <Link to="/">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+                        >
+                            Contact Us
+                        </motion.button>
+                    </Link>
                     <Link to="/register">
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="px-4 py-2 bg-[#FAF9F9] text-[#053B50] font-medium rounded-xl drop-shadow-md"
+                            className="mx-4 px-4 py-2 bg-[#FAF9F9] text-[#053B50] font-medium rounded-xl drop-shadow-md"
                         >
                             Sign Up
                         </motion.button>
@@ -141,6 +141,42 @@ const NavRight = () => {
                 </>
             ) : (
                 <>
+                    <Link to="/">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+                        >
+                            Jobs
+                        </motion.button>
+                    </Link>
+                    <Link to="/">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+                        >
+                            Connections
+                        </motion.button>
+                    </Link>
+                    <Link to={`/nurse/recommendations/receive/${user.id}`}>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+                        >
+                            Recommendations
+                        </motion.button>
+                    </Link>
+                    <Link to="/">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="hidden lg:block px-4 py-2 text-[#053B50] hover:text-[#00CEC8] font-medium rounded-md whitespace-nowrap"
+                        >
+                            Messages
+                        </motion.button>
+                    </Link>
                     <LoggedInProfileMenu logout={logout} user={user} />
                 </>
             )}
@@ -155,30 +191,44 @@ const LoggedInProfileMenu = ({
     user: UserType
     logout: Function
 }) => {
+
     const nav = useNavigate()
+
     return (
-        <div className="rounded-full h-14 dropdown dropdown-end">
-            <label  tabIndex={0} className="h-full avatar">
+        <div className="rounded-full h-14 dropdown dropdown-end ml-4">
+            <label tabIndex={0} className="h-full avatar">
                 <img
                     src={user?.img}
-                    className="h-full object-fill hover:scale-105 transition duration-200 ease-in border-4 rounded-full shadow-md shadow-[#00CEC8] border-white "
+                    className="h-full object-fill hover:scale-105 transition duration-200 ease-in rounded-full border-white border-4 shadow"
                 />
             </label>
-            <ul  tabIndex={0} className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 text-center">
+            <ul tabIndex={0} className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-40">
                 <li>
                     <button
-                        className="flex justify-center items-center w-full font-bold"
-                        onClick={() => logout()}
+                        onClick={() => nav(`/nurse/${user.id}`)}
                     >
-                        Sign out!
+                        View Profile
                     </button>
                 </li>
                 <li>
                     <button
-                        className="flex justify-center items-center w-full font-bold"
                         onClick={() => nav(`/nurse/${user.id}`)}
                     >
-                        View Profile
+                        Notifications
+                    </button>
+                </li>
+                <li>
+                    <button
+                        onClick={() => nav(`/nurse/${user.id}`)}
+                    >
+                        Settings
+                    </button>
+                </li>
+                <li>
+                    <button
+                        onClick={() => logout()}
+                    >
+                        Sign Out
                     </button>
                 </li>
             </ul>

@@ -1,12 +1,20 @@
 import { NurseType } from "../../types/nurseTypes/nurseType"
-import { ImLocation, ImInstagram } from "react-icons/im"
-import { AiOutlineMail } from "react-icons/ai"
-import { BsFillPersonFill } from "react-icons/bs"
-import { BsFacebook, BsTwitter } from "react-icons/bs"
 import { useAuth } from "../../hooks/useAuth"
 import { useNavigate } from "react-router"
 import useConnections from "../../hooks/useConnections.tsx"
 import useFetch from "../../hooks/useFetch"
+import { useState } from "react"
+import { GiveRecommendationSection } from "../modals/GiveRecommendationModal"
+// Icons
+import { BsFillCheckCircleFill } from "react-icons/bs"
+import { PiPhoneFill } from "react-icons/pi";
+import { PiEnvelopeSimpleBold } from "react-icons/pi";
+import { CgFacebook } from "react-icons/cg";
+import { FaTwitter } from "react-icons/fa";
+import { TiSocialInstagram } from "react-icons/ti";
+import { PiMapPinFill } from "react-icons/pi";
+import { PiUserFill } from "react-icons/pi";
+import useAddRecommendation from "../../hooks/useAddRecommendation"
 
 
 const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
@@ -17,7 +25,6 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
     const { data: checkConnection, error: errorConnection} = useFetch(`/api/nurse/${user?.id}/connection/${nurse?.userId}`)
     const { data: checkSent, error: errorSent} = useFetch(`/api/nurse/${user?.id}/connectionRequest/${nurse?.userId}`)
     const { data: checkRequest, error: errorRequest} = useFetch(`/api/nurse/${nurse?.userId}/connectionRequest/${user?.id}`)
-    console.log("testing")
     
     const handleSendConnection = async (
         e: React.MouseEvent<HTMLButtonElement>,
@@ -148,9 +155,11 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
             </button>
         );
     }
+    const [showGiveRecoModal, setShowGiveRecoModal] = useState<boolean>(false)
+
 
     return (
-        <div className="flex flex-col justify-start items-center w-full h-fit md:h-[80vh] border-b-2">
+        <div className="nurseHeader flex flex-col h-[640px]">
             <div className="h-[50vh] md:h-3/5 w-full flex justify-center items-center">
                 <img
                     src={nurse?.bannerPicture}
@@ -158,58 +167,65 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                     alt="Nurse's Profile Banner"
                 />
             </div>
-            <div className="h-2/5 flex md:flex-row flex-col w-full justify-center items-center md:items-start pt-20">
-                <div className="flex flex-col p-10 h-full justify-between">
-                    <span className="flex justify-center items-center text-2xl gap-1">
-                        <AiOutlineMail />{" "}
-                        <span className="text-xl">{nurse?.email}</span>
-                    </span>
-                    <span className="flex w-full justify-between text-4xl">
-                        <BsFacebook className="hover:text-[#00CEC8] hover:scale-105 transition-all duration-200 ease-in" />
-                        <BsTwitter className="hover:text-[#00CEC8]  hover:scale-105 transition-all duration-200 ease-in" />
-                        <ImInstagram className="hover:text-[#00CEC8]  hover:scale-105 transition-all duration-200 ease-in" />
-                    </span>
+            <div className="headerDetails flex px-20 pt-10 pb-10 w-full">
+                <div className="leftDetails flex-1 text-xl font-semibold font-open-sans">
+                    <div className="phoneNumber text-lg">
+                        <PiPhoneFill className="Phone w-8 h-8 mr-5 justify-center items-center inline-flex text-outline-text" />{" "}
+                        {nurse?.phoneNum}
+                    </div>
+                    <div className="email pt-5 text-lg">
+                        <PiEnvelopeSimpleBold className="Email w-8 h-8 mr-5 justify-center items-center inline-flex text-outline-text" />
+                        {nurse?.email}
+                    </div>
+                    <div className="socials flex gap-[25px] pt-20">
+                        <CgFacebook className="w-8 h-8 text-outline-text hover:text-secondary" />
+                        <FaTwitter className="w-8 h-8 text-outline-text hover:text-secondary" />
+                        <TiSocialInstagram className="w-8 h-8 text-outline-text hover:text-secondary" />
+                    </div>
+
                 </div>
-                <div className="flex flex-col justify-between items-center h-1/2 gap-10 md:mx-auto">
-                    <img
-                        src={nurse?.profilePicture}
-                        className="object-cover absolute top-[350px] border-8 rounded-full shadow-lg border-white"
-                        alt="Nurse's Profile Picture"
-                    />
-                    <span className="text-5xl font-bold flex flex-col text-center">
-                        {nurse?.firstName} {nurse?.lastName}
-                        <span className="text-lg font-normal text-slate-500 w-full text-center">
-                            @{nurse?.username}
-                        </span>
-                    </span>
-                    <div>
-                        <span className="flex justify-center items-center text-3xl">
-                            {nurse?.specialization}
-                        </span>
-                        <span className="flex justify-center items-center">
-                            <ImLocation className="mr-1" />
-                            {nurse?.country}, {nurse?.city}
-                        </span>
+                <div className="centerDetails flex-1 flex justify-center items-center flex-col relative bottom-[220px] text-outline-text">
+                    <div className="profilePictureFrame pb-2">
+                        <img
+                            src={nurse?.profilePicture}
+                            className="profilePicture w-[250px] h-[250px] object-cover rounded-full border-8 border-white shadow"
+                            alt="Nurse's Profile Picture"
+                        />
+                    </div>
+                    <div className="nameVerified flex justify-center items-center mt-3">
+                        <div className="fullName w-full text-3xl font-poppins text-center text-outline-text">
+                            {nurse?.firstName} {nurse?.lastName}
+                        </div>
+                        {/*This only shows up when they are fully verified*/}
+                        {/*<BsFillCheckCircleFill className="w-6 h-full ml-2 inline-flex text-secondary" />*/}
+                    </div>
+                    <div className="username font-pt-sans opacity-80 text-lg mt-2">
+                        @{nurse?.username}
+                    </div>
+                    <div className="specialization text-[23px] font-open-sans pt-7">
+                        {nurse?.specialization}
+                    </div>
+                    <div className="location flex text-lg font-pt-sans opacity-70 gap-[5px] justify-center items-center pb-10">
+                        <PiMapPinFill className="w-5 h-5 relative flex-col justify-start items-start inline-flex" />
+                        {nurse?.country}, {nurse?.city}
                     </div>
                 </div>
-                <div className="flex flex-col h-full justify-between items-center p-10">
-                    
-                    <span className="flex justify-center items-center text-2xl cursor-pointer"
-                        onClick={() => nav(`/connection/${nurse?.userId}`)}>
-                        <BsFillPersonFill /> <strong>{(nurse?.connections || []).length || 0}</strong>&nbsp; connections
-                    </span>
-                    {user?.id === nurse?.userId && (
-                        <button
-                            className="btn rounded-full text-[#176B87] hover:text-[#00CEC8] bg-white shadow-lg"
-                            onClick={() => nav(`/nurse/edit/${user.id}`)}
-                        >
-                            Edit Profile
-                        </button>
-                    )}
-                    {user?.id !== nurse?.userId && (
 
-                        <div className="flex flex-col w-full items-end">
-
+                <div className="rightDetails flex-1 flex-col">
+                    <div className="connections text-lg font-semibold text-outline-text font-open-sans flex items-center justify-end">
+                        <PiUserFill className="w-8 h-8 relative flex-col justify-start items-start inline-flex text-outline-text mr-3" />
+                        <strong>{(nurse?.connections || []).length || 0}</strong>&nbsp; connections
+                    </div>
+                    <div className="profileButtons flex flex-col items-end mt-20">
+                        {user?.id === nurse?.userId ? (
+                            <button
+                                className="btn w-[45%] text-lg rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                                onClick={() => nav(`/nurse/edit/${user.id}`)}
+                            >
+                                Edit Profile
+                            </button>
+                        ) : (
+                            <div className="flex flex-col w-full items-end">
                                 {connectButton}
 
                                 <div className="dropdown dropdown-end w-full flex flex-col items-end relative">
@@ -229,7 +245,10 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                                             </button>
                                         </li>
                                         <li>
-                                            <button onClick={() => nav(`/nurse/recommendations/give/${nurse?.userId}`)}>
+                                            {/*<button onClick={() => nav(`/nurse/recommendations/give/${nurse?.userId}`)}>*/}
+                                            <button onClick={() => 
+                                                setShowGiveRecoModal(true)
+                                                }>
                                                 Recommend
                                             </button>
                                         </li>
@@ -242,9 +261,17 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                                 </div>
 
                             </div>
-                    )}
+                    </div>
+
                 </div>
             </div>
+            <GiveRecommendationSection
+                show={showGiveRecoModal}
+                setShow={setShowGiveRecoModal}
+                name={nurse?.firstName}
+                authorId={user && user.id ? user.id : ''}
+                receiverId={nurse?.userId}
+            />
         </div>
     )
 }

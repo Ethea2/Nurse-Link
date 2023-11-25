@@ -9,10 +9,10 @@ const NurseEditBackgroundPage = () => {
     const { user } = useAuth()
     const { userId } = useParams()
     return (
-        <div className="flex md:gap-20 md:p-20 w-full min-h-screen">
+        <div className="flex p-20 gap-20 w-full min-h-screen">
             <EditSide user={user as UserType} />
             <Suspense fallback={<div>Loading...</div>}>
-                <NurseEditBackground userId={ userId as string} />
+                <NurseEditBackground userId={userId as string} />
             </Suspense>
         </div>
     )

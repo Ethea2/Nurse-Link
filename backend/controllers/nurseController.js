@@ -3,6 +3,7 @@ const Nurse = require("../models/nurseModel")
 const User = require("../models/userModel")
 const cloudinary = require("../utils/cloudinary")
 const fs = require("fs")
+const Recommendations = require("../models/recommendationModel")
 
 const computeNurseProgress = (nurse) => {
     const skills = [
@@ -574,6 +575,62 @@ const deleteNurseConnection = async (req, res) => {
 }
 
 
+const addRecommendation = async (req, res) => {
+    try{
+        const userId = req.params.userId
+        const receiverId = req.body.receiverId
+        const date = req.body.date
+        const description = req.body.description
+
+        const author = await User.findOne({ userId });
+        const receiver = await Nurse.findById(userId);
+
+        if (!author || !receiver) {
+            console.error('Author or receiver not found');
+        }
+
+        const newRecommendation = new Recommendations({
+            authorID: userId,
+            receiverID: receiverId,
+            date,
+            description
+        })
+
+        const savedRecommendation = await newRecommendation.save();
+        const recommendationsToAdd = [savedRecommendation];
+
+        const nurseReceived = await Nurse.findOneAndUpdate(
+            { userId: receiverId },
+            {
+                $push: {
+                    'recommendations.received': {
+                        $each: recommendationsToAdd
+                    }
+                }
+            }
+        );
+
+        const nurseGiven = await Nurse.findOneAndUpdate(
+            { userId: userId },
+            {
+                $push: {
+                    'recommendations.given': {
+                        $each: recommendationsToAdd
+                    }
+                }
+            }
+        );
+
+        console.log(newRecommendation)
+        return res.status(200).json({ message: "Recommendations added successfully" });
+    } catch (e) {
+        console.error('Error adding recommendation: ', e);
+        return res.status(500).json({ message: "Server Error!" });
+    }
+}
+
+
+
 module.exports = {
     getNurses,
     getNurse,
@@ -582,7 +639,6 @@ module.exports = {
     editNurseProfilePicture,
     editNurseBanner,
     addDocument,
-    getNurseConnections,
     getNurseConnection,
     getNurseConnectionRequest,
     sendNurseConnection,
@@ -590,4 +646,6 @@ module.exports = {
     acceptNurseConnection,
     rejectNurseConnection,
     deleteNurseConnection,
+    addRecommendation
+
 }
