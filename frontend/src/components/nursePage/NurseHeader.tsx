@@ -240,7 +240,7 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                                     <ul tabIndex={0} className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-40 z-[1] absolute right-0 top-10 mt-5">
                                         <li>
                                             {/* TODO: connect to message page */}
-                                            <button>
+                                            <button >
                                                 Message 
                                             </button>
                                         </li>
