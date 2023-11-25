@@ -261,6 +261,7 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                                 </div>
 
                             </div>
+                        )}
                     </div>
 
                 </div>
