@@ -33,7 +33,7 @@ const routes: Array<RouteType> = [
     { path: "/nurse/edit/contact/:userId", element: <NurseEditContactPage />},
     { path: "/connection/:userId", element: <Connection /> },
     { path: "/connection-request-received/:userId", element: <ConnectionRequestReceived />},
-    { path: "/connection-request-sent/:userId", element: <ConnectionRequestSent />},  
+    { path: "/connection-request-sent/:userId", element: <ConnectionRequestSent />},
     { path: "/nurse/edit/documents/:userId", element: <NurseEditDocumentPage /> },
     { path: "/nurse/edit/background/:userId", element: <NurseEditBackgroundPage /> },
     { path: "/nurse/edit/contact/:userId", element: <NurseEditContactPage /> },
