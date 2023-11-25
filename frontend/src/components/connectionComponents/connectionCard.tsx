@@ -10,26 +10,31 @@ const ConnectionCard = ({userId , nurseId }: {userId:string, nurseId: string }) 
   // We are currently looking at userId's connection page
   // userId is connected with nurseId
   const { data: nurse, loading } = useFetch(`/api/nurse/${nurseId}`);
-  const { data: checkC, error: error1} = useFetch(`/api/nurse/${userId}/connection/${nurseId}`)
+  //const { data: checkC, error: error1} = useFetch(`/api/nurse/${userId}/connection/${nurseId}`)
   //const { data: checkCL, error: error2} = useFetch(`/api/nurse/${userId}/connectionRequest/${nurseId}`)
-  console.log(error1)
+  //console.log("testing")
+  //console.log(checkC)
+  //console.log(error1)
   //console.log(checkCL)
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+
   const { disconnectConnection } = useConnections()
   const { user } = useAuth()
   // user is who is currently logged in
   const nav = useNavigate()
 
-  const handleRejectConnection = async (
-    e: React.MouseEvent<HTMLDivElement>,
+  const handleDeleteConnection = async (
+    e: React.MouseEvent<HTMLButtonElement>,
     connectionSender: string,
     connectionReceiver: string
 ) => {
     e.preventDefault()
     await disconnectConnection(connectionSender, connectionReceiver)
+    setIsVisible(false); // Hide the card
 }
 
   const toggleDropdown = () => {
@@ -40,18 +45,25 @@ const ConnectionCard = ({userId , nurseId }: {userId:string, nurseId: string }) 
     
   };
 
+  if (!isVisible) {
+    return null; // Render nothing if the card is not visible
+  }
+
   return (
     <div
-            className={`connection-card rounded-3xl p-4 flex items-center justify-between w-100 h-[10rem] ${
-                isHovered ? "hovered" : ""
-            }`}
-            style={{ backgroundColor: isHovered ? "#176B87" : "#FFFFFF",
-                     boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)"}}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            
-        >
-      <div className="profile-picture w-1/5 bg-white rounded-full">
+      className={`connection-card rounded-3xl p-4 flex items-center justify-between w-100 h-[10rem] ${
+        isHovered ? "hovered" : ""
+      }`}
+      style={{
+        backgroundColor: isHovered ? "#176B87" : "#FFFFFF",
+        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)",
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="profile-picture w-1/5 bg-white rounded-full"
+      onClick={() => nav(`/nurse/${nurseId}`)} // Navigate to the nurse's page on click
+      >
         <img src={nurse?.profilePicture}/>
       </div>
       <div className={`names flex flex-col w-1/3 ${isHovered ? "text-white" : "text-black"}`}
@@ -75,7 +87,7 @@ const ConnectionCard = ({userId , nurseId }: {userId:string, nurseId: string }) 
           <div className="dropdown-content absolute bg-white shadow-md rounded mt-2" style={{ fontFamily: "Poppins" }}>
             <button className="px-2 py-1" style={{ cursor: "pointer"}}        onClick={(e) => {
           if (user) {
-            handleRejectConnection(e, nurseId, user?.id)
+            handleDeleteConnection(e, nurseId, user?.id)
             console.log("pressed")
           } else {
               {() => nav(`/login`)}

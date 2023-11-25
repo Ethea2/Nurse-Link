@@ -1,13 +1,13 @@
 import { useParams } from "react-router"
 import useFetch from "../../hooks/useFetch"
 import { useEffect } from "react"
-import ConnectionRequestCard from "../../components/connectionComponents/connectionRequestCard"
+import ConnectionRequestCard from "../../components/connectionComponents/connectionRequestReceivedCard"
 import NurseCard from "../../components/others/NurseCard"
 import RequestCard from "../../components/others/RequestCard"
 import { useAuth } from "../../hooks/useAuth";
 
 
-const ConnectionRequest = () => {
+const ConnectionRequestReceived = () => {
     const { userId } = useParams()
     const { user } = useAuth()
     const { data: nurse, loading } = useFetch(`/api/nurse/${userId}`)
@@ -53,4 +53,4 @@ const ConnectionRequest = () => {
     )
 }
 
-export default ConnectionRequest
+export default ConnectionRequestReceived

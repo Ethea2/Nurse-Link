@@ -65,7 +65,6 @@ const useConnections = () =>{
                 url: import.meta.env.VITE_API_URL + "/api/nurse/connection/rejectNurseConnection",
             })
             .then((res) => {
-                toastID.current = toast.loading("Successfully Rejected Connection Request")
                 setState("success")
                 toast.update(toastID.current ?? "", {
                     render: res.data.message,
@@ -106,7 +105,6 @@ const useConnections = () =>{
                 url: import.meta.env.VITE_API_URL + "/api/nurse/connection/cancelNurseConnection",
             })
             .then((res) => {
-                toastID.current = toast.loading("Successfully Cancelled Connection Request")
                 setState("success")
                 toast.update(toastID.current ?? "", {
                     render: res.data.message,
@@ -171,7 +169,7 @@ const useConnections = () =>{
             })
             return state
         }
-
+          
     const sendConnection = async (
         senderId: String,
         receiverId: String
@@ -187,7 +185,6 @@ const useConnections = () =>{
                 url: import.meta.env.VITE_API_URL + "/api/nurse/connection/sendNurseConnection",
             })
         .then((res) => {
-            toastID.current = toast.loading("Connection Successfully Sent")
             setState("success")
             toast.update(toastID.current ?? "", {
                 render: res.data.message,

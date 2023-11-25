@@ -447,7 +447,8 @@ const getNurseConnectionRequest = async (req, res) => {
 const getNurseConnection = async (req, res) => {
     const senderId = req.params.senderId
     const receiverId = req.params.receiverId
-
+    console.log(senderId)
+    console.log(receiverId)
     try {
         const senderConnection = await Nurse.findOne(
             {$and: [
@@ -455,26 +456,31 @@ const getNurseConnection = async (req, res) => {
                 { connections: receiverId }
             ]}
         )
-
+        if(senderConnection)
+            return res.status(404).json({
+                message: "Connection not found! for SENDER",
+                result: false 
+            })
         const receiverConnection = await Nurse.findOne(
             {$and: [
                 { userId: receiverId },
                 { connections: senderId }
             ]}
         )
+        if(receiverConnection)
+            return res.status(404).json({
+                message: "Connection not found!for RECEIVER",
+                result: false 
+            })
+        
+        
+        return res
+            .status(200)
+            .json({
+                message: "Connection successfully found!", 
+                result: true 
+            })
 
-        if (senderConnection && receiverConnection)
-            return res
-                .status(200)
-                .json({
-                    message: "Connection successfully found!", 
-                    result: true 
-                })
-
-        return res.status(404).json({
-                                        message: "Connection not found!",
-                                        result: false 
-                                    })
     } catch (e) {
         console.log(e)
         return res.status(500).json({ message: "Something went wrong!" })
@@ -536,8 +542,8 @@ const helperCheckConnection = async (senderId, receiverId) => {
 const deleteNurseConnection = async (req, res) => {
     const senderId = req.body.senderId
     const receiverId = req.body.receiverId
-
     helperCheckConnection(senderId, receiverId).then(async function(result){
+        console.log(result)
         if (result) {
             try {
                 const acceptSenderRequest = await Nurse.findOneAndUpdate(
@@ -549,7 +555,9 @@ const deleteNurseConnection = async (req, res) => {
                     { userId: receiverId },
                     { $pull: { connections: senderId } }
                 )
-
+                console.log("something")
+                console.log(acceptSenderRequest)
+                console.log(acceptReceiverRequest)
                 if (acceptSenderRequest && acceptReceiverRequest)
                     return res
                         .status(200)
