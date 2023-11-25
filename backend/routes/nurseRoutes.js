@@ -2,7 +2,7 @@ const express = require("express")
 const { checkAuth } = require("../middlewears/checkAuth")
 
 const { getNurses, getNurse, editNurse, deleteNurse, editNurseProfilePicture, editNurseBanner, addDocument, getNurseConnections, 
-       getNurseConnection, getNurseConnectionRequest, sendNurseConnection, cancelNurseConnectionRequest, acceptNurseConnection, 
+       getNurseConnection, getNurseConnectionRequest, sendNurseConnection, cancelNurseConnectionRequest, acceptNurseConnection,
        rejectNurseConnection, deleteNurseConnection, addRecommendation} = require("../controllers/nurseController")
 const { disconnect } = require("process")
 
@@ -16,7 +16,7 @@ nurseRouter.get("/:userId/connections", getNurseConnections)
 
 nurseRouter.get("/:senderId/connectionRequest/:receiverId", getNurseConnectionRequest)
 
-nurseRouter.get("/:senderId/connection/:receiverId", getNurseConnection)
+nurseRouter.get("/:senderId/connection/:receiverId", getNurseConnections)
 
 nurseRouter.post("/edit/profilePhoto", checkAuth, editNurseProfilePicture)
 
