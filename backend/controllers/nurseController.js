@@ -250,16 +250,12 @@ const addDocument = async (req, res) => {
             }
         )
 
-
-
-
-
     }else{
         console.log("error")
         console.log(result)
     }
 
-}
+} 
 
 const getNurseConnections = async (req, res) => {
     const { userId } = req.params
@@ -274,6 +270,310 @@ const getNurseConnections = async (req, res) => {
         return res.status(500).json({ message: "Something went wrong!" })
     }
 }
+
+const sendNurseConnection = async (req, res) => {
+    const senderId = req.body.senderId
+    const receiverId = req.body.receiverId
+
+    helperCheckConnectionRequest(senderId, receiverId).then(async function(result){
+        if (result) {
+            return res.status(400).json({ message: "Connection request already sent!"})
+        }
+
+        try {
+            const sendRequest = await Nurse.findOneAndUpdate(
+                { userId: senderId },
+                { $addToSet: { connectionSent: receiverId } }
+            )
+    
+            const receiveRequest = await Nurse.findOneAndUpdate(
+                { userId: receiverId },
+                { $addToSet: { connectionReceived: senderId } }
+            )
+    
+            if (sendRequest && receiveRequest)
+                return res
+                    .status(200)
+                    .json({ message: "Connection request successfully sent!" })
+    
+            return res.status(400).json({ message: "Could not send connection request!"})
+        } catch (e) {
+            console.log(e)
+            return res.status(500).json({ message: "Something went wrong!" })
+        }
+    }) 
+}
+
+const cancelNurseConnectionRequest = async (req, res) => {
+    const senderId = req.body.senderId
+    const receiverId = req.body.receiverId
+
+    helperCheckConnectionRequest(senderId, receiverId).then(async function(result){
+        if (result) {
+            try {
+                const cancelSenderRequest = await Nurse.findOneAndUpdate(
+                    { userId: senderId },
+                    { $pull: { connectionSent: receiverId } }
+                )
+
+                const cancelReceiverRequest = await Nurse.findOneAndUpdate(
+                    { userId: receiverId },
+                    { $pull: { connectionReceived: senderId } }   
+                )
+
+                if (cancelSenderRequest && cancelReceiverRequest)
+                    return res
+                        .status(200)
+                        .json({ message: "Successfully cancelled connection request!" })
+                
+                return res.status(400).json({ message: "Could not cancel connection request!"})
+            } catch (e) {
+                console.log(e)
+                return res.status(500).json({ message: "Something went wrong!" })
+            }
+        }
+        return res.status(404).json({ message: "There is no connection request!"})
+    }) 
+}
+
+const acceptNurseConnection = async (req, res) => {
+    const accepterId = req.body.accepterId
+    const senderId = req.body.senderId
+
+    helperCheckConnectionRequest(senderId, accepterId).then(async function(result){
+        if (result) {
+            try {
+                const acceptSenderRequest = await Nurse.findOneAndUpdate({ userId: accepterId },
+                    {
+                        $pull: { connectionReceived: senderId },
+                        $push: { connections: senderId } 
+                    }   
+                )
+
+                const acceptReceiverRequest = await Nurse.findOneAndUpdate({ userId: senderId },
+                    {
+                        $pull: { connectionSent: accepterId },
+                        $push: { connections: accepterId }  
+                    }
+                )
+
+                if (acceptSenderRequest && acceptReceiverRequest)
+                    return res
+                        .status(200)
+                        .json({ message: "Successfully accepted connection request!" })
+
+                return res.status(400).json({ message: "Could not accept connection request!"})
+            } catch (e) {
+                console.log(e)
+                return res.status(500).json({ message: "Something went wrong!" })
+            }
+        }
+        return res.status(404).json({ message: "There is no connection request!"})
+    }) 
+}
+
+const rejectNurseConnection = async (req, res) => {
+    const rejecterId = req.body.rejecterId 
+    const rejecteeId = req.body.rejecteeId
+
+    helperCheckConnectionRequest(rejecteeId, rejecterId).then(async function(result){
+        console.log(result)
+        if (result) {
+            try {
+                const rejectSenderRequest = await Nurse.findOneAndUpdate(
+                    { userId: rejecterId },
+                    { $pull: { connectionReceived: rejecteeId } }
+                )
+    
+                const rejectReceiverRequest = await Nurse.findOneAndUpdate(
+
+                    { userId: rejecteeId},
+                    { $pull: { connectionSent: rejecterId } }
+                )
+    
+                if (rejectSenderRequest && rejectReceiverRequest)
+                    return res
+                        .status(200)
+                        .json({ message: "Successfully rejected connection request!" })
+
+                return res.status(400).json({ message: "Could not reject connection request!"})
+            } catch (e) {
+                console.log(e)
+                return res.status(500).json({ message: "Something went wrong!" })
+            }
+        }
+        return res.status(404).json({ message: "There is no connection request!"})
+    })
+}
+
+const getNurseConnectionRequest = async (req, res) => {
+    const senderId = req.params.senderId
+    const receiverId = req.params.receiverId
+
+    console.log(senderId)
+    console.log(receiverId)
+    try {
+        const senderRequest = await Nurse.findOne(
+            {$and: [
+                { userId: senderId },
+                { connectionSent: receiverId }
+            ]}
+        )
+
+        const receiverRequest = await Nurse.findOne(
+            {$and: [
+                { userId: receiverId },
+                { connectionReceived: senderId }
+            ]}
+        )
+
+        if (senderRequest && receiverRequest)
+            return res
+                .status(200)
+                .json({
+                    message: "Connection request successfully found!", 
+                    result: true 
+                })
+
+        return res.status(404).json({
+                                        message: "Connection request not found!",
+                                        result: false 
+                                    })
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({ message: "Something went wrong!" })
+    }
+}
+
+const getNurseConnection = async (req, res) => {
+    const senderId = req.params.senderId
+    const receiverId = req.params.receiverId
+    console.log(senderId)
+    console.log(receiverId)
+    try {
+        const senderConnection = await Nurse.findOne(
+            {$and: [
+                { userId: senderId },
+                { connections: receiverId }
+            ]}
+        )
+        if(!senderConnection)
+            return res.status(404).json({
+                message: "Connection not found! for SENDER",
+                result: false 
+            })
+        const receiverConnection = await Nurse.findOne(
+            {$and: [
+                { userId: receiverId },
+                { connections: senderId }
+            ]}
+        )
+        if(!receiverConnection)
+            return res.status(404).json({
+                message: "Connection not found!for RECEIVER",
+                result: false 
+            })
+        
+        
+        return res
+            .status(200)
+            .json({
+                message: "Connection successfully found!", 
+                result: true 
+            })
+
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({ message: "Something went wrong!" })
+    }
+}
+
+const helperCheckConnectionRequest = async (senderId, receiverId) => {
+    try {
+        const sendRequest = await Nurse.findOne(
+            {$and: [
+                { userId: senderId },
+                { connectionSent: receiverId }
+            ]}
+        )
+
+        const receiveRequest = await Nurse.findOne(
+            {$and: [
+                { userId: receiverId },
+                { connectionReceived: senderId }
+            ]}
+        )
+
+        if (sendRequest && receiveRequest) 
+            return true
+        return false
+        
+    } catch (e) {
+        console.log(e)
+        return false
+    }
+}
+
+const helperCheckConnection = async (senderId, receiverId) => {
+    try {
+        const senderConnection = await Nurse.findOne(
+            {$and: [
+                { userId: senderId },
+                { connections: receiverId }
+            ]}
+        )
+
+        const receiverConnection = await Nurse.findOne(
+            {$and: [
+                { userId: receiverId },
+                { connections: senderId }
+            ]}
+        )
+
+        if (senderConnection && receiverConnection)
+            return true
+        return false
+        
+    } catch (e) {
+        console.log(e)
+        return false
+    }
+}
+
+const deleteNurseConnection = async (req, res) => {
+    const senderId = req.body.senderId
+    const receiverId = req.body.receiverId
+    helperCheckConnection(senderId, receiverId).then(async function(result){
+        console.log(result)
+        if (result) {
+            try {
+                const acceptSenderRequest = await Nurse.findOneAndUpdate(
+                    { userId: senderId },
+                    { $pull: { connections: receiverId } }
+                )
+
+                const acceptReceiverRequest = await Nurse.findOneAndUpdate(
+                    { userId: receiverId },
+                    { $pull: { connections: senderId } }
+                )
+                console.log("something")
+                console.log(acceptSenderRequest)
+                console.log(acceptReceiverRequest)
+                if (acceptSenderRequest && acceptReceiverRequest)
+                    return res
+                        .status(200)
+                        .json({ message: "Successfully delete connection request!" })
+
+                return res.status(400).json({ message: "Could not delete connection request!"})
+            } catch (e) {
+                console.log(e)
+                return res.status(500).json({ message: "Something went wrong!" })
+            }
+        }
+        return res.status(404).json({ message: "There is no connection!"})
+    })
+}
+
 
 const addRecommendation = async (req, res) => {
     try{
@@ -330,6 +630,7 @@ const addRecommendation = async (req, res) => {
 }
 
 
+
 module.exports = {
     getNurses,
     getNurse,
@@ -338,6 +639,13 @@ module.exports = {
     editNurseProfilePicture,
     editNurseBanner,
     addDocument,
-    getNurseConnections,
+    getNurseConnection,
+    getNurseConnectionRequest,
+    sendNurseConnection,
+    cancelNurseConnectionRequest,
+    acceptNurseConnection,
+    rejectNurseConnection,
+    deleteNurseConnection,
     addRecommendation
+
 }

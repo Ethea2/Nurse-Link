@@ -1,6 +1,8 @@
 import { NurseType } from "../../types/nurseTypes/nurseType"
 import { useAuth } from "../../hooks/useAuth"
 import { useNavigate } from "react-router"
+import useConnections from "../../hooks/useConnections.tsx"
+import useFetch from "../../hooks/useFetch"
 import { useState } from "react"
 import { GiveRecommendationSection } from "../modals/GiveRecommendationModal"
 // Icons
@@ -14,10 +16,147 @@ import { PiMapPinFill } from "react-icons/pi";
 import { PiUserFill } from "react-icons/pi";
 import useAddRecommendation from "../../hooks/useAddRecommendation"
 
+
 const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
+
     const { user } = useAuth()
+    const { sendConnection, acceptConnection, rejectConnection, cancelConnection, disconnectConnection } = useConnections()
+    
+    const { data: checkConnection, error: errorConnection} = useFetch(`/api/nurse/${user?.id}/connection/${nurse?.userId}`)
+    const { data: checkSent, error: errorSent} = useFetch(`/api/nurse/${user?.id}/connectionRequest/${nurse?.userId}`)
+    const { data: checkRequest, error: errorRequest} = useFetch(`/api/nurse/${nurse?.userId}/connectionRequest/${user?.id}`)
+    
+    const handleSendConnection = async (
+        e: React.MouseEvent<HTMLButtonElement>,
+        connectionSender: string,
+        connectionReceiver: string
+    ) => {
+        e.preventDefault()
+        await sendConnection(connectionSender, connectionReceiver)
+    }
+
+    const handleDeleteConnection = async (
+        e: React.MouseEvent<HTMLButtonElement>,
+        connectionSender: string,
+        connectionReceiver: string
+    ) => {
+        e.preventDefault()
+        await disconnectConnection(connectionSender, connectionReceiver)
+    }
+
+    const handleCancelConnection = async (
+        e: React.MouseEvent<HTMLButtonElement>,
+        connectionRejecter: string,
+        connectionRejectee: string
+      ) => {
+        e.preventDefault()
+        await cancelConnection(connectionRejecter, connectionRejectee)
+    }
+
+    const handleAcceptConnection = async (
+        e: React.MouseEvent<HTMLButtonElement>,
+        connectionSender: string,
+        connectionReceiver: string
+      ) => {
+        e.preventDefault();
+        await acceptConnection(connectionSender, connectionReceiver);
+    };
+    
+    const handleRejectConnection = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    connectionRejecter: string,
+    connectionRejectee: string
+    ) => {
+        e.preventDefault();
+        await rejectConnection(connectionRejecter, connectionRejectee);
+    };
+
+    
+
     const nav = useNavigate()
+
+    let connectButton;
+
+    if (checkConnection) {
+        // If there is a connection, show "Disconnect" button
+        connectButton = (
+            <button
+                className="btn text-lg w-40 mb-4 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                onClick={(e) => {
+                    if (user) {
+                        handleDeleteConnection(e, user.id, nurse.userId);
+                    } else {
+                        nav(`/login`);
+                    }
+                }}
+            >
+                Disconnect
+            </button>
+        );
+    } else if (checkSent) {
+        // If there is a connection request sent, show "Cancel" button
+        connectButton = (
+            <button
+                className="btn text-lg w-40 mb-4 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                onClick={(e) => {
+                    if (user) {
+                      handleCancelConnection(e, user?.id, nurse.userId)
+                    } else {
+                        {() => nav(`/login`)}
+                    }}}
+            >
+                Cancel
+            </button>
+        );
+    } else if (checkRequest) {
+        // If there is a connection request received, show "Accept" and "Reject" buttons
+        connectButton = (
+            <div className="flex space-x-4">
+                <button
+                    className="btn text-lg w-20 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                    onClick={(e) => {
+                        if (user) {
+                          handleAcceptConnection(e, user?.id, nurse.userId);
+                        } else {
+                          nav(`/login`);
+                        }
+                    }}
+                >
+                    Accept
+                </button>
+                <button
+                    className="btn text-lg w-20 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                    onClick={(e) => {
+                        if (user) {
+                          handleRejectConnection(e, nurse.userId, user?.id);nurse.userId
+                        } else {
+                          nav(`/login`);
+                        }
+                    }}
+                >
+                    Reject
+                </button>
+            </div>
+        );
+    } else {
+        // If there is no connection or request, show "Connect" button
+        connectButton = (
+            <button
+                className="btn text-lg w-40 mb-4 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
+                onClick={(e) => {
+                    if (user) {
+                        handleSendConnection(e, user.id, nurse.userId);
+                    } else {
+                        nav(`/login`);
+                    }
+                }}
+            >
+                Connect
+            </button>
+        );
+    }
     const [showGiveRecoModal, setShowGiveRecoModal] = useState<boolean>(false)
+
 
     return (
         <div className="nurseHeader flex flex-col h-[640px]">
@@ -71,10 +210,11 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                         {nurse?.country}, {nurse?.city}
                     </div>
                 </div>
+
                 <div className="rightDetails flex-1 flex-col">
                     <div className="connections text-lg font-semibold text-outline-text font-open-sans flex items-center justify-end">
                         <PiUserFill className="w-8 h-8 relative flex-col justify-start items-start inline-flex text-outline-text mr-3" />
-                        6 connections {/*Place connections code here*/}
+                        <strong>{(nurse?.connections || []).length || 0}</strong>&nbsp; connections
                     </div>
                     <div className="profileButtons flex flex-col items-end mt-20">
                         {user?.id === nurse?.userId ? (
@@ -86,11 +226,8 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                             </button>
                         ) : (
                             <div className="flex flex-col w-full items-end">
-                                <button
-                                    className="btn text-lg w-40 mb-4 rounded-full bg-white text-secondary border-transparent shadow-inner drop-shadow-lg normal-case"
-                                >
-                                    Connect
-                                </button>
+                                {connectButton}
+
                                 <div className="dropdown dropdown-end w-full flex flex-col items-end relative">
 
                                     <label tabIndex={0}>
@@ -108,6 +245,7 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                                             </button>
                                         </li>
                                         <li>
+                                            {/*<button onClick={() => nav(`/nurse/recommendations/give/${nurse?.userId}`)}>*/}
                                             <button onClick={() => 
                                                 setShowGiveRecoModal(true)
                                                 }>
@@ -123,9 +261,8 @@ const NurseHeader = ({ nurse }: { nurse: NurseType }) => {
                                 </div>
 
                             </div>
-
-                        )}
                     </div>
+
                 </div>
             </div>
             <GiveRecommendationSection
