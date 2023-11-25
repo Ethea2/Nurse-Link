@@ -640,6 +640,7 @@ module.exports = {
     editNurseBanner,
     addDocument,
     getNurseConnection,
+    getNurseConnections,
     getNurseConnectionRequest,
     sendNurseConnection,
     cancelNurseConnectionRequest,

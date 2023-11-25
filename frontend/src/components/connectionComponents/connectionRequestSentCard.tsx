@@ -45,7 +45,7 @@ const handleCancelConnection = async (
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
 >
-        <div className="flex items-center justify-between gap-10 mb-5">
+        <div className="flex items-center justify-between gap-10 mb-5 cursor-pointer">
             <div className="profile-picture bg-white rounded-full w-20"
             onClick={() => nav(`/nurse/${nurseId}`)} // Navigate to the nurse's page on click
             >

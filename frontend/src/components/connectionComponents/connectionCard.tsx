@@ -55,7 +55,7 @@ const ConnectionCard = ({userId , nurseId }: {userId:string, nurseId: string }) 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="profile-picture w-1/5 bg-white rounded-full"
+      <div className="profile-picture w-1/5 bg-white rounded-full cursor-pointer"
       onClick={() => nav(`/nurse/${nurseId}`)} // Navigate to the nurse's page on click
       >
         <img src={nurse?.profilePicture}/>
