@@ -23,13 +23,14 @@ const ChatPage = () => {
                 <div>
                     <p className="font-poppins font-black text-xl">All Messages</p>
 
-            <button>
+            {/* TODO: validate if i need the button to be here or to be at the Chat Card */}
+            {/* <button> */}
                 <div className="flex flex-col gap-5 w-50">
                     {nurse?.connections?.map((connectionId, index) => (
                         <ChatCard key={index} userId={userId} nurseId={connectionId} />
                     ))}
                 </div>
-            </button>
+            {/* </button> */}
                 
 
                     {/* search function */}

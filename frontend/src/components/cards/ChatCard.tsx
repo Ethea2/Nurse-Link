@@ -4,10 +4,10 @@ import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
-// create a modal for the actual chat messages
+// TODO: create a modal for the actual chat messages
 
 const ChatCard = ({userId , nurseId }: {userId:string, nurseId: string }) => {
-  // We are currently looking at userId's connection page
+
   // userId is connected with nurseId
   const { data: nurse, loading } = useFetch(`/api/nurse/${nurseId}`);
 
@@ -17,6 +17,7 @@ const ChatCard = ({userId , nurseId }: {userId:string, nurseId: string }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   const { user } = useAuth()
+  
   // user is who is currently logged in
   const nav = useNavigate()
 
