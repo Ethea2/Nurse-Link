@@ -1,8 +1,5 @@
-import { Link } from "react-router-dom"
 import { useParams } from "react-router"
 import useFetch from "../../hooks/useFetch"
-import { Suspense } from "react"
-import NurseCard from "../../components/others/NurseCard"
 import ChatCard from "../../components/cards/ChatCard"
 
 
@@ -23,7 +20,7 @@ const ChatPage = () => {
                 <div>
                     <p className="font-poppins font-black text-xl">All Messages</p>
 
-            {/* TODO: validate if i need the button to be here or to be at the Chat Card */}
+                    {/* TODO: validate if i need the button to be here or to be at the Chat Card */}
             {/* <button> */}
                 <div className="flex flex-col gap-5 w-50">
                     {nurse?.connections?.map((connectionId, index) => (
@@ -40,7 +37,7 @@ const ChatPage = () => {
                 <div className="flex flex-col main-section w-3/4">
                     <div className="mb-5">
                         <p style={{ fontFamily: "Poppins", color: "#053B50", fontSize: "3rem", fontWeight: 900 }}>
-                            {/* {nurse?.connections?.length} Connections */}
+                            {/* {nurse?.connections?.length} Messages */}
                             Messages
                         </p>
                     </div>     
