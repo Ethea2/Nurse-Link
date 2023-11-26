@@ -16,6 +16,7 @@ import ConnectionRequestReceived from "../../pages/connection/ConnectionRequestR
 import ConnectionRequestSent from "../../pages/connection/ConnectionRequestSent.tsx"
 import NurseRecoRecievePage from "../../pages/recommendations/NurseRecoReceivePage.tsx"
 import NurseRecoGivePage from "../../pages/recommendations/NurseRecoGivePage.tsx"
+import ChatPage from "../../pages/chat/ChatPage.tsx"
 
 
 const routes: Array<RouteType> = [
@@ -38,7 +39,8 @@ const routes: Array<RouteType> = [
     { path: "/nurse/edit/background/:userId", element: <NurseEditBackgroundPage /> },
     { path: "/nurse/edit/contact/:userId", element: <NurseEditContactPage /> },
     { path: "/nurse/recommendations/receive/:userId", element: <NurseRecoRecievePage /> },
-    { path: "/nurse/recommendations/give/:userId", element: <NurseRecoGivePage /> }
+    { path: "/nurse/recommendations/give/:userId", element: <NurseRecoGivePage /> },
+    { path: "/pages/chat/ChatPage/:userId", element: <ChatPage />}
 
 ]
 
