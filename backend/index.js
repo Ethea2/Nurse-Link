@@ -13,8 +13,15 @@ const nurseRouter = require("./routes/nurseRoutes")
 const authRouter = require('./routes/authRoutes')
 const instituteRouter = require("./routes/instituteRoutes")
 const { generateSecret } = require("./utils/sessionSecret")
-
+const {Server} = require("socket.io")
 const app = express()
+
+const server = require("http").createServer(app)
+const socketHandler = require("./socketHandler")
+socketHandler.initializeSocket(server)
+server.listen(3000, () => {
+    console.log("Socket Server running at http://localhost:3000")
+});
 
 //middlewears
 app.use(
