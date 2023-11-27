@@ -19,7 +19,7 @@ const app = express()
 const server = require("http").createServer(app)
 const socketHandler = require("./socketHandler")
 socketHandler.initializeSocket(server)
-server.listen(3000, () => {
+server.listen(3001, () => {
     console.log("Socket Server running at http://localhost:3000")
 });
 

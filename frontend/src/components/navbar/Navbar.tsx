@@ -168,7 +168,7 @@ const NavRight = () => {
                             Recommendations
                         </motion.button>
                     </Link>
-                    <Link to="/">
+                    <Link to={`/pages/chat/ChatPage/${user.id}`}>
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
