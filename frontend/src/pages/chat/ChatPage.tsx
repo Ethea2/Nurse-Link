@@ -10,16 +10,17 @@ const ChatPage = () => {
     const [messageBodyVisible, setMessageBodyVisible] = useState(false);
     const { userId } = useParams()
     const { data: nurse, loading } = useFetch(`/api/nurse/${userId}`)
+    const [currentConnection, setCurrentConnection] = useState(null);
 
     const socket = io.connect("http://localhost:3001");
-    const btnClick = () =>
+    const btnClick = (value) =>
     {
+        console.log("value: ", value)
         setMessageBodyVisible(true);
+        // set current connction
+        setCurrentConnection(value);
     }
-    const sendMessage = async () => {
 
-
-    }
     return(
 
 
@@ -34,9 +35,9 @@ const ChatPage = () => {
 
                     {/* TODO: validate if i need the button to be here or to be at the Chat Card */}
              <button>
-                <div className="flex flex-col gap-5 w-50" onClick={btnClick}>
+                <div className="flex flex-col gap-5 w-50" >
                     {nurse?.connections?.map((connectionId, index) => (
-                        <ChatCard key={index} userId={userId} nurseId={connectionId} />
+                        <ChatCard key={index} userId={userId} nurseId={connectionId} btnClick={btnClick} />
                     ))}
                 </div>
              </button>
@@ -53,7 +54,8 @@ const ChatPage = () => {
                             Messages
                         </p>
                     </div>
-                    {messageBodyVisible && <ChatBody />}
+                    {messageBodyVisible && <ChatBody socket={socket} author={userId} destinationUser={currentConnection} setMessageList={setMessageList} />}
+
 
                 </div>
           

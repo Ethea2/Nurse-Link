@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { RiSendPlane2Line } from 'react-icons/ri';
 
-function ChatBody() {
+
+function ChatBody(props) {
     const [message, setMessage] = useState('');
 
-    const handleSendMessage = () => {
+    const handleSendMessage = async () => {
         // Add your logic to send the message
-        console.log('Message sent:', message);
-
+        const messagePayload = {
+            author: props.author,
+            message: message,
+            to: props.destinationUser,
+            date: new Date().toISOString(),
+        }
+        await props.socket.emit('send_message', messagePayload);
+        props.setMessageList((list) => [...list, messagePayload]);
         // Clear the input field after sending the message
         setMessage('');
     };
