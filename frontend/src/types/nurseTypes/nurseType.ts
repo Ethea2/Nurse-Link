@@ -20,7 +20,7 @@ export interface NurseType {
     progress: number
     technicalSkill: Array<string>
     credentials: CredentialsType
-    connections: Array<string>
+    connections: Array<connectionType>
     education: EducationType
     video: string
 } //continue updating
@@ -68,4 +68,9 @@ export interface DocumentType {
     issuanceDate: Date;
     status: 'verified' | 'unverified' | 'pending';
     link: string;
+  }
+
+  export interface connectionType {
+    uid: string;
+    nurse: NurseType;
   }
