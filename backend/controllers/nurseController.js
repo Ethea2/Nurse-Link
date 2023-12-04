@@ -259,8 +259,26 @@ const addDocument = async (req, res) => {
 
 const getNurseConnections = async (req, res) => {
     const { userId } = req.params
+    const search = req.query.search || ""
+    let sort = req.query.sort || "recent"
+    let sortBy = {}
+
+    console.log(search)
     try {
-        const connections = await Nurse.find({ userId }, { connections: 1, _id: 0})
+        const connections = await Nurse.find(
+                            // {$and: [
+                                { userId: userId },
+                            //     { lastName: {$regex: search, $options: "i"} }
+                            // ]}, 
+                            { 
+                                connections: 1, _id: 0
+                            })
+
+        Nurse.aggregate([
+            {$unwind: "$lastName"},
+            {$project:{_id:0}},
+            {$out:"test2"}
+        ])
         if (!connections)
             return res.status(404).json({ message: "Could not find connections for user!" })
 
@@ -410,8 +428,6 @@ const getNurseConnectionRequest = async (req, res) => {
     const senderId = req.params.senderId
     const receiverId = req.params.receiverId
 
-    console.log(senderId)
-    console.log(receiverId)
     try {
         const senderRequest = await Nurse.findOne(
             {$and: [
@@ -448,8 +464,7 @@ const getNurseConnectionRequest = async (req, res) => {
 const getNurseConnection = async (req, res) => {
     const senderId = req.params.senderId
     const receiverId = req.params.receiverId
-    console.log(senderId)
-    console.log(receiverId)
+
     try {
         const senderConnection = await Nurse.findOne(
             {$and: [
