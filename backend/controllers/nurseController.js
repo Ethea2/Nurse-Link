@@ -4,6 +4,7 @@ const User = require("../models/userModel")
 const cloudinary = require("../utils/cloudinary")
 const fs = require("fs")
 const Recommendations = require("../models/recommendationModel")
+const crypto = require("crypto");
 
 const computeNurseProgress = (nurse) => {
     const skills = [
@@ -336,41 +337,87 @@ const cancelNurseConnectionRequest = async (req, res) => {
     }) 
 }
 
-const acceptNurseConnection = async (req, res) => {
-    const accepterId = req.body.accepterId
-    const senderId = req.body.senderId
+// const acceptNurseConnection = async (req, res) => {
+//     const accepterId = req.body.accepterId
+//     const senderId = req.body.senderId
 
-    helperCheckConnectionRequest(senderId, accepterId).then(async function(result){
+//     helperCheckConnectionRequest(senderId, accepterId).then(async function(result){
+//         if (result) {
+//             try {
+//                 const acceptSenderRequest = await Nurse.findOneAndUpdate({ userId: accepterId },
+//                     {
+//                         $pull: { connectionReceived: senderId },
+//                         $push: { connections: senderId } 
+//                     }   
+//                 )
+
+//                 const acceptReceiverRequest = await Nurse.findOneAndUpdate({ userId: senderId },
+//                     {
+//                         $pull: { connectionSent: accepterId },
+//                         $push: { connections: accepterId }  
+//                     }
+//                 )
+
+//                 if (acceptSenderRequest && acceptReceiverRequest)
+//                     return res
+//                         .status(200)
+//                         .json({ message: "Successfully accepted connection request!" })
+
+//                 return res.status(400).json({ message: "Could not accept connection request!"})
+//             } catch (e) {
+//                 console.log(e)
+//                 return res.status(500).json({ message: "Something went wrong!" })
+//             }
+//         }
+//         return res.status(404).json({ message: "There is no connection request!"})
+//     }) 
+// }
+
+const acceptNurseConnection = async (req, res) => {
+    const accepterId = req.body.accepterId;
+    const senderId = req.body.senderId;
+
+    // Generate a random string for chatUID
+    const chatUID = crypto.randomBytes(20).toString('hex');
+
+    helperCheckConnectionRequest(senderId, accepterId).then(async function(result) {
         if (result) {
             try {
-                const acceptSenderRequest = await Nurse.findOneAndUpdate({ userId: accepterId },
+                const acceptSenderRequest = await Nurse.findOneAndUpdate(
+                    { userId: accepterId },
                     {
                         $pull: { connectionReceived: senderId },
-                        $push: { connections: senderId } 
-                    }   
-                )
+                        $push: { connections: senderId },
+                        // Set the chatUID for the users
+                        $set: { chatUID: chatUID } 
+                    }
+                );
 
-                const acceptReceiverRequest = await Nurse.findOneAndUpdate({ userId: senderId },
+                const acceptReceiverRequest = await Nurse.findOneAndUpdate(
+                    { userId: senderId },
                     {
                         $pull: { connectionSent: accepterId },
-                        $push: { connections: accepterId }  
+                        $push: { connections: accepterId },
+                        // set the chatUID for the users
+                        $set: { chatUID: chatUID } 
                     }
-                )
+                );
 
-                if (acceptSenderRequest && acceptReceiverRequest)
+                if (acceptSenderRequest && acceptReceiverRequest) {
                     return res
                         .status(200)
-                        .json({ message: "Successfully accepted connection request!" })
+                        .json({ message: "Successfully accepted connection request!" });
+                }
 
-                return res.status(400).json({ message: "Could not accept connection request!"})
+                return res.status(400).json({ message: "Could not accept connection request!" });
             } catch (e) {
-                console.log(e)
-                return res.status(500).json({ message: "Something went wrong!" })
+                console.log(e);
+                return res.status(500).json({ message: "Something went wrong!" });
             }
         }
-        return res.status(404).json({ message: "There is no connection request!"})
-    }) 
-}
+        return res.status(404).json({ message: "There is no connection request!" });
+    });
+};
 
 const rejectNurseConnection = async (req, res) => {
     const rejecterId = req.body.rejecterId 

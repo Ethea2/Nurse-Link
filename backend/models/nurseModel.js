@@ -193,6 +193,9 @@ const nurseSchema = new Schema({
     connectionReceived: {
         type: [mongoose.Schema.Types.ObjectId]
     },
+    chatUID: {
+        type: [String],
+    },
     notification: [{
         type: {
             type: String,
