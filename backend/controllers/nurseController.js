@@ -387,9 +387,8 @@ const acceptNurseConnection = async (req, res) => {
                     { userId: accepterId },
                     {
                         $pull: { connectionReceived: senderId },
-                        $push: { connections: senderId },
-                        // Set the chatUID for the users
-                        $set: { chatUID: chatUID } 
+                            $push: { connections: senderId },
+                            $addToSet: { chatUID: chatUID } // Set the chatUID for the users
                     }
                 );
 
@@ -399,7 +398,7 @@ const acceptNurseConnection = async (req, res) => {
                         $pull: { connectionSent: accepterId },
                         $push: { connections: accepterId },
                         // set the chatUID for the users
-                        $set: { chatUID: chatUID } 
+                        $addToSet: { chatUID: chatUID } 
                     }
                 );
 
