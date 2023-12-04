@@ -135,19 +135,11 @@ export const ChangeEducation = ({
     const { editDetails } = useNurseEdit()
 
     const reset = () => {
-        
-    // const profileInput = document.getElementById(
-    //     "profile-input"
-    // ) as HTMLInputElement
     setImageName(undefined)
     setImage(undefined)
     setShow(false)
-    // profileInput.value = ""
-    }
 
-    // useEffect(() => {
-    //     setAbout(nurse?.firstName)
-    // }, [loading])
+    }
 
     const handleSubmit = async () => {
         await editDetails({

@@ -25,32 +25,48 @@ const NurseBackgroundEditComponent = ({ userId }: { userId: string }) => {
         changed
     )
 
-    const about = nurse?.credentials.about || "";
-    const education = nurse?.credentials.education || "";
-    const experience = nurse?.credentials.experience || "";
-    const volunteering = nurse?.credentials.volunteering || "";
-    const technicalSkill = nurse?.credentials.technicalskill || "";
+    // const about = nurse?.credentials.about || "";
+    // const education = nurse?.credentials.education || "";
+    // const experience = nurse?.credentials.experience || "";
+    // const volunteering = nurse?.credentials.volunteering || "";
+    // const technicalSkill = nurse?.credentials.technicalskill || "";
 
-    // const [about, setAbout] = useState<string>(nurse?.about)
-    // const [education, setEducation] = useState<string>(nurse?.education)
-    // const [experience, setExperience] = useState<string>(nurse?.experience)
-    // const [volunteering, setVolunteering] = useState<string>(nurse?.volunteering)
-    // const [technicalSkill, setTechnicalSkill] = useState<string>(nurse?.technicalSkill)
+    const [about, setAbout] = useState<string>(nurse?.about)
 
-    const hasAbout = typeof about === "string" && about.trim() !== "";
-    const hasEducation = typeof education === "string" && education.trim() !== "";
+    const [educationInstitution, seteducationInstitution] = useState<string>(nurse?.educationInstitution)
+    // const [education, setEducation] = useState<string>(nurse?.education.educationInstitution)
+    const [educationPosition, seteducationPosition] = useState<string>(nurse?.educationPosition)
+
+    const [experience, setExperience] = useState<string>(nurse?.experience)
+    const [experienceSpecialization, setExperienceSpecialization] = useState<string>(nurse?.experienceSpecialization)
+
+    const [volunteering, setVolunteering] = useState<string>(nurse?.volunteering)
+    const [volunteeringSpecialization, setvolunteeringSpecialization] = useState<string>(nurse?.volunteeringSpecialization)
+
+    const [technicalSkill, setTechnicalSkill] = useState<string>(nurse?.technicalSkill)
+
+    // const hasAbout = typeof about === "string" && about.trim() !== "";
+    const hasEducation = typeof educationInstitution === "string" && educationInstitution.trim() !== "";
     const hasExperience = typeof experience === "string" && experience.trim() !== "";
     const hasVolunteering = typeof volunteering === "string" && volunteering.trim() !== "";
     const hasTechnicalSkill = typeof technicalSkill === "string" && technicalSkill.trim() !== "";
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     setAbout(nurse?.about)
-    //     setEducation(nurse?.education)
-    //     setExperience(nurse?.experiece)
-    //     setVolunteering(nurse?.volunteering)
-    //     setTechnicalSkill(nurse?.technicalSkill)
-    // }, [loading])
+        setAbout(nurse?.about)
+
+        // setEducation(nurse?.education)
+        seteducationInstitution(nurse?.educationInstitution)
+        seteducationPosition(nurse?.educationPosition)
+
+        setExperience(nurse?.experiece)
+        setExperienceSpecialization(nurse?.experienceSpecialization)
+
+        setVolunteering(nurse?.volunteering)
+        setvolunteeringSpecialization(nurse?.volunteeringSpecialization)
+
+        setTechnicalSkill(nurse?.technicalSkill)
+    }, [loading])
 
     return (
 
@@ -115,11 +131,25 @@ const NurseBackgroundEditComponent = ({ userId }: { userId: string }) => {
                                 className="text-primary hover:text-accent-blue"
                             />{" "}
                         </button>
+
                     </div>
                     <div id="nurse-about-list-container" className="text-lg mt-2">
-                        {hasAbout ? (
+                        {/* {hasAbout ? (
                             <div className="flex items-center">
                                 <p className="text-primary">{`About: ${about}`}</p>
+                                
+                            </div>
+                        ) : (
+                            <div className="flex items-center">
+                                <p className="text-primary">
+                                    No description added yet.
+                                </p>
+                            </div>
+                        )} */}
+
+                        {about ? (
+                            <div className="flex items-center">
+                                {about}
                             </div>
                         ) : (
                             <div className="flex items-center">
@@ -151,9 +181,11 @@ const NurseBackgroundEditComponent = ({ userId }: { userId: string }) => {
                         </button>
                     </div>
                     <div id="nurse-education-list-container" className="text-lg mt-2">
-                        {hasEducation ? (
+                        { hasEducation ? (
                             <div className="flex items-center">
-                                <p className="text-primary">{`Education: ${education}`}</p>
+                                {/* <p className="text-primary">{`Education: ${education}`}</p> */}
+                                {educationInstitution}
+                                {educationPosition }
                             </div>
                         ) : (
                             <div className="flex items-center">
@@ -187,7 +219,9 @@ const NurseBackgroundEditComponent = ({ userId }: { userId: string }) => {
                     <div id="nurse-experience-list-container" className="text-lg mt-2">
                         {hasExperience ? (
                             <div className="flex items-center">
-                                <p className="text-primary">{`Experience: ${experience}`}</p>
+                                {/* <p className="text-primary">{`Experience: ${experience}`}</p> */}
+                                {experience}
+                                {experienceSpecialization}
                             </div>
                         ) : (
                             <div className="flex items-center">
@@ -219,9 +253,12 @@ const NurseBackgroundEditComponent = ({ userId }: { userId: string }) => {
                         </button>
                     </div>
                     <div id="nurse-volunteering-list-container" className="text-lg mt-2">
-                        {hasVolunteering ? (
+                        {/* {hasVolunteering ? ( */}
+                        {volunteering ? (
                             <div className="flex items-center">
-                                <p className="text-primary">{`Volunteering: ${volunteering}`}</p>
+                                {/* <p className="text-primary">{`Volunteering: ${volunteering}`}</p> */}
+                                {volunteering}
+                                {volunteeringSpecialization}
                             </div>
                         ) : (
                             <div className="flex items-center">
@@ -252,16 +289,22 @@ const NurseBackgroundEditComponent = ({ userId }: { userId: string }) => {
                             />{" "}
                         </button>
                     </div>
+
                     <div id="nurse-technicalskill-list-container" className="text-lg mt-2">
-                        {hasTechnicalSkill ? (
+                        {/* {hasTechnicalSkill ? ( */}
+                        {technicalSkill ? (
                             <div className="flex items-center">
-                                <p className="text-primary">{`Technical Skill: ${technicalSkill}`}</p>
+                                {/* <p className="text-primary">{`Technical Skill: ${technicalSkill}`}</p> */}
+                                {technicalSkill}                   
+                                
+                                
                             </div>
                         ) : (
                             <div className="flex items-center">
                                 <p className="text-primary">
                                     No technical skills added yet.
                                 </p>
+                                
                             </div>
                         )}
                     </div>
